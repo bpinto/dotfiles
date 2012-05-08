@@ -1,0 +1,27 @@
+[user]
+  name = Bruno Pinto
+  email = bpinto@thoughtworks.com
+[core]
+  whitespace = tab-in-indent,tabwidth=2
+  excludesfile = /Users/bpinto/.gitignore
+[alias]
+  st = status
+  pr = pull --rebase
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  co = checkout
+  ci = commit
+  unstage = reset HEAD --
+[branch]
+  autosetupmerge = always
+  autosetuprebase = always
+[color]
+  branch = true
+  diff = true
+  decorate = true
+  grep = true
+  interactive = true
+  showbranch = true
+  status = true
+  ui = true
+[gui]
+  encoding = utf8
