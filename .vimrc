@@ -9,14 +9,25 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " General {{{
+Bundle 'benmills/vimux'
+"Bundle 'cloud8421/vimux-cucumber'
+"Bundle 'pgr0ss/vimux-ruby-test'
+Bundle 'chrismetcalf/vim-yankring'
+Bundle 'ervandew/supertab'
 Bundle 'kien/ctrlp.vim'
+Bundle 'mirell/vim-matchit'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
 Bundle 'tsaleh/vim-align'
+Bundle 'tpope/vim-bundler'
+Bundle 'tpope/vim-cucumber'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-rails'
-Bundle 'benmills/vimux'
+Bundle 'tpope/vim-rake'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'vim-scripts/AutoTag'
 " }}}
 
 " Colors {{{
@@ -345,7 +356,12 @@ inoremap <c-]> <c-x><c-]>
 
 " }}}
 " Quick editing {{{
+
+" Edit .vimrc file
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+" Reload .vimrc file
+nnoremap <leader>rv :source $MYVIMRC<cr>
+" Edit .zshrc file
 nnoremap <leader>ez :vsplit ~/.zshrc<cr>
 
 " }}}
@@ -361,13 +377,13 @@ nnoremap / /\v
 vnoremap / /\v
 
 set showmatch
-set gdefault
+set gdefault                                     " applies substitutions globally on lines
 set hlsearch                                     " highlight matches
 set incsearch                                    " incremental searching
 set ignorecase                                   " searches are case insensitive...
 set smartcase                                    " ... unless they contain at least one capital letter
 
-set scrolloff=3
+set scrolloff=3                                  " provide some context when editing
 set sidescroll=1
 set sidescrolloff=10
 
@@ -417,6 +433,9 @@ nnoremap VaB vaBV
 " Toggle "keep current line in the center of the screen" mode
 nnoremap <leader>C :let &scrolloff=999-&scrolloff<cr>
 
+" find merge conflict markers
+nmap <silent> <leader>cf <ESC>/\v^[<=>]{7}( .*\|$)<CR>
+
 " Directional Keys {{{
 
 " It's 2012.
@@ -434,9 +453,8 @@ noremap <C-l> <C-w>l
 " Vertical window split
 noremap <leader>v <C-w>v
 
-" Horizontal window split 
+" Horizontal window split
 noremap <leader>s <C-w>s
-
 
 " }}}
 " Highlight word {{{
@@ -468,16 +486,186 @@ nnoremap <up>    :lprev<cr>zvzz
 nnoremap <down>  :lnext<cr>zvzz
 
 " }}}
+" Statusline --------------------------------------------------------- {{{
+
+"statusline setup
+set statusline=%f       "tail of the filename
+
+"display a warning if fileformat isnt unix
+set statusline+=%#warningmsg#
+set statusline+=%{&ff!='unix'?'['.&ff.']':''}
+set statusline+=%*
+
+"display a warning if file encoding isnt utf-8
+set statusline+=%#warningmsg#
+set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
+set statusline+=%*
+
+set statusline+=%h      "help file flag
+set statusline+=%y      "filetype
+set statusline+=%r      "read only flag
+set statusline+=%m      "modified flag
+
+set statusline+=%{fugitive#statusline()}
+
+"display a warning if &et is wrong, or we have mixed-indenting
+set statusline+=%#error#
+set statusline+=%{StatuslineTabWarning()}
+set statusline+=%*
+
+set statusline+=%{StatuslineTrailingSpaceWarning()}
+
+set statusline+=%{StatuslineLongLineWarning()}
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+"display a warning if &paste is set
+set statusline+=%#error#
+set statusline+=%{&paste?'[paste]':''}
+set statusline+=%*
+
+set statusline+=%=      "left/right separator
+set statusline+=%{StatuslineCurrentHighlight()}\ \ "current highlight
+set statusline+=%c,     "cursor column
+set statusline+=%l/%L   "cursor line/total lines
+set statusline+=\ %P    "percent through file
+set laststatus=2
+
+"recalculate the trailing whitespace warning when idle, and after saving
+autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
+
+"return '[\s]' if trailing white space is detected
+"return '' otherwise
+function! StatuslineTrailingSpaceWarning()
+    if !exists("b:statusline_trailing_space_warning")
+
+        if !&modifiable
+            let b:statusline_trailing_space_warning = ''
+            return b:statusline_trailing_space_warning
+        endif
+
+        if search('\s\+$', 'nw') != 0
+            let b:statusline_trailing_space_warning = '[\s]'
+        else
+            let b:statusline_trailing_space_warning = ''
+        endif
+    endif
+    return b:statusline_trailing_space_warning
+endfunction
+
+
+"return the syntax highlight group under the cursor ''
+function! StatuslineCurrentHighlight()
+    let name = synIDattr(synID(line('.'),col('.'),1),'name')
+    if name == ''
+        return ''
+    else
+        return '[' . name . ']'
+    endif
+endfunction
+
+"recalculate the tab warning flag when idle and after writing
+autocmd cursorhold,bufwritepost * unlet! b:statusline_tab_warning
+
+"return '[&et]' if &et is set wrong
+"return '[mixed-indenting]' if spaces and tabs are used to indent
+"return an empty string if everything is fine
+function! StatuslineTabWarning()
+    if !exists("b:statusline_tab_warning")
+        let b:statusline_tab_warning = ''
+
+        if !&modifiable
+            return b:statusline_tab_warning
+        endif
+
+        let tabs = search('^\t', 'nw') != 0
+
+        "find spaces that arent used as alignment in the first indent column
+        let spaces = search('^ \{' . &ts . ',}[^\t]', 'nw') != 0
+
+        if tabs && spaces
+            let b:statusline_tab_warning =  '[mixed-indenting]'
+        elseif (spaces && !&et) || (tabs && &et)
+            let b:statusline_tab_warning = '[&et]'
+        endif
+    endif
+    return b:statusline_tab_warning
+endfunction
+
+"recalculate the long line warning when idle and after saving
+autocmd cursorhold,bufwritepost * unlet! b:statusline_long_line_warning
+
+"return a warning for "long lines" where "long" is either &textwidth or 80 (if
+"no &textwidth is set)
+"
+"return '' if no long lines
+"return '[#x,my,$z] if long lines are found, were x is the number of long
+"lines, y is the median length of the long lines and z is the length of the
+"longest line
+function! StatuslineLongLineWarning()
+    if !exists("b:statusline_long_line_warning")
+
+        if !&modifiable
+            let b:statusline_long_line_warning = ''
+            return b:statusline_long_line_warning
+        endif
+
+        let long_line_lens = s:LongLines()
+
+        if len(long_line_lens) > 0
+            let b:statusline_long_line_warning = "[" .
+                        \ '#' . len(long_line_lens) . "," .
+                        \ 'm' . s:Median(long_line_lens) . "," .
+                        \ '$' . max(long_line_lens) . "]"
+        else
+            let b:statusline_long_line_warning = ""
+        endif
+    endif
+    return b:statusline_long_line_warning
+endfunction
+
+"return a list containing the lengths of the long lines in this buffer
+function! s:LongLines()
+    let threshold = (&tw ? &tw : 80)
+    let spaces = repeat(" ", &ts)
+
+    let long_line_lens = []
+
+    let i = 1
+    while i <= line("$")
+        let len = strlen(substitute(getline(i), '\t', spaces, 'g'))
+        if len > threshold
+            call add(long_line_lens, len)
+        endif
+        let i += 1
+    endwhile
+
+    return long_line_lens
+endfunction
+
+"find the median of the given array of numbers
+function! s:Median(nums)
+    let nums = sort(a:nums)
+    let l = len(nums)
+
+    if l % 2 == 1
+        let i = (l-1) / 2
+        return nums[i]
+    else
+        return (nums[l/2] + nums[(l/2)-1]) / 2
+    endif
+endfunction
 
 " }}}
 " Plugin settings --------------------------------------------------------- {{{
 
 " Ctrl-P {{{
-
 let g:ctrlp_dont_split = 'NERD_tree_2'
 let g:ctrlp_jump_to_buffer = 0
 let g:ctrlp_map = '<leader><leader>'
-let g:ctrlp_working_path_mode = 0
+let g:ctrlp_working_path_mode = 2
 let g:ctrlp_match_window_reversed = 1
 let g:ctrlp_split_window = 0
 let g:ctrlp_max_height = 20
@@ -495,7 +683,7 @@ noremap <C-t> :CtrlP<CR>
 inoremap <C-t> <ESC>:CtrlP<CR>
 
 " }}}
-" NERD Tree {{{ 
+" NERD Tree {{{
 noremap  <F2> :NERDTreeToggle<cr>
 inoremap <F2> <esc>:NERDTreeToggle<cr>
 
@@ -511,28 +699,45 @@ let NERDTreeMinimalUI = 0
 let NERDTreeDirArrows = 1
 
 " }}}
-" NERD Commenter
-" ---------------------FIXME------------------
-nmap <C-/> :call NERDComment(0, "invert")<cr>
-vmap <C-/> :call NERDComment(0, "invert")<cr>
-" }}}
+" NERD Commenter {{{
+map  <D-/> <plug>NERDCommenterToggle<CR>
+imap <D-/> <Esc><plug>NERDCommenterToggle<CR>i
+
+map  <leader>/ <plug>NERDCommenterToggle<CR>
+imap <leader>/ <Esc><plug>NERDCommenterToggle<CR>i
 
 " }}}
-" NERD Tree {{{ 
+" Rubycomplete {{{
+
+set ofu=syntaxcomplete#Complete
+let g:rubycomplete_buffer_loading = 0
+let g:rubycomplete_classes_in_global = 1
+" }}}
+
+" Vimux {{{
 " Prompt for a command to run
-map rp :PromptVimTmuxCommand
+map <leader>rp :PromptVimTmuxCommand
 
 " Run last command executed by RunVimTmuxCommand
-map rl :RunLastVimTmuxCommand
+map <leader>rl :RunLastVimTmuxCommand
 
 " Inspect runner pane
-map ri :InspectVimTmuxRunner
+map <leader>ri :InspectVimTmuxRunner
 
 " Close all other tmux panes in current window
-map rx :CloseVimTmuxPanes
+map <leader>rx :CloseVimTmuxPanes
 
 " Interrupt any command running in the runner pane
-map rs :InterruptVimTmuxRunner
+map <leader>rs :InterruptVimTmuxRunner
+
+" }}}
+" Syntastic {{{
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=2
+
+" }}}
+" YankRing {{{
+nmap Y :YRShow<cr>
 
 " }}}
 
