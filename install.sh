@@ -1,6 +1,6 @@
 DIR=$( cd "$( dirname "$0" )" && pwd )
 
-DOT_FILES=".gitconfig .gvimrc .vimrc .zshrc"
+DOT_FILES=".gitconfig .gitignore .gvimrc .vimrc .zshrc"
 for file in $DOT_FILES; do
   ln -s $DIR/$file ~/$file
 done
