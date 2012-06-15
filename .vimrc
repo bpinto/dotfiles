@@ -1,6 +1,6 @@
 set nocompatible                                 " Use vim, no vi defaults
 filetype off
-"filetype plugin indent on
+filetype plugin indent on
 
 " Vundle
 set rtp+=~/.vim/bundle/vundle/
@@ -40,7 +40,7 @@ Bundle 'tomasr/molokai'
 
 set encoding=utf-8                               " Set default encoding to UTF-8
 set modelines=0
-set autoindent
+" set autoindent
 set showmode
 set showcmd
 set hidden
