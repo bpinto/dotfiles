@@ -34,8 +34,6 @@ setopt interactivecomments
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(autojump brew bundler fast_rake git mkv rails3 rake rvm wifi)
 
-source $ZSH/oh-my-zsh.sh
-
 # Customize to your needs...
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin:/usr/X11/bin
 export PATH=/usr/local/bin:$PATH
@@ -43,6 +41,8 @@ export RUBYOPT=-Ku
 export NODE_PATH=/usr/local/lib/node_modules
 export EDITOR='vim -f'
 export ANDROID_SDK_ROOT=/usr/local/Cellar/android-sdk/r18
+
+source $ZSH/oh-my-zsh.sh
 
 # RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
