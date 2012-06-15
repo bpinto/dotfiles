@@ -8,9 +8,10 @@ run() {
   bundle exec rackup -p $PORT -s thin
 }
 
+export RUBYOPT=-Ku
+
 export NLS_LANG="AMERICAN_AMERICA.UTF8"
 export ORACLE_HOME=/opt/oracle/instantclient_10_2
 export DYLD_LIBRARY_PATH=$ORACLE_HOME
-
 export LD_LIBRARY_PATH=$ORACLE_HOME
 export PATH=$ORACLE_HOME:$PATH
