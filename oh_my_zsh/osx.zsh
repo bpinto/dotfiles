@@ -1,0 +1,1 @@
+alias recd='cd .. && cd -'
