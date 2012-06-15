@@ -325,13 +325,12 @@ nnoremap <leader>i :set list!<cr>
 
 " Drag Lines {{{
 
-" <m-j> and <m-k> to drag lines in any mode
-noremap ∆ :m+<CR>
-noremap ˚ :m-2<CR>
-inoremap ∆ <Esc>:m+<CR>
-inoremap ˚ <Esc>:m-2<CR>
-vnoremap ∆ :m'>+<CR>gv
-vnoremap ˚ :m-2<CR>gv
+noremap <C-j> :m+<CR>
+noremap <C-k> :m-2<CR>
+inoremap <C-j> <Esc>:m+<CR>
+inoremap <C-k> <Esc>:m-2<CR>
+vnoremap <C-j> :m'>+<CR>gv
+vnoremap <C-k> :m-2<CR>gv
 
 " }}}
 
@@ -426,12 +425,6 @@ noremap j gj
 noremap k gk
 noremap gj j
 noremap gk k
-
-" Easy buffer navigation
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
 
 " Vertical window split
 noremap <leader>v <C-w>v
