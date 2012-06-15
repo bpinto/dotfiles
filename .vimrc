@@ -1,6 +1,6 @@
 set nocompatible                                 " Use vim, no vi defaults
 filetype off
-filetype plugin indent on
+"filetype plugin indent on
 
 " Vundle
 set rtp+=~/.vim/bundle/vundle/
@@ -9,7 +9,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " General {{{
-Bundle 'benmills/vimux'
+"Bundle 'benmills/vimux'
 "Bundle 'cloud8421/vimux-cucumber'
 "Bundle 'pgr0ss/vimux-ruby-test'
 Bundle 'chrismetcalf/vim-yankring'
