@@ -279,9 +279,6 @@ nnoremap J mzJ`z
 " The normal use of S is covered by cc, so don't worry about shadowing it.
 nnoremap S i<cr><esc><right>mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
-" HTML tag closing
-inoremap <C-_> <Space><BS><Esc>:call InsertCloseTag()<cr>a
-
 " Less chording
 nnoremap ; :
 
@@ -337,17 +334,7 @@ vnoremap ∆ :m'>+<CR>gv
 vnoremap ˚ :m-2<CR>gv
 
 " }}}
-" Easy filetype switching {{{
 
-nnoremap _md :set ft=markdown<CR>
-nnoremap _hd :set ft=htmldjango<CR>
-nnoremap _jt :set ft=htmljinja<CR>
-nnoremap _js :set ft=javascript<CR>
-nnoremap _cw :set ft=confluencewiki<CR>
-nnoremap _pd :set ft=python.django<CR>
-nnoremap _d  :set ft=diff<CR>
-
-" }}}
 " Insert Mode Completion {{{
 
 inoremap <c-l><c-l> <c-x><c-l>
@@ -412,10 +399,6 @@ nnoremap g, g,zz
 noremap H ^
 noremap L $
 vnoremap L g_
-
-" Heresy
-inoremap <c-a> <esc>I
-inoremap <c-e> <esc>A
 
 " Open a Quickfix window for the last search.
 nnoremap <silent> <leader>? :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
