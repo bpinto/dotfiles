@@ -12,7 +12,7 @@ Bundle 'gmarik/vundle'
 "Bundle 'benmills/vimux'
 "Bundle 'cloud8421/vimux-cucumber'
 "Bundle 'pgr0ss/vimux-ruby-test'
-Bundle 'chrismetcalf/vim-yankring'
+Bundle 'vim-scripts/YankRing.vim'
 Bundle 'ervandew/supertab'
 Bundle 'kien/ctrlp.vim'
 Bundle 'mirell/vim-matchit'
@@ -191,6 +191,7 @@ set noswapfile                                   " It's 2012, Vim.
 
 let mapleader = ","
 let maplocalleader = "\\"
+nmap \ ,
 
 " }}}
 " Color scheme {{{
@@ -683,10 +684,10 @@ imap <leader>/ <Esc><plug>NERDCommenterToggle<CR>i
 
 " }}}
 " Rubycomplete {{{
-
 set ofu=syntaxcomplete#Complete
 let g:rubycomplete_buffer_loading = 0
 let g:rubycomplete_classes_in_global = 1
+
 " }}}
 
 " Vimux {{{
