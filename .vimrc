@@ -707,11 +707,6 @@ map <leader>rx :CloseVimTmuxPanes
 map <leader>rs :InterruptVimTmuxRunner
 
 " }}}
-" Syntastic {{{
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=2
-
-" }}}
 " YankRing {{{
 nmap Y :YRShow<cr>
 
