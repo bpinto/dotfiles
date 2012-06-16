@@ -42,7 +42,6 @@ set encoding=utf-8                               " Set default encoding to UTF-8
 set modelines=0
 " set autoindent
 set showmode
-set showcmd
 set hidden
 set visualbell
 set ttyfast
