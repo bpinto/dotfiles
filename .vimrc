@@ -43,7 +43,7 @@ set modelines=0
 " set autoindent
 set showmode
 set hidden
-set visualbell
+"set visualbell                                  " Automatically on by an unknown reason
 set ttyfast
 set ruler                                        " Show line and column number
 set backspace=indent,eol,start                   " backspace through everything in insert mode
