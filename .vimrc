@@ -26,7 +26,6 @@ Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-rake'
-Bundle 'tpope/vim-unimpaired'
 Bundle 'vim-scripts/AutoTag'
 " }}}
 
