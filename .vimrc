@@ -197,8 +197,7 @@ nmap \ ,
 
 syntax enable                                    " Turn on syntax highlighting allowing local overrides
 set background=dark
-let g:badwolf_html_link_underline = 0
-colorscheme badwolf
+colorscheme solarized
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
