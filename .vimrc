@@ -11,7 +11,9 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'mirell/vim-matchit'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'skalnik/vim-vroom'
+Bundle 'tpope/vim-bundler'
 Bundle 'tpope/vim-fugitive'
+Bundle 'vim-scripts/AutoTag'
 Bundle 'vim-scripts/YankRing.vim'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
