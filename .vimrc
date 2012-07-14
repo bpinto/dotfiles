@@ -25,7 +25,7 @@ set nocompatible
 set modelines=0
 " Set default encoding to UTF-8
 set encoding=utf-8
-" Vim shell
+" This makes RVM work inside Vim. I have no idea why.
 set shell=bash
 " Prevent Vim from clobbering the scrollback buffer. See
 " http://www.shallowsky.com/linux/noaltscreen.html
@@ -68,8 +68,7 @@ set scrolloff=3
 set cmdheight=2
 " When on, splitting a window will put the new window below the current one
 set splitbelow
-" When on, splitting a window will put the new window right of the current
-" one
+" When on, splitting a window will put the new window right of the current one
 set splitright
 " Show line numbers
 set number
