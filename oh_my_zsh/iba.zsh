@@ -1,5 +1,5 @@
-alias remote="GO_ENVIRONMENT_NAME=bpinto headless=false SELENIUM_GRID=http://10.10.100.66:4444/wd/hub redis_host=vm100-102.sc01.thoughtworks.com bundle exec"
-alias morning="rake morning"
+alias tunnel-crp='ssh -L 6521:10.80.3.201:1521 ess61'
+alias tunnel-ftf='ssh -L 7521:10.195.1.124:1521 ess61'
 
 add-remote-jiji() {
   PROJECT=$(basename $PWD)
