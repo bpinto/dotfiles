@@ -10,11 +10,13 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'kien/ctrlp.vim'
 Bundle 'mirell/vim-matchit'
 Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/syntastic'
 Bundle 'skalnik/vim-vroom'
 Bundle 'tpope/vim-bundler'
 Bundle 'tpope/vim-fugitive'
 Bundle 'vim-scripts/AutoTag'
 Bundle 'vim-scripts/YankRing.vim'
+Bundle 'Lokaltog/vim-powerline'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EDITOR CONFIGURATION
