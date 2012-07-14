@@ -52,7 +52,7 @@ set autowrite
 syntax enable
 " Set window title
 set title
-" display incomplete commands
+" Display incomplete commands
 set showcmd
 " Highlight current line
 set cursorline
@@ -126,21 +126,21 @@ filetype off
 filetype plugin indent on
 " Automatic alignment during insertions
 set autoindent
-" use spaces, not tabs
+" Use spaces, not tabs
 set expandtab
-" a tab is two spaces
+" A tab is two spaces
 set tabstop=2
-" an autoindent (with <<) is two spaces
+" An autoindent (with <<) is two spaces
 set shiftwidth=2
-" should be the same value of shiftwidth
+" Should be the same value of shiftwidth
 set softtabstop=2
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " WILDMENU
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" make tab completion for files/buffers act like bash
+" Make tab completion for files/buffers act like bash
 set wildmenu
-" use emacs-style tab completion when selecting files, etc
+" Use emacs-style tab completion when selecting files, etc
 set wildmode=longest,list
 
 set wildignore+=.hg,.git,.svn                    " Version control
@@ -193,9 +193,6 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
-" Insert a hash rocket with <c-l>
-imap <c-l> <space>=><space>
-
 " Clear the search buffer when hitting return
 function! MapCR()
   nnoremap <cr> :nohlsearch<cr>
@@ -231,11 +228,6 @@ noremap gk k
 
 " Find merge conflict markers
 nmap <silent> <leader>cf <ESC>/\v^[<=>]{7}( .*\|$)<CR>
-
-nnoremap <silent> <leader>hh :execute 'match InterestingWord1 /\<<c-r><c-w>\>/'<cr>
-nnoremap <silent> <leader>h1 :execute 'match InterestingWord1 /\<<c-r><c-w>\>/'<cr>
-nnoremap <silent> <leader>h2 :execute '2match InterestingWord2 /\<<c-r><c-w>\>/'<cr>
-nnoremap <silent> <leader>h3 :execute '3match InterestingWord3 /\<<c-r><c-w>\>/'<cr>
 
 " Shorcut for setting a pry breakpoint
 iab xpry require 'pry'; binding.pry
