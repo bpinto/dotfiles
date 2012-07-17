@@ -13,5 +13,10 @@ run() {
   bundle exec rackup -p $PORT -s thin
 }
 
+run-background() {
+  SERVER=$(basename $PWD)
+  (cd .. &>/dev/null && rake "restart:$SERVER" &>/dev/null)
+}
+
 export RUBYOPT=-Ku
 export PATH=$ORACLE_HOME:$PATH
