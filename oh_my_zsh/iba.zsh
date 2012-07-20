@@ -33,6 +33,8 @@ alias sqlplus='rlwrap sqlplus'
 
 FTF_CONN="FTF/FTF@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=7521))(CONNECT_DATA=(SID=TD153)))"
 alias sqlplus-ftf="sqlplus '$FTF_CONN'"
+CRP_CONN="ESS_USER/ESS_USER@//localhost:6521/TH154"
+alias sqlplus-crp="sqlplus '$CRP_CONN'"
 
 alias tunnel-crp='ssh -L 6521:10.80.3.201:1521 ess61'
 alias tunnel-ftf='ssh -L 7521:10.195.1.124:1521 ess61'
