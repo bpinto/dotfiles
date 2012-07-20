@@ -3,6 +3,11 @@ add-remote-jiji() {
   git remote add 'jiji' "twer@xfwang.local:~/code/iba_2_0/$PROJECT"
 }
 
+add-remote-bogus() {
+  PROJECT=$(basename $PWD)
+  git remote add 'bogus' "fmobus@fmobus.local:~/everything/$PROJECT"
+}
+
 run() {
   SERVER=$(basename $PWD)
   PORT=$(cd .. &>/dev/null && exec rake -D | grep -E "Start.*$SERVER.*port: .*" | sed -E 's/.*port: ([0-9]+).*/\1/')
