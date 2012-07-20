@@ -25,5 +25,7 @@ export ANDROID_SDK_ROOT=/usr/local/Cellar/android-sdk/r18
 
 source $ZSH/oh-my-zsh.sh
 
+alias git='nocorrect git'
+
 # RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
