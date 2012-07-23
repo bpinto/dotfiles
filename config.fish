@@ -1,6 +1,7 @@
 set --erase fish_greeting
-set fish_function_path $fish_function_path /Users/bpinto/.oh-my-fish/functions
-set fish_function_path $fish_function_path /Users/bpinto/.oh-my-fish/functions/*
 
-# Theme
-set fish_function_path /Users/bpinto/.oh-my-fish/themes/robbyrussell $fish_function_path
+# Path to your oh-my-fish.
+set FISH $HOME/.oh-my-fish
+
+# Load oh-my-fish cofiguration.
+. $FISH/oh-my-fish.fish
