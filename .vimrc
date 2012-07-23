@@ -7,7 +7,9 @@ Bundle 'gmarik/vundle'
 " PLUGINS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'godlygeek/tabular'
 Bundle 'kien/ctrlp.vim'
+Bundle 'Lokaltog/vim-powerline'
 Bundle 'mirell/vim-matchit'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/syntastic'
@@ -16,7 +18,6 @@ Bundle 'tpope/vim-bundler'
 Bundle 'tpope/vim-fugitive'
 Bundle 'vim-scripts/AutoTag'
 Bundle 'vim-scripts/YankRing.vim'
-Bundle 'Lokaltog/vim-powerline'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EDITOR CONFIGURATION
