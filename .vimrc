@@ -44,8 +44,6 @@ set backspace=indent,eol,start
 set hidden
 " remember more commands and search history
 set history=10000
-" always show the status bar
-set laststatus=2
 " Use already open buffer
 set switchbuf=useopen
 " Write the contents of the file if it has been modified
@@ -78,6 +76,8 @@ set splitright
 set number
 " Line number left margin
 set numberwidth=5
+" always show the status bar
+set laststatus=2
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
