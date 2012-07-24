@@ -5,7 +5,7 @@ set --erase fish_greeting
 set FISH $HOME/.oh-my-fish
 
 # Plugins
-set FISH_PLUGINS git
+set FISH_PLUGINS autojump cd git rvm
 
 # Theme
 set FISH_THEME robbyrussell
