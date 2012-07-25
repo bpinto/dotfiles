@@ -21,7 +21,6 @@ run-background() {
 }
 
 export RUBYOPT=-Ku
-export PATH=$ORACLE_HOME:$PATH
 
 export NLS_LANG="AMERICAN_AMERICA.UTF8"
 export ORACLE_HOME=/opt/oracle/instantclient_10_2
