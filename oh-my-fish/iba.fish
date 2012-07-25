@@ -1,0 +1,7 @@
+set -g RUBYOPT -Ku
+
+set -g NLS_LANG "AMERICAN_AMERICA.UTF8"
+set -g ORACLE_HOME /opt/oracle/instantclient_10_2
+set -g DYLD_LIBRARY_PATH $ORACLE_HOME
+set -g LD_LIBRARY_PATH $ORACLE_HOME
+set -g PATH $ORACLE_HOME $PATH
