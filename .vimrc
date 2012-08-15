@@ -211,9 +211,9 @@ nnoremap <leader><leader> <c-^>
 nnoremap <leader>w mz:%s/\s\+$//<cr>:let @/=''<cr>`z
 
 " System clipboard interaction
-" From https://github.com/henrik/dotfiles/blob/master/vim/config/mappings.vim
-noremap <leader>Y "*y
-noremap <leader>P :set paste<CR>"*p<CR>:set nopaste<CR>
+nnoremap <leader>Y :.!pbcopy<CR>uk<CR>
+vnoremap <leader>Y :!pbcopy<CR>uk<CR>
+noremap <leader>P :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 
 " Select (charwise) the contents of the current line, excluding indentation.
 nnoremap vv ^vg_
