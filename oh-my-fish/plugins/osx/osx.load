@@ -1,2 +1,2 @@
 set PATH /usr/local/sbin $PATH
-set -x EDITOR vim
+set -gx EDITOR vim
