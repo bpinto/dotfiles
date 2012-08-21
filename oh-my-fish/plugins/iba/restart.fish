@@ -1,4 +1,4 @@
-function run-background
+function restart
   set -l SERVER (basename $PWD)
 
   pushd ..
