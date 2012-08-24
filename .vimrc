@@ -64,7 +64,7 @@ set cursorline
 set number
 " Minimal window width
 set winwidth=79
-" keep more context when scrolling off the end of a buffer (3 lines)
+" Keep more context when scrolling off the end of a buffer (3 lines)
 set scrolloff=3
 " Height of the command bar
 set cmdheight=2
@@ -76,8 +76,10 @@ set splitright
 set number
 " Line number left margin
 set numberwidth=5
-" always show the status bar
+" Always show the status bar
 set laststatus=2
+" Fix vim auto-complete slowness in large projects
+set foldmethod=manual
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
