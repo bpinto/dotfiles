@@ -434,5 +434,3 @@ imap <D-/> <Esc><plug>NERDCommenterToggle<CR>i
 
 map  <leader>/ <plug>NERDCommenterToggle<CR>
 imap <leader>/ <Esc><plug>NERDCommenterToggle<CR>i
-
-nmap Y :YRShow<cr>
