@@ -265,6 +265,8 @@ nnoremap <leader>EV :vsplit $MYVIMRC<cr>
 nnoremap <leader>RV :source $MYVIMRC<cr>
 " Edit .zshrc file
 nnoremap <leader>EZ :vsplit ~/.zshrc<cr>
+" Edit fish config file
+nnoremap <leader>EF :vsplit ~/.config/fish/config.fish<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
