@@ -286,10 +286,10 @@ inoremap <s-tab> <c-n>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ARROW KEYS ARE UNACCEPTABLE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <Left> <Nop>
-map <Right> <Nop>
-map <Up> <Nop>
-map <Down> <Nop>
+map <Left> :echo "Arrow keys are unacceptable"<CR>
+map <Right> :echo "Arrow keys are unacceptable"<CR>
+map <Up> :echo "Arrow keys are unacceptable"<CR>
+map <Down> :echo "Arrow keys are unacceptable"<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OPEN FILES IN DIRECTORY OF CURRENT FILE
