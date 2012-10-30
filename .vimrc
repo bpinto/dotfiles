@@ -113,7 +113,7 @@ set backup
 set backupdir=~/.vim/tmp/backup//
 " Swap files
 set directory=~/.vim/tmp/swap//
-" It's 20120, Vim.
+" It's 2012, Vim.
 set noswapfile
 " Make vim able to edit crontab files again.
 set backupskip=/tmp/*,/private/tmp/*"
