@@ -427,13 +427,13 @@ au FocusLost * :silent! wall
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CtrlP Menu remapping
 noremap <C-t> :CtrlP<CR>
 inoremap <C-t> <ESC>:CtrlP<CR>
 
-map  <D-/> <plug>NERDCommenterToggle<CR>
-imap <D-/> <Esc><plug>NERDCommenterToggle<CR>i
-
+" NerdCommenter Menu remapping
 map  <leader>/ <plug>NERDCommenterToggle<CR>
 imap <leader>/ <Esc><plug>NERDCommenterToggle<CR>i
 
 let g:Powerline_symbols = 'fancy'
+

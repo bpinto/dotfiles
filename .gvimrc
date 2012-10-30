@@ -13,3 +13,7 @@ macmenu &File.New\ Tab key=<D-S-t>
 noremap <D-t> :CtrlP<CR>
 inoremap <D-t> <ESC>:CtrlP<CR>
 
+" NerdCommenter OS-X Menu remapping
+map  <D-/> <plug>NERDCommenterToggle<CR>
+imap <D-/> <Esc><plug>NERDCommenterToggle<CR>i
+
