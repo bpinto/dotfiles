@@ -17,6 +17,7 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/syntastic'
 Bundle 'skalnik/vim-vroom'
 Bundle 'tpope/vim-bundler'
+Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
 Bundle 'vim-scripts/AutoTag'
 
