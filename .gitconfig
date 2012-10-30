@@ -5,12 +5,12 @@
   whitespace = tab-in-indent,tabwidth=2
   excludesfile = /Users/bpinto/.gitignore
 [alias]
-  st = status
-  pr = pull --rebase
-  lg = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  ap = add -p
   co = checkout
   ci = commit
-  unstage = reset HEAD --
+  lg = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  pr = pull --rebase
+  st = status
 [branch]
   autosetupmerge = always
   autosetuprebase = always
