@@ -19,7 +19,6 @@ Bundle 'skalnik/vim-vroom'
 Bundle 'tpope/vim-bundler'
 Bundle 'tpope/vim-fugitive'
 Bundle 'vim-scripts/AutoTag'
-Bundle 'vim-scripts/YankRing.vim'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EDITOR CONFIGURATION
