@@ -39,11 +39,11 @@ set t_ti= t_te=
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" allow backspacing over everything in insert mode
+" Allow backspacing over everything in insert mode
 set backspace=indent,eol,start
-" allow unsaved background buffers and remember marks/undo for them
+" Allow unsaved background buffers and remember marks/undo for them
 set hidden
-" remember more commands and search history
+" Remember more commands and search history
 set history=10000
 " Use already open buffer
 set switchbuf=useopen
@@ -163,17 +163,17 @@ set wildignore+=*.DS_Store                       " OSX bullshit
 " LIST
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Show invisible characters
- set list
+set list
 " Reset the listchars
- set listchars=""
-" a tab should display as "  ", trailing whitespace as "."
- set listchars=tab:\ \
-" show trailing spaces as dots
- set listchars+=trail:.
+set listchars=""
+" A tab should display as "  ", trailing whitespace as "."
+set listchars=tab:\ \
+" Show trailing spaces as dots
+set listchars+=trail:.
 " The character to show in the last column when wrap is off and the line continues beyond the right of the screen
- set listchars+=extends:>
+set listchars+=extends:>
 " The character to show in the last column when wrap is off and the line continues beyond the right of the screen
- set listchars+=precedes:<
+set listchars+=precedes:<
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STATUS LINE
@@ -188,7 +188,7 @@ let mapleader=","
 " Aliasing the new leader ',' to the default one '\'
 nmap \ ,
 
-"Better ESC
+" Better ESC
 inoremap jk <Esc>
 
 " Use sane regexes.
@@ -274,12 +274,12 @@ nnoremap <leader>EF :vsplit ~/.config/fish/config.fish<cr>
 " Indent if we're at the beginning of a line. Else, do completion.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
+  let col = col('.') - 1
+  if !col || getline('.')[col - 1] !~ '\k'
+    return "\<tab>"
+  else
+    return "\<c-p>"
+  endif
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
@@ -303,13 +303,13 @@ map <leader>v :view %%
 " RENAME CURRENT FILE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! RenameFile()
-    let old_name = expand('%')
-    let new_name = input('New file name: ', expand('%'), 'file')
-    if new_name != '' && new_name != old_name
-        exec ':saveas ' . new_name
-        exec ':silent !rm ' . old_name
-        redraw!
-    endif
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'), 'file')
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
 endfunction
 map <leader>n :call RenameFile()<cr>
 
@@ -414,11 +414,11 @@ augroup END
 
 " Trailing whitespace change on insert mode
 augroup trailing
-    au!
-    au InsertEnter * :set listchars-=trail:.
-    au InsertEnter * :set listchars+=trail:⌴
-    au InsertLeave * :set listchars+=trail:.
-    au InsertLeave * :set listchars-=trail:⌴
+  au!
+  au InsertEnter * :set listchars-=trail:.
+  au InsertEnter * :set listchars+=trail:⌴
+  au InsertLeave * :set listchars+=trail:.
+  au InsertLeave * :set listchars-=trail:⌴
 augroup END
 
 " Save when losing focus
