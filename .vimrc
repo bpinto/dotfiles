@@ -430,5 +430,12 @@ inoremap <C-t> <ESC>:CtrlP<CR>
 map  <leader>/ <plug>NERDCommenterToggle<CR>
 imap <leader>/ <Esc><plug>NERDCommenterToggle<CR>i
 
+" Use custom icons and arrows for symbols and dividers
 let g:Powerline_symbols = 'fancy'
 
+" Jump cursor to the first detected error when saving
+let g:syntastic_auto_jump = 1
+" Symbol when have errors
+let g:syntastic_error_symbol = '✗'
+" Symbol when have warnings
+let g:syntastic_warning_symbol = '⚠'
