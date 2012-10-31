@@ -1,3 +1,5 @@
+#!/bin/bash
+
 DIR=$( cd "$( dirname "$0" )" && pwd )
 
 DOT_FILES=".ackrc .editrc .gitconfig .gitignore .gvimrc .vimrc .zshrc"
