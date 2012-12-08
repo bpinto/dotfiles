@@ -235,6 +235,9 @@ nmap <silent> <leader>cf <ESC>/\v^[<=>]{7}( .*\|$)<CR>
 " Shorcut for setting a pry breakpoint
 iab xpry require 'pry'; binding.pry
 
+" Convert ruby 1.8 hash into ruby 1.9
+nnoremap <leader>h :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EXTRA
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
