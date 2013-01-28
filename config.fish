@@ -5,7 +5,7 @@ set --erase fish_greeting
 set fish_path $HOME/.oh-my-fish
 
 # Plugins
-set fish_plugins autojump brew bundler cliniko node osx rake rbenv smlnj z
+set fish_plugins brew bundler cliniko node osx python rake rbenv z
 
 # Theme
 set fish_theme robbyrussell
