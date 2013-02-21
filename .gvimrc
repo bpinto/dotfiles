@@ -3,7 +3,7 @@ set fuoptions=maxvert,maxhorz
 au GUIEnter * set fullscreen
 
 " Set Inconsolata font
-set guifont=Inconsolata-dz\ for\ Powerline:h12
+set guifont=Inconsolata-dz\ for\ Powerline:h14
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
