@@ -21,6 +21,7 @@ Bundle 'tpope/vim-bundler'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
 Bundle 'vim-scripts/AutoTag'
+Bundle 'Valloric/YouCompleteMe'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EDITOR CONFIGURATION
