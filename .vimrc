@@ -20,6 +20,7 @@ Bundle 'skalnik/vim-vroom'
 Bundle 'tpope/vim-bundler'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
+Bundle 'vim-ruby/vim-ruby'
 Bundle 'vim-scripts/AutoTag'
 Bundle 'Valloric/YouCompleteMe'
 
