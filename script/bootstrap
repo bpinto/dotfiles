@@ -114,8 +114,18 @@ install_dotfiles () {
   done
 }
 
+install_fish () {
+  info 'installing fish'
+
+  dest="$HOME/.config/fish/config.fish"
+  source="$DOTFILES_ROOT/fish/config.fish"
+
+  link_files $source $dest
+}
+
 setup_gitconfig
 install_dotfiles
+install_fish
 
 # If we are on a mac, lets install and setup homebrew
 if [ "$(uname -s)" == "Darwin" ]
