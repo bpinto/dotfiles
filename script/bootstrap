@@ -123,9 +123,21 @@ install_fish () {
   link_files $source $dest
 }
 
+install_fonts() {
+  info 'installing fonts'
+
+  dest="$HOME/Library/Fonts/"
+  for source in `find $DOTFILES_ROOT -maxdepth 2 -name \*.otf`
+  do
+    mv $source $dest
+    success "installed $source to $dest"
+  done
+}
+
 setup_gitconfig
 install_dotfiles
 install_fish
+install_fonts
 
 # If we are on a mac, lets install and setup homebrew
 if [ "$(uname -s)" == "Darwin" ]
