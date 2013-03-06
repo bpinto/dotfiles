@@ -1,0 +1,46 @@
+
+# Sample gitconfig
+#
+
+[hub]
+  protocol = https
+[user]
+  name   = AUTHORNAME
+  email  = AUTHOREMAIL
+  helper = osxkeychain
+[alias]
+  ap    = add -p
+  co    = checkout
+  count = !git shortlog -sn
+  ci    = commit
+  lg    = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  ll    = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --decorate --numstat
+  lga   = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  lla   = log --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --decorate --numstat
+  pr    = pull --rebase
+  st    = status
+[color]
+  branch      = true
+  diff        = true
+  decorate    = true
+  grep        = true
+  interactive = true
+  showbranch  = true
+  status      = true
+  ui          = true
+[core]
+  editor       = vim
+  excludesfile = ~/.gitignore
+  whitespace   = tab-in-indent,tabwidth=2
+[apply]
+  whitespace = nowarn
+[difftool]
+  prompt = false
+[help]
+  autocorrect = 1
+[push]
+  # See `git help config` (search for push.default)
+  # for more information on different options of the below setting.
+  #
+  # Setting to git 2.0 default to surpress warning message
+  default = simple
