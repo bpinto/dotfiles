@@ -14,6 +14,6 @@ then
 fi
 
 # Install homebrew packages
-brew install ctags fishfish macvim postgresql qt rbenv ruby-build the_silver_searcher wget z
+brew install ctags fishfish node macvim postgresql qt rbenv ruby-build the_silver_searcher wget z
 
 exit 0
