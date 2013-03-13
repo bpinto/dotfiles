@@ -49,7 +49,7 @@ set backspace=indent,eol,start
 " Allow unsaved background buffers and remember marks/undo for them
 set hidden
 " Remember more commands and search history
-set history=10000
+set history=1000
 " Use already open buffer
 set switchbuf=useopen
 " Write the contents of the file if it has been modified
@@ -147,6 +147,8 @@ set tabstop=2
 set shiftwidth=2
 " Should be the same value of shiftwidth
 set softtabstop=2
+" Always round the indent to a multiple of 'shiftwidth'
+set shiftround
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " WILDMENU
@@ -234,6 +236,9 @@ noremap j gj
 noremap k gk
 noremap gj j
 noremap gk k
+
+" Make Y consistent with C and D.
+nnoremap Y y$
 
 " Find merge conflict markers
 nmap <silent> <leader>cf <ESC>/\v^[<=>]{7}( .*\|$)<CR>
@@ -396,13 +401,8 @@ augroup vimrcEx
   " For fish, autoindent with two spaces
   autocmd FileType fish set ai sw=2 sts=2 et
 
-  autocmd! BufRead,BufNewFile *.sass setfiletype sass
-
   autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
   autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
-
-  " Indent p tags
-  autocmd FileType html,eruby if g:html_indent_tags !~ '\\|p\>' | let g:html_indent_tags .= '\|p\|li\|dt\|dd' | endif
 
   " Don't syntax highlight markdown because it's often wrong
   autocmd! FileType mkd setlocal syn=off
