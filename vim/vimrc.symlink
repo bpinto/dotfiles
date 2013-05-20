@@ -23,7 +23,6 @@ Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'vim-ruby/vim-ruby'
-Bundle 'vim-scripts/AutoTag'
 if has('gui_macvim')
   Bundle 'Valloric/YouCompleteMe'
 endif
