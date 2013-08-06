@@ -16,7 +16,7 @@ Bundle 'rodjek/vim-puppet'
 Bundle 'scriptin/scala.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/syntastic'
-Bundle 'skalnik/vim-vroom'
+Bundle 'thoughtbot/vim-rspec'
 Bundle 'tpope/vim-bundler'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-endwise'
@@ -461,6 +461,11 @@ let g:syntastic_error_symbol = '✗'
 " Symbol when have warnings
 let g:syntastic_warning_symbol = '⚠'
 
-" Vroom
-let g:vroom_use_dispatch = 1
-let g:vroom_use_spring = 1
+" Vim-rspec
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+
+let g:rspec_command = "Dispatch spring rspec {spec}"
+
