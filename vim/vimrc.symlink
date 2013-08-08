@@ -8,10 +8,10 @@ Bundle 'gmarik/vundle'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'aliva/vim-fish'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'bling/vim-airline'
 Bundle 'godlygeek/tabular'
 Bundle 'groenewege/vim-less'
 Bundle 'kien/ctrlp.vim'
-Bundle 'Lokaltog/vim-powerline'
 Bundle 'rodjek/vim-puppet'
 Bundle 'scriptin/scala.vim'
 Bundle 'scrooloose/nerdcommenter'
@@ -443,22 +443,26 @@ au FocusLost * :silent! wall
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" CtrlP Menu remapping
+" CtrlP
+" Menu remapping
 noremap <C-t> :CtrlP<CR>
 inoremap <C-t> <ESC>:CtrlP<CR>
 
-" NerdCommenter Menu remapping
+" NerdCommenter
+" Menu remapping
 map  <leader>/ <plug>NERDCommenterToggle<CR>
 imap <leader>/ <Esc><plug>NERDCommenterToggle<CR>i
 
-" Use custom icons and arrows for symbols and dividers
-let g:Powerline_symbols = 'fancy'
+" Airline
+" Solarized theme
+let g:airline_theme = 'solarized'
+" Enable usage of patched powerline font symbols
+let g:airline_powerline_fonts = 1
 
+"Syntastic
 " Jump cursor to the first detected error when saving
 let g:syntastic_auto_jump = 1
-" Symbol when have errors
 let g:syntastic_error_symbol = '✗'
-" Symbol when have warnings
 let g:syntastic_warning_symbol = '⚠'
 
 " Vim-rspec
