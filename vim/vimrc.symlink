@@ -471,5 +471,18 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
+function! RunWithoutDispatch(command)
+  let original_command = g:rspec_command
+
+  let g:rspec_command = "!spring rspec {spec}"
+  :execute "call " . a:command . "()"
+  let g:rspec_command = original_command
+endfunction
+
+map <Leader>T :call RunWithoutDispatch("RunCurrentSpecFile")<CR>
+map <Leader>S :call RunWithoutDispatch("RunNearestSpec")<CR>
+map <Leader>L :call RunWithoutDispatch("RunLastSpec")<CR>
+map <Leader>A :call RunWithoutDispatch("RunAllSpecs")<CR>
+
 let g:rspec_command = "Dispatch spring rspec {spec}"
 
