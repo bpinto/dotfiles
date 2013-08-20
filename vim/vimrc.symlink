@@ -13,7 +13,6 @@ Bundle 'godlygeek/tabular'
 Bundle 'groenewege/vim-less'
 Bundle 'kien/ctrlp.vim'
 Bundle 'rodjek/vim-puppet'
-Bundle 'scriptin/scala.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/syntastic'
 Bundle 'thoughtbot/vim-rspec'
@@ -24,7 +23,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'vim-ruby/vim-ruby'
 if has('gui_macvim')
-  Bundle 'Valloric/YouCompleteMe'
+  Bundle 'FredKSchott/CoVim'
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -439,6 +438,18 @@ augroup END
 
 " Save when losing focus
 au FocusLost * :silent! wall
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" EXTRA
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Replace grep with silver search
+cnoreabbrev ag grep
+if executable("ag")
+  set grepprg=Make!\ \ ag\ --nogroup\ --nocolor\ --column
+endif
+
+" Auto open the search result
+autocmd QuickFixCmdPost *grep* cwindow
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
