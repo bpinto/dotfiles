@@ -1,13 +1,9 @@
-
-# Sample gitconfig
-#
-
 [hub]
   protocol = https
 [user]
-  name   = AUTHORNAME
-  email  = AUTHOREMAIL
   helper = osxkeychain
+  name = Bruno Pinto
+  email = brunoferreirapinto@gmail.com
 [alias]
   ap    = add -p
   ci    = commit
