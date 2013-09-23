@@ -1,3 +1,4 @@
+
 [hub]
   protocol = https
 [user]
@@ -27,7 +28,7 @@
   ui          = true
 [core]
   editor       = vim
-  excludesfile = ~/.gitignore
+  excludesfile = /opt/boxen/config/git/gitignore
   whitespace   = tab-in-indent,tabwidth=2
 [apply]
   whitespace = nowarn
@@ -43,3 +44,9 @@
   default = simple
 [init]
   templatedir = ~/.git_template
+
+[github]
+user = bpinto
+
+[credential]
+helper = /opt/boxen/bin/boxen-git-credential
