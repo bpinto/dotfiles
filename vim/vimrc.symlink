@@ -433,7 +433,7 @@ au FocusLost * :silent! wall
 " Replace grep with silver search
 cnoreabbrev ag grep
 if executable("ag")
-  set grepprg=Make!\ \ ag\ --nogroup\ --nocolor\ --column
+  set grepprg=ag\ --nogroup\ --nocolor\ --column
 endif
 
 " Auto open the search result
