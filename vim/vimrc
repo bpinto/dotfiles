@@ -261,6 +261,9 @@ iab xpry require 'pry'; binding.pry
 " Convert ruby 1.8 hash into ruby 1.9
 nnoremap <leader>h :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<CR>
 
+" Make escape get out of pumenu mode and go back to the uncompleted word
+inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EXTRA
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
