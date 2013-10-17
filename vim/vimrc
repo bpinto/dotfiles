@@ -20,7 +20,6 @@ Bundle 'tpope/vim-bundler'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
-Bundle 'tsaleh/vim-matchit'
 Bundle 'kana/vim-textobj-user'
 Bundle 'nelstrom/vim-textobj-rubyblock'
 if has('gui_macvim')
@@ -295,6 +294,15 @@ nnoremap <leader>EZ :vsplit ~/.zshrc<cr>
 " Edit fish config file
 nnoremap <leader>EF :vsplit ~/.config/fish/config.fish<cr>
 
+" Replace grep with silver search
+cnoreabbrev ag grep
+if executable("ag")
+  set grepprg=ag\ --nogroup\ --nocolor\ --column
+endif
+
+" Auto open the search result
+autocmd QuickFixCmdPost *grep* cwindow
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
 " Indent if we're at the beginning of a line. Else, do completion.
@@ -433,20 +441,13 @@ augroup END
 au FocusLost * :silent! wall
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" EXTRA
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Replace grep with silver search
-cnoreabbrev ag grep
-if executable("ag")
-  set grepprg=ag\ --nogroup\ --nocolor\ --column
-endif
-
-" Auto open the search result
-autocmd QuickFixCmdPost *grep* cwindow
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Matchit
+" Enable matchit.vim
+runtime macros/matchit.vim
+
 " CtrlP
 " Menu remapping
 noremap <C-t> :CtrlP<CR>
