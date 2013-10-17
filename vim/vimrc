@@ -21,7 +21,8 @@ Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tsaleh/vim-matchit'
-Bundle 'vim-ruby/vim-ruby'
+Bundle 'kana/vim-textobj-user'
+Bundle 'nelstrom/vim-textobj-rubyblock'
 if has('gui_macvim')
   Bundle 'FredKSchott/CoVim'
 endif
