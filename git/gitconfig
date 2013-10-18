@@ -30,6 +30,7 @@
   editor       = vim
   excludesfile = /opt/boxen/config/git/gitignore
   whitespace   = tab-in-indent,tabwidth=2
+  pager        = less -+S -FXR
 [apply]
   whitespace = nowarn
 [difftool]
