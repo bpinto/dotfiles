@@ -468,10 +468,14 @@ let g:airline_theme = 'solarized'
 let g:airline_powerline_fonts = 1
 
 "Syntastic
-" Jump cursor to the first detected error when saving
-let g:syntastic_auto_jump = 1
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
+" Jump cursor to the first detected error when saving
+let g:syntastic_auto_jump = 1
+" Enable rubocop check
+let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+" Most issues returned by rubocop are warnings
+let g:syntastic_quiet_warnings = 0
 
 " Vim-rspec
 map <Leader>t :call RunCurrentSpecFile()<CR>

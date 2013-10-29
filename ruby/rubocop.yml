@@ -1,0 +1,16 @@
+# This is the configuration used to check the rubocop source code.
+
+inherit_from: config/default.yml
+
+AccessModifierIndentation:
+  EnforcedStyle: outdent
+DotPosition:
+  Style: 'trailing'
+LineLength:
+  Max: 99
+MethodLength:
+  CountComments: false
+  Max: 5
+ParameterLists:
+  Max: 4
+  CountKeywordArgs: true
