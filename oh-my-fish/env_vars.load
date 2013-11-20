@@ -1,0 +1,1 @@
+set -gx Z_SCRIPT_PATH /opt/boxen/homebrew/etc/profile.d/z.sh

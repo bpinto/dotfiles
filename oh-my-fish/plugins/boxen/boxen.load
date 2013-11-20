@@ -1,0 +1,56 @@
+# Make the root of Boxen available.
+
+set -gx BOXEN_HOME /opt/boxen
+
+# Add homebrew'd stuff to the path.
+
+set PATH $BOXEN_HOME/homebrew/bin $BOXEN_HOME/homebrew/sbin $PATH
+
+# Add homebrew'd stuff to the manpath.
+
+set MANPATH $BOXEN_HOME/homebrew/share/man $MANPATH
+
+# Add any binaries specific to Boxen to the path.
+
+set PATH $BOXEN_HOME/bin $PATH
+
+# Sourcing the real files is too slow
+#for f in $BOXEN_HOME/env.d/*.sh;
+  #if test -f $f
+    #source_script $f
+  #end
+#end
+
+set -gx BOXEN_BIN_DIR /opt/boxen/bin
+set -gx BOXEN_CONFIG_DIR /opt/boxen/config
+set -gx BOXEN_DATA_DIR /opt/boxen/data
+set -gx BOXEN_ENV_DIR /opt/boxen/env.d
+set -gx BOXEN_GITHUB_LOGIN bpinto
+set -gx BOXEN_HOME /opt/boxen
+set -gx BOXEN_LOG_DIR /opt/boxen/log
+set -gx BOXEN_POSTGRESQL_PORT 15432
+set -gx BOXEN_POSTGRESQL_URL postgres://localhost:$BOXEN_POSTGRESQL_PORT/
+set -gx BOXEN_REDIS_PORT 16379
+set -gx BOXEN_REDIS_URL redis://localhost:$BOXEN_REDIS_PORT/
+set -gx BOXEN_SOCKET_DIR /opt/boxen/data/project-sockets
+set -gx BOXEN_SRC_DIR /Users/bpinto/src
+set -gx CFLAGS -I/opt/boxen/homebrew/include
+set -gx HOMEBREW_CACHE /opt/boxen/cache/homebrew
+set -gx LDFLAGS -L/opt/boxen/homebrew/lib
+set -gx NODENV_ROOT /opt/boxen/nodenv
+set -gx PATH $BOXEN_HOME/heroku/bin $BOXEN_HOME/nodenv/shims $BOXEN_HOME/nodenv/bin $BOXEN_HOME/rbenv/shims $BOXEN_HOME/rbenv/bin $BOXEN_HOME/rbenv/plugins/ruby-build/bin $PATH
+set -gx PGPORT $BOXEN_POSTGRESQL_PORT
+set -gx RBENV_ROOT $BOXEN_HOME/rbenv
+
+# Add ./bin to the path. This happens after initialization to make
+# sure local stubs take precedence over stuff like rbenv.
+
+set PATH bin $PATH
+
+# Boxen is active.
+
+if test -d $BOXEN_HOME/repo/.git
+  set -x BOXEN_SETUP_VERSION (env GIT_DIR=$BOXEN_HOME/repo/.git git rev-parse --short HEAD)
+else
+  echo "Boxen could not load properly!"
+end
