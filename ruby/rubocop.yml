@@ -1,7 +1,5 @@
 # This is the configuration used to check the rubocop source code.
 
-inherit_from: config/default.yml
-
 AccessModifierIndentation:
   EnforcedStyle: outdent
 DotPosition:
