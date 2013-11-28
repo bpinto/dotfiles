@@ -357,6 +357,8 @@
 	<false/>
 	<key>HideActivityIndicator</key>
 	<false/>
+	<key>HideMenuBarInFullscreen</key>
+	<true/>
 	<key>HideScrollbar</key>
 	<false/>
 	<key>HideTab</key>
@@ -402,7 +404,7 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>347 279 924 485 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 88 1440 790 0 0 1440 878 </string>
+	<string>0 110 2560 1308 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>183 347 730 526 0 0 1440 878 </string>
 	<key>New Bookmarks</key>
@@ -1210,7 +1212,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2013-11-02T22:07:11Z</date>
+	<date>2013-11-20T10:58:09Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -1256,6 +1258,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>1.0.0.20130624</string>
+	<string>1.0.0.20131116</string>
 </dict>
 </plist>
