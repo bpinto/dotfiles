@@ -12,6 +12,7 @@ Bundle 'bling/vim-airline'
 Bundle 'godlygeek/tabular'
 Bundle 'groenewege/vim-less'
 Bundle 'kana/vim-textobj-user'
+Bundle 'kchmck/vim-coffee-script'
 Bundle 'kien/ctrlp.vim'
 Bundle 'nelstrom/vim-textobj-rubyblock'
 Bundle 'rodjek/vim-puppet'
@@ -414,6 +415,8 @@ augroup vimrcEx
   autocmd FileType python set sw=4 sts=4 et
   " For fish, autoindent with two spaces
   autocmd FileType fish set ai sw=2 sts=2 et
+  " For coffee, autoindent with two spaces
+  autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 
   autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
   autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
