@@ -2,8 +2,6 @@
 
 AccessModifierIndentation:
   EnforcedStyle: outdent
-DotPosition:
-  Style: 'trailing'
 LineLength:
   Max: 99
 MethodLength:
