@@ -399,30 +399,26 @@ nnoremap <leader>. :call OpenTestAlternate()<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CUSTOM AUTOCMDS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-augroup vimrcEx
-  " Clear all autocmds in the group
+augroup misc
+  " Remove ALL autocommands for the current group.
   autocmd!
-  autocmd FileType text setlocal textwidth=78
+
+  " Trailing whitespace change on insert mode
+  autocmd InsertEnter * :set listchars-=trail:.
+  autocmd InsertEnter * :set listchars+=trail:⌴
+  autocmd InsertLeave * :set listchars+=trail:.
+  autocmd InsertLeave * :set listchars-=trail:⌴
+
   " Jump to last cursor position unless it's invalid or in an event handler
   autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
     \ endif
+augroup END
 
-  " For ruby, autoindent with two spaces, always expand tabs
-  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
-  " For python autoindent with four spaces
-  autocmd FileType python set sw=4 sts=4 et
-  " For fish, autoindent with two spaces
-  autocmd FileType fish set ai sw=2 sts=2 et
-  " For coffee, autoindent with two spaces
-  autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
-
-  autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
-  autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
-
-  " Don't syntax highlight markdown because it's often wrong
-  autocmd! FileType mkd setlocal syn=off
+augroup highlight
+  " Remove ALL autocommands for the current group.
+  autocmd!
 
   " Leave the return key alone when in command line windows, since it's used
   " to run commands there.
@@ -434,22 +430,19 @@ augroup vimrcEx
   autocmd BufEnter * match OverLength /\%101v.*/
 augroup END
 
-" Trailing whitespace change on insert mode
-augroup trailing
-  au!
-  au InsertEnter * :set listchars-=trail:.
-  au InsertEnter * :set listchars+=trail:⌴
-  au InsertLeave * :set listchars+=trail:.
-  au InsertLeave * :set listchars-=trail:⌴
-augroup END
+" Autosave files/buffers
+augroup autosave
+  " Remove ALL autocommands for the current group.
+  autocmd!
 
-if has('gui_macvim')
-  " Save when losing focus
-  au FocusLost * :silent! wall
-else
-  " Save when leaving insert mode
-  autocmd InsertLeave * if expand('%') != '' | update | endif
-end
+  if has('gui_macvim')
+    " Save when losing focus
+    autocmd FocusLost * :silent! wall
+  else
+    " Save when leaving insert mode
+    autocmd InsertLeave * if expand('%') != '' | update | endif
+  end
+augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
