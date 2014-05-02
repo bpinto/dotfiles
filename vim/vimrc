@@ -9,6 +9,7 @@ Bundle 'gmarik/vundle'
 Bundle 'aliva/vim-fish'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'bling/vim-airline'
+Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'godlygeek/tabular'
 Bundle 'groenewege/vim-less'
 Bundle 'kana/vim-textobj-user'
@@ -216,11 +217,12 @@ inoremap jk <Esc>
 nnoremap / /\v
 vnoremap / /\v
 
+" * Disabled while using Vim Tmux Navigator plugin *
 " Move around splits with <c-hjkl>
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
+"nnoremap <c-j> <c-w>j
+"nnoremap <c-k> <c-w>k
+"nnoremap <c-h> <c-w>h
+"nnoremap <c-l> <c-w>l
 
 " Clear the search buffer when hitting return
 function! MapCR()
