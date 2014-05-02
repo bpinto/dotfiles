@@ -431,7 +431,7 @@ augroup vimrcEx
 
   " Highlight characters longer than 80 characters
   autocmd BufEnter * highlight OverLength ctermbg=7 guibg=#eee8d5
-  autocmd BufEnter * match OverLength /\%81v.*/
+  autocmd BufEnter * match OverLength /\%101v.*/
 augroup END
 
 " Trailing whitespace change on insert mode
