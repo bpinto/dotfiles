@@ -107,7 +107,7 @@
 			<key>Ansi 2 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<string>0.44977453351020813</string>
+				<string>0.020208755508065224</string>
 				<key>Green Component</key>
 				<string>0.54115492105484009</string>
 				<key>Red Component</key>
@@ -417,6 +417,8 @@
 	<true/>
 	<key>MaxVertically</key>
 	<true/>
+	<key>NSColorPanelMode</key>
+	<string>7</string>
 	<key>NSNavLastRootDirectory</key>
 	<string>~/Documents/Bruno/dotfiles/iterm2</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -442,12 +444,14 @@
 	<array/>
 	<key>NSTableView Sort Ordering KeyBingingTable</key>
 	<array/>
+	<key>NSWindow Frame NSColorPanel</key>
+	<string>586 519 214 309 0 0 2560 1418 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>853 372 924 485 0 0 2560 1440 </string>
+	<string>853 363 924 485 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 110 1440 768 0 0 1440 878 </string>
+	<string>0 334 730 526 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>418 881 730 526 0 0 2560 1418 </string>
+	<string>162 369 730 526 0 0 1440 900 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1251,7 +1255,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2014-03-20T21:42:52Z</date>
+	<date>2014-05-02T03:12:49Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -1299,6 +1303,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>1.0.0.20140112</string>
+	<string>1.0.0.20140403</string>
 </dict>
 </plist>
