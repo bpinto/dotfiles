@@ -443,8 +443,13 @@ augroup trailing
   au InsertLeave * :set listchars-=trail:⌴
 augroup END
 
-" Save when losing focus
-au FocusLost * :silent! wall
+if has('gui_macvim')
+  " Save when losing focus
+  au FocusLost * :silent! wall
+else
+  " Save when leaving insert mode
+  autocmd InsertLeave * if expand('%') != '' | update | endif
+end
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
