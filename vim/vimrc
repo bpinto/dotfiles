@@ -293,10 +293,10 @@ command! -bang WQ wq<bang>
 nnoremap <leader>EV :vsplit $MYVIMRC<cr>
 " Reload .vimrc file
 nnoremap <leader>RV :source $MYVIMRC<cr>
-" Edit .zshrc file
-nnoremap <leader>EZ :vsplit ~/.zshrc<cr>
 " Edit fish config file
 nnoremap <leader>EF :vsplit ~/.config/fish/config.fish<cr>
+" Edit tmux config file
+nnoremap <leader>ET :vsplit ~/.tmux.conf<cr>
 
 " Replace grep with silver search
 cnoreabbrev ag grep
