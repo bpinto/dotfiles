@@ -1,4 +1,5 @@
 set -gx Z_SCRIPT_PATH /opt/boxen/homebrew/etc/profile.d/z.sh
+set -gx NDENV_ROOT /opt/boxen/nodenv
 
 # http://stackoverflow.com/questions/2499794/how-can-i-fix-a-locale-warning-from-perl
 set -gx LC_CTYPE en_US.UTF-8
