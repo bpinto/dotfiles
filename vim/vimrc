@@ -106,11 +106,11 @@ set fillchars=vert:\|
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Background color
-set background=light
+set background=dark
 " Theme
 colorscheme solarized
 " Vertical split border
-highlight VertSplit cterm=NONE ctermfg=244 ctermbg=15 guifg=#839496 guibg=#fdf6e3
+highlight VertSplit cterm=NONE ctermfg=244 ctermbg=NONE guifg=#839496 guibg=NONE
 " Line numbers
 highlight LineNr term=bold cterm=NONE ctermfg=244 ctermbg=NONE gui=NONE guifg=#93a1a1 guibg=NONE
 
@@ -430,7 +430,7 @@ augroup vimrcEx
   autocmd! CmdwinLeave * :call MapCR()
 
   " Highlight characters longer than 80 characters
-  autocmd BufEnter * highlight OverLength ctermbg=7 guibg=#eee8d5
+  autocmd BufEnter * highlight OverLength ctermbg=0 guibg=#073642
   autocmd BufEnter * match OverLength /\%101v.*/
 augroup END
 
