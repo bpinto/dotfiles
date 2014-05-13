@@ -62,6 +62,8 @@ set history=1000
 set switchbuf=useopen
 " Write the contents of the file if it has been modified
 set autowrite
+" Use only one space after period when joining lines
+set nojoinspaces
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " INTERFACE
