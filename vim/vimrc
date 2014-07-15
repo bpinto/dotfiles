@@ -436,10 +436,14 @@ augroup highlight
   " Remove ALL autocommands for the current group.
   autocmd!
 
+  " Leave the return key alone when in quickfix windows, since it's used
+  " to run commands there.
+  autocmd BufEnter * :if &buftype is# "quickfix" | :unmap <cr>| else | :call MapCR()| endif
+
   " Leave the return key alone when in command line windows, since it's used
   " to run commands there.
-  autocmd! CmdwinEnter * :unmap <cr>
-  autocmd! CmdwinLeave * :call MapCR()
+  autocmd CmdwinEnter * :unmap <cr>
+  autocmd CmdwinLeave * :call MapCR()
 
   " Highlight characters longer than 80 characters
   autocmd BufEnter * highlight OverLength ctermbg=0 guibg=#073642
