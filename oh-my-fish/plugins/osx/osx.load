@@ -1,2 +1,1 @@
-set PATH /usr/local/sbin $PATH
 set -gx EDITOR vim
