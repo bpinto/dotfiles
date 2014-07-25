@@ -11,7 +11,7 @@ set fish_plugins bak brew bundler cliniko dpaste ec2 extract ndenv osx rails rbe
 set fish_theme robbyrussell
 
 # Path to your custom folder.
-set fish_custom $HOME/Documents/Bruno/dotfiles/oh-my-fish
+set fish_custom $HOME/Dropbox/Documents/Bruno/dotfiles/oh-my-fish
 
 # Load oh-my-fish cofiguration.
 . $fish_path/oh-my-fish.fish
