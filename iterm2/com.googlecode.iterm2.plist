@@ -417,10 +417,8 @@
 	<true/>
 	<key>MaxVertically</key>
 	<true/>
-	<key>NSColorPanelMode</key>
-	<string>7</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Documents/Bruno/dotfiles/iterm2</string>
+	<string>~/Dropbox/Documents/Bruno/dotfiles/iterm2</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -438,22 +436,18 @@
 		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
 		hAErATGG
 		</data>
-		<string>198</string>
+		<string>302</string>
 	</array>
 	<key>NSTableView Hidden Columns KeyBingingTable</key>
 	<array/>
 	<key>NSTableView Sort Ordering KeyBingingTable</key>
 	<array/>
-	<key>NSWindow Frame NSColorPanel</key>
-	<string>586 519 214 309 0 0 2560 1418 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>1400 374 924 485 0 0 2560 1440 </string>
+	<string>996 159 924 485 0 0 2560 1417 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
-	<string>230 834 592 584 0 0 2560 1418 </string>
+	<string>99 293 592 584 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>412 352 730 526 0 0 2560 1418 </string>
-	<key>NSWindow Frame iTerm Window 1</key>
-	<string>162 369 730 526 0 0 1440 900 </string>
+	<string>0 80 730 526 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1239,13 +1233,13 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/bpinto/Documents/Bruno/dotfiles/iterm2</string>
+	<string>/Users/bpinto/Dropbox/Documents/Bruno/dotfiles/iterm2</string>
 	<key>PromptOnClose</key>
 	<true/>
 	<key>PromptOnQuit</key>
 	<true/>
 	<key>QuitWhenAllWindowsClosed</key>
-	<false/>
+	<true/>
 	<key>RightCommand</key>
 	<integer>8</integer>
 	<key>RightOption</key>
@@ -1257,7 +1251,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2014-07-15T21:36:19Z</date>
+	<date>2014-10-17T17:19:19Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -1292,7 +1286,7 @@
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
 	<key>UKCrashReporterLastCrashReportDate</key>
-	<real>1404868224</real>
+	<real>1413376896</real>
 	<key>URLHandlersByGuid</key>
 	<dict/>
 	<key>UseBorder</key>
@@ -1316,6 +1310,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>1.0.0.20140629</string>
+	<string>2.0</string>
 </dict>
 </plist>
