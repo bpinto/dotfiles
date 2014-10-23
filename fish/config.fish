@@ -8,7 +8,7 @@ set fish_path $HOME/.oh-my-fish
 set fish_plugins bak brew bundler cliniko dpaste extract ndenv osx rails rbenv z boxen jump
 
 # Theme
-set fish_theme robbyrussell
+set fish_theme l
 
 # Path to your custom folder.
 set fish_custom $HOME/Dropbox/Documents/Bruno/dotfiles/oh-my-fish
