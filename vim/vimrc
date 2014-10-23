@@ -14,6 +14,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'aliva/vim-fish'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
+Plugin 'chriskempson/base16-vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'godlygeek/tabular'
 Plugin 'groenewege/vim-less'
@@ -117,11 +118,11 @@ set fillchars=vert:\|
 " Background color
 set background=dark
 " Theme
-colorscheme solarized
+colorscheme base16-default
 " Vertical split border
-highlight VertSplit cterm=NONE ctermfg=244 ctermbg=NONE guifg=#839496 guibg=NONE
+highlight VertSplit cterm=NONE ctermfg=8 ctermbg=NONE guifg=#585858 guibg=NONE
 " Line numbers
-highlight LineNr term=bold cterm=NONE ctermfg=244 ctermbg=NONE gui=NONE guifg=#93a1a1 guibg=NONE
+highlight LineNr term=bold cterm=NONE ctermfg=8 ctermbg=NONE gui=NONE guifg=#585858 guibg=NONE
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SEARCH CONFIGURATION
@@ -446,8 +447,8 @@ augroup highlight
   autocmd CmdwinEnter * :unmap <cr>
   autocmd CmdwinLeave * :call MapCR()
 
-  " Highlight characters longer than 80 characters
-  autocmd BufEnter * highlight OverLength ctermbg=0 guibg=#073642
+  " Highlight characters longer than 100 characters
+  autocmd BufEnter * highlight OverLength ctermfg=8 ctermbg=10 guifg=#585858 guibg=#282828
   autocmd BufEnter * match OverLength /\%101v.*/
 augroup END
 
