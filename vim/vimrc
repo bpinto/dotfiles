@@ -486,7 +486,7 @@ imap <leader>/ <Esc><plug>NERDCommenterToggle<CR>i
 
 " Airline
 " Solarized theme
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'base16'
 " Enable usage of patched powerline font symbols
 let g:airline_powerline_fonts = 1
 
