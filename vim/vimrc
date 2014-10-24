@@ -290,11 +290,12 @@ inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EXTRA
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-noremap  <F1> :set invfullscreen<CR>
-inoremap <F1> <ESC>:set invfullscreen<CR>a
-
 " Sudo to write
 cnoremap w!! w !sudo tee % >/dev/null
+
+" Open files in directory of current file
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+map <leader>e :edit %%
 
 " Typos
 command! -bang E e<bang>
@@ -347,13 +348,6 @@ map <Left> :echo "Arrow keys are unacceptable"<CR>
 map <Right> :echo "Arrow keys are unacceptable"<CR>
 map <Up> :echo "Arrow keys are unacceptable"<CR>
 map <Down> :echo "Arrow keys are unacceptable"<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" OPEN FILES IN DIRECTORY OF CURRENT FILE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-map <leader>e :edit %%
-map <leader>v :view %%
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RENAME CURRENT FILE
