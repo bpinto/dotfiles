@@ -6,17 +6,19 @@
   name = Bruno Pinto
   email = brunoferreirapinto@gmail.com
 [alias]
+  amend = commit --amend -C HEAD
   ap    = add -p
   ci    = commit
   co    = checkout
   count = shortlog -sn
   ctags = !.git/hooks/ctags
+  ds    = diff --staged
   lg    = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   ll    = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --decorate --numstat
   lga   = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   lla   = log --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --decorate --numstat
   pr    = pull --rebase
-  st    = status
+  st    = status -sb
 [color]
   branch      = true
   diff        = true
