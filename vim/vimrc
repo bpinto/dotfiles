@@ -503,9 +503,17 @@ map <Leader>a :call RunAllSpecs()<CR>
 function! RunWithoutDispatch(command)
   let original_command = g:rspec_command
 
-  let g:rspec_command = "!spring rspec {spec}"
+  let g:rspec_command = "Dispatch! spring rspec {spec}"
+  function! RunSpecs(spec)
+    execute substitute(g:rspec_command, "{spec}", a:spec, "g")
+  endfunction
+
   :execute "call " . a:command . "()"
+
   let g:rspec_command = original_command
+  function! RunSpecs(spec)
+    execute substitute(g:rspec_command, "{spec}", a:spec, "g")
+  endfunction
 endfunction
 
 map <Leader>T :call RunWithoutDispatch("RunCurrentSpecFile")<CR>
