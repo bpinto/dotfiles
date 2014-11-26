@@ -5,7 +5,7 @@ set --erase fish_greeting
 set fish_path $HOME/.oh-my-fish
 
 # Plugins
-set fish_plugins bak boot2docker brew bundler cliniko dpaste extract ndenv osx rails rbenv z boxen
+set fish_plugins brew boxen boot2docker bundler cliniko extract ndenv osx rails z rbenv
 
 # Theme
 set fish_theme l
