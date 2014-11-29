@@ -11,6 +11,7 @@ Plugin 'gmarik/Vundle.vim'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'airblade/vim-gitgutter'
 Plugin 'aliva/vim-fish'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
@@ -119,10 +120,19 @@ set fillchars=vert:\|
 set background=dark
 " Theme
 colorscheme base16-default
+
+" More information, e.g. :verbose highlight VertSplit
 " Vertical split border
-highlight VertSplit cterm=NONE ctermfg=8 ctermbg=NONE guifg=#585858 guibg=NONE
+highlight VertSplit cterm=NONE ctermfg=8 ctermbg=NONE
 " Line numbers
-highlight LineNr term=bold cterm=NONE ctermfg=8 ctermbg=NONE gui=NONE guifg=#585858 guibg=NONE
+highlight LineNr cterm=NONE ctermfg=8 ctermbg=NONE
+" Git Gutter column equal to Line number
+highlight clear SignColumn
+" Git Gutter column with signs
+highlight GitGutterAdd ctermfg=2 ctermbg=NONE
+highlight GitGutterChange ctermfg=4 ctermbg=NONE
+highlight GitGutterDelete ctermfg=1 ctermbg=NONE
+highlight GitGutterChangeDelete ctermfg=5 ctermbg=NONE
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SEARCH CONFIGURATION
