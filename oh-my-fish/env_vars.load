@@ -1,6 +1,9 @@
 set -gx Z_SCRIPT_PATH /usr/local/etc/profile.d/z.sh
 set -gx NDENV_ROOT /opt/boxen/nodenv
 
+# Homebrew is no longer installed on /opt/boxen/homebrew
+set -gx BOXEN_GIT_CREDENTIAL_FALLBACK /usr/local/bin/git-credential-osxkeychain
+
 # http://stackoverflow.com/questions/2499794/how-can-i-fix-a-locale-warning-from-perl
 set -gx LC_CTYPE en_US.UTF-8
 set -gx LC_ALL en_US.UTF-8
