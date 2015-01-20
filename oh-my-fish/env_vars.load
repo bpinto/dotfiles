@@ -1,5 +1,5 @@
-set -gx Z_SCRIPT_PATH /usr/local/etc/profile.d/z.sh
 set -gx NDENV_ROOT /opt/boxen/nodenv
+set -gx EDITOR vim
 
 # Homebrew is no longer installed on /opt/boxen/homebrew
 set -gx BOXEN_GIT_CREDENTIAL_FALLBACK /usr/local/bin/git-credential-osxkeychain
