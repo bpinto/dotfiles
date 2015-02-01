@@ -1,4 +1,3 @@
-set -gx NDENV_ROOT /opt/boxen/nodenv
 set -gx EDITOR vim
 
 # Homebrew is no longer installed on /opt/boxen/homebrew
