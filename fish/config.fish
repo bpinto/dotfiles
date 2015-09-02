@@ -1,26 +1,14 @@
-# Remove fish default greeting
-set --erase fish_greeting
-
 # Path to your oh-my-fish.
-set fish_path $HOME/.oh-my-fish
+set -g OMF_PATH $HOME/.local/share/omf
 
-# Path to your custom folder.
-set fish_custom $HOME/Dropbox/Documents/Bruno/dotfiles/oh-my-fish
+# Path to your oh-my-fish configuration.
+set -g OMF_CONFIG $HOME/.config/omf
+
+### Configuration required to load oh-my-fish ###
+# Note: Only add configurations that are required to be set before oh-my-fish is loaded.
+# For common configurations, we advise you to add them to your $OMF_CONFIG/init.fish file or
+# to create a custom plugin instead.
+set -gx Z_SCRIPT_PATH /usr/local/etc/profile.d/z.sh
 
 # Load oh-my-fish configuration.
-. $fish_path/oh-my-fish.fish
-
-Theme 'l'
-Plugin 'brew'
-Plugin 'boxen'
-Plugin 'boot2docker'
-Plugin 'bundler'
-Plugin 'cliniko'
-Plugin 'dpaste'
-Plugin 'extract'
-Plugin 'ndenv'
-Plugin 'rails'
-Plugin 'random'
-Plugin 'theme'
-Plugin 'z'
-Plugin 'rbenv'
+source $OMF_PATH/init.fish
