@@ -4,3 +4,5 @@ iterm2/com.googlecode.iterm2.plist
 oh-my-fish/plugins/cliniko/*
 oh-my-fish/plugins/boxen/*
 ssh
+
+.DS_Store
