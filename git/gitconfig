@@ -1,4 +1,3 @@
-
 [hub]
   protocol = https
 [user]
@@ -47,9 +46,8 @@
   default = simple
 [init]
   templatedir = ~/.git_template
+[commit]
+  template = ~/.gitmessage
 
 [github]
 user = bpinto
-
-[credential]
-helper = /opt/boxen/bin/boxen-git-credential
