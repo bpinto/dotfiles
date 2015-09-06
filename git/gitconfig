@@ -28,6 +28,7 @@
   status      = true
   ui          = true
 [core]
+  autocrlf     = input # Configure Git on OS X to properly handle line endings
   editor       = vim
   excludesfile = /opt/boxen/config/git/gitignore
   whitespace   = tab-in-indent,tabwidth=2
