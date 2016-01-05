@@ -1,8 +1,9 @@
-.rake_tasks
-tags
-iterm2/com.googlecode.iterm2.plist
-oh-my-fish/plugins/cliniko/*
-oh-my-fish/plugins/boxen/*
-ssh
-
+.config/omf/pkg/cliniko
 .DS_Store
+.gem/credentials
+.netrc
+.ngrok
+.ssh
+.subversion/
+.vim/bundle
+Library/
