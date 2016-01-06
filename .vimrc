@@ -11,7 +11,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'aliva/vim-fish'
 Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
-Plug 'cespare/vim-toml'
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'elixir-lang/vim-elixir'
@@ -34,9 +33,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
-if has('gui_macvim')
-  Plug 'FredKSchott/CoVim'
-endif
 
 call plug#end()
 
