@@ -39,8 +39,6 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Prevent a security hole
 set modelines=0
-" This makes RVM work inside Vim. I have no idea why.
-set shell=bash
 " Prevent Vim from clobbering the scrollback buffer. See
 " http://www.shallowsky.com/linux/noaltscreen.html
 set t_ti= t_te=
@@ -48,7 +46,7 @@ set t_ti= t_te=
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Allow unsaved background buffers and remember marks/undo for them
+" Allow unsaved background buffers and remember marks/undo for them.
 set hidden
 " Use already open buffer
 set switchbuf=useopen
@@ -74,6 +72,8 @@ set showcmd
 set cursorline
 " Show line numbers
 set number
+" Line number left margin
+set numberwidth=5
 " Minimal window width
 set winwidth=79
 " Keep more context when scrolling off the end of a buffer (3 lines)
@@ -84,14 +84,10 @@ set cmdheight=2
 set splitbelow
 " When on, splitting a window will put the new window right of the current one
 set splitright
-" Show line numbers
-set number
-" Line number left margin
-set numberwidth=5
-" Fix vim auto-complete slowness in large projects
-set foldmethod=manual
 " Dashed border
 set fillchars=vert:\|
+" Fix vim auto-complete slowness in large projects
+set foldmethod=manual
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
@@ -128,9 +124,9 @@ set ignorecase smartcase
 " Enable backups
 set backup
 " Backups
-set backupdir=~/.vim/tmp/backup//
+set backupdir=~/.local/share/nvim/backup//
 " Swap files
-set directory=~/.vim/tmp/swap//
+set directory=~/.local/share/nvim/swap//
 " It's 2012, Vim.
 set noswapfile
 " Make vim able to edit crontab files again.
@@ -138,7 +134,7 @@ set backupskip=/tmp/*,/private/tmp/*"
 " Enable undo history
 set undofile
 " Undo files
-set undodir=~/.vim/tmp/undo//
+set undodir=~/.local/share/nvim/undo//
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " INDENTATION
