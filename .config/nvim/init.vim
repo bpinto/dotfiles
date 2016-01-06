@@ -64,8 +64,6 @@ set nojoinspaces
 syntax enable
 " Syntax coloring lines that are too long just slows down the world
 set synmaxcol=128
-" Maximum number of lines to scroll the screen
-set ttyscroll=3
 " To avoid scrolling problems
 set lazyredraw
 " Set window title
