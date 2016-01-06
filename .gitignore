@@ -1,4 +1,6 @@
 .config/omf/pkg/cliniko
+.config/nvim/.netrwhist
+.config/nvim/bundle
 .DS_Store
 .gem/credentials
 .netrc
