@@ -1,7 +1,5 @@
 " Use vim, no vi defaults
 set nocompatible
-" required!
-filetype off
 call plug#begin('~/.vim/plugged')
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
