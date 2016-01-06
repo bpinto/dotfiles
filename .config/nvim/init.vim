@@ -415,13 +415,8 @@ augroup autosave
   " Remove ALL autocommands for the current group.
   autocmd!
 
-  if has('gui_macvim')
-    " Save when losing focus
-    autocmd FocusLost * :silent! wall
-  else
-    " Save when leaving insert mode
-    autocmd InsertLeave * if expand('%') != '' | update | endif
-  end
+  " Save when losing focus
+  autocmd FocusLost * :silent! wall
 augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
