@@ -15,17 +15,15 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'godlygeek/tabular'
 Plug 'groenewege/vim-less'
 Plug 'kana/vim-textobj-user'
+Plug 'kassio/neoterm'
 Plug 'kchmck/vim-coffee-script'
 Plug 'kien/ctrlp.vim'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'othree/html5.vim'
-Plug 'rodjek/vim-puppet'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/syntastic'
 Plug 'onemanstartup/vim-slim'
-Plug 'thoughtbot/vim-rspec'
 Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rake'
@@ -453,32 +451,8 @@ let g:syntastic_auto_jump = 1
 " Most issues returned by rubocop are warnings
 let g:syntastic_quiet_messages = {'level': 'warnings'}
 
-" Vim-rspec
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-
-function! RunWithoutDispatch(command)
-  let original_command = g:rspec_command
-
-  let g:rspec_command = "Dispatch! spring rspec {spec}"
-  function! RunSpecs(spec)
-    execute substitute(g:rspec_command, "{spec}", a:spec, "g")
-  endfunction
-
-  :execute "call " . a:command . "()"
-
-  let g:rspec_command = original_command
-  function! RunSpecs(spec)
-    execute substitute(g:rspec_command, "{spec}", a:spec, "g")
-  endfunction
-endfunction
-
-map <Leader>T :call RunWithoutDispatch("RunCurrentSpecFile")<CR>
-map <Leader>S :call RunWithoutDispatch("RunNearestSpec")<CR>
-map <Leader>L :call RunWithoutDispatch("RunLastSpec")<CR>
-map <Leader>A :call RunWithoutDispatch("RunAllSpecs")<CR>
-
-let g:rspec_command = "Dispatch spring rspec {spec}"
-
+" Neoterm
+nnoremap <silent> <leader>a :call neoterm#test#run('all')<cr>
+nnoremap <silent> <leader>t :call neoterm#test#run('file')<cr>
+nnoremap <silent> <leader>s :call neoterm#test#run('current')<cr>
+nnoremap <silent> <leader>l :call neoterm#test#rerun()<cr>
