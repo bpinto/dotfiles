@@ -2,47 +2,43 @@
 set nocompatible
 " required!
 filetype off
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plugin 'airblade/vim-gitgutter'
-Plugin 'aliva/vim-fish'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'bling/vim-airline'
-Plugin 'cespare/vim-toml'
-Plugin 'chriskempson/base16-vim'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'godlygeek/tabular'
-Plugin 'groenewege/vim-less'
-Plugin 'kana/vim-textobj-user'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'kien/ctrlp.vim'
-Plugin 'nelstrom/vim-textobj-rubyblock'
-Plugin 'othree/html5.vim'
-Plugin 'rodjek/vim-puppet'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/syntastic'
-Plugin 'onemanstartup/vim-slim'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rake'
-Plugin 'tpope/vim-rails'
-Plugin 'vim-ruby/vim-ruby'
+Plug 'airblade/vim-gitgutter'
+Plug 'aliva/vim-fish'
+Plug 'altercation/vim-colors-solarized'
+Plug 'bling/vim-airline'
+Plug 'cespare/vim-toml'
+Plug 'chriskempson/base16-vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'elixir-lang/vim-elixir'
+Plug 'godlygeek/tabular'
+Plug 'groenewege/vim-less'
+Plug 'kana/vim-textobj-user'
+Plug 'kchmck/vim-coffee-script'
+Plug 'kien/ctrlp.vim'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'othree/html5.vim'
+Plug 'rodjek/vim-puppet'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/syntastic'
+Plug 'onemanstartup/vim-slim'
+Plug 'thoughtbot/vim-rspec'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rake'
+Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
 if has('gui_macvim')
-  Plugin 'FredKSchott/CoVim'
+  Plug 'FredKSchott/CoVim'
 endif
 
-call vundle#end()
+call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EDITOR CONFIGURATION
