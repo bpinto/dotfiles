@@ -94,6 +94,10 @@ set foldmethod=manual
 set background=dark
 " Theme
 colorscheme base16-eighties
+" Enable true colors in the terminal
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" Enable cursor shape in the terminal
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 " More information, e.g. :verbose highlight VertSplit
 " Vertical split border
