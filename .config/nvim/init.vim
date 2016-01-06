@@ -221,17 +221,6 @@ call MapCR()
 nnoremap <leader>w mz:%s/\s\+$//<cr>:let @/=''<cr>`z
 
 " System clipboard interaction
-if has('clipboard')
-  vnoremap <leader>Y "*y
-  nnoremap <leader>Y "*yy
-else
-  nnoremap <leader>Y :.!pbcopy<CR>uk<CR>
-  vnoremap <leader>Y :!pbcopy<CR>uk<CR>
-
-  " http://vimtips.quora.com/How-to-Copy-to-clipboard-on-vim
-  "map <C-c> y:e ~/clipsongzboard<CR>P:w !pbcopy<CR><CR>:bdelete!<CR>
-end
-
 noremap <leader>P :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 
 " Select (charwise) the contents of the current line, excluding indentation.
