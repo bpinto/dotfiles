@@ -1,5 +1,3 @@
-" Use vim, no vi defaults
-set nocompatible
 " required!
 filetype off
 call plug#begin('~/.vim/plugged')
@@ -41,25 +39,17 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Prevent a security hole
 set modelines=0
-" Set default encoding to UTF-8
-set encoding=utf-8
 " This makes RVM work inside Vim. I have no idea why.
 set shell=bash
 " Prevent Vim from clobbering the scrollback buffer. See
 " http://www.shallowsky.com/linux/noaltscreen.html
 set t_ti= t_te=
-" Send more characters for redraws
-set ttyfast
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Allow backspacing over everything in insert mode
-set backspace=indent,eol,start
 " Allow unsaved background buffers and remember marks/undo for them
 set hidden
-" Remember more commands and search history
-set history=1000
 " Use already open buffer
 set switchbuf=useopen
 " Write the contents of the file if it has been modified
@@ -100,8 +90,6 @@ set splitright
 set number
 " Line number left margin
 set numberwidth=5
-" Always show the status bar
-set laststatus=2
 " Fix vim auto-complete slowness in large projects
 set foldmethod=manual
 " Dashed border
@@ -131,10 +119,6 @@ highlight GitGutterChangeDelete ctermfg=5 ctermbg=NONE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SEARCH CONFIGURATION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Incremental searching
-set incsearch
-" Highlight matches
-set hlsearch
 " Show matching bracket when text indicator is over them
 set showmatch
 " Make searches case-sensitive only if they contain upper-case characters
@@ -166,8 +150,6 @@ set undodir=~/.vim/tmp/undo//
 " 'cindent' is on in C files, etc.
 " Also load indent files, to automatically do language-dependent indenting.
 filetype plugin indent on
-" Automatic alignment during insertions
-set autoindent
 " Use spaces, not tabs
 set expandtab
 " A tab is two spaces
@@ -182,8 +164,6 @@ set shiftround
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " WILDMENU
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Make tab completion for files/buffers act like bash
-set wildmenu
 " Use emacs-style tab completion when selecting files, etc
 set wildmode=longest,list
 
