@@ -8,7 +8,6 @@ call plug#begin('~/.vim/plugged')
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'airblade/vim-gitgutter'
 Plug 'aliva/vim-fish'
-Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
@@ -19,6 +18,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'kassio/neoterm'
 Plug 'kchmck/vim-coffee-script'
 Plug 'kien/ctrlp.vim'
+Plug 'mhartington/oceanic-next'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'othree/html5.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -94,7 +94,7 @@ set foldmethod=manual
 " Background color
 set background=dark
 " Theme
-colorscheme base16-eighties
+colorscheme OceanicNext
 " Enable true colors in the terminal
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " Enable cursor shape in the terminal
@@ -102,16 +102,16 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 " More information, e.g. :verbose highlight VertSplit
 " Vertical split border
-highlight VertSplit cterm=NONE ctermfg=8 ctermbg=NONE
+highlight VertSplit cterm=NONE ctermfg=8 ctermbg=NONE guifg=NONE guibg=NONE
 " Line numbers
-highlight LineNr cterm=NONE ctermfg=8 ctermbg=NONE
+highlight LineNr ctermfg=246 ctermbg=None cterm=NONE guifg=#909194 guibg=None gui=NONE
 " Git Gutter column equal to Line number
 highlight clear SignColumn
 " Git Gutter column with signs
-highlight GitGutterAdd ctermfg=2 ctermbg=NONE
-highlight GitGutterChange ctermfg=4 ctermbg=NONE
-highlight GitGutterDelete ctermfg=1 ctermbg=NONE
-highlight GitGutterChangeDelete ctermfg=5 ctermbg=NONE
+highlight GitGutterAdd ctermfg=2 ctermbg=NONE guibg=NONE
+highlight GitGutterChange ctermfg=4 ctermbg=NONE guibg=NONE
+highlight GitGutterDelete ctermfg=1 ctermbg=NONE guibg=NONE
+highlight GitGutterChangeDelete ctermfg=5 ctermbg=NONE guibg=NONE
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SEARCH CONFIGURATION
@@ -441,8 +441,7 @@ map  <leader>/ <plug>NERDCommenterToggle<CR>
 imap <leader>/ <Esc><plug>NERDCommenterToggle<CR>i
 
 " Airline
-" Solarized theme
-let g:airline_theme = 'base16'
+let g:airline_theme = 'oceanicnext'
 " Enable usage of patched powerline font symbols
 let g:airline_powerline_fonts = 1
 

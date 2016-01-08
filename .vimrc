@@ -7,7 +7,6 @@ call plug#begin('~/.vim/plugged')
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'airblade/vim-gitgutter'
 Plug 'aliva/vim-fish'
-Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
@@ -17,6 +16,7 @@ Plug 'groenewege/vim-less'
 Plug 'kana/vim-textobj-user'
 Plug 'kchmck/vim-coffee-script'
 Plug 'kien/ctrlp.vim'
+Plug 'mhartington/oceanic-next'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'othree/html5.vim'
 Plug 'rodjek/vim-puppet'
@@ -111,7 +111,7 @@ set fillchars=vert:\|
 " Background color
 set background=dark
 " Theme
-colorscheme base16-eighties
+colorscheme OceanicNext
 
 " More information, e.g. :verbose highlight VertSplit
 " Vertical split border
