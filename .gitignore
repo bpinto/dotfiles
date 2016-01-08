@@ -8,5 +8,6 @@
 .ngrok
 .ssh
 .subversion/
+.vim/autoload
 .vim/bundle
 Library/
