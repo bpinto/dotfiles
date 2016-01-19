@@ -12,11 +12,11 @@ Plug 'bling/vim-airline'
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'elixir-lang/vim-elixir'
-Plug 'godlygeek/tabular'
 Plug 'groenewege/vim-less'
+Plug 'junegunn/vim-easy-align'
 Plug 'kana/vim-textobj-user'
 Plug 'kassio/neoterm'
-Plug 'kchmck/vim-coffee-script'
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'kien/ctrlp.vim'
 Plug 'mhartington/oceanic-next'
 Plug 'nelstrom/vim-textobj-rubyblock'
@@ -464,3 +464,9 @@ nnoremap <silent> <leader>a :call neoterm#test#run('all')<cr>
 nnoremap <silent> <leader>t :call neoterm#test#run('file')<cr>
 nnoremap <silent> <leader>s :call neoterm#test#run('current')<cr>
 nnoremap <silent> <leader>l :call neoterm#test#rerun()<cr>
+
+" Easy Plugin
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
