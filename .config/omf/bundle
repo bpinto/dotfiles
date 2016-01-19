@@ -3,7 +3,4 @@ package fasd
 package foreign-env
 package rails
 package rbenv
-package shark
-package weather
-theme bobthefish
 theme default
