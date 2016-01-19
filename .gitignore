@@ -2,6 +2,7 @@
 .config/nvim/.netrwhist
 .config/nvim/autoload
 .config/nvim/bundle
+.config/nvim/plugged
 .DS_Store
 .gem/credentials
 .netrc
