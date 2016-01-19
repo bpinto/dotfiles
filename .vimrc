@@ -261,6 +261,10 @@ noremap <leader>P :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 " Select (charwise) the contents of the current line, excluding indentation.
 nnoremap vv ^vg_
 
+" Don't lose selection when shifting sidewards
+xnoremap < <gv
+xnoremap > >gv
+
 " Keep search matches in the middle of the window.
 nnoremap n nzzzv
 nnoremap N Nzzzv
