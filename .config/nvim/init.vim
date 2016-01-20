@@ -17,7 +17,6 @@ Plug 'junegunn/vim-easy-align'
 Plug 'kana/vim-textobj-user'
 Plug 'kassio/neoterm'
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
-Plug 'kien/ctrlp.vim'
 Plug 'mhartington/oceanic-next'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'othree/html5.vim'
@@ -434,10 +433,11 @@ augroup END
 " Enable matchit.vim
 runtime macros/matchit.vim
 
-" CtrlP
-" Menu remapping
-noremap <C-t> :CtrlP<CR>
-inoremap <C-t> <ESC>:CtrlP<CR>
+" FZF
+set rtp+=/usr/local/opt/fzf
+" <C-p> or <C-t> to search files
+nnoremap <silent> <C-t> :FZF -m<cr>
+nnoremap <silent> <C-p> :FZF -m<cr>
 
 " NerdCommenter
 " Menu remapping
