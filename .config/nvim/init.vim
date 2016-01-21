@@ -20,15 +20,17 @@ Plug 'kassio/neoterm'
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'mhartington/oceanic-next'
 Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'onemanstartup/vim-slim'
 Plug 'othree/html5.vim'
+Plug 'rhysd/github-complete.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/syntastic'
 Plug 'onemanstartup/vim-slim'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rake'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rake'
 Plug 'vim-ruby/vim-ruby'
 
 call plug#end()
@@ -316,7 +318,11 @@ function! InsertTabWrapper()
   if !col || getline('.')[col - 1] !~ '\k'
     return "\<tab>"
   else
-    return "\<c-p>"
+    if &omnifunc == ""
+      return "\<c-p>"
+    else
+      return "\<c-x>\<c-o>"
+    endif
   endif
 endfunction
 inoremap <expr><tab> InsertTabWrapper()
@@ -427,6 +433,14 @@ augroup autosave
 
   " Autosave files/buffers when losing focus
   autocmd FocusLost * :silent! wall
+augroup END
+
+augroup config-github-complete
+  " Remove ALL autocommands for the current group.
+  autocmd!
+
+  " Github completion on git commit messages
+  autocmd FileType gitcommit setl omnifunc=github_complete#complete
 augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

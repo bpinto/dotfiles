@@ -19,18 +19,19 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'kien/ctrlp.vim'
 Plug 'mhartington/oceanic-next'
 Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'onemanstartup/vim-slim'
 Plug 'othree/html5.vim'
+Plug 'rhysd/github-complete.vim'
 Plug 'rodjek/vim-puppet'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/syntastic'
-Plug 'onemanstartup/vim-slim'
 Plug 'thoughtbot/vim-rspec'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rake'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rake'
 Plug 'vim-ruby/vim-ruby'
 
 call plug#end()
@@ -349,12 +350,15 @@ function! InsertTabWrapper()
   if !col || getline('.')[col - 1] !~ '\k'
     return "\<tab>"
   else
-    return "\<c-p>"
+    if &omnifunc == ""
+      return "\<c-p>"
+    else
+      return "\<c-x>\<c-o>"
+    endif
   endif
 endfunction
 inoremap <expr><tab> InsertTabWrapper()
 inoremap <expr><s-tab> pumvisible()?"\<c-p>":"\<c-d>"
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ARROW KEYS ARE UNACCEPTABLE
@@ -466,6 +470,14 @@ augroup autosave
     " Autosave file/buffers when leaving insert mode
     autocmd InsertLeave * if expand('%') != '' | update | endif
   end
+augroup END
+
+augroup config-github-complete
+  " Remove ALL autocommands for the current group.
+  autocmd!
+
+  " Github completion on git commit messages
+  autocmd FileType gitcommit setl omnifunc=github_complete#complete
 augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
