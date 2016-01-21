@@ -341,6 +341,10 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 " Indent if we're at the beginning of a line. Else, do completion.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! InsertTabWrapper()
+  if pumvisible()
+    return "\<c-n>"
+  endif
+
   let col = col('.') - 1
   if !col || getline('.')[col - 1] !~ '\k'
     return "\<tab>"
@@ -348,8 +352,9 @@ function! InsertTabWrapper()
     return "\<c-p>"
   endif
 endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-n>
+inoremap <expr><tab> InsertTabWrapper()
+inoremap <expr><s-tab> pumvisible()?"\<c-p>":"\<c-d>"
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ARROW KEYS ARE UNACCEPTABLE
@@ -421,7 +426,7 @@ nnoremap <leader>. :call OpenTestAlternate()<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CUSTOM AUTOCMDS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-augroup misc
+augroup cursor-position
   " Remove ALL autocommands for the current group.
   autocmd!
 
@@ -450,16 +455,15 @@ augroup highlight
   autocmd BufEnter * match OverLength /\%101v.*/
 augroup END
 
-" Autosave files/buffers
 augroup autosave
   " Remove ALL autocommands for the current group.
   autocmd!
 
   if has('gui_macvim')
-    " Save when losing focus
+    " Autosave file/buffers when losing focus
     autocmd FocusLost * :silent! wall
   else
-    " Save when leaving insert mode
+    " Autosave file/buffers when leaving insert mode
     autocmd InsertLeave * if expand('%') != '' | update | endif
   end
 augroup END
