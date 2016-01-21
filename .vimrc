@@ -498,7 +498,7 @@ map  <leader>/ <plug>NERDCommenterToggle<CR>
 imap <leader>/ <Esc><plug>NERDCommenterToggle<CR>i
 
 " Airline
-let g:airline_theme = 'oceanicnext'
+let g:airline_theme = 'zenburn'
 " Enable usage of patched powerline font symbols
 let g:airline_powerline_fonts = 1
 
