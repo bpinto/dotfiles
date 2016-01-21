@@ -12,17 +12,15 @@ Plug 'bling/vim-airline'
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'elixir-lang/vim-elixir'
-Plug 'godlygeek/tabular'
 Plug 'groenewege/vim-less'
+Plug 'junegunn/vim-easy-align'
 Plug 'kana/vim-textobj-user'
-Plug 'kchmck/vim-coffee-script'
-Plug 'kien/ctrlp.vim'
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'mhartington/oceanic-next'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'onemanstartup/vim-slim'
 Plug 'othree/html5.vim'
 Plug 'rhysd/github-complete.vim'
-Plug 'rodjek/vim-puppet'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/syntastic'
 Plug 'thoughtbot/vim-rspec'
@@ -117,16 +115,16 @@ colorscheme spacegray
 
 " More information, e.g. :verbose highlight VertSplit
 " Vertical split border
-highlight VertSplit cterm=NONE ctermfg=8 ctermbg=NONE
+highlight VertSplit cterm=NONE ctermfg=8 ctermbg=NONE guifg=NONE guibg=NONE
 " Line numbers
-highlight LineNr cterm=NONE ctermfg=8 ctermbg=NONE
+highlight LineNr ctermfg=246 ctermbg=None cterm=NONE guifg=#909194 guibg=None gui=NONE
 " Git Gutter column equal to Line number
 highlight clear SignColumn
 " Git Gutter column with signs
-highlight GitGutterAdd ctermfg=2 ctermbg=NONE
-highlight GitGutterChange ctermfg=4 ctermbg=NONE
-highlight GitGutterDelete ctermfg=1 ctermbg=NONE
-highlight GitGutterChangeDelete ctermfg=5 ctermbg=NONE
+highlight GitGutterAdd ctermfg=2 ctermbg=NONE guibg=NONE
+highlight GitGutterChange ctermfg=4 ctermbg=NONE guibg=NONE
+highlight GitGutterDelete ctermfg=1 ctermbg=NONE guibg=NONE
+highlight GitGutterChangeDelete ctermfg=5 ctermbg=NONE guibg=NONE
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SEARCH CONFIGURATION
@@ -488,10 +486,11 @@ augroup END
 " Enable matchit.vim
 runtime macros/matchit.vim
 
-" CtrlP
-" Menu remapping
-noremap <C-t> :CtrlP<CR>
-inoremap <C-t> <ESC>:CtrlP<CR>
+" FZF
+set rtp+=/usr/local/opt/fzf
+" <C-p> or <C-t> to search files
+nnoremap <silent> <C-t> :FZF -m<cr>
+nnoremap <silent> <C-p> :FZF -m<cr>
 
 " NerdCommenter
 " Menu remapping
@@ -499,8 +498,7 @@ map  <leader>/ <plug>NERDCommenterToggle<CR>
 imap <leader>/ <Esc><plug>NERDCommenterToggle<CR>i
 
 " Airline
-" Solarized theme
-let g:airline_theme = 'base16'
+let g:airline_theme = 'oceanicnext'
 " Enable usage of patched powerline font symbols
 let g:airline_powerline_fonts = 1
 
@@ -543,3 +541,8 @@ map <Leader>A :call RunWithoutDispatch("RunAllSpecs")<CR>
 
 let g:rspec_command = "Dispatch spring rspec {spec}"
 
+" Easy Plugin
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
