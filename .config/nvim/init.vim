@@ -7,6 +7,7 @@ call plug#begin('~/.config/nvim/plugged')
 " PLUGINS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'airblade/vim-gitgutter'
+Plug 'ajh17/Spacegray.vim'
 Plug 'aliva/vim-fish'
 Plug 'bling/vim-airline'
 Plug 'chriskempson/base16-vim'
@@ -93,7 +94,7 @@ set foldmethod=manual
 " Background color
 set background=dark
 " Theme
-colorscheme OceanicNext
+colorscheme spacegray
 " Enable true colors in the terminal
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " Enable cursor shape in the terminal

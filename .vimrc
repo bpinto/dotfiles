@@ -6,6 +6,7 @@ call plug#begin('~/.vim/plugged')
 " PLUGINS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'airblade/vim-gitgutter'
+Plug 'ajh17/Spacegray.vim'
 Plug 'aliva/vim-fish'
 Plug 'bling/vim-airline'
 Plug 'chriskempson/base16-vim'
@@ -111,7 +112,7 @@ set fillchars=vert:\|
 " Background color
 set background=dark
 " Theme
-colorscheme OceanicNext
+colorscheme spacegray
 
 " More information, e.g. :verbose highlight VertSplit
 " Vertical split border

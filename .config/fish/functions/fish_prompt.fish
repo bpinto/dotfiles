@@ -1,1 +1,1 @@
-/Users/bpinto/.local/share/omf/themes/default/fish_prompt.fish
+/Users/bpinto/.config/omf/themes/spacegray/fish_prompt.fish
