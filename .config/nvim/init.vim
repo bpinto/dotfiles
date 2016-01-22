@@ -13,6 +13,7 @@ Plug 'bling/vim-airline'
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'elixir-lang/vim-elixir'
+Plug 'ervandew/supertab'
 Plug 'groenewege/vim-less'
 Plug 'junegunn/vim-easy-align'
 Plug 'kana/vim-textobj-user'
@@ -25,7 +26,6 @@ Plug 'othree/html5.vim'
 Plug 'rhysd/github-complete.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/syntastic'
-Plug 'onemanstartup/vim-slim'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
@@ -306,29 +306,6 @@ autocmd QuickFixCmdPost *grep* cwindow
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MULTIPURPOSE TAB KEY
-" Indent if we're at the beginning of a line. Else, do completion.
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! InsertTabWrapper()
-  if pumvisible()
-    return "\<c-n>"
-  endif
-
-  let col = col('.') - 1
-  if !col || getline('.')[col - 1] !~ '\k'
-    return "\<tab>"
-  else
-    if &omnifunc == ""
-      return "\<c-p>"
-    else
-      return "\<c-x>\<c-o>"
-    endif
-  endif
-endfunction
-inoremap <expr><tab> InsertTabWrapper()
-inoremap <expr><s-tab> pumvisible()?"\<c-p>":"\<c-d>"
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ARROW KEYS ARE UNACCEPTABLE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <Left> :echo "Arrow keys are unacceptable"<CR>
@@ -488,3 +465,7 @@ nnoremap <silent> <leader>l :call neoterm#test#rerun()<cr>
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" Supertab
+" Navigate the completion menu from top to bottom
+let g:SuperTabDefaultCompletionType = "<c-n>"
