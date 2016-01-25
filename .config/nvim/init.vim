@@ -430,6 +430,11 @@ runtime macros/matchit.vim
 
 " FZF
 set rtp+=/usr/local/opt/fzf
+" Act like CtrlP
+let g:fzf_action = {
+      \ 'ctrl-s': 'split',
+      \ 'ctrl-v': 'vsplit'
+      \ }
 " <C-p> or <C-t> to search files
 nnoremap <silent> <C-t> :FZF -m<cr>
 nnoremap <silent> <C-p> :FZF -m<cr>
