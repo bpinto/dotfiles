@@ -7,8 +7,7 @@ set-option -g pane-border-fg black
 set-option -g status-bg default
 set-option -g status-justify right
 
-set-option -g status-left '#[fg=white]#h#(~/.bin/itunes-current-track-tmux.sh)'
-set-option -g status-left-length 100
+set-option -g status-left-length 0
 set-option -g status-right '#[fg=white]| #S | Up #(uptime | sed "s/.*up\( \)\{1,2\}\([^,]*\),.*/\2/") '
 set-option -g status-right-length 60
 set-option -g status-utf8 on
