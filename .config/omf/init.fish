@@ -30,8 +30,8 @@ set -gx LESS_TERMCAP_us \e'[04;38;5;200m' # enter underline mode
 #set -x LESS_TERMCAP_ue (printf "\033[0m")
 #set -x LESS_TERMCAP_us (printf "\033[04;33;146m")
 
-# xhyve
-set -gx DOCKER_HOST tcp://192.168.64.4:2375
+# dlite
+set -gx DOCKER_HOST tcp://192.168.64.9:2375
 
 # golang
 set -gx GOPATH $HOME/gocode
