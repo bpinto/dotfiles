@@ -1,0 +1,60 @@
+# Packages
+brew 'ctags-exuberant'
+brew 'dlite'
+brew 'docker'
+brew 'docker-compose'
+brew 'dnsmasq'
+brew 'elixir'
+brew 'fasd'
+brew 'fish'
+brew 'fzf'
+brew 'httpie'
+brew 'lftp'
+brew 'mackup', args: ['HEAD']
+brew 'node'
+brew 'noti'
+brew 'neovim/neovim/neovim'
+brew 'reattach-to-user-namespace'
+brew 'rbenv'
+brew 'rbenv-ctags'
+brew 'rbenv-default-gems'
+brew 'ruby-build'
+brew 'ssh-copy-id'
+brew 'the_silver_searcher'
+brew 'tmux'
+brew 'tree'
+brew 'vim'
+brew 'youtube-dl'
+
+# Install brew cask
+
+tap 'caskroom/cask'
+tap 'caskroom/versions'
+
+# Casks
+
+cask '1password'
+cask 'alfred'
+cask 'appcleaner'
+cask 'beamer'
+cask 'chitchat'
+cask 'cloud'
+cask 'dockertoolbox'
+cask 'dropbox'
+cask 'flux'
+cask 'gitter'
+cask 'google-chrome'
+cask 'iterm2-beta'
+cask 'java'
+cask 'shiori'
+cask 'slack'
+cask 'skype'
+cask 'spectacle'
+cask 'spotify'
+cask 'subtitles'
+cask 'the-unarchiver'
+cask 'vlc'
+
+# Install brew services
+
+tap 'homebrew/services'
