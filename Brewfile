@@ -1,5 +1,6 @@
 # Packages
 brew 'ctags-exuberant'
+brew 'diff-so-fancy'
 brew 'dlite'
 brew 'docker'
 brew 'docker-compose'

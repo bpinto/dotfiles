@@ -2,8 +2,8 @@
   protocol = https
 [user]
   helper = osxkeychain
-  name = Bruno Pinto
-  email = brunoferreirapinto@gmail.com
+  name   = Bruno Pinto
+  email  = brunoferreirapinto@gmail.com
 [alias]
   amend = commit --amend -C HEAD
   ap    = add -p
@@ -19,19 +19,24 @@
   pr    = pull --rebase
   st    = status -sb
 [color]
-  branch      = true
-  diff        = true
-  decorate    = true
-  grep        = true
-  interactive = true
-  showbranch  = true
-  status      = true
-  ui          = true
+  ui = always
+[color "diff"]
+  meta       = yellow bold
+  commit     = green bold
+  frag       = magenta bold
+  old        = red bold
+  new        = green bold
+  whitespace = red reverse
+[color "diff-highlight"]
+  oldNormal    = red bold
+  oldHighlight = "red bold 52"
+  newNormal    = "green bold"
+  newHighlight = "green bold 22"
 [core]
   editor       = vim
   excludesfile = /opt/boxen/config/git/gitignore
   whitespace   = tab-in-indent,tabwidth=2
-  pager        = less -+S -FXR
+  pager        = diff-highlight | diff-so-fancy | less -+S -FXR
 [apply]
   whitespace = nowarn
 [difftool]
@@ -48,6 +53,5 @@
   templatedir = ~/.git_template
 [commit]
   template = ~/.gitmessage
-
 [github]
-user = bpinto
+  user = bpinto
