@@ -31,7 +31,7 @@ set -gx LESS_TERMCAP_us \e'[04;38;5;200m' # enter underline mode
 #set -x LESS_TERMCAP_us (printf "\033[04;33;146m")
 
 # dlite
-set -gx DOCKER_HOST tcp://192.168.64.9:2375
+set -gx DOCKER_HOST tcp://192.168.64.2:2375
 
 # golang
 set -gx GOPATH $HOME/gocode
