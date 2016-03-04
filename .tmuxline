@@ -10,7 +10,6 @@ set-option -g status-justify right
 set-option -g status-left-length 0
 set-option -g status-right '#[fg=white]| #S | Up #(uptime | sed "s/.*up\( \)\{1,2\}\([^,]*\),.*/\2/") '
 set-option -g status-right-length 60
-set-option -g status-utf8 on
 
 set-window-option -g window-status-current-format '#[fg=red]#I:#W#F'
 set-window-option -g window-status-format '#[fg=white]#I:#W#F'

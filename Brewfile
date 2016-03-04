@@ -21,7 +21,7 @@ brew 'rbenv-default-gems'
 brew 'ruby-build'
 brew 'ssh-copy-id'
 brew 'the_silver_searcher'
-brew 'tmux'
+brew 'tmux', args: ['HEAD']
 brew 'tree'
 brew 'vim'
 brew 'wget'
