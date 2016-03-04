@@ -1,7 +1,7 @@
 package brew
-package fasd
 package fonts
 package foreign-env
 package rails
 package rbenv
+package z
 theme default
