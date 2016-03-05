@@ -11,4 +11,5 @@
 .subversion/
 .vim/autoload
 .vim/bundle
+.z
 Library/
