@@ -36,7 +36,7 @@
   editor       = vim
   excludesfile = /opt/boxen/config/git/gitignore
   whitespace   = tab-in-indent,tabwidth=2
-  pager        = diff-highlight | diff-so-fancy | less -+S -FXR
+  pager        = diff-so-fancy | less -+S -FXR
 [apply]
   whitespace = nowarn
 [difftool]
