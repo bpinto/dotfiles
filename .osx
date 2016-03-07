@@ -127,7 +127,7 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 defaults write NSGlobalDomain KeyRepeat -int 3
 
 # Do not wait much before repeating a key
-defaults write NSGlobalDomain InitialKeyRepeat -int 7
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 # Automatically illuminate built-in MacBook keyboard in low light
 defaults write com.apple.BezelServices kDim -bool true
