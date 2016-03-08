@@ -449,7 +449,7 @@ augroup config-github-complete
   autocmd!
 
   " Github completion on git commit messages
-  autocmd FileType gitcommit setl omnifunc=github_complete#complete
+  autocmd FileType gitcommit setl omnifunc=github_complete#complete | call SuperTabChain(&omnifunc, "<c-p>")
 augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
