@@ -11,7 +11,7 @@ Plug 'ajh17/Spacegray.vim'
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ervandew/supertab'
-Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'kana/vim-textobj-user'
 Plug 'kassio/neoterm'
 Plug 'mhartington/oceanic-next'

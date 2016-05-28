@@ -10,7 +10,7 @@ Plug 'ajh17/Spacegray.vim'
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ervandew/supertab'
-Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'kana/vim-textobj-user'
 Plug 'mhartington/oceanic-next'
 Plug 'nelstrom/vim-textobj-rubyblock'
@@ -528,3 +528,6 @@ nmap ga <Plug>(EasyAlign)
 " Supertab
 " Navigate the completion menu from top to bottom
 let g:SuperTabDefaultCompletionType = "<c-n>"
+
+" GitHub Complete
+let g:github_complete_api_token = $GITHUB_API_TOKEN
