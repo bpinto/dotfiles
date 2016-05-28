@@ -113,7 +113,7 @@ colorscheme spacegray
 " Vertical split border
 highlight VertSplit cterm=NONE ctermfg=8 ctermbg=NONE guifg=NONE guibg=NONE
 " Line numbers
-highlight LineNr ctermfg=246 ctermbg=None cterm=NONE guifg=#909194 guibg=None gui=NONE
+highlight LineNr ctermfg=246 ctermbg=NONE cterm=NONE guifg=#909194 guibg=NONE gui=NONE
 " Git Gutter column equal to Line number
 highlight clear SignColumn
 " Git Gutter column with signs
