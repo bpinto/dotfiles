@@ -444,7 +444,7 @@ let g:airline_theme = 'zenburn'
 " Enable usage of patched powerline font symbols
 let g:airline_powerline_fonts = 1
 
-"Syntastic
+" Syntastic
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 " Jump cursor to the first detected error when saving
@@ -459,6 +459,8 @@ nnoremap <silent> <leader>a :call neoterm#test#run('all')<cr>
 nnoremap <silent> <leader>t :call neoterm#test#run('file')<cr>
 nnoremap <silent> <leader>s :call neoterm#test#run('current')<cr>
 nnoremap <silent> <leader>l :call neoterm#test#rerun()<cr>
+" Vim requires `set shell=bash`, but neoterm should run my real shell
+let g:neoterm_shell = "fish"
 
 " Easy Plugin
 " Start interactive EasyAlign in visual mode (e.g. vipga)
