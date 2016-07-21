@@ -106,6 +106,10 @@ set fillchars=vert:\|
 set background=dark
 " Theme
 colorscheme deep-space
+" Enable true colors in the terminal
+if (has("termguicolors"))
+  set termguicolors
+endif
 
 " More information, e.g. :verbose highlight VertSplit
 highlight clear SignColumn
