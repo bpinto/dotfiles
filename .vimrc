@@ -6,13 +6,10 @@ call plug#begin('~/.vim/plugged')
 " PLUGINS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'airblade/vim-gitgutter'
-Plug 'ajh17/Spacegray.vim'
-Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ervandew/supertab'
 Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'kana/vim-textobj-user'
-Plug 'mhartington/oceanic-next'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'rhysd/github-complete.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -25,6 +22,7 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rake'
+Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -107,14 +105,9 @@ set fillchars=vert:\|
 " Background color
 set background=dark
 " Theme
-colorscheme spacegray
+colorscheme deep-space
 
 " More information, e.g. :verbose highlight VertSplit
-" Vertical split border
-highlight VertSplit cterm=NONE ctermfg=8 ctermbg=NONE guifg=NONE guibg=NONE
-" Line numbers
-highlight LineNr ctermfg=246 ctermbg=NONE cterm=NONE guifg=#909194 guibg=NONE gui=NONE
-" Git Gutter column equal to Line number
 highlight clear SignColumn
 " Git Gutter column with signs
 highlight GitGutterAdd ctermfg=2 ctermbg=NONE guibg=NONE
@@ -476,7 +469,7 @@ map  <leader>/ <plug>NERDCommenterToggle<CR>
 imap <leader>/ <Esc><plug>NERDCommenterToggle<CR>i
 
 " Airline
-let g:airline_theme = 'zenburn'
+let g:airline_theme = 'deep_space'
 " Enable usage of patched powerline font symbols
 let g:airline_powerline_fonts = 1
 
