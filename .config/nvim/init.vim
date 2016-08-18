@@ -13,9 +13,9 @@ Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'kana/vim-textobj-user'
 Plug 'kassio/neoterm'
 Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'neomake/neomake'
 Plug 'rhysd/github-complete.vim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/syntastic'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-endwise'
@@ -197,13 +197,6 @@ inoremap jk <Esc>
 " Use sane regexes.
 nnoremap / /\v
 vnoremap / /\v
-
-" * Disabled while using Vim Tmux Navigator plugin *
-" Move around splits with <c-hjkl>
-"nnoremap <c-j> <c-w>j
-"nnoremap <c-k> <c-w>k
-"nnoremap <c-h> <c-w>h
-"nnoremap <c-l> <c-w>l
 
 " Clear the search buffer when hitting return
 function! MapCR()
@@ -438,15 +431,17 @@ let g:airline_theme = 'deep_space'
 " Enable usage of patched powerline font symbols
 let g:airline_powerline_fonts = 1
 
-" Syntastic
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '⚠'
-" Jump cursor to the first detected error when saving
-let g:syntastic_auto_jump = 1
-" Enable rubocop check
-"let g:syntastic_ruby_checkers = ['mri', 'rubocop']
-" Most issues returned by rubocop are warnings
-let g:syntastic_quiet_messages = {'level': 'warnings'}
+" Neomake
+autocmd! BufWritePost * Neomake
+
+let g:neomake_warning_sign = {
+  \ 'text': 'W',
+  \ 'texthl': 'WarningMsg',
+  \ }
+let g:neomake_error_sign = {
+  \ 'text': 'E',
+  \ 'texthl': 'ErrorMsg',
+  \ }
 
 " Neoterm
 nnoremap <silent> <leader>a :call neoterm#test#run('all')<cr>
