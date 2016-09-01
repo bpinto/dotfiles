@@ -13,7 +13,6 @@ brew 'lftp'
 brew 'mackup', args: ['HEAD']
 brew 'neovim/neovim/neovim'
 brew 'node'
-brew 'noti'
 brew 'rbenv'
 brew 'rbenv-ctags'
 brew 'rbenv-default-gems'
@@ -51,7 +50,6 @@ cask 'slack'
 cask 'spotify'
 cask 'the-unarchiver'
 cask 'vlc'
-cask 'whatsapp'
 
 # Install brew services
 
