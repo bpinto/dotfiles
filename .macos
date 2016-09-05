@@ -768,6 +768,14 @@ defaults write com.twitter.twitter-mac HideInBackground -bool true
 # Bypass the annoyingly slow t.co URL shortener
 defaults write com.tapbots.TweetbotMac OpenURLsDirectly -bool true
 
+
+###############################################################################
+# PF                                                                          #
+###############################################################################
+sudo cp pf/com.bpinto /etc/pf.anchors/com.bpinto
+sudo cp pf/com.bpinto.pf.plist /Library/LaunchDaemons/com.bpinto.pf.plist
+sudo cp pf/pf.bpinto.conf /etc/pf.bpinto.conf
+
 ###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################

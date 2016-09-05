@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.bpinto.pf</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/bash</string>
+		<string>-c</string>
+		<string>ipconfig waitall &amp;&amp; /sbin/pfctl -e -f /etc/pf.bpinto.conf</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+  	<key>StandardErrorPath</key>
+  	<string>/Library/Logs/com.bpinto.pf.log</string>
+	<key>StandardOutPath</key>
+	<string>/Library/Logs/com.bpinto.pf.log</string>
+</dict>
+</plist>

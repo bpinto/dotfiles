@@ -1,0 +1,80 @@
+# Disable packet filter:
+# sudo pfctl -d
+#
+# Enable packet filter with configuration file:
+# sudo pfctl -e -f /etc/pf.bpinto.conf
+#
+# Check and print parsed configuration:
+# sudo pfctl -v -n -f /etc/pf.bpinto.conf
+#
+# View log:
+# sudo ifconfig pflog0 create
+# sudo tcpdump -n -e -ttt -i pflog0
+# sudo ifconfig pflog0 destroy
+#
+# Useful commands for reading configuration:
+# sudo pfctl -s rules
+# sudo pfctl -s nat
+# sudo pfctl -s all
+# sudo pfctl -a com.apple.internet-sharing -s nat
+# sudo pfctl -a com.apple.internet-sharing/shared_v4 -s nat
+# sudo pfctl -a com.apple.internet-sharing/shared_v4 -s rules
+# sudo pfctl -v -s Anchors
+
+# Define interfaces.
+docker=bridge100
+internet=en0
+vpn=utun0
+
+# Define machines.
+vpn_ip=ADD_ME
+
+##### Options #####
+
+# Block packets and reply with:
+# - TCP RST: Allows application to quickly notice that they are not allowed to connect.
+# or
+# - ICMP Unreachable response
+set block-policy return
+
+# Don't filter on local loopback or docker interface (dlite).
+set skip on { lo0 $docker }
+
+##### Normalization #####
+
+# Scrub all incoming packets.
+scrub in all no-df
+
+##### Filtering #####
+#
+# INSECURE RULES COMMENTED OUT
+#
+# Allow ICMP from home LAN.
+#pass in log inet proto icmp from 192.168.0.0/24
+#
+# Allow Bonjour.
+#pass proto udp from any to any port 5353
+#
+# Allow AirPlay to connect to local mirroring options.
+#pass from 192.168.0.0/24 to 192.168.0.0/24
+#
+# Allow AirDrop (com.apple/200.AirDrop/Bonjour).
+#pass in on p2p0 inet6 proto udp from any to any port = 5353 keep state
+#pass out on p2p0 proto tcp all flags any keep state
+
+# Default deny policy.
+block log
+
+# Don't allow IPv6 at all.
+block quick inet6
+
+# Allow connections through VPN interface.
+pass quick on $vpn
+
+# Allow DHCP.
+pass in on $internet proto udp from any port 67 to any port 68
+
+# Allow connection setup with VPN server.
+pass proto tcp to $vpn_ip port { 443 636 41194 }
+pass proto udp to $vpn_ip port 8757
+
