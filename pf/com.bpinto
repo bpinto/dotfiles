@@ -50,20 +50,17 @@ scrub in all no-df
 # INSECURE RULES COMMENTED OUT
 #
 # Allow ICMP from home LAN.
-#pass in log inet proto icmp from 192.168.0.0/24
+#pass in quick log inet proto icmp from 192.168.0.0/24
 #
 # Allow Bonjour.
-#pass proto udp from any to any port 5353
+#pass quick proto udp from any to any port 5353
 #
 # Allow AirPlay to connect to local mirroring options.
-#pass from 192.168.0.0/24 to 192.168.0.0/24
+#pass quick from 192.168.0.0/24 to 192.168.0.0/24
 #
 # Allow AirDrop (com.apple/200.AirDrop/Bonjour).
-#pass in on p2p0 inet6 proto udp from any to any port = 5353 keep state
-#pass out on p2p0 proto tcp all flags any keep state
-
-# Default deny policy.
-block log
+#pass in quick on p2p0 inet6 proto udp from any to any port = 5353 keep state
+#pass out quick on p2p0 proto tcp all flags any keep state
 
 # Don't allow IPv6 at all.
 block quick inet6
@@ -72,9 +69,12 @@ block quick inet6
 pass quick on $vpn
 
 # Allow DHCP.
-pass in on $internet proto udp from any port 67 to any port 68
+pass in quick on $internet proto udp from any port 67 to any port 68
 
 # Allow connection setup with VPN server.
-pass proto tcp to $vpn_ip port { 443 636 41194 }
-pass proto udp to $vpn_ip port 8757
+pass quick proto tcp to $vpn_ip port { 443 636 41194 }
+pass quick proto udp to $vpn_ip port 8757
+
+# Block all other rules.
+block quick log
 
