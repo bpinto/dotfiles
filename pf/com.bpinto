@@ -28,6 +28,7 @@ vpn=utun0
 
 # Define machines.
 vpn_ip=ADD_ME
+#table <docker> const { 192.168.64.0/24 }
 
 ##### Options #####
 
@@ -39,11 +40,17 @@ set block-policy return
 
 # Don't filter on local loopback or docker interface (dlite).
 set skip on { lo0 $docker }
+#set skip on lo0
 
 ##### Normalization #####
 
 # Scrub all incoming packets.
 scrub in all no-df
+
+##### Translation #####
+
+# Translate outgoing docker requests.
+#nat on $vpn proto { tcp, udp, icmp } from <docker> to any -> $vpn
 
 ##### Filtering #####
 #
@@ -74,6 +81,13 @@ pass in quick on $internet proto udp from any port 67 to any port 68
 # Allow connection setup with VPN server.
 pass quick proto tcp to $vpn_ip port { 443 636 41194 }
 pass quick proto udp to $vpn_ip port 8757
+
+# Allow all traffic between host and docker VM.
+#table <docker> const { 192.168.64.0/24 }
+#pass quick log on $docker proto { tcp, udp, icmp } from <docker> to <docker> flags any
+
+# Allow incoming traffic on docker interface.
+#pass in quick log on $docker from <docker> to any flags any
 
 # Block all other rules.
 block quick log
