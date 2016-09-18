@@ -1,18 +1,18 @@
+# To install homebrew-bundle:
+# brew tap Homebrew/bundle
+
 # Packages
 brew 'ctags-exuberant'
 brew 'diff-so-fancy'
 brew 'dlite'
-brew 'dnsmasq'
 brew 'docker'
 brew 'docker-compose'
-brew 'elixir'
 brew 'fish'
 brew 'fzf'
 brew 'httpie'
-brew 'lftp'
 brew 'mackup', args: ['HEAD']
-brew 'neovim/neovim/neovim'
-brew 'node'
+tap 'neovim/neovim'
+brew 'neovim'
 brew 'rbenv'
 brew 'rbenv-ctags'
 brew 'rbenv-default-gems'
@@ -35,13 +35,10 @@ tap 'caskroom/versions'
 # Casks
 
 cask '1password'
-cask 'alfred'
 cask 'appcleaner'
 cask 'beamer'
 cask 'cloud'
-cask 'flux'
 cask 'google-chrome'
-cask 'hyperterm'
 cask 'iterm2-beta'
 cask 'little-snitch'
 cask 'shiori'
