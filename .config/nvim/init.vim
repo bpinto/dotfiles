@@ -434,7 +434,8 @@ let g:airline_theme = 'deep_space'
 let g:airline_powerline_fonts = 1
 
 " Neomake
-autocmd! BufWritePost * Neomake
+" Run NeoMake on read and write operations
+autocmd! BufReadPost,BufWritePost * Neomake
 
 let g:neomake_warning_sign = {
   \ 'text': 'W',
