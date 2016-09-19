@@ -26,4 +26,4 @@ COMP_KEY=9 COMP_TYPE=9
 COMP_WORDS=("$@") COMP_CWORD=$(( $# - 1 ))
 "$completer" "$cmd" "$cur" "$prev"
 
-printf '%s\n' "${COMPREPLY[@]}"
+printf '%s\n' ${COMPREPLY[@]}
