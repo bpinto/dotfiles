@@ -8,6 +8,7 @@ com.googlecode.iterm2.plist
 .gem/credentials
 .netrc
 .ngrok
+.gnupg/
 .ssh
 .subversion/
 .vim/autoload

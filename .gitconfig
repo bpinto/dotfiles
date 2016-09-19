@@ -1,9 +1,10 @@
 [hub]
   protocol = https
 [user]
-  helper = osxkeychain
-  name   = Bruno Pinto
-  email  = brunoferreirapinto@gmail.com
+  helper     = osxkeychain
+  name       = Bruno Pinto
+  email      = brunoferreirapinto@gmail.com
+  signingkey = brunoferreirapinto@gmail.com
 [alias]
   amend = commit --amend -C HEAD
   ap    = add -p
@@ -53,6 +54,7 @@
 [init]
   templatedir = ~/.git_template
 [commit]
+  gpgsign  = true
   template = ~/.gitmessage
 [github]
   user = bpinto
