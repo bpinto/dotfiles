@@ -270,6 +270,8 @@ command! -bang WQ wq<bang>
 nnoremap <leader>EV :vsplit $MYVIMRC<cr>
 " Reload .vimrc file
 nnoremap <leader>RV :source $MYVIMRC<cr>
+" Edit elvish config file
+nnoremap <leader>EE :vsplit ~/.elvish/rc.elv<cr>
 " Edit fish config file
 nnoremap <leader>EF :vsplit ~/.config/fish/config.fish<cr>
 " Edit tmux config file
@@ -449,7 +451,7 @@ nnoremap <silent> <leader>t :call neoterm#test#run('file')<cr>
 nnoremap <silent> <leader>s :call neoterm#test#run('current')<cr>
 nnoremap <silent> <leader>l :call neoterm#test#rerun()<cr>
 " Vim requires `set shell=bash`, but neoterm should run my real shell
-let g:neoterm_shell = "fish"
+let g:neoterm_shell = "elvish"
 
 " Easy Plugin
 " Start interactive EasyAlign in visual mode (e.g. vipga)

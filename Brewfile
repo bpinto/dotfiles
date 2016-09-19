@@ -20,7 +20,7 @@ brew 'reattach-to-user-namespace'
 brew 'ruby-build'
 brew 'ssh-copy-id'
 brew 'the_silver_searcher'
-brew 'tmux', args: ['HEAD']
+brew 'tmux'
 brew 'tree'
 brew 'vim'
 brew 'wget'
