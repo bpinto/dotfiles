@@ -17,9 +17,12 @@
   ll    = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --decorate --numstat
   lga   = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   lla   = log --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --decorate --numstat
+  patch = --no-pager diff --no-color
   pf    = push --force-with-lease
   pr    = pull --rebase
   st    = status -sb
+[apply]
+  whitespace = nowarn
 [color]
   ui = always
 [color "diff"]
@@ -34,27 +37,28 @@
   oldHighlight = "red bold 52"
   newNormal    = "green bold"
   newHighlight = "green bold 22"
+[commit]
+  gpgsign  = true
+  template = ~/.gitmessage
 [core]
   editor       = vim
   excludesfile = ~/.gitignore
   whitespace   = tab-in-indent,tabwidth=2
-  pager        = diff-so-fancy | less -+S -FXR
-[apply]
-  whitespace = nowarn
+  pager        = diff-so-fancy | less --tabs=4 -RFX
 [difftool]
   prompt = false
+[github]
+  user = bpinto
 [help]
   autocorrect = 1
+[init]
+  templatedir = ~/.git_template
+[pager]
+  diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
+  show = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
 [push]
   # See `git help config` (search for push.default)
   # for more information on different options of the below setting.
   #
   # Setting to git 2.0 default to surpress warning message
   default = simple
-[init]
-  templatedir = ~/.git_template
-[commit]
-  gpgsign  = true
-  template = ~/.gitmessage
-[github]
-  user = bpinto
