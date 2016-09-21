@@ -33,16 +33,19 @@ fn branch-name {
 }
 
 fn commit-count {
-  splits &sep="\t" (git rev-list --count --left-right "@{upstream}...HEAD")
+  splits &sep="\t" (git rev-list --count --left-right "@{upstream}...HEAD" 2>/dev/null)
 }
 
 fn ahead {
   if is-detached; then
-    put detached
-    return
+    put detached; return
   fi
 
-  {commits-behind,commits-ahead}=(commit-count)
+  try
+    {commits-behind,commits-ahead}=(commit-count)
+  except
+    put none; return
+  tried
 
   if == $commits-behind 0; then
     if == $commits-ahead 0; then

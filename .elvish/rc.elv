@@ -16,4 +16,4 @@ le:prompt={ git-prompt:prompt }
 le:rprompt={ put '' }
 
 # Autocompleter
-le:completer[""]={ bash-wrapper:complete $@ }
+le:completer[git]={ bash-wrapper:complete $@ }
