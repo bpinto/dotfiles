@@ -21,7 +21,7 @@ fn is-repo {
 }
 
 fn is-touched {
-  not-ok { git status --porcelain >/dev/null 2>&1 }
+  ok { test -n (echo (git status --porcelain 2>&1)) }
 }
 
 fn branch-name {
