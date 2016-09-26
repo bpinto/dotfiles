@@ -8,6 +8,7 @@ use bindings
 use brew
 use cliniko
 use git-prompt
+use n
 
 # Use git prompt
 le:prompt={ git-prompt:prompt }

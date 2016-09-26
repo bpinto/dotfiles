@@ -12,6 +12,7 @@ brew 'fzf'
 brew 'httpie'
 brew 'mackup', args: ['HEAD']
 tap 'neovim/neovim'
+brew 'n'
 brew 'neovim'
 brew 'rbenv'
 brew 'rbenv-ctags'
