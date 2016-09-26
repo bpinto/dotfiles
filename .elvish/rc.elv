@@ -1,4 +1,6 @@
 #use aliases
+fn console { cliniko:console $@ }
+fn deploy { cliniko:deploy $@ }
 fn dk  { e:docker-compose $@ }
 fn la  { e:ls -lah $@ }
 fn vim { e:nvim $@ }
