@@ -1,0 +1,4 @@
+E:DOCKER_HOST=tcp://192.168.64.3:2376
+E:DOCKER_CERT_PATH=$E:HOME"/.docker/machine/machines/default"
+E:DOCKER_TLS_VERIFY=1
+E:DOCKER_MACHINE_NAME=default

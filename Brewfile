@@ -4,9 +4,12 @@
 # Packages
 brew 'ctags-exuberant'
 brew 'diff-so-fancy'
-brew 'dlite'
+tap 'codekitchen/dinghy'
+brew 'dinghy'
 brew 'docker'
 brew 'docker-compose'
+brew 'docker-machine'
+brew 'docker-machine-driver-xhyve'
 brew 'fish'
 brew 'fzf'
 brew 'httpie'

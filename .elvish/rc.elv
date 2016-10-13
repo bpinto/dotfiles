@@ -9,6 +9,7 @@ use bash-wrapper
 use bindings
 use brew
 use cliniko
+use dinghy
 use git-prompt
 use n
 
