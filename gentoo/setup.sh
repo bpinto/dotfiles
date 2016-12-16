@@ -50,6 +50,16 @@ sudo eselect fontconfig enable 50-user.conf
 ln -sf $PWD/.config/fontconfig/fonts.conf ~/.config/fontconfig/
 
 ###########################################################
+# i3 configuration
+###########################################################
+
+# i3 configuration
+ln -sf $PWD/.config/i3 ~/.config/
+
+# Polybar configuration
+ln -sf $PWD/.config/polybar ~/.config/
+
+###########################################################
 # Termite configuration
 ###########################################################
 
