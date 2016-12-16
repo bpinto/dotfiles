@@ -7,7 +7,9 @@ sudo -v
 # Kernel configuration
 ###########################################################
 
-sudo ln -sf $PWD/usr/src/linux/.config /usr/src/linux/
+# File is replaced when using `menuconfig`, so we need to
+# remember to copy the config file here after changing it.
+sudo cp $PWD/usr/src/linux/.config /usr/src/linux/
 
 ###########################################################
 # Gentoo configuration
