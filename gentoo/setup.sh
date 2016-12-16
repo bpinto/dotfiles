@@ -48,3 +48,9 @@ sudo eselect fontconfig enable 52-infinality.conf
 # User configuration
 sudo eselect fontconfig enable 50-user.conf
 ln -sf $PWD/.config/fontconfig/fonts.conf ~/.config/fontconfig/
+
+###########################################################
+# Termite configuration
+###########################################################
+
+ln -sf $PWD/.config/termite/config ~/.config/termite/
