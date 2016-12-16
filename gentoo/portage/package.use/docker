@@ -1,0 +1,2 @@
+>=sys-libs/libseccomp-2.3.0 static-libs
+>=sys-process/tini-0.13.0 static

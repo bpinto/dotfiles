@@ -4,6 +4,25 @@
 sudo -v
 
 ###########################################################
+# Gentoo configuration
+###########################################################
+
+# Global configuration
+sudo ln -sf $PWD/portage/make.conf /etc/portage/
+
+# Per package configuration
+sudo ln -sf $PWD/portage/package.accept_keywords /etc/portage/
+sudo ln -sf $PWD/portage/package.mask /etc/portage/
+sudo ln -sf $PWD/portage/package.use /etc/portage/
+
+# Environment variables per package
+sudo ln -sf $PWD/portage/package.env /etc/portage/
+sudo ln -sf $PWD/portage/env /etc/portage/
+
+# Overlay configuration
+sudo ln -sf $PWD/portage/repos.conf /etc/portage/
+
+###########################################################
 # X configuration
 ###########################################################
 

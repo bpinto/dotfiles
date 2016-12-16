@@ -1,0 +1,3 @@
+x11-misc/rofi
+x11-wm/i3
+=x11-libs/xcb-util-xrm-1.0 ~amd64

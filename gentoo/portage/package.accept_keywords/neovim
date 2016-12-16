@@ -1,0 +1,5 @@
+>=dev-lua/mpack-1.0.3 ~amd64
+>=dev-libs/unibilium-1.1.1 ~amd64
+>=dev-libs/libtermkey-0.17 ~amd64
+app-editors/neovim ~amd64
+>=dev-libs/msgpack-1.1.0 ~amd64
