@@ -26,6 +26,9 @@ sudo ln -sf $PWD/portage/repos.conf /etc/portage/
 # X configuration
 ###########################################################
 
+# Start configuration
+ln -sf $PWD/.xinitrc ~/.xinitrc
+
 # User configuration
 ln -sf $PWD/.Xresources ~/.Xresources
 
