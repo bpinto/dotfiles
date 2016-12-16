@@ -6,3 +6,23 @@ Xft.hinting: false
 Xft.hintstyle: hintnone
 Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
+
+!To  get  a list of available options, formatted as Xresources entries run:
+!rofi -dump-xresources
+rofi.bw: 0
+rofi.eh: 2
+rofi.fake-background: background
+rofi.fake-transparency: true
+rofi.font: San Francisco Display 18
+rofi.lines: 3
+rofi.opacity: 85
+rofi.padding: 400
+rofi.width: 100
+
+rofi.color-enabled: true
+! State:           ´bg´,          ´border´
+rofi.color-window: argb:CC111111, argb:00000000
+! State:           ´bg´,          ´fg´,    ´bgalt´,       ´hlbg´,        ´hlfg´
+rofi.color-normal: argb:00000000, #F3F4F5, argb:00000000, argb:00000000, #9575CD
+rofi.color-active: argb:00000000, #F3F4F5, argb:00000000, argb:00000000, #9574CD
+rofi.color-urgent: argb:00000000, #E53935, argb:00000000, argb:00000000, #9574CD
