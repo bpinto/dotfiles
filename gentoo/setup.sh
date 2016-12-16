@@ -10,6 +10,10 @@ sudo -v
 # User configuration
 ln -sf $PWD/.Xresources ~/.Xresources
 
+# Global configuration
+sudo ln -sf $PWD/X11/xorg.conf /etc/X11/
+sudo ln -sf $PWD/X11/xorg.conf.d/99-libinput-custom-config.conf /etc/X11/xorg.conf.d/
+
 ###########################################################
 # Font configuration
 ###########################################################
