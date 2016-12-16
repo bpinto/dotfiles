@@ -64,3 +64,10 @@ ln -sf $PWD/.config/polybar ~/.config/
 ###########################################################
 
 ln -sf $PWD/.config/termite/config ~/.config/termite/
+
+###########################################################
+# Weechat configuration
+###########################################################
+
+# Configuration files
+ln -sf $PWD/.weechat ~/
