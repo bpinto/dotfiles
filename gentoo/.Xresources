@@ -1,0 +1,8 @@
+!Some applications like URxvt will ignore fontconfig settings.
+Xft.antialias: true
+Xft.autohint: false
+Xft.dpi: 96
+Xft.hinting: false
+Xft.hintstyle: hintnone
+Xft.lcdfilter: lcddefault
+Xft.rgba: rgb
