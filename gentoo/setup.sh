@@ -32,6 +32,9 @@ sudo ln -sf $PWD/etc/portage/package.use /etc/portage/
 sudo ln -sf $PWD/etc/portage/package.env /etc/portage/
 sudo ln -sf $PWD/etc/portage/env /etc/portage/
 
+# Custom ebuilds
+sudo ln -sf $PWD/usr/local/portage /usr/local/
+
 # Overlay configuration
 sudo ln -sf $PWD/etc/portage/repos.conf /etc/portage/
 
