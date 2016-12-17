@@ -15,6 +15,9 @@ sudo cp $PWD/usr/src/linux/.config /usr/src/linux/
 # Gentoo configuration
 ###########################################################
 
+# Installed packages
+sudo ln -sf $PWD/var/lib/portage/world /var/lib/portage/world
+
 # Global configuration
 sudo ln -sf $PWD/portage/make.conf /etc/portage/
 
