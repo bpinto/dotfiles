@@ -9,6 +9,7 @@ app-portage/genlop
 app-portage/gentoolkit
 app-shells/fish
 app-text/tree
+dev-lang/ruby
 dev-vcs/git
 media-gfx/feh
 media-gfx/maim
@@ -27,6 +28,8 @@ sys-kernel/genkernel-next
 sys-kernel/gentoo-sources
 www-client/google-chrome
 x11-apps/xbacklight
+x11-drivers/xf86-input-libinput
+x11-drivers/xf86-video-intel
 x11-misc/gpaste
 x11-misc/i3lock
 x11-misc/polybar
