@@ -11,6 +11,7 @@ app-shells/fish
 app-text/tree
 dev-lang/ruby
 dev-vcs/git
+media-fonts/dejavu
 media-gfx/feh
 media-gfx/maim
 media-sound/spotify
