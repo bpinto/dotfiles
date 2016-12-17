@@ -21,19 +21,19 @@ sudo cp $PWD/usr/src/linux/.config /usr/src/linux/
 sudo ln -sf $PWD/var/lib/portage/world /var/lib/portage/world
 
 # Global configuration
-sudo ln -sf $PWD/portage/make.conf /etc/portage/
+sudo ln -sf $PWD/etc/portage/make.conf /etc/portage/
 
 # Per package configuration
-sudo ln -sf $PWD/portage/package.accept_keywords /etc/portage/
-sudo ln -sf $PWD/portage/package.mask /etc/portage/
-sudo ln -sf $PWD/portage/package.use /etc/portage/
+sudo ln -sf $PWD/etc/portage/package.accept_keywords /etc/portage/
+sudo ln -sf $PWD/etc/portage/package.mask /etc/portage/
+sudo ln -sf $PWD/etc/portage/package.use /etc/portage/
 
 # Environment variables per package
-sudo ln -sf $PWD/portage/package.env /etc/portage/
-sudo ln -sf $PWD/portage/env /etc/portage/
+sudo ln -sf $PWD/etc/portage/package.env /etc/portage/
+sudo ln -sf $PWD/etc/portage/env /etc/portage/
 
 # Overlay configuration
-sudo ln -sf $PWD/portage/repos.conf /etc/portage/
+sudo ln -sf $PWD/etc/portage/repos.conf /etc/portage/
 
 ###########################################################
 # Power management configuration
@@ -61,8 +61,8 @@ ln -sf $PWD/.xinitrc ~/.xinitrc
 ln -sf $PWD/.Xresources ~/.Xresources
 
 # Global configuration
-sudo ln -sf $PWD/X11/xorg.conf /etc/X11/
-sudo ln -sf $PWD/X11/xorg.conf.d/99-libinput-custom-config.conf /etc/X11/xorg.conf.d/
+sudo ln -sf $PWD/etc/X11/xorg.conf /etc/X11/
+sudo ln -sf $PWD/etc/X11/xorg.conf.d/99-libinput-custom-config.conf /etc/X11/xorg.conf.d/
 
 ###########################################################
 # Font configuration
