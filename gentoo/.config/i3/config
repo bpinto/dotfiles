@@ -184,7 +184,7 @@ bindsym $alt+r mode "resize"
 # Set shut down, restart and locking features
 set $mode_system (l)ock, (r)eboot, (s)hutdown
 mode "$mode_system" {
-  bindsym l exec --no-startup-id ~/.config/i3/scripts/lock, mode "default"
+  bindsym l exec --no-startup-id /usr/local/bin/lock, mode "default"
   bindsym r exec --no-startup-id systemctl reboot, mode "default"
   bindsym s exec --no-startup-id systemctl poweroff -i, mode "default"
 

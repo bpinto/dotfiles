@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+user=$(whoami)
+
 # Ask for the administrator password upfront
 sudo -v
 
@@ -32,6 +34,21 @@ sudo ln -sf $PWD/portage/env /etc/portage/
 
 # Overlay configuration
 sudo ln -sf $PWD/portage/repos.conf /etc/portage/
+
+###########################################################
+# Power management configuration
+###########################################################
+
+# i3lock script
+sudo ln -sf $PWD/usr/local/bin/lock /usr/local/bin/lock
+
+# Autolock service
+sudo cp $PWD/etc/systemd/system/auto-lock@.service /etc/systemd/system/
+sudo systemctl enable auto-lock@$user
+
+# Delayed hibernation service
+sudo cp $PWD/etc/systemd/system/suspend-to-hibernate.service /etc/systemd/system/
+sudo systemctl enable suspend-to-hibernate
 
 ###########################################################
 # X configuration
