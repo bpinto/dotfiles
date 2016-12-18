@@ -53,6 +53,9 @@ sudo systemctl enable auto-lock@$user
 sudo cp $PWD/etc/systemd/system/suspend-to-hibernate.service /etc/systemd/system/
 sudo systemctl enable suspend-to-hibernate
 
+# Fix wakeup after suspending
+sudo ln -sf $PWD/etc/udev/rules.d/90-hxc_sleep.rules /etc/udev/rules.d/
+
 ###########################################################
 # X configuration
 ###########################################################
