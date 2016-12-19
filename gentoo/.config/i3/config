@@ -236,11 +236,10 @@ set $workspace8 "8 "
 set $workspace9 "9 "
 set $workspace10 "10 "
 
-assign [class="Chrome"] $workspace1
+assign [class="Google-chrome"] $workspace1
 assign [class="mpv"] $workspace5
 assign [class="Slack"] $workspace9
-# Temporary workaround for Spotify bug
-# https://github.com/i3/i3/issues/2060
+# Temporary workaround for Spotify bug: https://github.com/i3/i3/issues/2060
 #assign [class="Spotify"] $workspace10
 for_window [class="Spotify"] move to workspace $workspace10
 

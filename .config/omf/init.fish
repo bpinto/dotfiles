@@ -1,5 +1,5 @@
-# Set vim as terminal editor
-set -gx EDITOR vim
+# Set neovim as terminal editor
+set -gx EDITOR nvim
 
 # # http://stackoverflow.com/questions/2499794/how-can-i-fix-a-locale-warning-from-perl
 set -gx LC_CTYPE en_US.UTF-8
