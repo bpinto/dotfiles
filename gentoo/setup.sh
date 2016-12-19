@@ -70,6 +70,9 @@ ln -sf $PWD/.Xresources ~/.Xresources
 sudo ln -sf $PWD/etc/X11/xorg.conf /etc/X11/
 sudo ln -sf $PWD/etc/X11/xorg.conf.d/99-libinput-custom-config.conf /etc/X11/xorg.conf.d/
 
+# Wallpaper
+sudo ln -sf $PWD/.wallpaper.jpg ~/.wallpaper.jpg
+
 ###########################################################
 # Font configuration
 ###########################################################
