@@ -1,5 +1,0 @@
-app-emulation/docker ~amd64
-=app-emulation/runc-1.0.0_rc2-r1 ~amd64
-=app-emulation/containerd-0.2.4 ~amd64
-=sys-process/tini-0.13.0 ~amd64
-=app-emulation/docker-proxy-0.8.0_p20161111 ~amd64
