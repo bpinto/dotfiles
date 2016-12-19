@@ -32,9 +32,6 @@ overline-color = #f00
 underline-size = 2
 underline-color = #00f
 
-border-bottom = 2
-border-bottom-color = ${colors.background}
-
 spacing = 1
 padding-left = 1
 padding-right = 2
@@ -62,8 +59,8 @@ format-prefix-foreground = ${colors.foreground-alt}
 label-layout = %layout%
 
 label-indicator-padding = 2
+label-indicator-foreground = ${colors.background}
 label-indicator-background = ${colors.alert}
-label-indicator-underline = ${colors.alert}
 
 [module/i3]
 type = internal/i3
