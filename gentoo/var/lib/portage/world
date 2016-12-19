@@ -21,7 +21,6 @@ net-irc/weechat
 net-misc/youtube-dl
 net-wireless/broadcom-sta
 sys-apps/the_silver_searcher
-sys-boot/grub
 sys-boot/grub:2
 sys-devel/gcc:4.9.3
 sys-devel/gcc:5.4.0

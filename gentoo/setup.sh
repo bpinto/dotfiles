@@ -13,6 +13,9 @@ sudo -v
 # remember to copy the config file here after changing it.
 sudo cp $PWD/usr/src/linux/.config /usr/src/linux/
 
+# Grub configuration
+sudo ln -sf $PWD/etc/default/grub /etc/default/
+
 ###########################################################
 # Gentoo configuration
 ###########################################################
