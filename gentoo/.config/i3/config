@@ -101,10 +101,10 @@ bindsym $cmd+grave focus mode_toggle
 
 # screenshot
 bindsym $cmd+Shift+3 exec maim "$HOME/Pictures/Screenshot\ from\ $(date +%F-%T).png"
-bindsym $cmd+$ctrl+Shift+3 exec maim /tmp/screenshot.png && gpaste-client file /tmp/screenshot.png
+bindsym $cmd+$ctrl+Shift+3 exec maim /tmp/screenshot.png && copyq copy image/png - < /tmp/screenshot.png
 
 bindsym $cmd+Shift+4 exec maim -s "$HOME/Pictures/Screenshot\ from\ $(date +%F-%T).png"
-bindsym $cmd+$ctrl+Shift+4 exec maim -s /tmp/screenshot.png && gpaste-client file /tmp/screenshot.png
+bindsym $cmd+$ctrl+Shift+4 exec maim -s /tmp/screenshot.png && copyq copy image/png - < /tmp/screenshot.png
 
 ###########################################################
 # EXTRA
@@ -149,7 +149,8 @@ bindsym XF86MonBrightnessDown exec xbacklight -steps 1 -time 50 -dec 10
 bindsym $alt+Return exec termite
 
 # Open clipboard history
-bindsym $ctrl+Shift+c exec gpaste-client ui
+#bindsym $ctrl+Shift+c exec ~/.config/i3/scripts/launch_copyq.sh
+bindsym $ctrl+Shift+p exec ~/.config/i3/scripts/launch_copyq.sh
 
 ###########################################################
 # MODES

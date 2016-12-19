@@ -27,11 +27,11 @@ sys-devel/gcc:5.4.0
 sys-kernel/genkernel-next
 sys-kernel/gentoo-sources
 www-client/google-chrome
+x11-apps/copyq
 x11-apps/xbacklight
 x11-drivers/mba6x_bl
 x11-drivers/xf86-input-libinput
 x11-drivers/xf86-video-intel
-x11-misc/gpaste
 x11-misc/i3lock
 x11-misc/polybar
 x11-misc/rofi
