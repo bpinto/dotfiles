@@ -56,7 +56,7 @@ blacklist-0 = num lock
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 
-label-layout = %layout%
+label-layout = %layout% %number%
 
 label-indicator-padding = 2
 label-indicator-foreground = ${colors.background}
