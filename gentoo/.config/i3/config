@@ -149,8 +149,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -steps 1 -time 50 -dec 10
 bindsym $alt+Return exec termite
 
 # Open clipboard history
-#bindsym $ctrl+Shift+c exec ~/.config/i3/scripts/launch_copyq.sh
-bindsym $ctrl+Shift+p exec ~/.config/i3/scripts/launch_copyq.sh
+bindsym $cmd+$alt+c exec ~/.config/i3/scripts/launch_copyq.sh
 
 ###########################################################
 # MODES
@@ -275,3 +274,5 @@ bindsym $cmd+Shift+Tab move container to workspace back_and_forth
 
 exec_always --no-startup-id feh --bg-scale ~/.wallpaper.jpg
 exec_always --no-startup-id ~/.config/polybar/launch.sh
+
+exec --no-startup-id copyq &
