@@ -97,8 +97,6 @@ bindsym $cmd+grave focus mode_toggle
 # OSX MAPPINGS
 ###########################################################
 
-#bindsym $cmd+c
-
 # screenshot
 bindsym $cmd+Shift+3 exec maim "$HOME/Pictures/Screenshot\ from\ $(date +%F-%T).png"
 bindsym $cmd+$ctrl+Shift+3 exec maim /tmp/screenshot.png && copyq copy image/png - < /tmp/screenshot.png
@@ -109,9 +107,6 @@ bindsym $cmd+$ctrl+Shift+4 exec maim -s /tmp/screenshot.png && copyq copy image/
 ###########################################################
 # EXTRA
 ###########################################################
-
-# reload the configuration file
-#bindsym $alt+Shift+c reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $alt+Shift+r restart
@@ -196,29 +191,6 @@ mode "$mode_system" {
 }
 
 bindsym $alt+x mode "$mode_system"
-
-###########################################################
-# STATUS BAR
-###########################################################
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-#bar {
-  #status_command py3status -c ~/.config/i3/i3status.conf
-
-  ## i3bar position
-  #position top
-
-  #colors {
-    #background $bg-color
-    #separator #757575
-
-    ##                  border             background         text
-    #focused_workspace  $bg-color          $bg-color          $text-color
-    #inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-    #urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-  #}
-#}
 
 ###########################################################
 # WORKSPACES
