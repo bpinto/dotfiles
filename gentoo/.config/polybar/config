@@ -17,7 +17,6 @@ alert = #BD2C40
 alert-alt = #E60053
 
 [bar/topbar]
-monitor = ${env:MONITOR:eDP-1}
 width = 100%
 height = 27
 offset-x = 0
@@ -43,7 +42,14 @@ font-1 = SF UI Text:size=9;0
 
 modules-left = i3
 modules-center = xwindow
-modules-right = wlan xkeyboard volume battery date powermenu
+modules-right = github wlan xkeyboard volume battery date powermenu
+
+[module/github]
+type = internal/github
+token = ${env:GITHUB_API_TOKEN}
+
+label = "%notifications%"
+format-prefix = " "
 
 [module/xwindow]
 type = internal/xwindow
@@ -155,7 +161,7 @@ ramp-volume-foreground = ${colors.foreground-alt}
 type = internal/battery
 battery = BAT0
 adapter = ADP1
-full-at = 82
+full-at = 95
 
 format-charging = <animation-charging> <label-charging>
 format-discharging = <ramp-capacity> <label-discharging>
