@@ -75,4 +75,4 @@ GRUB_DISTRIBUTOR="Gentoo"
 
 GRUB_ENABLE_CRYPTODISK=y
 
-GRUB_CMDLINE_LINUX="init=/usr/lib/systemd/systemd crypt_root=UUID=25fc37c3-8ac0-4ac2-9499-c98bf282530e dolvm quiet acpi_backlight=video acpi_osi= systemd.show_status=1 net.ifnames=0"
+GRUB_CMDLINE_LINUX="init=/usr/lib/systemd/systemd crypt_root=UUID=25fc37c3-8ac0-4ac2-9499-c98bf282530e dolvm quiet acpi_backlight=video acpi_osi= systemd.show_status=1 net.ifnames=0 ipv6.disable=1"
