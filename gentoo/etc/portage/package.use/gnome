@@ -1,3 +1,0 @@
->=media-libs/gegl-0.3.8 raw jpeg2k
->=media-plugins/grilo-plugins-0.2.17:0.2 upnp-av
->=gnome-base/gnome-control-center-3.20.1-r1 networkmanager

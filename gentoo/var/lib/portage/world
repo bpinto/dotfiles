@@ -1,11 +1,8 @@
 app-admin/sudo
-app-editors/nano
 app-editors/neovim
 app-emulation/docker
 app-emulation/docker-compose
 app-laptop/laptop-mode-tools
-app-misc/tmux
-app-portage/genlop
 app-portage/gentoolkit
 app-shells/fish
 app-text/tree
