@@ -28,9 +28,12 @@ font pango:SF UI Text 10
 hide_edge_borders both
 
 # disable window titlebars
+for_window [class="mpv"] border pixel 0, fullscreen enable
 for_window [class="Slack"] border pixel 0
-for_window [class="Termite"] border pixel 1
 for_window [class="Spotify"] border pixel 0
+
+# Add a border among termite windows
+for_window [class="Termite"] border pixel 1
 
 set $bg-color            #2f343f
 set $inactive-bg-color   #2f343f
