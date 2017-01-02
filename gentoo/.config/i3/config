@@ -250,3 +250,4 @@ exec_always --no-startup-id feh --bg-scale ~/.wallpaper.jpg
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 exec --no-startup-id copyq &
+exec --no-startup-id 1pass &
