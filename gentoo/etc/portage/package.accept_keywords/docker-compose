@@ -5,4 +5,4 @@
 =dev-python/texttable-0.8.3 ~amd64
 =dev-python/dockerpty-0.4.1 ~amd64
 =dev-python/docker-py-1.10.6 ~amd64
->=app-emulation/docker-compose-1.9.0 ~amd64
+=app-emulation/docker-compose-1.9.0 ~amd64
