@@ -17,6 +17,7 @@ media-sound/spotify
 media-video/mpv
 net-im/slack-bin
 net-irc/weechat
+net-misc/minidlna
 net-misc/youtube-dl
 net-wireless/broadcom-sta
 sys-apps/the_silver_searcher

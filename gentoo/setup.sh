@@ -106,6 +106,13 @@ ln -sf $PWD/.config/i3 ~/.config/
 ln -sf $PWD/.config/polybar ~/.config/
 
 ###########################################################
+# Minidlna configuration
+###########################################################
+
+# Configuration files
+sudo ln -sf $PWD/etc/minidlna.conf /etc/
+
+###########################################################
 # Termite configuration
 ###########################################################
 
