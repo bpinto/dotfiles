@@ -15,6 +15,7 @@ rofi.fake-background: background
 rofi.fake-transparency: true
 rofi.font: San Francisco Display 18
 rofi.lines: 3
+rofi.matching: fuzzy
 rofi.opacity: 85
 rofi.padding: 400
 rofi.width: 100
