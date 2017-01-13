@@ -3,7 +3,6 @@ app-admin/sudo
 app-editors/neovim
 app-emulation/docker
 app-emulation/docker-compose
-app-laptop/laptop-mode-tools
 app-portage/gentoolkit
 app-shells/fish
 app-text/tree
