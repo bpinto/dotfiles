@@ -113,6 +113,20 @@ ln -sf $PWD/.config/polybar ~/.config/
 sudo ln -sf $PWD/etc/minidlna.conf /etc/
 
 ###########################################################
+# Redshift configuration
+###########################################################
+
+# Configuration files
+ln -sf $PWD/.config/redshift.conf ~/.config/
+
+# Enable autostart
+systemctl --user enable redshift
+
+# Fix builtin systemd service
+mkdir -p ~/.config/systemd/user/redshift.service.d
+ln -sf $PWD/.config/systemd/user/redshift.service.d/custom.conf ~/.config/systemd/user/redshift.service.d/
+
+###########################################################
 # Termite configuration
 ###########################################################
 

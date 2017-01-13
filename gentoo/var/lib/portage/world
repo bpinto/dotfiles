@@ -33,6 +33,7 @@ x11-drivers/xf86-input-libinput
 x11-drivers/xf86-video-intel
 x11-misc/i3lock
 x11-misc/polybar
+x11-misc/redshift
 x11-misc/rofi
 x11-misc/slop
 x11-misc/xbindkeys
