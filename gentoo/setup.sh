@@ -113,6 +113,17 @@ ln -sf $PWD/.config/polybar ~/.config/
 sudo ln -sf $PWD/etc/minidlna.conf /etc/
 
 ###########################################################
+# Newsbeuter configuration
+###########################################################
+
+# Configuration files
+ln -sf $PWD/.config/newsbeuter ~/.config/
+
+# Manually create XDG data directory until a new version is released:
+# https://github.com/akrennmair/newsbeuter/issues/245
+mkdir -p ~/.local/share/newsbeuter
+
+###########################################################
 # Redshift configuration
 ###########################################################
 

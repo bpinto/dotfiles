@@ -18,6 +18,7 @@ net-im/slack-bin
 net-irc/weechat
 net-misc/minidlna
 net-misc/youtube-dl
+net-news/newsbeuter
 net-wireless/broadcom-sta
 sys-apps/the_silver_searcher
 sys-boot/grub:2
