@@ -142,8 +142,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 # APPLICATIONS SHORTCUTS
 ###########################################################
 
-# Start a terminal
-bindsym $alt+Return exec termite
+# Start terminal in current directory
+bindsym --release $alt+Return exec --no-startup-id ~/.config/i3/scripts/hotkey.sh "$alt+Return"
 
 # Open clipboard history
 bindsym $cmd+$alt+c exec ~/.config/i3/scripts/launch_copyq.sh

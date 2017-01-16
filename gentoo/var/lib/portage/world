@@ -38,5 +38,6 @@ x11-misc/redshift
 x11-misc/rofi
 x11-misc/slop
 x11-misc/xbindkeys
+x11-misc/xdotool
 x11-terms/termite
 x11-wm/i3
