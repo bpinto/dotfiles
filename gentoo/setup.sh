@@ -113,6 +113,13 @@ ln -sf $PWD/.config/polybar ~/.config/
 sudo ln -sf $PWD/etc/minidlna.conf /etc/
 
 ###########################################################
+# MPV configuration
+###########################################################
+
+# Configuration files
+ln -sf $PWD/.config/mpv/mpv.conf ~/.config/mpv/
+
+###########################################################
 # Newsbeuter configuration
 ###########################################################
 
