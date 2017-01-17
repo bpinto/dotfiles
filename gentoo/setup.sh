@@ -149,3 +149,10 @@ ln -sf $PWD/.config/termite/config ~/.config/termite/
 
 # Configuration files
 ln -sf $PWD/.weechat ~/
+
+###########################################################
+# Youtube-dl configuration
+###########################################################
+
+# Configuration files
+ln -sf $PWD/.config/youtube-dl ~/.config/
