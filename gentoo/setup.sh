@@ -80,6 +80,16 @@ sudo ln -sf $PWD/etc/X11/xorg.conf.d  /etc/X11/
 sudo ln -sf $PWD/.wallpaper.jpg ~/.wallpaper.jpg
 
 ###########################################################
+# Bluetooth configuration
+###########################################################
+
+# Configure pulseaudio
+sudo ln -sf $PWD/etc/pulse/default.pa /etc/pulse/
+
+# Configure bluetooth
+sudo ln -sf $PWD/etc/bluetooth/main.conf /etc/bluetooth/
+
+###########################################################
 # Font configuration
 ###########################################################
 
