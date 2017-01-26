@@ -10,12 +10,14 @@
 [colors]
 background = #262D3C
 foreground = #DFDFDF
-foreground-alt = #55
+foreground-alt = #535F70
 warning = #FFA900
 alert = #BD2C40
 alert-alt = #E60053
 
 [bar/topbar]
+dpi = ${xrdb:Xft.dpi:96}
+
 width = 100%
 height = 27
 offset-x = 0

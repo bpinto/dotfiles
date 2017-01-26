@@ -1,2 +1,1 @@
-x11-misc/polybar curl i3 wifi
-x11-libs/libxcb xkb
+x11-misc/polybar curl i3 network
