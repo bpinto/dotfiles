@@ -1,34 +1,47 @@
 #!/usr/bin/env bash
 
-getdefaultsinkname() {
+getDefaultSinkName() {
     pacmd stat | awk -F": " '/^Default sink name: /{print $2}'
 }
 
-getdefaultsinkvol() {
+getDefaultSinkVolume() {
     pacmd list-sinks |
-        awk '/^\s+name: /{indefault = $2 == "<'$(getdefaultsinkname)'>"}
+        awk '/^\s+name: /{indefault = $2 == "<'$(getDefaultSinkName)'>"}
             /^\s+volume: / && indefault {print $5; exit}' |
         awk -F"%" '{print $1}'
 
 }
 
+isDefaultSinkMute() {
+    pacmd list-sinks |
+        awk '/^\s+name: /{indefault = $2 == "<'$(getDefaultSinkName)'>"}
+            /^\s+muted: / && indefault {print $2; exit}' |
+            grep 'yes'
+}
+
 interval=10
-currentVolume=$(getdefaultsinkvol)
+isMute=$(isDefaultSinkMute)
+currentVolume=$(getDefaultSinkVolume)
 minVolume=0
 maxVolume=100
 
-if [ "$1" == "UP" ]
-then
-  currentVolume=$(echo "$currentVolume + $interval" | bc)
-  if (( $(echo "$maxVolume < $currentVolume" | bc -l) == 0 ))
-  then
-    pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ +$interval%
+if [ "$1" == "UP" ]; then
+  if [ $isMute ]; then
+    pactl set-sink-mute @DEFAULT_SINK@ 0
   else
-    pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ 100%
+    volume=$(echo "$currentVolume + $interval" | bc)
+
+    if (( $(echo "$maxVolume < $volume" | bc -l) == 0 ))
+    then
+      pactl set-sink-volume @DEFAULT_SINK@ +$interval%
+    else
+      pactl set-sink-volume @DEFAULT_SINK@ 100%
+    fi
   fi
 else
-  currentVolume=$(echo "$currentVolume - $interval" | bc)
-  if (( $(echo "$minVolume >= $currentVolume" | bc -l) == 0 ))
+  volume=$(echo "$currentVolume - $interval" | bc)
+
+  if (( $(echo "$minVolume >= $volume" | bc -l) == 0 ))
   then
     pactl set-sink-volume @DEFAULT_SINK@ -$interval%
   else
