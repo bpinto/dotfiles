@@ -4,6 +4,7 @@ app-editors/neovim
 app-emulation/docker
 app-emulation/docker-compose
 app-portage/gentoolkit
+app-portage/repoman
 app-shells/fish
 app-text/tree
 dev-lang/ruby
