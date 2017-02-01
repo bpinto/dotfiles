@@ -29,6 +29,7 @@ sudo ln -sf $PWD/etc/portage/make.conf /etc/portage/
 # Per package configuration
 sudo ln -sf $PWD/etc/portage/package.accept_keywords /etc/portage/
 sudo ln -sf $PWD/etc/portage/package.mask /etc/portage/
+sudo ln -sf $PWD/etc/portage/package.unmask /etc/portage/
 sudo ln -sf $PWD/etc/portage/package.use /etc/portage/
 
 # Environment variables per package
