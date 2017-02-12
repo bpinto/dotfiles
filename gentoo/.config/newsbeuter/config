@@ -6,6 +6,9 @@
 # time has passed (see reload-time).
 auto-reload "yes"
 
+# Parallel download
+reload-threads 20
+
 # Set chrome as default browser
 browser "google-chrome-stable %u"
 
