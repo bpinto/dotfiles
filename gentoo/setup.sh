@@ -88,7 +88,7 @@ sudo ln -sf $PWD/.wallpaper.jpg ~/.wallpaper.jpg
 sudo ln -sf $PWD/etc/pulse/default.pa /etc/pulse/
 
 # Configure bluetooth
-sudo ln -sf $PWD/etc/bluetooth/main.conf /etc/bluetooth/
+sudo cp $PWD/etc/bluetooth/main.conf /etc/bluetooth/
 
 ###########################################################
 # Font configuration
