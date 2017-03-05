@@ -1,6 +1,5 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 #
 # To populate all changes in this file you need to regenerate your
 # grub configuration file afterwards:
@@ -15,7 +14,7 @@ GRUB_DISTRIBUTOR="Gentoo"
 #GRUB_DEFAULT=0
 
 # Boot the default entry this many seconds after the menu is displayed
-#GRUB_TIMEOUT=5
+GRUB_TIMEOUT=2
 #GRUB_TIMEOUT_STYLE=menu
 
 # Append parameters to the linux kernel command line
@@ -74,5 +73,4 @@ GRUB_DISTRIBUTOR="Gentoo"
 #GRUB_INIT_TUNE="60 800 1"
 
 GRUB_ENABLE_CRYPTODISK=y
-
-GRUB_CMDLINE_LINUX="init=/usr/lib/systemd/systemd crypt_root=UUID=25fc37c3-8ac0-4ac2-9499-c98bf282530e dolvm quiet acpi_backlight=video acpi_osi= systemd.show_status=1 net.ifnames=0 ipv6.disable=1"
+GRUB_CMDLINE_LINUX="init=/usr/lib/systemd/systemd crypt_root=UUID=d3db91b6-0fc8-40d5-99ce-8919a71d2f4d resume=/dev/mapper/vg1-swap dolvm quiet systemd.show_status=1 net.ifnames=0 ipv6.disable=1 i915.enable_fbc=1 i915.enable_psr=1 i915.disable_power_well=0 acpi_rev_override=1"

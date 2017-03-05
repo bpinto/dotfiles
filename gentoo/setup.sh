@@ -13,6 +13,9 @@ sudo -v
 # remember to copy the config file here after changing it.
 sudo cp $PWD/usr/src/linux/.config /usr/src/linux/
 
+# ALSA (sound) configuration
+sudo cp $PWD/etc/modprobe.d/alsa.conf /etc/modprobe.d/
+
 # Grub configuration
 sudo ln -sf $PWD/etc/default/grub /etc/default/
 
