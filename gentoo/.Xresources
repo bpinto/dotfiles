@@ -1,7 +1,10 @@
+! Increase cursor size
+Xcursor.size: 48
+
 !Some applications like URxvt will ignore fontconfig settings.
 Xft.antialias: true
 Xft.autohint: false
-Xft.dpi: 96
+Xft.dpi: 240
 Xft.hinting: false
 Xft.hintstyle: hintnone
 Xft.lcdfilter: lcddefault
@@ -13,11 +16,11 @@ rofi.bw: 0
 rofi.eh: 2
 rofi.fake-background: background
 rofi.fake-transparency: true
-rofi.font: San Francisco Display 18
+rofi.font: San Francisco Display 34
 rofi.lines: 3
 rofi.matching: fuzzy
 rofi.opacity: 85
-rofi.padding: 400
+rofi.padding: 1000
 rofi.width: 100
 
 rofi.color-enabled: true

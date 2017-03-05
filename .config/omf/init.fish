@@ -22,6 +22,9 @@ set -gx LESS_TERMCAP_se \e'[0m' # leave standout mode
 set -gx LESS_TERMCAP_ue \e'[0m' # leave underline mode
 set -gx LESS_TERMCAP_us \e'[04;38;5;200m' # enter underline mode
 
+# HiDPI support for QT
+set -gx QT_SCALE_FACTOR 2
+
 #set -x LESS_TERMCAP_mb (printf "\033[01;31m")
 #set -x LESS_TERMCAP_md (printf "\033[01;31m")
 #set -x LESS_TERMCAP_me (printf "\033[0m")

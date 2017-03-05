@@ -49,6 +49,13 @@ sudo ln -sf $PWD/etc/portage/patches /etc/portage/
 sudo ln -sf $PWD/etc/portage/repos.conf /etc/portage/
 
 ###########################################################
+# Font configuration
+###########################################################
+
+# Configure console font
+sudo cp $PWD/etc/vconsole.conf /etc/
+
+###########################################################
 # Power management configuration
 ###########################################################
 

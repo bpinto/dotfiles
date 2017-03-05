@@ -11,6 +11,7 @@ dev-lang/ruby
 dev-util/ctags
 dev-vcs/git
 media-fonts/dejavu
+media-fonts/terminus-font
 media-gfx/feh
 media-gfx/maim
 media-sound/spotify
