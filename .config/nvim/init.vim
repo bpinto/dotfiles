@@ -17,6 +17,7 @@ Plug 'neomake/neomake'
 Plug 'rhysd/github-complete.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'sheerun/vim-polyglot'
+Plug 'slm-lang/vim-slm'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
@@ -413,7 +414,7 @@ augroup END
 runtime macros/matchit.vim
 
 " FZF
-set rtp+=/usr/local/opt/fzf
+set rtp+=/usr/share/nvim/runtime
 " Act like CtrlP
 let g:fzf_action = {
       \ 'ctrl-s': 'split',

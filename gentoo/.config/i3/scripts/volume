@@ -19,7 +19,7 @@ isDefaultSinkMute() {
             grep 'yes'
 }
 
-interval=10
+interval=5
 isMute=$(isDefaultSinkMute)
 currentVolume=$(getDefaultSinkVolume)
 minVolume=0

@@ -1,0 +1,9 @@
+[Unit]
+Description=Powertop tunings
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/manual-powertop
+
+[Install]
+WantedBy=multi-user.target

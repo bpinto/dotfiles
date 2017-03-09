@@ -3,3 +3,5 @@
 >=dev-libs/libtermkey-0.17 ~amd64
 app-editors/neovim ~amd64
 >=dev-libs/msgpack-1.1.0 ~amd64
+>=dev-lua/lpeg-1.0.1 ~amd64
+dev-libs/libvterm ~amd64

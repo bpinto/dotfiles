@@ -109,22 +109,12 @@ toggle-on-foreground = ${colors.alert}
 toggle-off-foreground = #66
 
 [module/wlan]
-type = internal/network
-interface = wlan0
+type = custom/script
 interval = 3.0
 
-format-connected = <ramp-signal> <label-connected>
-format-disconnected = 
-
-label-connected = %essid%
-label-disconnected-foreground = ${colors.foreground-alt}
-
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-foreground = ${colors.foreground-alt}
+exec = "wpa_cli status | grep '^ssid' | awk --field-separator = '{ print $2 }'"
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
 
 [module/date]
 type = internal/date
@@ -159,8 +149,8 @@ ramp-volume-foreground = ${colors.foreground-alt}
 [module/battery]
 type = internal/battery
 battery = BAT0
-adapter = ADP1
-full-at = 95
+adapter = AC
+full-at = 100
 
 format-charging = <animation-charging> <label-charging>
 format-discharging = <ramp-capacity> <label-discharging>

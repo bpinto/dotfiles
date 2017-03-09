@@ -28,6 +28,7 @@ font pango:SF UI Text 10
 hide_edge_borders both
 
 # disable window titlebars
+for_window [class="Google-chrome"] border pixel 0
 for_window [class="mpv"] border pixel 0, fullscreen enable
 for_window [class="Slack"] border pixel 0
 for_window [class="Spotify"] border pixel 0
@@ -101,10 +102,10 @@ bindsym $cmd+grave focus mode_toggle
 ###########################################################
 
 # screenshot
-bindsym $cmd+Shift+3 exec maim "$HOME/Pictures/Screenshot\ from\ $(date +%F-%T).png"
+bindsym $cmd+Shift+3 exec maim "$HOME/Pictures/Screenshot from $(date +%F-%T).png"
 bindsym $cmd+$ctrl+Shift+3 exec maim /tmp/screenshot.png && copyq copy image/png - < /tmp/screenshot.png
 
-bindsym $cmd+Shift+4 exec maim -s "$HOME/Pictures/Screenshot\ from\ $(date +%F-%T).png"
+bindsym $cmd+Shift+4 exec maim -s "$HOME/Pictures/Screenshot from $(date +%F-%T).png"
 bindsym $cmd+$ctrl+Shift+4 exec maim -s /tmp/screenshot.png && copyq copy image/png - < /tmp/screenshot.png
 
 ###########################################################
@@ -179,14 +180,12 @@ mode "resize" {
 bindsym $alt+r mode "resize"
 
 # Set shut down, restart and locking features
-set $mode_system (l)ock, (r)eboot, (s)hutdown
+set $mode_system (l)ock, (r)eboot, (s)hutdown, (h)ibernate
 mode "$mode_system" {
-  bindsym l exec --no-startup-id /usr/local/bin/lock, mode "default"
+  bindsym h exec --no-startup-id systemctl hibernate, mode "default"
+  bindsym l exec --no-startup-id systemctl suspend, mode "default"
   bindsym r exec --no-startup-id systemctl reboot, mode "default"
   bindsym s exec --no-startup-id systemctl poweroff -i, mode "default"
-
-  #bindsym s exec --no-startup-id ~/.scripts/lock && systemctl suspend, mode "default"
-  #bindsym h exec --no-startup-id ~/.scripts/lock && systemctl hibernate, mode "default"
 
   # exit system mode: "Enter" or "Escape"
   bindsym Return mode "default"
@@ -250,4 +249,4 @@ exec_always --no-startup-id feh --bg-scale ~/.wallpaper.jpg
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 exec --no-startup-id copyq &
-exec --no-startup-id 1pass &
+#exec --no-startup-id 1pass &

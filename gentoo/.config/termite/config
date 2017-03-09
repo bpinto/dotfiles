@@ -1,6 +1,4 @@
 [options]
-font = SF Mono 11
-#font = Anonymous Pro For Powerline 12
 scrollback_lines = 10000
 
 [colors]
