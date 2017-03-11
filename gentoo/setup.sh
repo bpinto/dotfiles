@@ -117,6 +117,21 @@ sudo eselect fontconfig enable 50-user.conf
 ln -sf $PWD/.config/fontconfig/fonts.conf ~/.config/fontconfig/
 
 ###########################################################
+# Fish configuration
+###########################################################
+
+ln -sf $PWD/../.config/fish ~/.config/
+ln -sf $PWD/../.config/omf ~/.config/
+
+###########################################################
+# Git configuration
+###########################################################
+ln -sf $PWD/../.gitconfig ~/
+ln -sf $PWD/../.gitignore ~/
+ln -sf $PWD/../.gitmessage ~/
+ln -sf $PWD/../.git_template ~/
+
+###########################################################
 # i3 configuration
 ###########################################################
 

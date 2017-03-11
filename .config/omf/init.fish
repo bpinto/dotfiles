@@ -1,10 +1,6 @@
 # Set neovim as terminal editor
 set -gx EDITOR nvim
 
-# # http://stackoverflow.com/questions/2499794/how-can-i-fix-a-locale-warning-from-perl
-set -gx LC_CTYPE en_US.UTF-8
-set -gx LC_ALL en_US.UTF-8
-
 # Show folder name only on theme
 set -g theme_short_path yes
 
@@ -32,7 +28,3 @@ set -gx QT_SCALE_FACTOR 2
 #set -x LESS_TERMCAP_so (printf "\033[38;5;246m")
 #set -x LESS_TERMCAP_ue (printf "\033[0m")
 #set -x LESS_TERMCAP_us (printf "\033[04;33;146m")
-
-# golang
-set -gx GOPATH $HOME/gocode
-set PATH $GOPATH/bin $PATH

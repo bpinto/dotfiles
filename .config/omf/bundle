@@ -1,7 +1,1 @@
-package brew
-package fonts
-package foreign-env
-package rails
-package rbenv
-package z
 theme default

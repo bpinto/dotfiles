@@ -1,4 +1,5 @@
 com.googlecode.iterm2.plist
+.config/fish/fishd.localhost
 .config/omf/pkg/cliniko
 .config/nvim/.netrwhist
 .config/nvim/autoload
