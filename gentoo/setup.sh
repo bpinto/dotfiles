@@ -19,6 +19,9 @@ sudo cp $PWD/etc/modprobe.d/alsa.conf /etc/modprobe.d/
 # Grub configuration
 sudo ln -sf $PWD/etc/default/grub /etc/default/
 
+# Genkernel configuration
+sudo ln -sf $PWD/etc/genkernel.conf /etc/
+
 ###########################################################
 # Gentoo configuration
 ###########################################################
