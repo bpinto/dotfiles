@@ -23,3 +23,13 @@ set -gx QT_SCALE_FACTOR 2
 
 # Configure ssh-agent
 set -gx SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+# Use $HOME as root folder for directory navigation
+set -gx FZF_ALT_C_COMMAND "
+    command find -L $HOME -mindepth 1 \\( -path '*/\\.*' \
+    -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' \\) -prune \
+    -o -type d -print 2> /dev/null"
+
+# Do not ignore hidden files when filtering files (e.g. vim integration)
+set -gx FZF_DEFAULT_COMMAND 'ag --hidden --ignore .git -g ""'
+
