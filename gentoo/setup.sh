@@ -89,6 +89,14 @@ sudo cp $PWD/etc/systemd/system/powertop.service /etc/systemd/system/
 sudo systemctl enable powertop
 
 ###########################################################
+# SSH configuration
+###########################################################
+
+# SSH agent auto-start service
+mkdir -p ~/.config/systemd/user
+systemctl --user enable $PWD/.config/systemd/user/ssh-agent.service
+
+###########################################################
 # Wireless configuration
 ###########################################################
 

@@ -21,10 +21,5 @@ set -gx LESS_TERMCAP_us \e'[04;38;5;200m' # enter underline mode
 # HiDPI support for QT
 set -gx QT_SCALE_FACTOR 2
 
-#set -x LESS_TERMCAP_mb (printf "\033[01;31m")
-#set -x LESS_TERMCAP_md (printf "\033[01;31m")
-#set -x LESS_TERMCAP_me (printf "\033[0m")
-#set -x LESS_TERMCAP_se (printf "\033[0m")
-#set -x LESS_TERMCAP_so (printf "\033[38;5;246m")
-#set -x LESS_TERMCAP_ue (printf "\033[0m")
-#set -x LESS_TERMCAP_us (printf "\033[04;33;146m")
+# Configure ssh-agent
+set -gx SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent.socket"
