@@ -35,9 +35,11 @@ sys-kernel/gentoo-sources
 sys-kernel/linux-firmware
 sys-power/powertop
 sys-process/htop
+www-client/firefox
 www-client/google-chrome
 x11-apps/copyq
 x11-apps/xbacklight
+x11-apps/xhost
 x11-apps/xrandr
 x11-base/xorg-drivers
 x11-base/xorg-server

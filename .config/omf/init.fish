@@ -33,3 +33,6 @@ set -gx FZF_ALT_C_COMMAND "
 # Do not ignore hidden files when filtering files (e.g. vim integration)
 set -gx FZF_DEFAULT_COMMAND 'ag --hidden --ignore .git -g ""'
 
+# Add /usr/local/bin to PATH
+set PATH /usr/local/bin $PATH
+

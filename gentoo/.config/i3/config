@@ -209,6 +209,7 @@ set $workspace9 "9 "
 set $workspace10 "10 "
 
 assign [class="Google-chrome"] $workspace1
+assign [class="Firefox"] $workspace7
 assign [class="mpv"] $workspace5
 assign [class="Slack"] $workspace9
 # Temporary workaround for Spotify bug: https://github.com/i3/i3/issues/2060

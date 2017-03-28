@@ -193,6 +193,18 @@ mkdir -p ~/.config/systemd/user/redshift.service.d
 ln -sf $PWD/.config/systemd/user/redshift.service.d/custom.conf ~/.config/systemd/user/redshift.service.d/
 
 ###########################################################
+# Sandbox
+###########################################################
+
+if ! id -u browser > /dev/null 2>&1; then
+  # Sandbox Firefox
+  sudo ./sandbox_user.sh www-client/firefox browser /home/browser $user
+
+  # Firefox configured to run in sandbox mode
+  sudo ln -sf $PWD/usr/local/bin/firefox /usr/local/bin/
+fi
+
+###########################################################
 # Termite configuration
 ###########################################################
 
