@@ -18,9 +18,6 @@ set -gx LESS_TERMCAP_se \e'[0m' # leave standout mode
 set -gx LESS_TERMCAP_ue \e'[0m' # leave underline mode
 set -gx LESS_TERMCAP_us \e'[04;38;5;200m' # enter underline mode
 
-# HiDPI support for QT
-set -gx QT_SCALE_FACTOR 2
-
 # Configure ssh-agent
 set -gx SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent.socket"
 
