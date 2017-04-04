@@ -97,6 +97,13 @@ mkdir -p ~/.config/systemd/user
 systemctl --user enable $PWD/.config/systemd/user/ssh-agent.service
 
 ###########################################################
+# Time configuration
+###########################################################
+
+sudo timedatectl set-timezone Europe/Lisbon
+sudo timedatectl set-ntp true
+
+###########################################################
 # Wireless configuration
 ###########################################################
 
