@@ -28,8 +28,7 @@ net-wireless/wpa_supplicant
 sys-apps/the_silver_searcher
 sys-apps/yarn
 sys-boot/grub:2
-sys-devel/gcc:4.9.4
-sys-devel/gcc:5.4.0
+sys-devel/gcc
 sys-kernel/genkernel-next
 sys-kernel/gentoo-sources
 sys-kernel/linux-firmware
