@@ -164,7 +164,12 @@ ln -sf $PWD/.config/polybar ~/.config/
 ###########################################################
 
 # Configuration files
-#sudo ln -sf $PWD/etc/minidlna.conf /etc/
+sudo ln -sf $PWD/etc/minidlna.conf /etc/
+sudo ln -sf $PWD/etc/conf.d/minidlna /etc/conf.d/
+
+# Fix installation
+sudo mkdir -p /run/minidlna
+sudo chown -R minidlna:minidlna /run/minidlna
 
 ###########################################################
 # MPV configuration
