@@ -218,6 +218,13 @@ if ! id -u browser > /dev/null 2>&1; then
 fi
 
 ###########################################################
+# Slack configuration
+###########################################################
+
+# Restart slack when it freezes
+sudo ln -sf $PWD/usr/local/bin/slack /usr/local/bin/
+
+###########################################################
 # Spotify configuration
 ###########################################################
 
