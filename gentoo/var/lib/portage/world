@@ -21,6 +21,7 @@ media-sound/spotify
 media-video/mpv
 net-im/slack-bin
 net-irc/weechat
+net-misc/httpie
 net-misc/minidlna
 net-misc/youtube-dl
 net-news/newsbeuter
