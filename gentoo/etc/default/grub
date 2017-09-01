@@ -73,7 +73,7 @@ GRUB_TIMEOUT=2
 #GRUB_INIT_TUNE="60 800 1"
 
 GRUB_ENABLE_CRYPTODISK=y
-GRUB_CMDLINE_LINUX="init=/usr/lib/systemd/systemd crypt_root=UUID=d3db91b6-0fc8-40d5-99ce-8919a71d2f4d resume=/dev/mapper/vg1-swap root_key=disk.key dolvm quiet systemd.show_status=1 net.ifnames=0 ipv6.disable=1 i915.enable_fbc=1 i915.enable_psr=1 i915.disable_power_well=0 acpi_rev_override=1"
+GRUB_CMDLINE_LINUX="init=/usr/lib/systemd/systemd crypt_root=UUID=d3db91b6-0fc8-40d5-99ce-8919a71d2f4d resume=/dev/mapper/vg1-swap root_key=disk.key dolvm quiet systemd.show_status=1 net.ifnames=0 ipv6.disable=1 i915.enable_psr=1 i915.disable_power_well=0 acpi_rev_override=1"
 
 # Use a custom font, converted using grub-mkfont utility
 # grub2-mkfont -s 32 -o /boot/grub/fonts/terminus_32.pf2 /usr/share/fonts/terminus/ter-x32b.pcf.gz
