@@ -16,7 +16,7 @@ rofi.bw: 0
 rofi.eh: 2
 rofi.fake-background: background
 rofi.fake-transparency: true
-rofi.font: San Francisco Display 34
+rofi.font: SF Pro Display 34
 rofi.lines: 3
 rofi.matching: fuzzy
 rofi.opacity: 85

@@ -1,4 +1,5 @@
 [options]
+font = SF Mono 10
 scrollback_lines = 10000
 
 [colors]

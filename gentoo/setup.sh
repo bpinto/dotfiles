@@ -65,8 +65,13 @@ sudo cp $PWD/etc/bluetooth/main.conf /etc/bluetooth/
 # Font configuration
 ###########################################################
 
+ln -sf $PWD/.config/fontconfig ~/.config/
+
 # Configure console font
 sudo cp $PWD/etc/vconsole.conf /etc/
+
+# Copy San Francisco font
+sudo cp -rf $PWD/usr/share/fonts/system-san-francisco /usr/share/fonts/
 
 ###########################################################
 # Power management configuration
