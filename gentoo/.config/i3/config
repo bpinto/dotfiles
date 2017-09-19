@@ -108,6 +108,8 @@ bindsym $cmd+$ctrl+Shift+3 exec maim /tmp/screenshot.png && copyq copy image/png
 bindsym $cmd+Shift+4 exec maim -s "$HOME/Pictures/Screenshot from $(date +%F-%T).png"
 bindsym $cmd+$ctrl+Shift+4 exec maim -s /tmp/screenshot.png && copyq copy image/png - < /tmp/screenshot.png
 
+bindsym Print exec maim -s "$HOME/Pictures/Screenshot from $(date +%F-%T).png"
+
 ###########################################################
 # EXTRA
 ###########################################################
