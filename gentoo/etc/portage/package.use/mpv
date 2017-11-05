@@ -1,1 +1,2 @@
 media-video/ffmpeg openssl
+media-libs/libsdl2 gles

@@ -1,0 +1,13 @@
+# Gentoo-branded splash screen
+gnome-base/gnome-session branding
+
+# Required by gnome
+gnome-base/gnome-control-center networkmanager
+media-libs/clutter egl
+media-libs/cogl gles2
+media-libs/gegl jpeg2k raw
+media-libs/gst-plugins-bad egl
+media-libs/mesa gles2
+net-fs/samba client
+sys-libs/tdb python
+sys-libs/tevent python

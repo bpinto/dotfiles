@@ -13,9 +13,6 @@ sudo -v
 # remember to copy the config file here after changing it.
 sudo cp $PWD/usr/src/linux/.config /usr/src/linux/
 
-# ALSA (sound) configuration
-sudo cp $PWD/etc/modprobe.d/alsa.conf /etc/modprobe.d/
-
 # Grub configuration
 sudo ln -sf $PWD/etc/default/grub /etc/default/
 
@@ -52,16 +49,6 @@ sudo ln -sf $PWD/usr/local/portage /usr/local/
 sudo ln -sf $PWD/etc/portage/repos.conf /etc/portage/
 
 ###########################################################
-# Bluetooth configuration
-###########################################################
-
-# Configure pulseaudio
-sudo ln -sf $PWD/etc/pulse/default.pa /etc/pulse/
-
-# Configure bluetooth
-sudo cp $PWD/etc/bluetooth/main.conf /etc/bluetooth/
-
-###########################################################
 # Font configuration
 ###########################################################
 
@@ -78,12 +65,12 @@ sudo cp -rf $PWD/usr/share/fonts/system-san-francisco /usr/share/fonts/
 ###########################################################
 
 # Copy script
-sudo ln -sf $PWD/usr/local/bin/lock /usr/local/bin/
-sudo ln -sf $PWD/usr/local/bin/manual-powertop /usr/local/bin/
+#sudo ln -sf $PWD/usr/local/bin/lock /usr/local/bin/
+#sudo ln -sf $PWD/usr/local/bin/manual-powertop /usr/local/bin/
 
 # Autolock service
-sudo cp $PWD/etc/systemd/system/auto-lock@.service /etc/systemd/system/
-sudo systemctl enable auto-lock@$user
+#sudo cp $PWD/etc/systemd/system/auto-lock@.service /etc/systemd/system/
+#sudo systemctl enable auto-lock@$user
 
 # Delayed hibernation service
 sudo cp $PWD/etc/systemd/system/suspend.target /etc/systemd/system/
@@ -91,8 +78,8 @@ sudo cp $PWD/etc/systemd/system/suspend-to-hibernate.service /etc/systemd/system
 sudo systemctl enable suspend-to-hibernate
 
 # Powertop service
-sudo cp $PWD/etc/systemd/system/powertop.service /etc/systemd/system/
-sudo systemctl enable powertop
+#sudo cp $PWD/etc/systemd/system/powertop.service /etc/systemd/system/
+#sudo systemctl enable powertop
 
 ###########################################################
 # SSH configuration
@@ -108,19 +95,6 @@ systemctl --user enable $PWD/.config/systemd/user/ssh-agent.service
 
 sudo timedatectl set-timezone Europe/Lisbon
 sudo timedatectl set-ntp true
-
-###########################################################
-# Wireless configuration
-###########################################################
-
-# Enable services
-sudo systemctl enable systemd-networkd
-sudo systemctl enable systemd-resolved
-sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
-
-# Enable wifi
-sudo cp $PWD/etc/systemd/network/wireless.network /etc/systemd/network/
-sudo systemctl enable wpa_supplicant@wlan0 # Must be configured at /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
 
 ###########################################################
 # X configuration
@@ -169,18 +143,6 @@ ln -sf $PWD/.config/i3 ~/.config/
 
 # Polybar configuration
 ln -sf $PWD/.config/polybar ~/.config/
-
-###########################################################
-# Minidlna configuration
-###########################################################
-
-# Configuration files
-sudo ln -sf $PWD/etc/minidlna.conf /etc/
-sudo ln -sf $PWD/etc/conf.d/minidlna /etc/conf.d/
-
-# Fix installation
-sudo mkdir -p /run/minidlna
-sudo chown -R minidlna:minidlna /run/minidlna
 
 ###########################################################
 # MPV configuration
@@ -238,18 +200,11 @@ if ! id -u browser > /dev/null 2>&1; then
 fi
 
 ###########################################################
-# Slack configuration
-###########################################################
-
-# Restart slack when it freezes
-sudo ln -sf $PWD/usr/local/bin/slack /usr/local/bin/
-
-###########################################################
 # Spotify configuration
 ###########################################################
 
 # HiDPI support
-sudo ln -sf $PWD/usr/local/bin/spotify /usr/local/bin/
+#sudo ln -sf $PWD/usr/local/bin/spotify /usr/local/bin/
 
 ###########################################################
 # Termite configuration
