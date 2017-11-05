@@ -195,6 +195,15 @@ ln -sf $PWD/.config/mpv/mpv.conf ~/.config/mpv/
 
 ln -sf $PWD/../.config/nvim ~/.config/
 
+# Create backup folder
+mkdir -p ~/.local/share/nvim/backup
+
+# Install vim-plug
+if [[ ! -e ~/.local/share/nvim/site/autoload/plug.vim ]]; then
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+
 ###########################################################
 # Newsbeuter configuration
 ###########################################################
