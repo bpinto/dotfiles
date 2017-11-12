@@ -30,7 +30,7 @@ net-misc/youtube-dl
 net-news/newsbeuter
 net-vpn/wireguard
 net-wireless/wpa_supplicant
-sys-apps/the_silver_searcher
+sys-apps/ripgrep
 sys-apps/yarn
 sys-boot/grub
 sys-devel/gcc
