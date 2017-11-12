@@ -25,6 +25,7 @@ net-im/slack-bin
 net-irc/weechat
 net-misc/httpie
 net-misc/networkmanager
+net-misc/wuzz
 net-misc/youtube-dl
 net-news/newsbeuter
 net-vpn/wireguard
