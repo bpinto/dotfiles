@@ -15,6 +15,7 @@ dev-util/ctags
 dev-vcs/diff-so-fancy
 dev-vcs/git
 gnome-base/gnome
+media-fonts/emojione-color-font
 media-fonts/fontawesome
 media-fonts/noto
 media-fonts/noto-cjk
