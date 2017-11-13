@@ -13,7 +13,6 @@ Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'kana/vim-textobj-user'
 Plug 'kassio/neoterm'
 Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'neomake/neomake'
 Plug 'rhysd/github-complete.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'sheerun/vim-polyglot'
@@ -27,6 +26,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'w0rp/ale'
 
 call plug#end()
 
@@ -435,26 +435,13 @@ let g:airline_theme = 'deep_space'
 " Enable usage of patched powerline font symbols
 let g:airline_powerline_fonts = 1
 
-" Neomake
-" Run NeoMake on read and write operations
-autocmd! BufReadPost,BufWritePost * Neomake
-
-let g:neomake_warning_sign = {
-  \ 'text': 'W',
-  \ 'texthl': 'WarningMsg',
-  \ }
-let g:neomake_error_sign = {
-  \ 'text': 'E',
-  \ 'texthl': 'ErrorMsg',
-  \ }
-
 " Neoterm
 nnoremap <silent> <leader>a :call neoterm#test#run('all')<cr>
 nnoremap <silent> <leader>t :call neoterm#test#run('file')<cr>
 nnoremap <silent> <leader>s :call neoterm#test#run('current')<cr>
 nnoremap <silent> <leader>l :call neoterm#test#rerun()<cr>
 " Vim requires `set shell=bash`, but neoterm should run my real shell
-let g:neoterm_shell = "elvish"
+let g:neoterm_shell = "fish"
 
 " Easy Plugin
 " Start interactive EasyAlign in visual mode (e.g. vipga)
