@@ -66,7 +66,6 @@ sudo cp -rf $PWD/usr/share/fonts/system-san-francisco /usr/share/fonts/
 
 # Copy script
 #sudo ln -sf $PWD/usr/local/bin/lock /usr/local/bin/
-#sudo ln -sf $PWD/usr/local/bin/manual-powertop /usr/local/bin/
 
 # Autolock service
 #sudo cp $PWD/etc/systemd/system/auto-lock@.service /etc/systemd/system/
@@ -78,8 +77,8 @@ sudo cp $PWD/etc/systemd/system/suspend-to-hibernate.service /etc/systemd/system
 sudo systemctl enable suspend-to-hibernate
 
 # Powertop service
-#sudo cp $PWD/etc/systemd/system/powertop.service /etc/systemd/system/
-#sudo systemctl enable powertop
+sudo cp $PWD/etc/systemd/system/powertop.service /etc/systemd/system/
+sudo systemctl enable powertop
 
 ###########################################################
 # SSH configuration
