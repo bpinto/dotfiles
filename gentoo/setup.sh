@@ -149,6 +149,7 @@ ln -sf $PWD/.config/polybar ~/.config/
 
 # Configuration files
 ln -sf $PWD/.config/mpv/mpv.conf ~/.config/mpv/
+ln -sf $PWD/.config/mpv/scripts/ ~/.config/mpv/
 
 ###########################################################
 # Neovim configuration

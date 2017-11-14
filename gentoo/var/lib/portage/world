@@ -22,6 +22,7 @@ media-fonts/noto-cjk
 media-fonts/terminus-font
 media-sound/spotify
 media-video/mpv
+media-video/subliminal
 net-im/slack-bin
 net-irc/weechat
 net-misc/httpie
