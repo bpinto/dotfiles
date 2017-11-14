@@ -6,21 +6,33 @@
   email      = brunoferreirapinto@gmail.com
   signingkey = brunoferreirapinto@gmail.com
 [alias]
-  amend = commit --amend -C HEAD
-  ap    = add -p
-  ci    = commit
-  co    = checkout
-  count = shortlog -sn
-  ctags = !.git/hooks/ctags
-  ds    = diff --staged
-  lg    = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  ll    = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --decorate --numstat
-  lga   = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  lla   = log --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --decorate --numstat
-  patch = --no-pager diff --no-color
-  pf    = push --force-with-lease
-  pr    = pull --rebase
-  st    = status -sb
+  co           = checkout
+  ctags        = !.git/hooks/ctags
+  ds           = diff --staged
+  lg           = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  ll           = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --decorate --numstat
+  lga          = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  lla          = log --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --decorate --numstat
+  patch        = --no-pager diff --no-color
+  pf           = push --force-with-lease
+  pr           = pull --rebase
+  st           = status -sb
+
+  # Amend the currently staged files to the latest commit
+  amend        = commit --amend -C HEAD
+
+  # List contributors with number of commits
+  contributors = shortlog --summary --numbered
+
+  # Credit an author on the latest commit
+  credit       = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
+
+  # Remove branches that have already been merged with master
+  # a.k.a. ‘delete merged’
+  dm           = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d; git remote -v update -p"
+
+  # Interactive rebase with the given number of latest commits
+  reb          = "!r() { git rebase -i --autosquash HEAD~$1; }; r"
 [apply]
   whitespace = nowarn
 [color]
@@ -43,8 +55,12 @@
 [core]
   editor       = nvim
   excludesfile = ~/.gitignore
-  whitespace   = tab-in-indent,tabwidth=2
   pager        = diff-so-fancy | less --tabs=4 -RFX
+
+  # Treat spaces before tabs and all kinds of trailing whitespace as an error
+  # [default] trailing-space: looks for spaces at the end of a line
+  # [default] space-before-tab: looks for spaces before tabs at the beginning of a line
+  whitespace = space-before-tab,-indent-with-non-tab,trailing-space
 [difftool]
   prompt = false
 [github]
@@ -57,8 +73,5 @@
   diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
   show = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
 [push]
-  # See `git help config` (search for push.default)
-  # for more information on different options of the below setting.
-  #
   # Setting to git 2.0 default to surpress warning message
   default = simple
