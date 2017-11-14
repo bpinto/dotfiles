@@ -423,8 +423,8 @@ augroup highlight
   autocmd CmdwinLeave * :call MapCR()
 
   " Highlight characters longer than 100 characters
-  autocmd BufEnter * highlight OverLength ctermfg=8 ctermbg=10 guifg=#585858 guibg=#282828
-  autocmd BufEnter * match OverLength /\%101v.*/
+  autocmd BufEnter * highlight OverLength ctermbg=darkgrey guibg=#111111
+  autocmd BufEnter * match OverLength /\%>100v.\+/
 augroup END
 
 augroup autosave
