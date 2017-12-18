@@ -13,7 +13,7 @@
   ll           = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --decorate --numstat
   lga          = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   lla          = log --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --decorate --numstat
-  patch        = --no-pager diff --no-color
+  patch        = diff --no-color
   pf           = push --force-with-lease
   pr           = pull --rebase
   st           = status -sb
@@ -71,6 +71,7 @@
   templatedir = ~/.git_template
 [pager]
   diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
+  patch = cat
   show = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
 [push]
   # Setting to git 2.0 default to surpress warning message
