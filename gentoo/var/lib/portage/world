@@ -29,7 +29,7 @@ net-misc/httpie
 net-misc/networkmanager
 net-misc/wuzz
 net-misc/youtube-dl
-net-news/newsbeuter
+net-news/newsboat
 net-vpn/wireguard
 net-wireless/wpa_supplicant
 sys-apps/ripgrep

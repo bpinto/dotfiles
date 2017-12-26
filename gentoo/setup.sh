@@ -167,11 +167,11 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 fi
 
 ###########################################################
-# Newsbeuter configuration
+# Newboat configuration
 ###########################################################
 
 # Configuration files
-ln -sf $PWD/.config/newsbeuter ~/.config/
+ln -sf $PWD/.config/newsboat ~/.config/
 
 ###########################################################
 # Redshift configuration
