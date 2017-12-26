@@ -426,6 +426,10 @@ let g:fzf_action = {
 " <C-p> or <C-t> to search files
 nnoremap <silent> <C-t> :FZF -m<cr>
 nnoremap <silent> <C-p> :FZF -m<cr>
+" Hide statusline
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " NerdCommenter
 " Menu remapping
