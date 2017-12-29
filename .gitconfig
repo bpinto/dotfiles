@@ -19,20 +19,23 @@
   st           = status -sb
 
   # Amend the currently staged files to the latest commit
-  amend        = commit --amend -C HEAD
+  amend = commit --amend -C HEAD
 
   # List contributors with number of commits
   contributors = shortlog --summary --numbered
 
   # Credit an author on the latest commit
-  credit       = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
+  credit = "!git shortlog --email --numbered --summary | fzf --reverse --delimiter='\t' --bind 'enter:execute(git commit --amend --author \"{+2}\" -C HEAD)+abort'"
 
   # Remove branches that have already been merged with master
   # a.k.a. ‘delete merged’
-  dm           = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d; git remote -v update -p"
+  dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d; git remote -v update -p"
 
-  # Interactive rebase with the given number of latest commits
-  reb          = "!r() { git rebase -i --autosquash HEAD~$1; }; r"
+  # Interactive fixup
+  fixup = "!git --no-pager lg | fzf --ansi --delimiter='[*-]' --multi --no-sort --preview 'echo {+2} | sed 's/[^a-zA-Z0-9]//g' | xargs -r git show -m' --reverse --bind 'enter:execute(echo {+2} | sed 's/[^a-zA-Z0-9]//g' | xargs -r git commit --fixup)+abort'"
+
+  # Interactive rebase
+  reb = "!git --no-pager lga | fzf --ansi --delimiter='[*-]' --multi --no-sort --preview 'echo {+2} | sed 's/[^a-zA-Z0-9]//g' | xargs -r git show -m' --reverse --bind 'enter:execute(echo {+2} | sed 's/[^a-zA-Z0-9]//g' | xargs -r git rebase -i --autosquash)+abort'"
 [apply]
   whitespace = nowarn
 [color]
@@ -70,8 +73,19 @@
 [init]
   templatedir = ~/.git_template
 [pager]
+  # Easy commit navigation with initial search per file
   diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
+
+  # Filter git log results with FZF and display commit on fzf preview box
+  lg = diff-so-fancy | fzf --ansi --delimiter='[*-]' --multi --no-sort --preview 'echo {+2} | sed 's/[^a-zA-Z0-9]//g' | xargs -r git show -m' --reverse
+
+  # Filter git log results with FZF and display commit on fzf preview box
+  lga = diff-so-fancy | fzf --ansi --delimiter='[*-]' --multi --no-sort --preview 'echo {+2} | sed 's/[^a-zA-Z0-9]//g' | xargs -r git show -m' --reverse
+
+  # Bare commit
   patch = cat
+
+  # Easy commit navigation with initial search per file
   show = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
 [push]
   # Setting to git 2.0 default to surpress warning message
