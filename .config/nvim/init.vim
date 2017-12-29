@@ -281,10 +281,9 @@ nnoremap <leader>EF :vsplit ~/.config/fish/config.fish<cr>
 " Edit tmux config file
 nnoremap <leader>ET :vsplit ~/.tmux.conf<cr>
 
-" Replace grep with silver search
-cnoreabbrev ag grep
-if executable("ag")
-  set grepprg=ag\ --nogroup\ --nocolor\ --column
+" Replace grep with ripgrep
+if executable("rg")
+  set grepprg=rg\ --vimgrep
 endif
 
 " Auto open the search result
