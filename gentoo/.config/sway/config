@@ -23,20 +23,20 @@ output eDP-1 scale 2
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:FontAwesome 8
-font pango:SF Pro Text 10
+#font pango:FontAwesome 8
+#font pango:SF Pro Text 10
 
 # hide borders
-hide_edge_borders both
+#hide_edge_borders both
 
 # disable window titlebars
-for_window [class="Google-chrome"] border pixel 0
-for_window [class="mpv"] border pixel 0, fullscreen enable
-for_window [class="Slack"] border pixel 0
-for_window [class="Spotify"] border pixel 0
+#for_window [class="Google-chrome"] border pixel 0
+#for_window [class="mpv"] border pixel 0, fullscreen enable
+#for_window [class="Slack"] border pixel 0
+#for_window [class="Spotify"] border pixel 0
 
  #Add a border among termite windows
-for_window [class="Termite"] border pixel 1
+#for_window [class="Termite"] border pixel 1
 
 set $bg-color            #2f343f
 set $inactive-bg-color   #2f343f
@@ -46,10 +46,10 @@ set $urgent-bg-color     #E53935
 
 # window colors
 #                       border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $text-color          #00ff00
-client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
-client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
-client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
+#client.focused          $bg-color           $bg-color          $text-color          #00ff00
+#client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
+#client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
+#client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
 
 ###########################################################
 # CONVENIENCE MAPPINGS
@@ -214,13 +214,13 @@ set $workspace8 "8 "
 set $workspace9 "9 "
 set $workspace10 "10 "
 
-assign [class="Google-chrome"] $workspace1
-assign [class="Firefox"] $workspace7
-assign [class="mpv"] $workspace5
-assign [class="Slack"] $workspace9
+#assign [class="Google-chrome"] $workspace1
+#assign [class="Firefox"] $workspace7
+#assign [class="mpv"] $workspace5
+#assign [class="Slack"] $workspace9
 # Temporary workaround for Spotify bug: https://github.com/i3/i3/issues/2060
 #assign [class="Spotify"] $workspace10
-for_window [class="Spotify"] move to workspace $workspace10
+#for_window [class="Spotify"] move to workspace $workspace10
 
 # switch to workspace
 bindsym $alt+1 workspace $workspace1
@@ -266,7 +266,7 @@ bindsym $cmd+Shift+Tab move container to workspace back_and_forth
 # Touchpad configuration
 input "2:7:SynPS/2_Synaptics_TouchPad" {
   accel_profile flat
-  accel_speed 1.0
+  #accel_speed 1.0
   click_method clickfinger
   dwt enabled
   natural_scroll enabled
@@ -284,6 +284,6 @@ bar {
     colors {
         statusline #ffffff
         background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
+        inactive_workspace #323232 #323232 #5c5c5c
     }
 }
