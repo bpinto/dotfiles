@@ -7,7 +7,6 @@ call plug#begin('~/.config/nvim/plugged')
 " PLUGINS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'airblade/vim-gitgutter'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'ervandew/supertab'
 Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'kana/vim-textobj-user'
@@ -231,6 +230,12 @@ noremap j gj
 noremap k gk
 noremap gj j
 noremap gk k
+
+" Better navigation between windows
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 " Make Y consistent with C and D.
 nnoremap Y y$
