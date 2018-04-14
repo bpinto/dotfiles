@@ -244,7 +244,7 @@ nnoremap Y y$
 nmap <silent> <leader>cf <ESC>/\v^[<=>]{7}( .*\|$)<CR>
 
 " Shorcut for setting a pry breakpoint
-iab xpry require 'pry'; binding.pry
+iabbrev xpry require 'pry'; binding.pry<Esc>F%s<c-o>:call getchar()<CR>
 
 " Convert ruby 1.8 hash into ruby 1.9
 nnoremap <leader>h :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<CR>
