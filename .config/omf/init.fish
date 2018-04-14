@@ -30,6 +30,5 @@ set -gx FZF_ALT_C_COMMAND "
 # Do not ignore hidden files when filtering files (e.g. vim integration)
 set -gx FZF_DEFAULT_COMMAND 'rg --files'
 
-# Add /usr/local/bin to PATH
-set PATH /usr/local/bin $PATH
-
+# Configure PATH
+set PATH ~/.gem/ruby/2.3.0/bin /usr/local/bin $PATH

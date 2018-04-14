@@ -442,6 +442,8 @@ imap <leader>/ <Esc><plug>NERDCommenterToggle<CR>i
 let g:airline_theme = 'deep_space'
 " Enable usage of patched powerline font symbols
 let g:airline_powerline_fonts = 1
+" Enable ALE integration
+let g:airline#extensions#ale#enabled = 1
 
 " Neoterm
 nnoremap <silent> <leader>a :call neoterm#test#run('all')<cr>
@@ -460,3 +462,8 @@ nmap ga <Plug>(EasyAlign)
 " Supertab
 " Navigate the completion menu from top to bottom
 let g:SuperTabDefaultCompletionType = "<c-n>"
+
+" ALE
+" <M-j> or <M-k> to move between errors
+nmap <silent> <M-k> <Plug>(ale_previous_wrap)
+nmap <silent> <M-j> <Plug>(ale_next_wrap)
