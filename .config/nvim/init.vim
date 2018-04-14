@@ -17,7 +17,6 @@ Plug 'rhysd/github-complete.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'sheerun/vim-polyglot'
 Plug 'slm-lang/vim-slm'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
@@ -457,10 +456,3 @@ nmap ga <Plug>(EasyAlign)
 " Supertab
 " Navigate the completion menu from top to bottom
 let g:SuperTabDefaultCompletionType = "<c-n>"
-
-" Multiple cursor
-" This allows one to
-" a) search for the keyword using *
-" b) turn search results into cursors with Alt-j.
-nnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
-vnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
