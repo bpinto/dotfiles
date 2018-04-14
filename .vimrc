@@ -11,7 +11,6 @@ Plug 'ervandew/supertab'
 Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'rhysd/github-complete.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/syntastic'
 Plug 'sheerun/vim-polyglot'
@@ -22,6 +21,7 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rake'
+Plug 'tpope/vim-rhubarb'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -444,7 +444,7 @@ augroup config-github-complete
   autocmd!
 
   " Github completion on git commit messages
-  autocmd FileType gitcommit setl omnifunc=github_complete#complete | call SuperTabChain(&omnifunc, "<c-p>")
+  autocmd FileType gitcommit setl omnifunc=rhubarb#omnifunc | call SuperTabChain(&omnifunc, "<c-p>")
 augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -524,6 +524,3 @@ nmap ga <Plug>(EasyAlign)
 " Supertab
 " Navigate the completion menu from top to bottom
 let g:SuperTabDefaultCompletionType = "<c-n>"
-
-" GitHub Complete
-let g:github_complete_api_token = $GITHUB_API_TOKEN

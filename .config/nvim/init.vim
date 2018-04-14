@@ -13,7 +13,6 @@ Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'kana/vim-textobj-user'
 Plug 'kassio/neoterm'
 Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'rhysd/github-complete.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'sheerun/vim-polyglot'
 Plug 'slm-lang/vim-slm'
@@ -403,7 +402,7 @@ augroup config-github-complete
   autocmd!
 
   " Github completion on git commit messages
-  autocmd FileType gitcommit setl omnifunc=github_complete#complete | call SuperTabChain(&omnifunc, "<c-p>")
+  autocmd FileType gitcommit setl omnifunc=rhubarb#omnifunc | call SuperTabChain(&omnifunc, "<c-p>")
 augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
