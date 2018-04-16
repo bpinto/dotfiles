@@ -286,4 +286,5 @@ bar {
         background #323232
         inactive_workspace #323232 #323232 #5c5c5c
     }
+    status_command ~/.config/sway/status.sh
 }
