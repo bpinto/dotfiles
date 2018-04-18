@@ -40,6 +40,7 @@ sys-fs/fuse-exfat
 sys-kernel/genkernel-next
 sys-kernel/gentoo-sources
 sys-kernel/linux-firmware
+sys-power/brightnessctl
 sys-power/powertop
 sys-process/htop
 www-client/firefox
