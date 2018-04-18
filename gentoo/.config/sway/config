@@ -59,7 +59,13 @@ set $urgent-bg-color     #E53935
 bindsym $cmd+q kill
 
 # start program launcher
-#bindsym $cmd+space exec rofi -show run
+bindsym $cmd+space exec bemenu-run \
+          --ignorecase --prompt "launch:" \
+          --fn "DejaVu Sans Mono 8" -l 10 \
+          --tf '#bcbcbc' --tb '#444444' \
+          --nf '#bcbcbc' --nb '#262626' \
+          --hf '#bcbcbc' --hb '#444444' \
+          --scf '#bcbcbc' --scb '#444444'
 
 # change focus
 bindsym $alt+h focus left
