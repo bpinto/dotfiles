@@ -279,6 +279,15 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
   tap enabled
 }
 
+# Keyboard configuration
+input "1:1:AT_Translated_Set_2_keyboard" {
+  repeat_delay 250
+  repeat_rate 50
+  xkb_layout "us,us"
+  xkb_variant ",intl"
+  xkb_options "caps:escape,grp:alt_space_toggle"
+}
+
 ###########################################################
 # STATUS BAR CONFIGURATION
 ###########################################################
