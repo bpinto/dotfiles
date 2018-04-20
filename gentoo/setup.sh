@@ -65,11 +65,11 @@ sudo cp -rf $PWD/usr/share/fonts/system-san-francisco /usr/share/fonts/
 ###########################################################
 
 # Copy script
-#sudo ln -sf $PWD/usr/local/bin/lock /usr/local/bin/
+sudo ln -sf $PWD/usr/local/bin/lock /usr/local/bin/
 
 # Autolock service
-#sudo cp $PWD/etc/systemd/system/auto-lock@.service /etc/systemd/system/
-#sudo systemctl enable auto-lock@$user
+sudo cp $PWD/etc/systemd/system/auto-lock@.service /etc/systemd/system/
+sudo systemctl enable auto-lock@$user
 
 # Delayed hibernation service
 sudo cp $PWD/etc/systemd/system/suspend.target /etc/systemd/system/
