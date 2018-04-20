@@ -43,7 +43,7 @@ sudo ln -sf $PWD/etc/portage/env /etc/portage/
 sudo ln -sf $PWD/usr/local/portage /usr/local/
 
 # Custom patches
-#sudo ln -sf $PWD/etc/portage/patches /etc/portage/
+sudo ln -sf $PWD/etc/portage/patches /etc/portage/
 
 # Overlay configuration
 sudo ln -sf $PWD/etc/portage/repos.conf /etc/portage/
