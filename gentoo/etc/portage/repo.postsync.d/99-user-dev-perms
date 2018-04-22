@@ -1,0 +1,13 @@
+#!/bin/bash
+repository_name=$1
+repository_path=$3
+user_name=bpinto
+
+if [ "$repository_name" != "gentoo" ]; then
+  echo ">>> Adding user $user_name permission to modify repository $repository_name"
+
+  find $repository_path/ -type d -exec setfacl -m u:$user_name:rwx {} \;
+  find $repository_path/ -type f -exec setfacl -m u:$user_name:rw {} \;
+  find $repository_path/.git -type d -exec setfacl -m u:$user_name:rwx {} \;
+  find $repository_path/.git -type f -exec setfacl -m u:$user_name:rw {} \;
+fi

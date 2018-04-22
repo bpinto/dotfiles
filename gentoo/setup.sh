@@ -48,6 +48,9 @@ sudo ln -sf $PWD/etc/portage/patches /etc/portage/
 # Overlay configuration
 sudo ln -sf $PWD/etc/portage/repos.conf /etc/portage/
 
+# Hooks
+sudo ln -sf $PWD/etc/portage/repo.postsync.d /etc/portage/
+
 ###########################################################
 # Font configuration
 ###########################################################
