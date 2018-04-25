@@ -30,13 +30,13 @@ output eDP-1 scale 2
 #hide_edge_borders both
 
 # disable window titlebars
-#for_window [class="Google-chrome"] border pixel 0
-#for_window [class="mpv"] border pixel 0, fullscreen enable
-#for_window [class="Slack"] border pixel 0
-#for_window [class="Spotify"] border pixel 0
+for_window [class="Google-chrome"] border pixel 0
+for_window [class="mpv"] border pixel 0, fullscreen enable
+for_window [class="Slack"] border pixel 0
+for_window [class="Spotify"] border pixel 0
 
  #Add a border among termite windows
-#for_window [class="Termite"] border pixel 1
+for_window [title="termite"] border pixel 1
 
 set $bg-color            #2f343f
 set $inactive-bg-color   #2f343f
@@ -209,24 +209,24 @@ bindsym $alt+x mode "$mode_system"
 ###########################################################
 # WORKSPACES
 ###########################################################
-set $workspace1 "1 "
-set $workspace2 "2 "
-set $workspace3 "3 "
-set $workspace4 "4 "
-set $workspace5 "5 "
-set $workspace6 "6 "
-set $workspace7 "7 "
-set $workspace8 "8 "
-set $workspace9 "9 "
-set $workspace10 "10 "
+set $workspace1 1 
+set $workspace2 2 
+set $workspace3 3 
+set $workspace4 4 
+set $workspace5 5 
+set $workspace6 6 
+set $workspace7 7 
+set $workspace8 8 
+set $workspace9 9 
+set $workspace10 10 
 
-#assign [class="Google-chrome"] $workspace1
-#assign [class="Firefox"] $workspace7
-#assign [class="mpv"] $workspace5
-#assign [class="Slack"] $workspace9
+assign [class="Google-chrome"] $workspace1
+assign [class="Firefox"] $workspace7
+assign [class="mpv"] $workspace5
+assign [class="Slack"] $workspace9
 # Temporary workaround for Spotify bug: https://github.com/i3/i3/issues/2060
 #assign [class="Spotify"] $workspace10
-#for_window [class="Spotify"] move to workspace $workspace10
+for_window [class="Spotify"] move to workspace $workspace10
 
 # switch to workspace
 bindsym $alt+1 workspace $workspace1
