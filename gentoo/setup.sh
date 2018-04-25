@@ -55,6 +55,16 @@ sudo ln -sf $PWD/etc/portage/repo.postsync.d /etc/portage/
 # Font configuration
 ###########################################################
 
+# Locale configuration
+sudo ln -sf $PWD/etc/locale.gen /etc/
+sudo ln -sf $PWD/etc/environment /etc/
+
+if [ "$LANG" != 'en_US.UTF-8' ]; then
+  sudo locale-gen
+  sudo localectl set-locale LANG=en_US.utf8
+fi
+
+# Configure font
 ln -sf $PWD/.config/fontconfig ~/.config/
 
 # Configure console font
@@ -110,7 +120,7 @@ ln -sf $PWD/.Xresources ~/.Xresources
 
 # Global configuration
 #sudo ln -sf $PWD/etc/X11/xorg.conf /etc/X11/
-sudo ln -sf $PWD/etc/X11/xorg.conf.d  /etc/X11/
+sudo ln -sf $PWD/etc/X11/xorg.conf.d/* /etc/X11/xorg.conf.d/
 
 # Wallpaper
 sudo ln -sf $PWD/.wallpaper.jpg ~/.wallpaper.jpg
