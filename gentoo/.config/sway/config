@@ -19,7 +19,7 @@ set $mod Mod4
 ###########################################################
 
 output * bg ~/.wallpaper.jpg fill
-output eDP-1 scale 2
+output * scale 2
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -282,6 +282,14 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
 # Keyboard configuration
 input "1:1:AT_Translated_Set_2_keyboard" {
   repeat_delay 250
+  repeat_rate 50
+  xkb_layout "us,us"
+  xkb_variant ",intl"
+  xkb_options "caps:escape,grp:alt_space_toggle"
+}
+
+input "1118:1957:Microsoft_Microsoft®_2.4GHz_Transceiver_v9.0" {
+  repeat_delay 400
   repeat_rate 50
   xkb_layout "us,us"
   xkb_variant ",intl"
