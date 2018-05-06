@@ -93,6 +93,10 @@ sudo systemctl enable suspend-to-hibernate
 sudo cp $PWD/etc/systemd/system/powertop.service /etc/systemd/system/
 sudo systemctl enable powertop
 
+# Wake computer from external keyboard
+sudo cp $PWD/etc/udev/rules.d/90-keyboard-wakeup.rules /etc/udev/rules.d/
+sudo cp $PWD/etc/udev/hwdb.d/10-ms-sculpt.hwdb /etc/udev/hwdb.d/
+
 ###########################################################
 # SSH configuration
 ###########################################################

@@ -1,0 +1,4 @@
+#Whenever a keyboard is connected to the machine, enable wakeup on its parent device
+
+ACTION=="add", KERNELS=="usb1", ENV{ID_INPUT_KEYBOARD}=="1", RUN+="/bin/sh -c 'echo enabled > /sys/bus/usb/devices/usb1/power/wakeup'"
+ACTION=="add", KERNELS=="usb2", ENV{ID_INPUT_KEYBOARD}=="1", RUN+="/bin/sh -c 'echo enabled > /sys/bus/usb/devices/usb2/power/wakeup'"

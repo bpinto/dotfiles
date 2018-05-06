@@ -1,0 +1,3 @@
+# remap MS Sculpt Keyboard (Dongle) Devices key to Power Button key
+evdev:input:b0003v045Ep07A5*
+ KEYBOARD_KEY_700e0=leftctrl
