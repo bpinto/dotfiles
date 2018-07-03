@@ -1,4 +1,1 @@
-=dev-lang/rust-1.19.0 ~amd64
-=dev-util/cargo-0.21.0 ~amd64
-=sys-apps/ripgrep-0.7.1 ~amd64
-=virtual/rust-1.19.0 ~amd64
+=sys-apps/ripgrep-0.8.1-r2 ~amd64
