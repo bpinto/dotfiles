@@ -46,5 +46,4 @@ sys-power/powertop
 sys-process/htop
 www-client/firefox
 www-client/google-chrome
-x11-terms/kitty
 x11-terms/termite
