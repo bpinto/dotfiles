@@ -6,17 +6,17 @@
   email      = brunoferreirapinto@gmail.com
   signingkey = brunoferreirapinto@gmail.com
 [alias]
-  co           = checkout
-  ctags        = !.git/hooks/ctags
-  ds           = diff --staged
-  lg           = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  ll           = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --decorate --numstat
-  lga          = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  lla          = log --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --decorate --numstat
-  patch        = diff --no-color
-  pf           = push --force-with-lease
-  pr           = pull --rebase
-  st           = status -sb
+  co    = checkout
+  ctags = !.git/hooks/ctags
+  ds    = diff --staged
+  lg    = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  ll    = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --decorate --numstat
+  lga   = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  lla   = log --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --decorate --numstat
+  patch = diff --no-color
+  pf    = push --force-with-lease
+  pr    = pull --rebase
+  st    = status -sb
 
   # Amend the currently staged files to the latest commit
   amend = commit --amend -C HEAD
@@ -41,11 +41,11 @@
 [color]
   ui = always
 [color "diff"]
-  meta       = yellow bold
-  commit     = green bold
+  commit     = yellow bold
   frag       = magenta bold
-  old        = red bold
+  meta       = yellow
   new        = green bold
+  old        = red bold
   whitespace = red reverse
 [color "diff-highlight"]
   oldNormal    = red bold
