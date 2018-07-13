@@ -30,10 +30,10 @@ font pango:SF Pro Text 10
 hide_edge_borders both
 
 # disable window titlebars
-for_window [class="Google-chrome"] border pixel 0
-for_window [class="mpv"] border pixel 0, fullscreen enable
-for_window [class="Slack"] border pixel 0
-for_window [class="Spotify"] border pixel 0
+for_window [class="Google-chrome"] border none
+for_window [class="mpv"] border none, fullscreen enable
+for_window [class="Slack"] border none
+for_window [class="Spotify"] border none
 
  #Add a border among termite windows
 for_window [title="termite"] border pixel 1
