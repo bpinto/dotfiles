@@ -45,11 +45,11 @@ set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
 
 # window colors
-#                       border              background         text                 indicator
-#client.focused          $bg-color           $bg-color          $text-color          #00ff00
-#client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
-#client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
-#client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
+#                       border             background         text                 indicator  child-border
+client.focused          $bg-color          $bg-color          $text-color          #00ff00    $bg-color
+client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00    $inactive-bg-color
+client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00    $inactive-bg-color
+client.urgent           $urgent-bg-color   $urgent-bg-color   $text-color          #00ff00    $urgent-bg-color
 
 ###########################################################
 # CONVENIENCE MAPPINGS
