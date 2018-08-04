@@ -32,14 +32,12 @@
   dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d; git remote -v update -p"
 
   # Interactive fixup
-  fixup = "!git --no-pager lg | fzf --ansi --delimiter='[*-]' --multi --no-sort --preview 'echo {+2} | sed 's/[^a-zA-Z0-9]//g' | xargs -r git show -m' --reverse --bind 'enter:execute(echo {+2} | sed 's/[^a-zA-Z0-9]//g' | xargs -r git commit --fixup)+abort'"
+  fixup = "!git --no-pager lg --color | fzf --ansi --delimiter='[*-]' --multi --no-sort --preview 'echo {+2} | sed 's/[^a-zA-Z0-9]//g' | xargs -r git show -m --color' --reverse --bind 'enter:execute(echo {+2} | sed 's/[^a-zA-Z0-9]//g' | xargs -r git commit --fixup)+abort'"
 
   # Interactive rebase
-  reb = "!git --no-pager lga | fzf --ansi --delimiter='[*-]' --multi --no-sort --preview 'echo {+2} | sed 's/[^a-zA-Z0-9]//g' | xargs -r git show -m' --reverse --bind 'enter:execute(echo {+2} | sed 's/[^a-zA-Z0-9]//g' | xargs -r git rebase -i --autosquash)+abort'"
+  reb = "!git --no-pager lga --color | fzf --ansi --delimiter='[*-]' --multi --no-sort --preview 'echo {+2} | sed 's/[^a-zA-Z0-9]//g' | xargs -r git show -m --color' --reverse --bind 'enter:execute(echo {+2} | sed 's/[^a-zA-Z0-9]//g' | xargs -r git rebase -i --autosquash)+abort'"
 [apply]
   whitespace = nowarn
-[color]
-  ui = always
 [color "diff"]
   commit     = yellow bold
   frag       = magenta bold
@@ -77,10 +75,10 @@
   diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
 
   # Filter git log results with FZF and display commit on fzf preview box
-  lg = diff-so-fancy | fzf --ansi --delimiter='[*-]' --multi --no-sort --preview 'echo {+2} | sed 's/[^a-zA-Z0-9]//g' | xargs -r git show -m' --reverse
+  lg = fzf --ansi --delimiter='[*-]' --multi --no-sort --preview 'echo {+2} | sed 's/[^a-zA-Z0-9]//g' | xargs -r git show -m --color' --reverse
 
   # Filter git log results with FZF and display commit on fzf preview box
-  lga = diff-so-fancy | fzf --ansi --delimiter='[*-]' --multi --no-sort --preview 'echo {+2} | sed 's/[^a-zA-Z0-9]//g' | xargs -r git show -m' --reverse
+  lga = fzf --ansi --delimiter='[*-]' --multi --no-sort --preview 'echo {+2} | sed 's/[^a-zA-Z0-9]//g' | xargs -r git show -m --color' --reverse
 
   # Bare commit
   patch = cat
