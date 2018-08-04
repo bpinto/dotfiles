@@ -160,6 +160,10 @@ bindsym $alt+Return exec termite
 # Open clipboard history
 #bindsym $cmd+$alt+c exec ~/.config/i3/scripts/launch_copyq.sh
 
+# Mako
+bindsym $mod+n exec makoctl dismiss
+bindsym $mod+Shift+n exec makoctl dismiss -a
+
 ###########################################################
 # MODES
 ###########################################################
@@ -260,6 +264,7 @@ bindsym $cmd+Shift+Tab move container to workspace back_and_forth
 #exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 #exec --no-startup-id copyq &
+exec --no-startup-id mako
 
 ###########################################################
 # INPUT CONFIGURATION
