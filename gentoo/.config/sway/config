@@ -126,8 +126,7 @@ bindsym $cmd+grave focus mode_toggle
 bindsym $mod+Shift+r reload
 
 # exit sway (logs you out of your wayland session)
-#bindsym $alt+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Shift+e exit
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
 ###########################################################
 # MEDIA KEYS

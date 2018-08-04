@@ -1,6 +1,6 @@
 =dev-libs/json-c-0.13 ~amd64
 =dev-libs/sway-9999::ineluctable-overlay **
 =dev-libs/wayland-1.15.0 ~amd64
-=dev-libs/wayland-protocols-1.14 ~amd64
+=dev-libs/wayland-protocols-1.15 ~amd64
 =dev-libs/wlroots-9999 **
 =media-libs/mesa-18.1.3 ~amd64
