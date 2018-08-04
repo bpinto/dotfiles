@@ -143,11 +143,11 @@ bindsym XF86MonBrightnessUp exec brightnessctl set +5%
 
 # Pulse Audio controls
 # unmute and increase volume
-bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/scripts/volume UP
+bindsym --locked XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/scripts/volume UP
 # decrease volume
-bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/scripts/volume DOWN
+bindsym --locked XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/scripts/volume DOWN
 # mute/unmute
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym --locked XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 ###########################################################
 # APPLICATIONS SHORTCUTS
