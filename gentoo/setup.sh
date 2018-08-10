@@ -74,6 +74,19 @@ sudo cp $PWD/etc/vconsole.conf /etc/
 sudo cp -rf $PWD/usr/share/fonts/system-san-francisco /usr/share/fonts/
 
 ###########################################################
+# Graphic card configuration
+###########################################################
+
+# Blacklist the nvidia and nouveau modules
+sudo ln -sf $PWD/etc/modprobe.d/nvidia-n-nouveau.conf /etc/modprobe.d/
+
+# Load acpi-call module at boot
+sudo ln -sf $PWD/etc/modules-load.d/acpi_call.conf /etc/modules-load.d/
+
+# Fully Power Down Discrete GPU
+sudo ln -sf $PWD/etc/tmpfiles.d/acpi_call.conf /etc/tmpfiles.d/
+
+###########################################################
 # Power management configuration
 ###########################################################
 
