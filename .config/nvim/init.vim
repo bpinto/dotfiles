@@ -111,6 +111,8 @@ highlight GitGutterChangeDelete ctermfg=5 ctermbg=NONE guibg=NONE
 set showmatch
 " Make searches case-sensitive only if they contain upper-case characters
 set ignorecase smartcase
+" Add ctags stored on .git folder to search list
+set tags+=.git/tags
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BACKUP
