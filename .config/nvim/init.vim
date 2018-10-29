@@ -469,3 +469,8 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " <M-j> or <M-k> to move between errors
 nmap <silent> <M-k> <Plug>(ale_previous_wrap)
 nmap <silent> <M-j> <Plug>(ale_next_wrap)
+
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['prettier-eslint'],
+\}
