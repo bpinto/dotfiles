@@ -11,6 +11,7 @@ app-text/tree
 app-text/wgetpaste
 dev-lang/ruby
 dev-libs/bemenu
+dev-libs/mullvad-wireguard
 dev-libs/sway
 dev-util/ctags
 dev-vcs/diff-so-fancy
