@@ -110,13 +110,13 @@ bindsym $cmd+grave focus mode_toggle
 ###########################################################
 
 # screenshot
-#bindsym $cmd+Shift+3 exec maim "$HOME/Pictures/Screenshot from $(date +%F-%T).png"
+bindsym $cmd+Shift+3 exec grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S.png')
 #bindsym $cmd+$ctrl+Shift+3 exec maim /tmp/screenshot.png && copyq copy image/png - < /tmp/screenshot.png
 
-#bindsym $cmd+Shift+4 exec maim -s "$HOME/Pictures/Screenshot from $(date +%F-%T).png"
+bindsym $cmd+Shift+4 exec slurp | grim -g - $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S.png')
 #bindsym $cmd+$ctrl+Shift+4 exec maim -s /tmp/screenshot.png && copyq copy image/png - < /tmp/screenshot.png
 
-#bindsym Print exec maim -s "$HOME/Pictures/Screenshot from $(date +%F-%T).png"
+bindsym Print exec slurp | grim -g - $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S.png')
 
 ###########################################################
 # EXTRA

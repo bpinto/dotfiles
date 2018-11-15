@@ -48,6 +48,8 @@ sys-power/powertop
 sys-process/htop
 www-client/firefox
 www-client/google-chrome
+x11-misc/grim
 x11-misc/mako
+x11-misc/slurp
 x11-terms/alacritty
 x11-terms/termite
