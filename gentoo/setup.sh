@@ -93,10 +93,6 @@ sudo ln -sf $PWD/etc/tmpfiles.d/acpi_call.conf /etc/tmpfiles.d/
 # Copy script
 sudo ln -sf $PWD/usr/local/bin/lock /usr/local/bin/
 
-# Autolock service
-sudo cp $PWD/etc/systemd/system/auto-lock@.service /etc/systemd/system/
-sudo systemctl enable auto-lock@$user
-
 # Delayed hibernation service
 sudo cp $PWD/etc/systemd/system/suspend.target /etc/systemd/system/
 sudo cp $PWD/etc/systemd/system/suspend-to-hibernate.service /etc/systemd/system/

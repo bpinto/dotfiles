@@ -266,6 +266,15 @@ bindsym $cmd+Shift+Tab move container to workspace back_and_forth
 #exec --no-startup-id copyq &
 exec --no-startup-id mako
 
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 600 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+exec swayidle \
+    timeout 300 'swaylock -c 475263' \
+    timeout 600 'swaymsg "output * dpms off"' \
+       resume 'swaymsg "output * dpms on"' \
+    before-sleep 'swaylock -c 475263'
+
 ###########################################################
 # INPUT CONFIGURATION
 ###########################################################
