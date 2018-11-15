@@ -143,6 +143,12 @@ sudo ln -sf $PWD/etc/X11/xorg.conf.d/* /etc/X11/xorg.conf.d/
 sudo ln -sf $PWD/.wallpaper.jpg ~/.wallpaper.jpg
 
 ###########################################################
+# Alacritty configuration
+###########################################################
+
+ln -sf $PWD/.config/alacritty ~/.config/
+
+###########################################################
 # Docker configuration
 ###########################################################
 
