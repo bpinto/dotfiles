@@ -1,7 +1,1 @@
 app-editors/neovim ~amd64
-=dev-libs/libtermkey-0.20 ~amd64
-=dev-libs/libvterm-0.0_pre20160305 ~amd64
-=dev-libs/msgpack-1.1.0 ~amd64
-=dev-libs/unibilium-1.2.1 ~amd64
-=dev-lua/lpeg-1.0.1 ~amd64
-=dev-lua/mpack-1.0.4 ~amd64

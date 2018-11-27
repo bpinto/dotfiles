@@ -1,2 +1,2 @@
->=dev-lua/mpack-1.0.4 luajit
 >=dev-lua/lpeg-1.0.1 luajit
+>=dev-lua/mpack-1.0.4 luajit
