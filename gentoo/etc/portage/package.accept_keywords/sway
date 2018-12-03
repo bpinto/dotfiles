@@ -3,5 +3,5 @@
 >=dev-libs/sway-1.0_beta1 ~amd64
 =dev-libs/wayland-1.15.0 ~amd64
 =dev-libs/wayland-protocols-1.15 ~amd64
-=dev-libs/wlroots-0.1 ~amd64
+=dev-libs/wlroots-0.2 ~amd64
 =dev-util/meson-0.48.1 ~amd64
