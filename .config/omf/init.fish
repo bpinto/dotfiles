@@ -28,7 +28,7 @@ set -gx FZF_ALT_C_COMMAND "
     -o -type d -print 2> /dev/null"
 
 # Do not ignore hidden files when filtering files (e.g. vim integration)
-set -gx FZF_DEFAULT_COMMAND 'rg --files'
+set -gx FZF_DEFAULT_COMMAND "rg --files --hidden -g'!.git'"
 
 # Configure PATH
 set PATH ~/.gem/ruby/2.4.0/bin /usr/local/bin $PATH
