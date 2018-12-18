@@ -29,7 +29,12 @@
 
   # Remove branches that have already been merged with master
   # a.k.a. ‘delete merged’
-  dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d; git remote -v update -p"
+  ;dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d; git remote -v update -p"
+
+  # Remove branches that have already been "squash-merged" into master
+  # a.k.a 'delete squashed'
+  dm = "!git for-each-ref refs/heads/ '--format=%(refname:short)' | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == '-'* ]] && git branch -D $branch; done"
+
 
   # Interactive fixup
   fixup = "!git --no-pager lg --color | fzf --ansi --delimiter='[*-]' --exact --multi --no-sort --preview 'echo {+2} | sed 's/[^a-zA-Z0-9]//g' | xargs -r git show -m --color' --reverse --bind 'enter:execute(echo {+2} | sed 's/[^a-zA-Z0-9]//g' | xargs -r git commit --fixup)+abort'"
