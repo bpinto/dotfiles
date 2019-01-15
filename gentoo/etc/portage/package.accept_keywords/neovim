@@ -1,1 +1,2 @@
 app-editors/neovim ~amd64
+=dev-libs/unibilium-2.0.0 ~amd64
