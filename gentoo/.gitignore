@@ -2,3 +2,4 @@
 logs/
 .weechat/script/plugins.xml.gz
 .weechat/sec.conf
+.config/newsboat/.password

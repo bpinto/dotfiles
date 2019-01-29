@@ -16,6 +16,14 @@ browser "google-chrome-stable %u"
 feed-sort-order unreadarticlecount-asc
 
 ###########################################################
+# Inoreader
+###########################################################
+
+urls-source "inoreader"
+inoreader-login "bruno+inoreader"
+inoreader-passwordfile "~/.config/newsboat/.password"
+
+###########################################################
 # Theme
 ###########################################################
 
