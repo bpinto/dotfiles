@@ -1,7 +1,9 @@
-=app-text/scdoc-1.5.2 ~amd64
+=app-text/scdoc-1.8.1 ~amd64
 =dev-libs/json-c-0.13 ~amd64
->=dev-libs/sway-1.0_beta1 ~amd64
 =dev-libs/wayland-1.15.0 ~amd64
 =dev-libs/wayland-protocols-1.15 ~amd64
-=dev-libs/wlroots-0.2 ~amd64
 =dev-util/meson-0.48.1 ~amd64
+=gui-apps/swayidle-1.2 ~amd64
+=gui-apps/swaylock-1.3 ~amd64
+=gui-libs/wlroots-0.4 ~amd64
+>=gui-wm/sway-1.0_beta1 ~amd64

@@ -12,11 +12,11 @@ app-text/wgetpaste
 dev-lang/ruby
 dev-libs/bemenu
 dev-libs/mullvad-wireguard
-dev-libs/sway
 dev-util/ctags
 dev-vcs/diff-so-fancy
 dev-vcs/git
 gnome-base/gnome
+gui-wm/sway
 media-fonts/emojione-color-font
 media-fonts/fontawesome
 media-fonts/noto
