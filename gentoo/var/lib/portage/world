@@ -16,6 +16,7 @@ dev-util/ctags
 dev-vcs/diff-so-fancy
 dev-vcs/git
 gnome-base/gnome
+gui-apps/wl-clipboard
 gui-wm/sway
 media-fonts/emojione-color-font
 media-fonts/fontawesome
