@@ -3,6 +3,7 @@ gnome-base/gnome-session branding
 
 # Required by gnome
 gnome-base/gnome-control-center networkmanager
+>=gnome-base/librsvg-2.40.18 vala
 media-libs/clutter egl
 media-libs/cogl gles2
 media-libs/gegl jpeg2k raw
