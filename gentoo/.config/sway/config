@@ -111,10 +111,10 @@ bindsym $cmd+grave focus mode_toggle
 
 # screenshot
 bindsym $cmd+Shift+3 exec grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S.png')
-#bindsym $cmd+$ctrl+Shift+3 exec maim /tmp/screenshot.png && copyq copy image/png - < /tmp/screenshot.png
+bindsym $cmd+$ctrl+Shift+3 exec grim - | wl-copy
 
 bindsym $cmd+Shift+4 exec slurp | grim -g - $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S.png')
-#bindsym $cmd+$ctrl+Shift+4 exec maim -s /tmp/screenshot.png && copyq copy image/png - < /tmp/screenshot.png
+bindsym $cmd+$ctrl+Shift+4 exec slurp | grim -g - - | wl-copy
 
 bindsym Print exec slurp | grim -g - $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S.png')
 
@@ -263,7 +263,6 @@ bindsym $cmd+Shift+Tab move container to workspace back_and_forth
 
 #exec_always --no-startup-id ~/.config/polybar/launch.sh
 
-#exec --no-startup-id copyq &
 exec --no-startup-id mako
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
