@@ -43,6 +43,8 @@
   reb = "!git --no-pager lga --color | fzf --ansi --delimiter='[*-]' --exact --multi --no-sort --preview 'echo {+2} | sed 's/[^a-zA-Z0-9]//g' | xargs -r git show -m --color' --reverse --bind 'enter:execute(echo {+2} | sed 's/[^a-zA-Z0-9]//g' | xargs -r git rebase -i --autosquash)+abort'"
 [apply]
   whitespace = nowarn
+[branch]
+  sort = -authordate
 [color "diff"]
   commit     = yellow bold
   frag       = magenta bold
