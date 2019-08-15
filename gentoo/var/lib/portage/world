@@ -12,6 +12,7 @@ app-text/wgetpaste
 dev-lang/ruby
 dev-libs/bemenu
 dev-libs/mullvad-wireguard
+dev-python/websocket-client
 dev-util/ctags
 dev-vcs/diff-so-fancy
 dev-vcs/git
