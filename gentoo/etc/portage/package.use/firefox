@@ -1,0 +1,2 @@
+>=media-libs/libvpx-1.7.0 postproc
+>=dev-db/sqlite-3.29.0 secure-delete
