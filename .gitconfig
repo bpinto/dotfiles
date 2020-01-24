@@ -3,8 +3,8 @@
 [user]
   helper     = osxkeychain
   name       = Bruno Pinto
-  email      = brunoferreirapinto@gmail.com
-  signingkey = brunoferreirapinto@gmail.com
+  email      = bruno@bpinto.com
+  signingkey = bruno@bpinto.com
 [alias]
   co    = checkout
   ctags = !.git/hooks/ctags
