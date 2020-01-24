@@ -8,6 +8,7 @@ call plug#begin('~/.config/nvim/plugged')
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug '/usr/local/opt/fzf'
 Plug 'airblade/vim-gitgutter'
+Plug 'ayu-theme/ayu-vim'
 Plug 'ervandew/supertab'
 Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'kana/vim-textobj-user'
@@ -22,7 +23,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-rhubarb'
-Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
@@ -79,8 +79,8 @@ set cmdheight=2
 set splitbelow
 " When on, splitting a window will put the new window right of the current one
 set splitright
-" Dashed border
-set fillchars=vert:\|
+" Non-dashed border
+set fillchars+=vert:│
 " Fix vim auto-complete slowness in large projects
 set foldmethod=manual
 
@@ -88,22 +88,17 @@ set foldmethod=manual
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Background color
-set background=dark
+let ayucolor="mirage"
 " Theme
-colorscheme deep-space
+colorscheme ayu
 " Enable true colors in the terminal
 set termguicolors
 " Enable cursor shape in the terminal
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
-" More information, e.g. :verbose highlight VertSplit
-" Git Gutter column equal to Line number
-highlight clear SignColumn
-" Git Gutter column with signs
-highlight GitGutterAdd ctermfg=2 ctermbg=NONE guibg=NONE
-highlight GitGutterChange ctermfg=4 ctermbg=NONE guibg=NONE
-highlight GitGutterDelete ctermfg=1 ctermbg=NONE guibg=NONE
-highlight GitGutterChangeDelete ctermfg=5 ctermbg=NONE guibg=NONE
+" More information, e.g. :verbose highlight, :verbose highlight VertSplit
+" Color border
+highlight VertSplit ctermfg=81 guifg=#343F4C
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SEARCH CONFIGURATION
@@ -441,7 +436,7 @@ map  <leader>/ <plug>NERDCommenterToggle<CR>
 imap <leader>/ <Esc><plug>NERDCommenterToggle<CR>i
 
 " Airline
-let g:airline_theme = 'deep_space'
+let g:airline_theme = 'ayu'
 " Enable usage of patched powerline font symbols
 let g:airline_powerline_fonts = 1
 " Enable ALE integration
