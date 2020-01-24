@@ -6,6 +6,7 @@ call plug#begin('~/.config/nvim/plugged')
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug '/usr/local/opt/fzf'
 Plug 'airblade/vim-gitgutter'
 Plug 'ervandew/supertab'
 Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
@@ -421,7 +422,6 @@ augroup END
 runtime macros/matchit.vim
 
 " FZF
-set rtp+=/usr/share/nvim/runtime
 " Act like CtrlP
 let g:fzf_action = {
       \ 'ctrl-s': 'split',
