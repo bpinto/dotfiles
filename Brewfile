@@ -1,57 +1,19 @@
-# To install homebrew-bundle:
-# brew tap Homebrew/bundle
+tap "homebrew/bundle"
+tap "homebrew/cask-fonts"
+tap "homebrew/core"
 
-# Packages
-brew 'ctags-exuberant'
 brew 'diff-so-fancy'
-tap 'codekitchen/dinghy'
-brew 'dinghy'
-brew 'docker'
-brew 'docker-compose'
-brew 'docker-machine'
-brew 'docker-machine-driver-xhyve'
-brew 'fish'
+brew 'elvish'
 brew 'fzf'
-brew 'httpie'
-brew 'mackup', args: ['HEAD']
-tap 'neovim/neovim'
-brew 'n'
+brew 'gpg'
 brew 'neovim'
-brew 'rbenv'
-brew 'rbenv-ctags'
-brew 'rbenv-default-gems'
-brew 'reattach-to-user-namespace'
-brew 'ruby-build'
-brew 'ssh-copy-id'
-brew 'the_silver_searcher'
-brew 'tmux'
-brew 'tree'
-brew 'vim'
-brew 'wget'
-brew 'youtube-dl'
-brew 'z'
+brew 'pinentry-mac'
+brew 'ripgrep'
 
-# Install brew cask
-
-tap 'caskroom/cask'
-tap 'caskroom/versions'
-
-# Casks
-
-cask '1password'
-cask 'appcleaner'
-cask 'beamer'
-cask 'cloud'
+cask 'alacritty'
+cask 'aws-vault'
+cask 'docker'
+cask 'font-roboto-mono-for-powerline'
+cask 'itau'
 cask 'google-chrome'
-cask 'iterm2-beta'
-cask 'little-snitch'
-cask 'shiori'
-cask 'skype'
 cask 'slack'
-cask 'spotify'
-cask 'the-unarchiver'
-cask 'vlc'
-
-# Install brew services
-
-tap 'homebrew/services'
