@@ -186,30 +186,30 @@ font:
 colors:
   # Default colors
   primary:
-    background: '0x212733'
-    foreground: '0xd9d7ce'
+    background: '0x1f2430'
+    foreground: '0xcbccc6'
 
   # Normal colors
   normal:
-    black:   '0x212733'
-    red:     '0xf07178'
-    green:   '0xbbe67e'
-    yellow:  '0xffcc66'
-    blue:    '0x5ccfe6'
-    magenta: '0xd4bfff'
-    cyan:    '0x95e6cb'
-    white:   '0xffffff'
+    black:   '0x191e2a'
+    red:     '0xed8274'
+    green:   '0xa6cc70'
+    yellow:  '0xfad07b'
+    blue:    '0x6dcbfa'
+    magenta: '0xcfbafa'
+    cyan:    '0x90e1c6'
+    white:   '0xc7c7c7'
 
   # Bright colors
   bright:
-    black:   '0x607080'
-    red:     '0xff3333'
-    green:   '0xbbe67e'
-    yellow:  '0xffcc66'
-    blue:    '0x5ccfe6'
+    black:   '0x686868'
+    red:     '0xf28779'
+    green:   '0xbae67e'
+    yellow:  '0xffd580'
+    blue:    '0x73d0ff'
     magenta: '0xd4bfff'
     cyan:    '0x95e6cb'
-    white:   '0x5c6773'
+    white:   '0xffffff'
 
 
 # Visual Bell
