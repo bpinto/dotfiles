@@ -1,2 +1,3 @@
 !.config
 !.config/omf/pkg/cliniko
+!.elvish/lib/cliniko.elv

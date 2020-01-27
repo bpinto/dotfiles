@@ -5,9 +5,9 @@ com.googlecode.iterm2.plist
 .config/nvim/autoload
 .config/nvim/bundle
 .config/nvim/plugged
-.elvish/cliniko.elv
 .elvish/db
 .elvish/db-journal
+.elvish/lib/cliniko.elv
 .DS_Store
 .gem/credentials
 .netrc

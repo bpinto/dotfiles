@@ -24,6 +24,19 @@ mkdir -p ~/.local/share
 ln -sf $PWD/.config/alacritty ~/.config/
 
 ###########################################################
+# Elvish configuration
+###########################################################
+
+mkdir -p ~/.elvish
+
+# Config files
+ln -sf $PWD/.elvish/rc.elv ~/.elvish/
+
+# Plugins
+ln -sf $PWD/.elvish/lib/cliniko.elv ~/.elvish/lib/
+ln -sf $PWD/.elvish/lib/prompt.elv ~/.elvish/lib/
+
+###########################################################
 # Git configuration
 ###########################################################
 
