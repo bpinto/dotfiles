@@ -1,5 +1,5 @@
-" Use bash as default shell
-set shell=bash
+" Use zsh as default shell
+set shell=zsh
 
 call plug#begin('~/.config/nvim/plugged')
 
