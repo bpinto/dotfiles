@@ -26,6 +26,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
+Plug 'yuki-ycino/fzf-preview.vim'
 
 call plug#end()
 
@@ -417,18 +418,16 @@ augroup END
 runtime macros/matchit.vim
 
 " FZF
-" Act like CtrlP
-let g:fzf_action = {
-      \ 'ctrl-s': 'split',
-      \ 'ctrl-v': 'vsplit'
-      \ }
 " <C-p> or <C-t> to search files
-nnoremap <silent> <C-t> :FZF -m<cr>
-nnoremap <silent> <C-p> :FZF -m<cr>
-" Hide statusline
-autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noshowmode noruler
-      \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+nnoremap <silent> <C-t> :FzfPreviewProjectFiles -resume<cr>
+nnoremap <silent> <C-p> :FzfPreviewProjectFiles -resume<cr>
+" Use colors on preview window
+let g:fzf_preview_command = 'bat --color=always --style=grid {-1}'
+" Use ripgrep for file list
+let g:fzf_preview_filelist_command = 'rg --files --hidden --follow --no-messages -g \!"* *"'
+" Unmap ctrl-u binding
+let g:fzf_preview_preview_key_bindings = 'ctrl-d:preview-page-down,?:toggle-preview'
+
 
 " NerdCommenter
 " Menu remapping

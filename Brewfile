@@ -2,6 +2,7 @@ tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 
+brew 'bat'
 brew 'diff-so-fancy'
 brew 'elvish'
 brew 'fzf'
