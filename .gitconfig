@@ -25,7 +25,7 @@
   contributors = shortlog --summary --numbered
 
   # Credit an author on the latest commit
-  credit = "!git shortlog --email --numbered --summary | fzf --reverse --delimiter='\t' --bind 'enter:execute(git commit --amend --author \"{+2}\" -C HEAD)+abort'"
+  credit = "!git shortlog --email --numbered --summary | fzf --reverse --delimiter='\t' --bind 'enter:execute(git commit --amend --author \"{+2}\" -C HEAD)+accept'"
 
   # Remove branches that have already been merged with master
   # a.k.a. ‘delete merged’
@@ -37,10 +37,10 @@
 
 
   # Interactive fixup
-  fixup = "!git --no-pager lg --color | fzf --ansi --delimiter='[*-]' --exact --multi --no-sort --preview 'echo {+2} | grep -E -o \"[a-f0-9]+\" | xargs git show -m --color' --reverse --bind 'enter:execute(echo {+2} | xargs git commit --fixup)+abort'"
+  fixup = "!git --no-pager lg --color | fzf --ansi --delimiter='[*-]' --exact --multi --no-sort --preview 'echo {+2} | grep -E -o \"[a-f0-9]+\" | xargs git show -m --color' --reverse --bind 'enter:execute(echo {+2} | xargs git commit --fixup)+accept'"
 
   # Interactive rebase
-  reb = "!git --no-pager lga --color | fzf --ansi --delimiter='[*-]' --exact --multi --no-sort --preview 'echo {+2} | grep -E -o \"[a-f0-9]+\" | xargs git show -m --color' --reverse --bind 'enter:execute(echo {+2} | xargs git rebase -i --autosquash)+abort'"
+  reb = "!git --no-pager lga --color | fzf --ansi --delimiter='[*-]' --exact --multi --no-sort --preview 'echo {+2} | grep -E -o \"[a-f0-9]+\" | xargs git show -m --color' --reverse --bind 'enter:execute(echo {+2} | xargs git rebase -i --autosquash)+accept'"
 [apply]
   whitespace = nowarn
 [branch]
