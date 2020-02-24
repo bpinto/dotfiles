@@ -82,10 +82,10 @@
   diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
 
   # Filter git log results with FZF and display commit on fzf preview box
-  lg = fzf --ansi --delimiter='[*-]' --exact --multi --no-sort --preview 'echo {+2} | grep -E -o \"[a-f0-9]+\" | xargs git show -m --color' --reverse
+  lg = fzf --ansi --delimiter='[*-]' --exact --multi --no-sort --preview 'echo {+2} | grep -E -o \"[a-f0-9]+\" | xargs git show -m --color' --reverse --bind 'enter:execute(echo -n {+2} | pbcopy)+accept'
 
   # Filter git log results with FZF and display commit on fzf preview box
-  lga = fzf --ansi --delimiter='[*-]' --exact --multi --no-sort --preview 'echo {+2} | grep -E -o \"[a-f0-9]+\" | xargs git show -m --color' --reverse
+  lga = fzf --ansi --delimiter='[*-]' --exact --multi --no-sort --preview 'echo {+2} | grep -E -o \"[a-f0-9]+\" | xargs git show -m --color' --reverse --bind 'enter:execute(echo -n {+2} | pbcopy)+accept'
 
   # Bare commit
   patch = cat
