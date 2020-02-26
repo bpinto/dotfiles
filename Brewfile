@@ -8,6 +8,7 @@ brew 'elvish'
 brew 'fzf'
 brew 'gpg'
 brew 'neovim'
+brew 'node@12', link: true
 brew 'pinentry-mac'
 brew 'ripgrep'
 
