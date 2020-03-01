@@ -14,6 +14,7 @@
 ##############################################################################
 
 use cliniko
+use docker
 use prompt
 use github.com/xiaq/edit.elv/smart-matcher
 

@@ -34,6 +34,7 @@ ln -sf $PWD/.elvish/rc.elv ~/.elvish/
 
 # Plugins
 ln -sf $PWD/.elvish/lib/cliniko.elv ~/.elvish/lib/
+ln -sf $PWD/.elvish/lib/docker.elv ~/.elvish/lib/
 ln -sf $PWD/.elvish/lib/prompt.elv ~/.elvish/lib/
 
 ###########################################################
