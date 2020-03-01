@@ -2,13 +2,13 @@
   "entries": {
     "tap": {
       "homebrew/bundle": {
-        "revision": "04a8b37bbdd9bb801a5fde72fd82232846cf2b69"
+        "revision": "0796bb72fa0b6615cdb51d0ec07ca405e4550870"
       },
       "homebrew/core": {
-        "revision": "91c772afe0076500306f05b23d6b5a04b7cee9d9"
+        "revision": "009cb701bac2aaf6f1c100443a7c545d07f9d0c1"
       },
       "homebrew/cask-fonts": {
-        "revision": "fca9a79d88b9b9da43d47b0b959854fc8506ac69"
+        "revision": "4b639dae64056fa794ddc593cb2e2f7fd7ee5f16"
       }
     },
     "cask": {
@@ -52,6 +52,12 @@
         "version": "5.3.2",
         "options": {
           "full_name": "aws-vault"
+        }
+      },
+      "iina": {
+        "version": "1.0.6",
+        "options": {
+          "full_name": "iina"
         }
       }
     },
@@ -234,7 +240,7 @@
       "catalina": {
         "HOMEBREW_VERSION": "2.2.6",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "91c772afe0076500306f05b23d6b5a04b7cee9d9",
+        "Homebrew/homebrew-core": "009cb701bac2aaf6f1c100443a7c545d07f9d0c1",
         "CLT": "11.0.33.17",
         "Xcode": "11.3",
         "macOS": "10.15.3"
