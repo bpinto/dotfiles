@@ -9,6 +9,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug '/usr/local/opt/fzf'
 Plug 'airblade/vim-gitgutter'
 Plug 'ayu-theme/ayu-vim'
+Plug 'dense-analysis/ale'
 Plug 'ervandew/supertab'
 Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'kana/vim-textobj-user'
@@ -25,7 +26,6 @@ Plug 'tpope/vim-rake'
 Plug 'tpope/vim-rhubarb'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'w0rp/ale'
 Plug 'yuki-ycino/fzf-preview.vim'
 
 call plug#end()
@@ -468,6 +468,10 @@ let g:ale_fixers = {
       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
       \ 'javascript': ['prettier-eslint'],
       \}
+
+ let g:ale_linters = {
+       \ 'yaml' : ['cloudformation'],
+       \}
 
 " Set this variable to 1 to fix files when you save them.
 let g:ale_fix_on_save = 1

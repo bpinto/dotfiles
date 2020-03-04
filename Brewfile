@@ -3,6 +3,7 @@ tap "homebrew/cask-fonts"
 tap "homebrew/core"
 
 brew 'bat'
+brew 'cfn-lint'
 brew 'diff-so-fancy'
 brew 'elvish'
 brew 'fzf'
