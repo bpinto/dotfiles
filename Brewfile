@@ -2,6 +2,7 @@ tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 
+brew 'awscli'
 brew 'bat'
 brew 'cfn-lint'
 brew 'diff-so-fancy'
