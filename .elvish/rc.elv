@@ -15,6 +15,7 @@
 
 use cliniko
 use docker
+use node
 use prompt
 use github.com/xiaq/edit.elv/smart-matcher
 
