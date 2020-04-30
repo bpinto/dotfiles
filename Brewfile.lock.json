@@ -65,6 +65,12 @@
         "options": {
           "full_name": "insomnia"
         }
+      },
+      "shiori": {
+        "version": "1.1.0",
+        "options": {
+          "full_name": "shiori"
+        }
       }
     },
     "brew": {
