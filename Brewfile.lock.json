@@ -80,6 +80,12 @@
         "options": {
           "full_name": "docker-edge"
         }
+      },
+      "numi": {
+        "version": "3.27.665",
+        "options": {
+          "full_name": "numi"
+        }
       }
     },
     "brew": {
