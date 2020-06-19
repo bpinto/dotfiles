@@ -17,6 +17,7 @@ brew 'ripgrep'
 
 cask 'alacritty'
 cask 'aws-vault'
+cask 'discord'
 cask 'docker-edge'
 cask 'font-roboto-mono-for-powerline'
 cask 'iina'
