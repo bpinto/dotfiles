@@ -4,7 +4,6 @@ tap "homebrew/cask-versions"
 tap "homebrew/core"
 
 brew 'awscli'
-brew 'bat'
 brew 'cfn-lint'
 brew 'diff-so-fancy'
 brew 'elvish'
