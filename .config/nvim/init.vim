@@ -8,13 +8,13 @@ call plug#begin('~/.config/nvim/plugged')
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug '/usr/local/opt/fzf'
 Plug 'airblade/vim-gitgutter'
-Plug 'ayu-theme/ayu-vim'
 Plug 'dense-analysis/ale'
 Plug 'ervandew/supertab'
 Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'kana/vim-textobj-user'
 Plug 'kassio/neoterm'
 Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'rakr/vim-one'
 Plug 'scrooloose/nerdcommenter'
 Plug 'sheerun/vim-polyglot'
 Plug 'slm-lang/vim-slm'
@@ -89,9 +89,9 @@ set foldmethod=manual
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Background color
-let ayucolor="mirage"
+set background=dark
 " Theme
-colorscheme ayu
+colorscheme one
 " Enable true colors in the terminal
 set termguicolors
 " Enable cursor shape in the terminal
@@ -437,7 +437,7 @@ map  <leader>/ <plug>NERDCommenterToggle<CR>
 imap <leader>/ <Esc><plug>NERDCommenterToggle<CR>i
 
 " Airline
-let g:airline_theme = 'ayu'
+let g:airline_theme = 'one'
 " Enable usage of patched powerline font symbols
 let g:airline_powerline_fonts = 1
 " Enable ALE integration

@@ -162,12 +162,12 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: false
 
-# Colors (Ayu Material)
+# Colors (One Dark)
 colors:
   # Default colors
   primary:
-    background: '0x1f2430'
-    foreground: '0xcbccc6'
+    background: '0x282c34'
+    foreground: '0xabb2bf'
 
     # Bright and dim foreground colors
     #
@@ -193,9 +193,9 @@ colors:
   #
   # Allowed values are CellForeground and CellBackground, which reference the
   # affected cell, or hexadecimal colors like #ff00ff.
-  #vi_mode_cursor:
-  #  text: CellBackground
-  #  cursor: CellForeground
+  vi_mode_cursor:
+    text: '0x282c34'
+    cursor: '0xc678dd'
 
   # Selection colors
   #
@@ -223,24 +223,24 @@ colors:
 
   # Normal colors
   normal:
-    black:   '0x191e2a'
-    red:     '0xed8274'
-    green:   '0xa6cc70'
-    yellow:  '0xfad07b'
-    blue:    '0x6dcbfa'
-    magenta: '0xcfbafa'
-    cyan:    '0x90e1c6'
-    white:   '0xc7c7c7'
+    black:   '0x131613'
+    red:     '0xe06c75'
+    green:   '0x98c379'
+    yellow:  '0xd19a66'
+    blue:    '0x61afef'
+    magenta: '0xc678dd'
+    cyan:    '0x56b6c2'
+    white:   '0xabb2bf'
 
   # Bright colors
   bright:
-    black:   '0x686868'
-    red:     '0xf28779'
-    green:   '0xbae67e'
-    yellow:  '0xffd580'
-    blue:    '0x73d0ff'
-    magenta: '0xd4bfff'
-    cyan:    '0x95e6cb'
+    black:   '0x5c6370'
+    red:     '0xe06c75'
+    green:   '0x98c379'
+    yellow:  '0xd19a66'
+    blue:    '0x61afef'
+    magenta: '0xc678dd'
+    cyan:    '0x56b6c2'
     white:   '0xffffff'
 
   # Dim colors
