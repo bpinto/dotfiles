@@ -359,7 +359,7 @@ live_config_reload: true
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
 shell:
-  program: /usr/local/bin/elvish
+  program: /usr/local/bin/fish
 #  args:
 #    - --login
 

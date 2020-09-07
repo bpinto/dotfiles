@@ -6,7 +6,7 @@ tap "homebrew/core"
 brew 'awscli'
 brew 'cfn-lint'
 brew 'diff-so-fancy'
-brew 'elvish'
+brew 'fish'
 brew 'fzf'
 brew 'gpg'
 brew 'neovim'

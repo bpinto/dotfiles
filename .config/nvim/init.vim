@@ -449,7 +449,7 @@ nnoremap <silent> <leader>t :call neoterm#test#run('file')<cr>
 nnoremap <silent> <leader>s :call neoterm#test#run('current')<cr>
 nnoremap <silent> <leader>l :call neoterm#test#rerun()<cr>
 " Vim requires `set shell=bash`, but neoterm should run my real shell
-let g:neoterm_shell = "elvish"
+let g:neoterm_shell = "fish"
 
 " Easy Plugin
 " Start interactive EasyAlign in visual mode (e.g. vipga)
