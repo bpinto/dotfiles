@@ -88,10 +88,10 @@ set foldmethod=manual
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Background color
-set background=dark
 " Theme
 colorscheme one
+" Background color
+set background=dark
 " Enable true colors in the terminal
 set termguicolors
 " Enable cursor shape in the terminal
