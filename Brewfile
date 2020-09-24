@@ -15,6 +15,7 @@ brew 'pinentry-mac'
 brew 'ripgrep'
 
 cask 'alacritty'
+cask 'authy'
 cask 'aws-vault'
 cask 'discord'
 cask 'docker-edge'

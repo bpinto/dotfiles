@@ -2,16 +2,16 @@
   "entries": {
     "tap": {
       "homebrew/bundle": {
-        "revision": "b84d4569eafe799c7c46c6c12c63215cb8095b6d"
+        "revision": "12702c2b9111a447bb89cd887771d20cffab4e63"
       },
       "homebrew/core": {
-        "revision": "31d65b811b8ae686dc28ce388d8fc30d5d893583"
+        "revision": "63a79e6180f8015f815cd99f148a2cc9c923032f"
       },
       "homebrew/cask-fonts": {
-        "revision": "c722cf4cb4a6b9863466368e4572c5fa481ec228"
+        "revision": "bd966014eceec41a130707813f67f35f7c354149"
       },
       "homebrew/cask-versions": {
-        "revision": "a6621c005e7229be32191a2e542b0736fb6dcda7"
+        "revision": "624acd75643328fda64760a2e03aabf4bc45cd35"
       }
     },
     "cask": {
@@ -91,6 +91,12 @@
         "version": "0.0.257",
         "options": {
           "full_name": "discord"
+        }
+      },
+      "authy": {
+        "version": "1.8.3",
+        "options": {
+          "full_name": "authy"
         }
       }
     },
@@ -267,22 +273,22 @@
         }
       },
       "cfn-lint": {
-        "version": "0.35.1",
+        "version": "0.36.1",
         "bottle": {
           "cellar": ":any_skip_relocation",
           "prefix": "/usr/local",
           "files": {
             "catalina": {
-              "url": "https://homebrew.bintray.com/bottles/cfn-lint-0.35.1.catalina.bottle.tar.gz",
-              "sha256": "014d7b4554effe933e007624c9cb023086a516328a6b2a90e75d2633ddf73e9a"
+              "url": "https://homebrew.bintray.com/bottles/cfn-lint-0.36.1.catalina.bottle.tar.gz",
+              "sha256": "f4b5008ad56741f1c68ef0116b4e2fd9edd0ced6b7a36dbbecf16c25747e2fc1"
             },
             "mojave": {
-              "url": "https://homebrew.bintray.com/bottles/cfn-lint-0.35.1.mojave.bottle.tar.gz",
-              "sha256": "dbc97fc16e4aeec508d33f853fc7a9ad9b4c8060a2be187120e08cf31abbafef"
+              "url": "https://homebrew.bintray.com/bottles/cfn-lint-0.36.1.mojave.bottle.tar.gz",
+              "sha256": "225bb8865cacc7a7529649cc6228c37f246df17c356881823a517de6198b477d"
             },
             "high_sierra": {
-              "url": "https://homebrew.bintray.com/bottles/cfn-lint-0.35.1.high_sierra.bottle.tar.gz",
-              "sha256": "a1356c3630dfdf5e8957cc7184df4654b3ea752b2d7100e454f548ccd60d8790"
+              "url": "https://homebrew.bintray.com/bottles/cfn-lint-0.36.1.high_sierra.bottle.tar.gz",
+              "sha256": "8071821fa2c6e13854058a7d27071f1e28b7f79692efbcbed39d01b4d7ec9ff5"
             }
           }
         }
@@ -342,9 +348,9 @@
         "macOS": "10.15.5"
       },
       "big_sur": {
-        "HOMEBREW_VERSION": "2.5.1",
+        "HOMEBREW_VERSION": "2.5.2",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "31d65b811b8ae686dc28ce388d8fc30d5d893583",
+        "Homebrew/homebrew-core": "63a79e6180f8015f815cd99f148a2cc9c923032f",
         "CLT": "11.0.33.17",
         "Xcode": "11.5",
         "macOS": "11.0"
