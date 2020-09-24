@@ -85,6 +85,9 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
+# Install global projectionist file
+ln -sf $PWD/.config/projections.json ~/.config/
+
 ###########################################################
 # Safari configuration
 ###########################################################

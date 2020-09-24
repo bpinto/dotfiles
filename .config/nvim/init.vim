@@ -21,7 +21,7 @@ Plug 'slm-lang/vim-slm'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rails'
+Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-rhubarb'
 Plug 'vim-airline/vim-airline'
@@ -330,38 +330,6 @@ endfunction
 :map <leader>p :PromoteToLet<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" SWITCH BETWEEN TEST AND PRODUCTION CODE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! OpenTestAlternate()
-  let new_file = AlternateForCurrentFile()
-  exec ':e ' . new_file
-endfunction
-function! AlternateForCurrentFile()
-  let current_file = expand("%")
-  let new_file = current_file
-  let in_spec = match(current_file, '^spec/') != -1
-  let going_to_spec = !in_spec
-  let in_app = match(current_file, '\<controllers\>') != -1 || match(current_file, '\<models\>') != -1 || match(current_file, '\<views\>') != -1 || match(current_file, '\<helpers\>') != -1 || match(current_file, '\<resources\>') != -1
-
-  if going_to_spec
-    if in_app
-      let new_file = substitute(new_file, '^app/', '', '')
-    end
-    let new_file = substitute(new_file, '\.rb$', '_spec.rb', '')
-    let new_file = substitute(new_file, '\.jbuilder$', '.jbuilder_spec.rb', '')
-    let new_file = 'spec/' . new_file
-  else
-    let new_file = substitute(new_file, '_spec\.rb$', '.rb', '')
-    let new_file = substitute(new_file, '^spec/', '', '')
-    if in_app
-      let new_file = 'app/' . new_file
-    end
-  endif
-  return new_file
-endfunction
-nnoremap <leader>. :call OpenTestAlternate()<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CUSTOM AUTOCMDS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup cursor-position
@@ -465,18 +433,20 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " <M-j> or <M-k> to move between errors
 nmap <silent> <M-k> <Plug>(ale_previous_wrap)
 nmap <silent> <M-j> <Plug>(ale_next_wrap)
-
+" Set this variable to 1 to fix files when you save them.
+let g:ale_fix_on_save = 1
+" Configure fixers
 let g:ale_fixers = {
       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
       \ 'javascript': ['prettier-eslint'],
       \}
+" Configure linters
+let g:ale_linters = {
+      \ 'yaml' : ['cloudformation'],
+      \}
 
- let g:ale_linters = {
-       \ 'yaml' : ['cloudformation'],
-       \}
-
-" Set this variable to 1 to fix files when you save them.
-let g:ale_fix_on_save = 1
-
-" Enable completion
-"let g:ale_completion_enabled = 1
+" Projectionist
+" Global configuration file
+let g:projectionist_heuristics = json_decode(join(readfile(expand('~/.config/projections.json'))))
+" Jump to alternate file
+nnoremap <leader>. :A<cr>

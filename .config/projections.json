@@ -1,0 +1,12 @@
+{
+  "front-end/": {
+    "*.js": {
+      "alternate": "{}.test.js",
+      "type": "source"
+    },
+    "*.test.js": {
+      "alternate": "{}.js",
+      "type": "test"
+    }
+  }
+}
