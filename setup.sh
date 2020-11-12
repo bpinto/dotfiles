@@ -71,6 +71,12 @@ ln -sf $PWD/.gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
 ln -sf $PWD/.gnupg/gpg.conf ~/.gnupg/gpg.conf
 
 ###########################################################
+# Kitty configuration
+###########################################################
+
+ln -sf $PWD/.config/kitty ~/.config/
+
+###########################################################
 # Neovim configuration
 ###########################################################
 

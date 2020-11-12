@@ -5,13 +5,13 @@
         "revision": "a8aa5445de31d655508a52223ed20e6c09e121a2"
       },
       "homebrew/core": {
-        "revision": "cb7745ed470a8ecb865b8d9afe9af5a09ac70298"
+        "revision": "fc794cad6ba6d52504ab13d980d083df8c4c9dac"
       },
       "homebrew/cask-fonts": {
         "revision": "77e6259591da7689a654a0276c574c730c9e44eb"
       },
       "homebrew/cask-versions": {
-        "revision": "8355137e45276078394097187a088216f091a108"
+        "revision": "8b1a64de9f12fff59aebcc1c332778648b817b40"
       }
     },
     "cask": {
@@ -97,6 +97,12 @@
         "version": "1.8.3",
         "options": {
           "full_name": "authy"
+        }
+      },
+      "kitty": {
+        "version": "0.19.1",
+        "options": {
+          "full_name": "kitty"
         }
       }
     },
@@ -372,12 +378,12 @@
         "macOS": "10.15.5"
       },
       "big_sur": {
-        "HOMEBREW_VERSION": "2.5.9",
+        "HOMEBREW_VERSION": "2.5.10",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "cb7745ed470a8ecb865b8d9afe9af5a09ac70298",
+        "Homebrew/homebrew-core": "fc794cad6ba6d52504ab13d980d083df8c4c9dac",
         "CLT": "11.0.33.17",
         "Xcode": "11.5",
-        "macOS": "11.0"
+        "macOS": "11.0.1"
       }
     }
   }
