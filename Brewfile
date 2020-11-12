@@ -10,7 +10,7 @@ brew 'fish'
 brew 'fzf'
 brew 'gpg'
 brew 'neovim'
-brew 'node@12', link: true
+brew 'node@10', link: true
 brew 'pinentry-mac'
 brew 'ripgrep'
 
