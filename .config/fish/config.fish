@@ -7,6 +7,10 @@ if not set -q fish_user_paths
 
   # Add XQuartz binaries to PATH
   set -U fish_user_paths $fish_user_paths /usr/X11/bin
+
+  # Add ./node_modules/.bin to PATH
+  # Usage: ln -sf ../node_modules/.bin/ .git/node_bin
+  set -U fish_user_paths $fish_user_paths .git/node_bin
 end
 
 if status --is-interactive
