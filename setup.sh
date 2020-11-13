@@ -74,6 +74,10 @@ ln -sf $PWD/.gnupg/gpg.conf ~/.gnupg/gpg.conf
 # Kitty configuration
 ###########################################################
 
+# Fix config file not loading for kitty: kitty/issues/1375
+launchctl setenv KITTY_CONFIG_DIRECTORY $HOME/.config/kitty/
+
+# Config files
 ln -sf $PWD/.config/kitty ~/.config/
 
 ###########################################################
