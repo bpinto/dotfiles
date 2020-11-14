@@ -8,6 +8,7 @@ brew 'cfn-lint'
 brew 'diff-so-fancy'
 brew 'fish'
 brew 'fzf'
+brew 'gh'
 brew 'gpg'
 brew 'neovim'
 brew 'node@10', link: true
