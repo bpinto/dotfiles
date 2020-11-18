@@ -15,7 +15,6 @@ brew 'node@10', link: true
 brew 'pinentry-mac'
 brew 'ripgrep'
 
-cask 'alacritty'
 cask 'authy'
 cask 'aws-vault'
 cask 'discord'
