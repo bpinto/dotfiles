@@ -22,4 +22,8 @@ if status --is-interactive
 
   # Set main editor
   set -gx EDITOR "vim"
+
+  # Build images using dockerbuild
+  set -gx COMPOSE_DOCKER_CLI_BUILD 1
+  set -gx DOCKER_BUILDKIT 1
 end
