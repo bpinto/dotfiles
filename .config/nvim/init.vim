@@ -281,6 +281,8 @@ nnoremap <leader>RV :source $MYVIMRC<cr>
 nnoremap <leader>EE :vsplit ~/.elvish/rc.elv<cr>
 " Edit fish config file
 nnoremap <leader>EF :vsplit ~/.config/fish/config.fish<cr>
+" Edit github pull request
+nnoremap <leader>EG :execute "split" fnameescape(FugitiveFind('.git/descriptions/'.fugitive#head().'.mk'))<CR>
 " Edit tmux config file
 nnoremap <leader>ET :vsplit ~/.tmux.conf<cr>
 

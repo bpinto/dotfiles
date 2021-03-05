@@ -19,4 +19,7 @@ if status --is-interactive
 
   # XQuartz
   set -gx DISPLAY ":0"
+
+  # Set main editor
+  set -gx EDITOR "vim"
 end
