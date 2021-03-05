@@ -35,12 +35,11 @@
   # a.k.a 'delete squashed'
   dm = "!git for-each-ref refs/heads/ '--format=%(refname:short)' | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == '-'* ]] && git branch -D $branch; done"
 
-
   # Interactive fixup
   fixup = "!git --no-pager lg --color | fzf --ansi --delimiter='[*-]' --exact --multi --no-sort --preview 'echo {+2} | grep -E -o \"[a-f0-9]+\" | xargs git show -m --color' --reverse --bind 'enter:execute(echo {+2} | xargs git commit --fixup)+accept'"
 
   # Interactive rebase
-  reb = "!git --no-pager lga --color | fzf --ansi --delimiter='[*-]' --exact --multi --no-sort --preview 'echo {+2} | grep -E -o \"[a-f0-9]+\" | xargs git show -m --color' --reverse --bind 'enter:execute(echo {+2} | xargs git rebase -i --autosquash)+accept'"
+  reb = "!git --no-pager lga --color | fzf --ansi --delimiter='[*-]' --exact --multi --no-sort --preview 'echo {+2} | grep -E -o \"[a-f0-9]+\" | xargs git show -m --color' --reverse --bind 'enter:execute(echo {+2} | xargs git rebase -i --autosquash)+accept' --query='origin/master'"
 [apply]
   whitespace = nowarn
 [branch]
