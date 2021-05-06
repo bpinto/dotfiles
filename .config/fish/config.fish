@@ -17,6 +17,9 @@ if status --is-interactive
   # Do not ignore hidden files when filtering files (e.g. vim integration)
   set -gx FZF_DEFAULT_COMMAND "rg --files --hidden -g'!.git'"
 
+  # Set language environment
+  set -gx LC_ALL "en_US.UTF-8"
+
   # XQuartz
   set -gx DISPLAY ":0"
 
