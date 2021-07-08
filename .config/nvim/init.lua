@@ -10,15 +10,17 @@ local paq = require('paq-nvim').paq  -- a convenient alias
 paq { 'savq/paq-nvim' }    -- paq-nvim manages itself
 paq { 'eddyekofo94/gruvbox-flat.nvim' }
 paq { 'ervandew/supertab' }
+paq { 'folke/trouble.nvim' }
 paq { 'ful1e5/onedark.nvim' }
 paq { 'hoob3rt/lualine.nvim' }
+paq { 'jose-elias-alvarez/null-ls.nvim' }
 paq { 'junegunn/fzf' }
 paq { 'junegunn/vim-easy-align' }
 paq { 'kana/vim-textobj-user' }
 paq { 'lewis6991/gitsigns.nvim' }
 paq { 'nelstrom/vim-textobj-rubyblock' }
 paq { 'neovim/nvim-lspconfig' }
-paq { 'nvim-lua/plenary.nvim' }
+paq { 'nvim-lua/plenary.nvim' } -- required by: null-ls
 paq { 'nvim-treesitter/nvim-treesitter', run = function() vim.cmd('TSUpdate') end }
 paq { 'rakr/vim-one' }
 paq { 'scrooloose/nerdcommenter' }
@@ -423,3 +425,26 @@ require('nvim-treesitter.configs').setup {
     enable = true -- enable extension
   }
 }
+
+-- Trouble
+require('trouble').setup {
+  icons = false -- do not use devicons for filenames
+}
+
+-- Diagnostic icons
+local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
+for type, icon in pairs(signs) do
+  local hl = "LspDiagnosticsSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+end
+
+map('n', '<leader>xw', '<cmd>Trouble lsp_workspace_diagnostics<cr>', { silent = true })
+map('n', '<leader>xd', '<cmd>Trouble lsp_document_diagnostics<cr>', { silent = true })
+map('n', '<leader>xx', '<cmd>Trouble<cr>', { silent = true })
+map('n', 'gR', '<cmd>Trouble lsp_references<cr>', { silent = true })
+
+--------------------------------------------------------------------------------
+-- Load other config files
+--------------------------------------------------------------------------------
+
+require 'my_modules/lsp'
