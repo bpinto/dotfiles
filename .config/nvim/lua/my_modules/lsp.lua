@@ -20,13 +20,13 @@ local sources = {
   null_ls.builtins.formatting.fish_indent
 }
 
+if vim.fn.executable('prettier_d_slim') == 1 then
+  table.insert(sources, null_ls.builtins.formatting.prettier_d_slim)
+end
+
 if vim.fn.executable('eslint_d') == 1 then
   table.insert(sources, null_ls.builtins.diagnostics.eslint.with({ command = 'eslint_d' }))
   table.insert(sources, null_ls.builtins.formatting.eslint_d)
-end
-
-if vim.fn.executable('prettier_d_slim') == 1 then
-  table.insert(sources, null_ls.builtins.formatting.prettier_d_slim)
 end
 
 null_ls.config({ sources = sources })
@@ -44,7 +44,7 @@ local on_attach = function(client, bufnr)
 
   if client.resolved_capabilities.document_formatting then
     map('n', '<leader>=', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-    vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
+    vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
   elseif client.resolved_capabilities.document_range_formatting then
     map('n', '<leader>=', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
   end

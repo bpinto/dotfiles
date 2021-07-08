@@ -8,6 +8,7 @@ local opt = vim.opt  -- to set options
 
 local paq = require('paq-nvim').paq  -- a convenient alias
 paq { 'savq/paq-nvim' }    -- paq-nvim manages itself
+paq { 'RRethy/nvim-treesitter-textsubjects' }
 paq { 'eddyekofo94/gruvbox-flat.nvim' }
 paq { 'ervandew/supertab' }
 paq { 'folke/trouble.nvim' }
@@ -16,20 +17,15 @@ paq { 'hoob3rt/lualine.nvim' }
 paq { 'jose-elias-alvarez/null-ls.nvim' }
 paq { 'junegunn/fzf' }
 paq { 'junegunn/vim-easy-align' }
-paq { 'kana/vim-textobj-user' }
 paq { 'lewis6991/gitsigns.nvim' }
-paq { 'nelstrom/vim-textobj-rubyblock' }
 paq { 'neovim/nvim-lspconfig' }
 paq { 'nvim-lua/plenary.nvim' } -- required by: null-ls
 paq { 'nvim-treesitter/nvim-treesitter', run = function() vim.cmd('TSUpdate') end }
-paq { 'rakr/vim-one' }
+paq { 'nvim-treesitter/nvim-treesitter-textobjects' }
 paq { 'scrooloose/nerdcommenter' }
 paq { 'slm-lang/vim-slm' }
-paq { 'tpope/vim-bundler' }
-paq { 'tpope/vim-endwise' }
 paq { 'tpope/vim-fugitive' }
 paq { 'tpope/vim-projectionist' }
-paq { 'tpope/vim-rake' }
 paq { 'tpope/vim-rhubarb' }
 paq { 'tpope/vim-surround' }
 
@@ -385,13 +381,17 @@ cmd([[
 -- PLUGINS
 --------------------------------------------------------------------------------
 
+----------------------------
 -- Easy Align
+----------------------------
 -- Start interactive EasyAlign in visual mode (e.g. vipga)
 map('x', 'ga', '<Plug>(EasyAlign)', { noremap = false })
 -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
 map('n', 'ga', '<Plug>(EasyAlign)', { noremap = false })
 
+----------------------------
 -- FZF
+----------------------------
 -- Act like CtrlP
 vim.g.fzf_action = { ['ctrl-s'] = 'split', ['ctrl-v'] = 'vsplit' }
 -- Enable per-command history
@@ -401,24 +401,34 @@ vim.g.fzf_history_dir = '~/.local/share/fzf-history'
 map('n', '<C-t>', ':FZF -m<cr>', { silent = true })
 map('n', '<C-p>', ':FZF -m<cr>', { silent = true })
 
+----------------------------
 -- Gitsigns
+----------------------------
 require('gitsigns').setup()
 
+----------------------------
 -- NerdCommenter
+----------------------------
 map('', '<leader>/', '<plug>NERDCommenterToggle<CR>', { noremap = false })
 map('i', '<leader>/', '<Esc><plug>NERDCommenterToggle<CR>i', { noremap = false })
 
+----------------------------
 -- Projectionist
+----------------------------
 -- Global configuration file
 vim.g.projectionist_heuristics = vim.fn.json_decode(vim.fn.join(vim.fn.readfile(vim.fn.expand('~/.config/projections.json'))))
 -- Jump to alternate file
 map('n', '<leader>.', ':A<cr>')
 
+----------------------------
 -- Supertab
+----------------------------
 -- Navigate the completion menu from top to bottom
 vim.g.SuperTabDefaultCompletionType = '<c-n>'
 
+----------------------------
 -- Treesitter
+----------------------------
 require('nvim-treesitter.configs').setup {
   ensure_installed = "maintained",
   highlight = {
@@ -426,7 +436,63 @@ require('nvim-treesitter.configs').setup {
   }
 }
 
+----------------------------
+-- Treesitter textobjects
+----------------------------
+
+require('nvim-treesitter.configs').setup {
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true, -- automatically jump forward to textobj
+
+      keymaps = {
+        ["ab"] = "@block.outer",
+        ["ib"] = "@block.inner",
+        ["ac"] = "@call.outer",
+        ["ic"] = "@call.inner",
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+      }
+    },
+
+    move = {
+      enable = true,
+      set_jumps = true, -- whether to set jumps in the jumplist
+
+      goto_next_start = {
+        ["]m"] = "@function.outer"
+      },
+      goto_next_end = {
+        ["]M"] = "@function.outer"
+      },
+      goto_previous_start = {
+        ["[m"] = "@function.outer"
+      },
+      goto_previous_end = {
+        ["[M"] = "@function.outer"
+      }
+    }
+  }
+}
+
+----------------------------
+-- Treesitter textsubjects
+----------------------------
+
+require('nvim-treesitter.configs').setup {
+    textsubjects = {
+        enable = true,
+        keymaps = {
+            ['.'] = 'textsubjects-smart',
+            [';'] = 'textsubjects-container-outer'
+        }
+    }
+}
+
+----------------------------
 -- Trouble
+----------------------------
 require('trouble').setup {
   icons = false -- do not use devicons for filenames
 }
