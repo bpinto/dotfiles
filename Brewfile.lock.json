@@ -5,13 +5,13 @@
         "revision": "72481ae13e66200930dbf5dcc1b1016f04529973"
       },
       "homebrew/core": {
-        "revision": "d48777423d34766398fa73292e8ebc1d90cb7d7d"
+        "revision": "0ba4519055204edeae1b35d59fb9aa69611e52e6"
       },
       "homebrew/cask-fonts": {
         "revision": "047492b0294dda1209ae5aad9d92d00572b9c242"
       },
       "homebrew/cask-versions": {
-        "revision": "657a3fea8377ece3e5c6416114ca2e6f1b6cc890"
+        "revision": "42113f4c955c81dfd7393da9a3fb6803277d70d2"
       }
     },
     "cask": {
@@ -139,6 +139,18 @@
         "version": "7.8.6",
         "options": {
           "full_name": "1password"
+        }
+      },
+      "font-victor-mono-nerd-font": {
+        "version": "2.1.0",
+        "options": {
+          "full_name": "font-victor-mono-nerd-font"
+        }
+      },
+      "font-victor-mono": {
+        "version": "latest",
+        "options": {
+          "full_name": "font-victor-mono"
         }
       }
     },
@@ -561,7 +573,7 @@
       "big_sur": {
         "HOMEBREW_VERSION": "3.2.1",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "d48777423d34766398fa73292e8ebc1d90cb7d7d",
+        "Homebrew/homebrew-core": "0ba4519055204edeae1b35d59fb9aa69611e52e6",
         "CLT": "12.5.0.22.9",
         "Xcode": "12.5",
         "macOS": "11.4"
