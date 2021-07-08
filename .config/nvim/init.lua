@@ -353,7 +353,7 @@ cmd([[
 
     " Highlight characters longer than 100 characters
     autocmd BufEnter * highlight OverLength ctermbg=darkgrey guibg=#111111
-    autocmd BufEnter * match OverLength /\%>100v.\+/
+    autocmd BufEnter * :if &buftype isnot# "nofile" | match OverLength /\%>100v.\+/ | endif
   augroup END
 ]])
 
@@ -396,6 +396,8 @@ map('n', 'ga', '<Plug>(EasyAlign)', { noremap = false })
 vim.g.fzf_action = { ['ctrl-s'] = 'split', ['ctrl-v'] = 'vsplit' }
 -- Enable per-command history
 vim.g.fzf_history_dir = '~/.local/share/fzf-history'
+-- Show preview window with colors using bat
+vim.env.FZF_DEFAULT_OPTS = "--ansi --preview-window 'right:60%' --margin=1 --preview 'bat --color=always --line-range :150 {}'"
 
 -- <C-p> or <C-t> to search files
 map('n', '<C-t>', ':FZF -m<cr>', { silent = true })
