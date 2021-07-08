@@ -385,13 +385,17 @@ cmd([[
 -- PLUGINS
 --------------------------------------------------------------------------------
 
+----------------------------
 -- Easy Align
+----------------------------
 -- Start interactive EasyAlign in visual mode (e.g. vipga)
 map('x', 'ga', '<Plug>(EasyAlign)', { noremap = false })
 -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
 map('n', 'ga', '<Plug>(EasyAlign)', { noremap = false })
 
+----------------------------
 -- FZF
+----------------------------
 -- Act like CtrlP
 vim.g.fzf_action = { ['ctrl-s'] = 'split', ['ctrl-v'] = 'vsplit' }
 -- Enable per-command history
@@ -401,24 +405,34 @@ vim.g.fzf_history_dir = '~/.local/share/fzf-history'
 map('n', '<C-t>', ':FZF -m<cr>', { silent = true })
 map('n', '<C-p>', ':FZF -m<cr>', { silent = true })
 
+----------------------------
 -- Gitsigns
+----------------------------
 require('gitsigns').setup()
 
+----------------------------
 -- NerdCommenter
+----------------------------
 map('', '<leader>/', '<plug>NERDCommenterToggle<CR>', { noremap = false })
 map('i', '<leader>/', '<Esc><plug>NERDCommenterToggle<CR>i', { noremap = false })
 
+----------------------------
 -- Projectionist
+----------------------------
 -- Global configuration file
 vim.g.projectionist_heuristics = vim.fn.json_decode(vim.fn.join(vim.fn.readfile(vim.fn.expand('~/.config/projections.json'))))
 -- Jump to alternate file
 map('n', '<leader>.', ':A<cr>')
 
+----------------------------
 -- Supertab
+----------------------------
 -- Navigate the completion menu from top to bottom
 vim.g.SuperTabDefaultCompletionType = '<c-n>'
 
+----------------------------
 -- Treesitter
+----------------------------
 require('nvim-treesitter.configs').setup {
   ensure_installed = "maintained",
   highlight = {
@@ -426,7 +440,9 @@ require('nvim-treesitter.configs').setup {
   }
 }
 
+----------------------------
 -- Trouble
+----------------------------
 require('trouble').setup {
   icons = false -- do not use devicons for filenames
 }
