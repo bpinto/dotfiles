@@ -8,7 +8,6 @@ local opt = vim.opt  -- to set options
 
 local paq = require('paq-nvim').paq  -- a convenient alias
 paq { 'savq/paq-nvim' }    -- paq-nvim manages itself
-paq { 'airblade/vim-gitgutter' }
 paq { 'eddyekofo94/gruvbox-flat.nvim' }
 paq { 'ervandew/supertab' }
 paq { 'ful1e5/onedark.nvim' }
@@ -16,8 +15,10 @@ paq { 'hoob3rt/lualine.nvim' }
 paq { 'junegunn/fzf' }
 paq { 'junegunn/vim-easy-align' }
 paq { 'kana/vim-textobj-user' }
+paq { 'lewis6991/gitsigns.nvim' }
 paq { 'nelstrom/vim-textobj-rubyblock' }
 paq { 'neovim/nvim-lspconfig' }
+paq { 'nvim-lua/plenary.nvim' }
 paq { 'nvim-treesitter/nvim-treesitter', run = function() vim.cmd('TSUpdate') end }
 paq { 'rakr/vim-one' }
 paq { 'scrooloose/nerdcommenter' }
@@ -397,6 +398,9 @@ vim.g.fzf_history_dir = '~/.local/share/fzf-history'
 -- <C-p> or <C-t> to search files
 map('n', '<C-t>', ':FZF -m<cr>', { silent = true })
 map('n', '<C-p>', ':FZF -m<cr>', { silent = true })
+
+-- Gitsigns
+require('gitsigns').setup()
 
 -- NerdCommenter
 map('', '<leader>/', '<plug>NERDCommenterToggle<CR>', { noremap = false })
