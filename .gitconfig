@@ -47,18 +47,6 @@
   whitespace = nowarn
 [branch]
   sort = -authordate
-[color "diff"]
-  commit     = yellow bold
-  frag       = magenta bold
-  meta       = yellow
-  new        = green bold
-  old        = red bold
-  whitespace = red reverse
-[color "diff-highlight"]
-  oldNormal    = red bold
-  oldHighlight = "red bold 52"
-  newNormal    = "green bold"
-  newHighlight = "green bold 22"
 [commit]
   gpgsign  = true
   template = ~/.gitmessage
@@ -71,6 +59,23 @@
   # [default] trailing-space: looks for spaces at the end of a line
   # [default] space-before-tab: looks for spaces before tabs at the beginning of a line
   whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+[delta]
+  plus-style = "syntax #32361a"
+  minus-style = "syntax #3c1f1e"
+  features = side-by-side line-numbers decorations
+  syntax-theme = Gruvbox Material Dark
+  navigate = true
+[delta "decorations"]
+  commit-decoration-style = bold yellow box ul
+  file-style = bold ul
+  file-decoration-style = none
+  hunk-header-decoration-style = "#5a524c" box ul
+[delta "line-numbers"]
+  line-numbers-plus-style = "#6c782e"
+  line-numbers-minus-style = "#c14a4a"
+  line-numbers-left-style = "#5a524c"
+  line-numbers-right-style = "#5a524c"
+  line-numbers-zero-style = "#5a524c"
 [difftool]
   prompt = false
 [format]
@@ -82,10 +87,12 @@
 [init]
   templatedir = ~/.git_template
 [interactive]
-  diffFilter = diff-so-fancy --patch
+  diffFilter = delta --color-only
 [pager]
-  # Easy commit navigation with initial search per file
-  diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
+  diff = delta
+  log = delta
+  reflog = delta
+  show = delta
 
   # Filter git log results with FZF and display commit on fzf preview box
   lg = fzf --ansi --delimiter='[*-]' --exact --multi --no-sort --preview 'echo {+2} | grep -E -o \"[a-f0-9]+\" | xargs git show -m --color' --reverse --bind 'enter:execute(echo -n {+2} | pbcopy)+accept'
@@ -95,9 +102,6 @@
 
   # Bare commit
   patch = cat
-
-  # Easy commit navigation with initial search per file
-  show = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
 [push]
   # Setting to git 2.0 default to surpress warning message
   default = simple
