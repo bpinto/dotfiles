@@ -65,14 +65,13 @@ opt.winwidth = 79 -- Minimal window width
 require('lualine').setup {
     options = {
         theme = 'gruvbox-flat',
-        section_separators = {'', ''},
         component_separators = {'', ''},
         icons_enabled = true
     },
     sections = {
         lualine_a = {{'mode', upper = true}},
         lualine_b = {{'branch', icon = ''}},
-        lualine_c = {{'filename', file_status = true}},
+        lualine_c = {{'filename', file_status = true, path = 1}},
         lualine_x = {'encoding', 'fileformat', 'filetype'},
         lualine_y = {'progress'},
         lualine_z = {'location'}
@@ -80,7 +79,7 @@ require('lualine').setup {
     inactive_sections = {
         lualine_a = {},
         lualine_b = {},
-        lualine_c = {'filename'},
+        lualine_c = {{'filename', file_status = true, path = 1}},
         lualine_x = {'location'},
         lualine_y = {},
         lualine_z = {}
