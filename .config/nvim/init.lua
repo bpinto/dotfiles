@@ -14,7 +14,10 @@ paq { 'ervandew/supertab' }
 paq { 'folke/trouble.nvim' }
 paq { 'ful1e5/onedark.nvim' }
 paq { 'hoob3rt/lualine.nvim' }
-paq { 'hrsh7th/nvim-compe' }
+paq { 'hrsh7th/cmp-buffer' }
+paq { 'hrsh7th/cmp-emoji' }
+paq { 'hrsh7th/cmp-nvim-lsp' }
+paq { 'hrsh7th/nvim-cmp' }
 paq { 'jose-elias-alvarez/null-ls.nvim' }
 paq { 'junegunn/fzf' }
 paq { 'junegunn/vim-easy-align' }
@@ -23,6 +26,7 @@ paq { 'neovim/nvim-lspconfig' }
 paq { 'nvim-lua/plenary.nvim' } -- required by: null-ls
 paq { 'nvim-treesitter/nvim-treesitter', run = function() vim.cmd('TSUpdate') end }
 paq { 'nvim-treesitter/nvim-treesitter-textobjects' }
+paq { 'quangnguyen30192/cmp-nvim-tags' }
 paq { 'scrooloose/nerdcommenter' }
 paq { 'slm-lang/vim-slm' }
 paq { 'tpope/vim-fugitive' }
@@ -415,50 +419,27 @@ map('', '<leader>/', '<plug>NERDCommenterToggle<CR>', { noremap = false })
 map('i', '<leader>/', '<Esc><plug>NERDCommenterToggle<CR>i', { noremap = false })
 
 ----------------------------
--- nvim-compe
+-- nvim-cmp
 ----------------------------
-opt.completeopt = 'menuone,noselect'
+local cmp = require('cmp')
 
-require('compe').setup {
-  enabled = true;
-  autocomplete = true;
-  debug = false;
-  min_length = 1;
-  preselect = 'enable';
-  throttle_time = 80;
-  source_timeout = 200;
-  resolve_timeout = 800;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
-  documentation = {
-    border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
-    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
-    max_width = 120,
-    min_width = 60,
-    max_height = math.floor(vim.o.lines * 0.3),
-    min_height = 1,
-  };
-
-  source = {
-    path = true;
-    buffer = { priority = 100000 },
-    calc = true;
-    nvim_lsp = true;
-    nvim_lua = true;
-    spell = true;
-    tags = true;
-    treesitter = true;
-  };
+cmp.setup {
+  mapping = {
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    })
+  },
+  sources = {
+    { name = 'buffer' },
+    { name = 'emoji' },
+    { name = 'nvim_lsp' },
+    { name = 'tags' },
+  }
 }
-
-map('i', '<C-Space>', 'compe#complete()', { expr = true, silent = true })
-map('i', '<CR>', "compe#confirm('<CR>')", { expr = true, silent = true })
-map('i', '<C-e>', "compe#close('<C-e>')", { expr = true, silent = true })
-map('i', '<C-f>', "compe#scroll({'delta': +4})", { expr = true, silent = true })
-map('i', '<C-d>', "compe#scroll({'delta': -4})", { expr = true, silent = true })
-map("i", "<C-y>", "compe#confirm('<C-y>')", { expr = true, silent = true })
 
 ----------------------------
 -- Projectionist
