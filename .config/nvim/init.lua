@@ -7,7 +7,8 @@ local opt = vim.opt  -- to set options
 --------------------------------------------------------------------------------
 
 local paq = require('paq-nvim').paq  -- a convenient alias
-paq { 'savq/paq-nvim' }    -- paq-nvim manages itself
+paq { 'savq/paq-nvim' } -- paq-nvim manages itself
+paq { 'MunifTanjim/nui.nvim' } -- required by package-info
 paq { 'RRethy/nvim-treesitter-textsubjects' }
 paq { 'eddyekofo94/gruvbox-flat.nvim' }
 paq { 'ervandew/supertab' }
@@ -33,6 +34,7 @@ paq { 'tpope/vim-fugitive' }
 paq { 'tpope/vim-projectionist' }
 paq { 'tpope/vim-rhubarb' }
 paq { 'tpope/vim-surround' }
+paq { 'vuki656/package-info.nvim' }
 
 --------------------------------------------------------------------------------
 -- EDITOR CONFIGURATION
@@ -440,6 +442,11 @@ cmp.setup {
     { name = 'tags' },
   }
 }
+
+----------------------------
+-- Package Info
+----------------------------
+require('package-info').setup()
 
 ----------------------------
 -- Projectionist
