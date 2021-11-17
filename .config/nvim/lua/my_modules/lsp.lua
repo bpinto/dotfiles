@@ -15,21 +15,15 @@ lsp.handlers['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_hel
 
 vim.opt.updatetime = 300 -- set inactivity time to 300ms
 
-local sources = {
-  null_ls.builtins.code_actions.gitsigns,
-  null_ls.builtins.formatting.fish_indent
-}
-
-if vim.fn.executable('prettier_d_slim') == 1 then
-  table.insert(sources, null_ls.builtins.formatting.prettier_d_slim)
-end
-
-if vim.fn.executable('eslint_d') == 1 then
-  table.insert(sources, null_ls.builtins.diagnostics.eslint.with({ command = 'eslint_d' }))
-  table.insert(sources, null_ls.builtins.formatting.eslint_d)
-end
-
-null_ls.config({ sources = sources })
+null_ls.config({
+  sources = {
+    null_ls.builtins.code_actions.gitsigns,
+    null_ls.builtins.diagnostics.eslint_d,
+    null_ls.builtins.formatting.fish_indent,
+    null_ls.builtins.formatting.prettier_d_slim,
+    null_ls.builtins.formatting.eslint_d
+  }
+})
 
 local on_attach = function(client, bufnr)
   local function map(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
