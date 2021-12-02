@@ -41,8 +41,6 @@ paq { 'vuki656/package-info.nvim' }
 --------------------------------------------------------------------------------
 
 opt.autowrite = true -- Write the contents of the file if it has been modified
-opt.hidden = true -- Allow unsaved background buffers and remember marks/undo for them.
-opt.joinspaces = false -- Use only one space after period when joining lines
 opt.switchbuf = 'useopen' -- Use already open buffer
 
 --------------------------------------------------------------------------------
@@ -213,9 +211,6 @@ map('n', '<C-h>', '<C-w>h')
 map('n', '<C-j>', '<C-w>j')
 map('n', '<C-k>', '<C-w>k')
 map('n', '<C-l>', '<C-w>l')
-
--- Make Y consistent with C and D.
-map('n', 'Y', 'y$')
 
 -- Clear the search buffer when hitting return
 function _G.map_enter()
