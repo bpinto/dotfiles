@@ -1,14 +1,13 @@
 local null_ls = require 'null-ls'
 local lsp = vim.lsp
 
-lsp.handlers['textDocument/publishDiagnostics'] = lsp.with(
-  lsp.diagnostic.on_publish_diagnostics, {
-    signs = true,
-    underline = true,
-    update_in_insert = false, -- delay update diagnostics
-    virtual_text = false -- do not show diagnostics message inline
-  }
-)
+vim.diagnostic.config({
+  float = { border = 'single', focusable = false },
+  signs = true,
+  underline = true,
+  update_in_insert = false, -- delay update diagnostics
+  virtual_text = false -- do not show diagnostics message inline
+})
 
 lsp.handlers['textDocument/hover'] = lsp.with(lsp.handlers.hover, { border = 'single' })
 lsp.handlers['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_help, { border = 'single' })
@@ -32,8 +31,8 @@ local on_attach = function(client, bufnr)
   -- mappings options
   local opts = { noremap = true, silent = true }
 
-  map('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev({ popup_opts = { border = "single" }})<CR>', opts)
-  map('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next({ popup_opts = { border = "single" }})<CR>', opts)
+  map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
   map('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
 
@@ -45,7 +44,7 @@ local on_attach = function(client, bufnr)
   end
 
   -- Show line diagnostics after inactivity
-  vim.cmd('autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics({ border = "single", focusable = false })')
+  vim.cmd('autocmd CursorHold <buffer> lua vim.diagnostic.open_float()')
 
   -- Show singature help after inactivity on insertion mode
   vim.cmd('autocmd CursorHoldI <buffer> silent! lua vim.lsp.buf.signature_help()')
