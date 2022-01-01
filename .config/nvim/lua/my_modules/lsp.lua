@@ -14,17 +14,6 @@ lsp.handlers['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_hel
 
 vim.opt.updatetime = 300 -- set inactivity time to 300ms
 
-null_ls.config({
-  sources = {
-    null_ls.builtins.code_actions.gitsigns,
-    null_ls.builtins.diagnostics.eslint_d,
-    null_ls.builtins.formatting.fish_indent,
-    null_ls.builtins.formatting.prettier_d_slim,
-    null_ls.builtins.formatting.eslint_d,
-    null_ls.builtins.formatting.trim_whitespace
-  }
-})
-
 local on_attach = function(client, bufnr)
   local function map(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
@@ -50,10 +39,15 @@ local on_attach = function(client, bufnr)
   vim.cmd('autocmd CursorHoldI <buffer> silent! lua vim.lsp.buf.signature_help()')
 end
 
-lspconfig = require('lspconfig')
-lspconfig['null-ls'].setup({
+null_ls.setup({
   on_attach = on_attach,
-  flags = {
-    debounce_text_changes = 150,
+  sources = {
+    null_ls.builtins.code_actions.gitsigns,
+    null_ls.builtins.diagnostics.codespell,
+    null_ls.builtins.diagnostics.eslint_d,
+    null_ls.builtins.formatting.fish_indent,
+    null_ls.builtins.formatting.prettier_d_slim,
+    null_ls.builtins.formatting.eslint_d,
+    null_ls.builtins.formatting.trim_whitespace
   }
 })
