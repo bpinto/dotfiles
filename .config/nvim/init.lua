@@ -6,35 +6,36 @@ local opt = vim.opt  -- to set options
 -- PLUGINS
 --------------------------------------------------------------------------------
 
-local paq = require('paq-nvim').paq  -- a convenient alias
-paq { 'savq/paq-nvim' } -- paq-nvim manages itself
-paq { 'MunifTanjim/nui.nvim' } -- required by package-info
-paq { 'RRethy/nvim-treesitter-textsubjects' }
-paq { 'eddyekofo94/gruvbox-flat.nvim' }
-paq { 'ervandew/supertab' }
-paq { 'folke/trouble.nvim' }
-paq { 'ful1e5/onedark.nvim' }
-paq { 'hoob3rt/lualine.nvim' }
-paq { 'hrsh7th/cmp-buffer' }
-paq { 'hrsh7th/cmp-emoji' }
-paq { 'hrsh7th/cmp-nvim-lsp' }
-paq { 'hrsh7th/nvim-cmp' }
-paq { 'jose-elias-alvarez/null-ls.nvim' }
-paq { 'junegunn/fzf' }
-paq { 'junegunn/vim-easy-align' }
-paq { 'lewis6991/gitsigns.nvim' }
-paq { 'neovim/nvim-lspconfig' }
-paq { 'nvim-lua/plenary.nvim' } -- required by: null-ls
-paq { 'nvim-treesitter/nvim-treesitter', run = function() vim.cmd('TSUpdate') end }
-paq { 'nvim-treesitter/nvim-treesitter-textobjects' }
-paq { 'quangnguyen30192/cmp-nvim-tags' }
-paq { 'scrooloose/nerdcommenter' }
-paq { 'slm-lang/vim-slm' }
-paq { 'tpope/vim-fugitive' }
-paq { 'tpope/vim-projectionist' }
-paq { 'tpope/vim-rhubarb' }
-paq { 'tpope/vim-surround' }
-paq { 'vuki656/package-info.nvim' }
+require 'paq' {
+  'savq/paq-nvim'; -- paq-nvim manages itself
+  'MunifTanjim/nui.nvim'; -- required by package-info
+  'RRethy/nvim-treesitter-textsubjects';
+  'eddyekofo94/gruvbox-flat.nvim';
+  'ervandew/supertab';
+  'folke/trouble.nvim';
+  'ful1e5/onedark.nvim';
+  'hoob3rt/lualine.nvim';
+  'hrsh7th/cmp-buffer';
+  'hrsh7th/cmp-emoji';
+  'hrsh7th/cmp-nvim-lsp';
+  'hrsh7th/nvim-cmp';
+  'jose-elias-alvarez/null-ls.nvim';
+  'junegunn/fzf';
+  'junegunn/vim-easy-align';
+  'lewis6991/gitsigns.nvim';
+  'neovim/nvim-lspconfig';
+  'nvim-lua/plenary.nvim'; -- required by: null-ls
+  { 'nvim-treesitter/nvim-treesitter', run = function() vim.cmd('TSUpdate') end };
+  'nvim-treesitter/nvim-treesitter-textobjects';
+  'quangnguyen30192/cmp-nvim-tags';
+  'scrooloose/nerdcommenter';
+  'slm-lang/vim-slm';
+  'tpope/vim-fugitive';
+  'tpope/vim-projectionist';
+  'tpope/vim-rhubarb';
+  'tpope/vim-surround';
+  'vuki656/package-info.nvim';
+}
 
 --------------------------------------------------------------------------------
 -- EDITOR CONFIGURATION
