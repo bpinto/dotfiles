@@ -46,7 +46,7 @@ null_ls.setup({
     null_ls.builtins.diagnostics.codespell,
     null_ls.builtins.diagnostics.eslint_d,
     null_ls.builtins.formatting.fish_indent,
-    null_ls.builtins.formatting.prettier_d_slim,
+    null_ls.builtins.formatting.prettierd,
     null_ls.builtins.formatting.eslint_d,
     null_ls.builtins.formatting.trim_whitespace
   }
