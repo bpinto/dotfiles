@@ -63,7 +63,7 @@
   plus-style = "syntax #32361a"
   minus-style = "syntax #3c1f1e"
   features = side-by-side line-numbers decorations
-  syntax-theme = Gruvbox Material Dark
+  syntax-theme = gruvbox-dark
   navigate = true
 [delta "decorations"]
   commit-decoration-style = bold yellow box ul
