@@ -11,7 +11,7 @@ brew 'gh'
 brew 'git-delta'
 brew 'gpg'
 brew 'neovim'
-brew 'node@14', link: true
+brew 'node@16', link: true
 brew 'pinentry-mac'
 brew 'ripgrep'
 
