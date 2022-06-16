@@ -1,6 +1,7 @@
-local cmd = vim.cmd  -- to execute Vim commands e.g. cmd('pwd')
-local fn = vim.fn    -- to call Vim functions e.g. fn.bufnr()
-local opt = vim.opt  -- to set options
+local cmd = vim.cmd
+local fn = vim.fn
+local keymap = vim.keymap
+local opt = vim.opt
 
 --------------------------------------------------------------------------------
 -- PLUGINS
@@ -167,60 +168,53 @@ opt.listchars = { extends = '…', precedes = '…', tab = '  ', trail = '·' }
 -- CONVENIENCE MAPPINGS
 --------------------------------------------------------------------------------
 
-local function map(mode, lhs, rhs, opts)
-  local options = { noremap = true }
-  if opts then options = vim.tbl_extend('force', options, opts) end
-
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
 -- Remapping leader to ,
 vim.g.mapleader = ','
 
 -- Aliasing the new leader ',' to the default one '\'
-map('n', '<Bslash>', ',', { noremap = false })
+keymap.set('n', '<Bslash>', ',', { remap = true })
 
 -- Better ESC
-map('i', 'jk', '<Esc>')
+keymap.set('i', 'jk', '<Esc>')
 
 -- Use sane regexes
-map('n', '/', '/\\v')
-map('v', '/', '/\\v')
+keymap.set('n', '/', '/\\v')
+keymap.set('v', '/', '/\\v')
 
 -- Select the contents of the current line, excluding indentation.
-map('n', 'vv', '^vg_')
+keymap.set('n', 'vv', '^vg_')
 
 -- Don't lose selection when shifting sidewards
-map('x', '<', '<gv')
-map('x', '>', '>gv')
+keymap.set('x', '<', '<gv')
+keymap.set('x', '>', '>gv')
 
 -- Keep search matches in the middle of the window.
-map('n', 'n', 'nzzzv')
-map('n', 'N', 'Nzzzv')
+keymap.set('n', 'n', 'nzzzv')
+keymap.set('n', 'N', 'Nzzzv')
 -- Same when jumping around
-map('n', 'g;', 'g;zz')
-map('n', 'g,', 'g,zz')
+keymap.set('n', 'g;', 'g;zz')
+keymap.set('n', 'g,', 'g,zz')
 
 -- It's 2021.
-map('', 'j', 'gj')
-map('', 'k', 'gk')
-map('', 'gj', 'j')
-map('', 'gk', 'k')
+keymap.set('', 'j', 'gj')
+keymap.set('', 'k', 'gk')
+keymap.set('', 'gj', 'j')
+keymap.set('', 'gk', 'k')
 
 -- Better navigation between windows
-map('n', '<C-h>', '<C-w>h')
-map('n', '<C-j>', '<C-w>j')
-map('n', '<C-k>', '<C-w>k')
-map('n', '<C-l>', '<C-w>l')
+keymap.set('n', '<C-h>', '<C-w>h')
+keymap.set('n', '<C-j>', '<C-w>j')
+keymap.set('n', '<C-k>', '<C-w>k')
+keymap.set('n', '<C-l>', '<C-w>l')
 
 -- Clear the search buffer when hitting return
 function _G.map_enter()
-  map('n', '<cr>', ':nohlsearch<cr>:call clearmatches()<cr>')
+  keymap.set('n', '<cr>', ':nohlsearch<cr>:call clearmatches()<cr>')
 end
 _G.map_enter()
 
 -- Make escape get out of pumenu mode and go back to the uncompleted word
-map('i', '<Esc>', 'pumvisible() ? "<C-e>" : "<Esc>"', { expr = true })
+keymap.set('i', '<Esc>', 'pumvisible() ? "<C-e>" : "<Esc>"', { expr = true })
 
 -- Typos
 cmd 'command! -bang E e<bang>'
@@ -238,41 +232,41 @@ cmd 'command! -bang WQ wq<bang>'
 --------------------------------------------------------------------------------
 
 -- Sudo to write
-map('c', 'w!!', 'w !sudo tee % >/dev/null')
+keymap.set('c', 'w!!', 'w !sudo tee % >/dev/null')
 
 -- Open files in directory of current file
-map('c', '%%', "<C-R>=expand('%:h').'/'<cr>")
-map('', '<leader>e', ':edit %%', { noremap = false })
+keymap.set('c', '%%', "<C-R>=expand('%:h').'/'<cr>")
+keymap.set('', '<leader>e', ':edit %%', { remap = true})
 
 -- Find merge conflict markers
-map('n', '<leader>cf', '<ESC>/\\v^[<=>]{7}( .*|$)<CR>', { silent = true })
+keymap.set('n', '<leader>cf', '<ESC>/\\v^[<=>]{7}( .*|$)<CR>', { silent = true })
 
 -- Shorcut for setting a pry breakpoint
 cmd "iabbrev xpry require 'pry'; binding.pry<Esc>F%s<c-o>:call getchar()<CR>"
 
 -- Convert ruby 1.8 hash into ruby 1.9
-map('n', '<leader>h', ':%s/:\\([^ ]*\\)\\(\\s*\\)=>/\\1:/g<CR>')
+keymap.set('n', '<leader>h', ':%s/:\\([^ ]*\\)\\(\\s*\\)=>/\\1:/g<CR>')
 
 -- Clean trailing whitespaces
-map('n', '<leader>w', "mz:%s/\\s\\+$//<CR>:let @/=''<CR>`z")
+keymap.set('n', '<leader>w', "mz:%s/\\s\\+$//<CR>:let @/=''<CR>`z")
 
 -- Edit .vimrc file
-map('n', '<leader>EV', ':vsplit $MYVIMRC<cr>')
+keymap.set('n', '<leader>EV', ':vsplit $MYVIMRC<cr>')
 
 -- Reload .vimrc file
-map('n', '<leader>RV', ':source $MYVIMRC<cr>')
+keymap.set('n', '<leader>RV', ':source $MYVIMRC<cr>')
 
 -- Edit elvish config file
-map('n', '<leader>EE', ':vsplit ~/.elvish/rc.elv<cr>')
+keymap.set('n', '<leader>EE', ':vsplit ~/.elvish/rc.elv<cr>')
 
 -- Edit fish config file
-map('n', '<leader>EF', ':vsplit ~/.config/fish/config.fish<cr>')
+keymap.set('n', '<leader>EF', ':vsplit ~/.config/fish/config.fish<cr>')
 
 -- Edit github pull request
-map('n', '<leader>EG', ":execute 'split' fnameescape(FugitiveFind('.git/descriptions/'.fugitive#head().'.mk'))<CR>")
+keymap.set('n', '<leader>EG', ":execute 'split' fnameescape(FugitiveFind('.git/descriptions/'.fugitive#head().'.mk'))<CR>")
 
 -- Edit tmux config file
-map('n', '<leader>ET', ':vsplit ~/.tmux.conf<cr>')
+keymap.set('n', '<leader>ET', ':vsplit ~/.tmux.conf<cr>')
 
 -- Replace grep with ripgrep
 if vim.fn.executable('rg') == 1 then opt.grepprg = "rg --vimgrep" end
@@ -290,16 +284,16 @@ cmd 'autocmd BufNewFile,BufRead *.slim set syntax=slm'
 -- ARROW KEYS ARE UNACCEPTABLE
 --------------------------------------------------------------------------------
 
-map('', '<Left>', ':echo "Arrow keys are unnaceptable"<CR>', { noremap = false })
-map('', '<Right>', ':echo "Arrow keys are unnaceptable"<CR>', { noremap = false })
-map('', '<Up>', ':echo "Arrow keys are unnaceptable"<CR>', { noremap = false })
-map('', '<Down>', ':echo "Arrow keys are unnaceptable"<CR>', { noremap = false })
+keymap.set('', '<Left>', ':echo "Arrow keys are unnaceptable"<CR>', { remap = true})
+keymap.set('', '<Right>', ':echo "Arrow keys are unnaceptable"<CR>', { remap = true})
+keymap.set('', '<Up>', ':echo "Arrow keys are unnaceptable"<CR>', { remap = true})
+keymap.set('', '<Down>', ':echo "Arrow keys are unnaceptable"<CR>', { remap = true})
 
 --------------------------------------------------------------------------------
 -- RENAME CURRENT FILE
 --------------------------------------------------------------------------------
 
-function _G.rename_file(mode, lhs, rhs, opts)
+keymap.set('', '<leader>n', function()
   local old_name = fn.expand('%')
   local new_name = fn.input('New file name: ', vim.fn.expand('%'), 'file')
 
@@ -308,22 +302,18 @@ function _G.rename_file(mode, lhs, rhs, opts)
     cmd(':silent !rm '.. old_name)
     cmd('redraw!')
   end
-end
-
-map('', '<leader>n', ':call v:lua.rename_file()<cr>')
+end)
 
 --------------------------------------------------------------------------------
 -- PROMOTE VARIABLE TO RSPEC LET
 --------------------------------------------------------------------------------
 
-function _G.promote_to_let()
+keymap.set('', '<leader>p', function()
     cmd(':normal! dd')
     cmd(':normal! P')
     cmd(':.s/\\(\\w\\+\\) = \\(.*\\)$/let(:\\1) { \\2 }/')
     cmd(':normal ==')
-end
-
-map('', '<leader>p', ':call v:lua.promote_to_let()<cr>')
+end)
 
 --------------------------------------------------------------------------------
 -- CUSTOM AUTOCMDS
@@ -387,9 +377,9 @@ cmd([[
 -- Easy Align
 ----------------------------
 -- Start interactive EasyAlign in visual mode (e.g. vipga)
-map('x', 'ga', '<Plug>(EasyAlign)', { noremap = false })
+keymap.set('x', 'ga', '<Plug>(EasyAlign)', { remap = true})
 -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
-map('n', 'ga', '<Plug>(EasyAlign)', { noremap = false })
+keymap.set('n', 'ga', '<Plug>(EasyAlign)', { remap = true})
 
 ----------------------------
 -- FZF
@@ -402,8 +392,8 @@ vim.g.fzf_history_dir = '~/.local/share/fzf-history'
 vim.env.FZF_DEFAULT_OPTS = "--ansi --preview-window 'right:60%' --margin=1 --preview 'bat --color=always --line-range :150 {}'"
 
 -- <C-p> or <C-t> to search files
-map('n', '<C-t>', ':FZF -m<cr>', { silent = true })
-map('n', '<C-p>', ':FZF -m<cr>', { silent = true })
+keymap.set('n', '<C-t>', ':FZF -m<cr>', { silent = true })
+keymap.set('n', '<C-p>', ':FZF -m<cr>', { silent = true })
 
 ----------------------------
 -- Gitsigns
@@ -411,35 +401,35 @@ map('n', '<C-p>', ':FZF -m<cr>', { silent = true })
 require('gitsigns').setup {
   on_attach = function(bufnr)
     -- Navigation
-    map('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true })
-    map('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true })
+    keymap.set('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true })
+    keymap.set('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true })
 
     -- Actions
-    map('n', '<leader>hs', ':Gitsigns stage_hunk<CR>')
-    map('v', '<leader>hs', ':Gitsigns stage_hunk<CR>')
-    map('n', '<leader>hr', ':Gitsigns reset_hunk<CR>')
-    map('v', '<leader>hr', ':Gitsigns reset_hunk<CR>')
-    map('n', '<leader>hS', '<cmd>Gitsigns stage_buffer<CR>')
-    map('n', '<leader>hu', '<cmd>Gitsigns undo_stage_hunk<CR>')
-    map('n', '<leader>hR', '<cmd>Gitsigns reset_buffer<CR>')
-    map('n', '<leader>hp', '<cmd>Gitsigns preview_hunk<CR>')
-    map('n', '<leader>hb', '<cmd>lua require"gitsigns".blame_line{full=true}<CR>')
-    map('n', '<leader>tb', '<cmd>Gitsigns toggle_current_line_blame<CR>')
-    map('n', '<leader>hd', '<cmd>Gitsigns diffthis<CR>')
-    map('n', '<leader>hD', '<cmd>lua require"gitsigns".diffthis("~")<CR>')
-    map('n', '<leader>td', '<cmd>Gitsigns toggle_deleted<CR>')
+    keymap.set('n', '<leader>hs', ':Gitsigns stage_hunk<CR>')
+    keymap.set('v', '<leader>hs', ':Gitsigns stage_hunk<CR>')
+    keymap.set('n', '<leader>hr', ':Gitsigns reset_hunk<CR>')
+    keymap.set('v', '<leader>hr', ':Gitsigns reset_hunk<CR>')
+    keymap.set('n', '<leader>hS', '<cmd>Gitsigns stage_buffer<CR>')
+    keymap.set('n', '<leader>hu', '<cmd>Gitsigns undo_stage_hunk<CR>')
+    keymap.set('n', '<leader>hR', '<cmd>Gitsigns reset_buffer<CR>')
+    keymap.set('n', '<leader>hp', '<cmd>Gitsigns preview_hunk<CR>')
+    keymap.set('n', '<leader>hb', '<cmd>lua require"gitsigns".blame_line{full=true}<CR>')
+    keymap.set('n', '<leader>tb', '<cmd>Gitsigns toggle_current_line_blame<CR>')
+    keymap.set('n', '<leader>hd', '<cmd>Gitsigns diffthis<CR>')
+    keymap.set('n', '<leader>hD', '<cmd>lua require"gitsigns".diffthis("~")<CR>')
+    keymap.set('n', '<leader>td', '<cmd>Gitsigns toggle_deleted<CR>')
 
     -- Text object
-    map('o', 'ih', ':<C-U>Gitsigns select_hunk<CR>')
-    map('x', 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+    keymap.set('o', 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+    keymap.set('x', 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
 }
 
 ----------------------------
 -- NerdCommenter
 ----------------------------
-map('', '<leader>/', '<plug>NERDCommenterToggle<CR>', { noremap = false })
-map('i', '<leader>/', '<Esc><plug>NERDCommenterToggle<CR>i', { noremap = false })
+keymap.set('', '<leader>/', '<plug>NERDCommenterToggle<CR>', { remap = true})
+keymap.set('i', '<leader>/', '<Esc><plug>NERDCommenterToggle<CR>i', { remap = true})
 
 ----------------------------
 -- nvim-cmp
@@ -475,7 +465,7 @@ require('package-info').setup()
 -- Global configuration file
 vim.g.projectionist_heuristics = vim.fn.json_decode(vim.fn.join(vim.fn.readfile(vim.fn.expand('~/.config/projections.json'))))
 -- Jump to alternate file
-map('n', '<leader>.', ':A<cr>')
+keymap.set('n', '<leader>.', ':A<cr>')
 
 ----------------------------
 -- Supertab
@@ -561,10 +551,10 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 
-map('n', '<leader>xw', '<cmd>Trouble lsp_workspace_diagnostics<cr>', { silent = true })
-map('n', '<leader>xd', '<cmd>Trouble lsp_document_diagnostics<cr>', { silent = true })
-map('n', '<leader>xx', '<cmd>Trouble<cr>', { silent = true })
-map('n', 'gR', '<cmd>Trouble lsp_references<cr>', { silent = true })
+keymap.set('n', '<leader>xw', '<cmd>Trouble lsp_workspace_diagnostics<cr>', { silent = true })
+keymap.set('n', '<leader>xd', '<cmd>Trouble lsp_document_diagnostics<cr>', { silent = true })
+keymap.set('n', '<leader>xx', '<cmd>Trouble<cr>', { silent = true })
+keymap.set('n', 'gR', '<cmd>Trouble lsp_references<cr>', { silent = true })
 
 --------------------------------------------------------------------------------
 -- Load other config files
