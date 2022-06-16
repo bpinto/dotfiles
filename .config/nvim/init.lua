@@ -99,8 +99,12 @@ cmd 'colorscheme gruvbox-flat' -- Theme
 opt.background = 'dark' -- Background color
 opt.termguicolors = true -- Enable true colors in the terminal
 
--- More information, e.g. :verbose highlight, :verbose highlight VertSplit
-cmd 'highlight VertSplit ctermfg=81 guifg=#343F4C ctermbg=none guibg=none' -- Color border
+vim.api.nvim_set_hl(0, 'VertSplit', {
+  fg = '#343F4C',
+  bg = 'NONE',
+  ctermfg = 81,
+  ctermbg = 'NONE',
+})
 
 --------------------------------------------------------------------------------
 -- SEARCH CONFIGURATION
