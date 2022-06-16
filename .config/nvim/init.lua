@@ -276,13 +276,31 @@ keymap.set('n', '<leader>ET', ':vsplit ~/.tmux.conf<cr>')
 if vim.fn.executable('rg') == 1 then opt.grepprg = "rg --vimgrep" end
 
 -- Auto open the search result
-cmd 'autocmd QuickFixCmdPost *grep* cwindow'
+vim.api.nvim_create_autocmd('QuickFixCmdPost', {
+  pattern = '*grep*',
+  callback = function()
+    cmd('cwindow')
+  end,
+  desc = 'Auto open the search result'
+})
 
 -- Spell checking and automatic wrapping at the 72 chars to git commit message
-cmd 'autocmd Filetype gitcommit setlocal spell textwidth=72'
+vim.api.nvim_create_autocmd('Filetype', {
+  pattern = 'gitcommit',
+  callback = function()
+    cmd('setlocal spell textwidth=72')
+  end,
+  desc = 'Spell checking and automatic wrapping at the 72 chars to git commit message'
+})
 
 -- .slim is a slm filetype
-cmd 'autocmd BufNewFile,BufRead *.slim set syntax=slm'
+vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
+  pattern = '*.slim',
+  callback = function()
+    cmd('set syntax=slm')
+  end,
+  desc = '.slim is a slm filetype'
+})
 
 --------------------------------------------------------------------------------
 -- ARROW KEYS ARE UNACCEPTABLE
