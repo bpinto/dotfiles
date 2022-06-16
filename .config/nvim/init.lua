@@ -139,6 +139,8 @@ opt.tabstop = 2 -- A tab is two spaces
 opt.shiftwidth = 2 -- An autoindent (with <<) is two spaces
 opt.softtabstop = 2 -- Should be the same value of shiftwidth
 opt.shiftround = true -- Always round the indent to a multiple of 'shiftwidth'
+vim.g.do_filetype_lua = 1 -- Activate the Lua filetype detection mechanism
+vim.g.did_load_filetypes = 0 -- Disable filetype.vim detection mechanism
 
 --------------------------------------------------------------------------------
 -- WILDMENU
