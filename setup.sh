@@ -31,21 +31,6 @@ ln -sf $PWD/.config/bat ~/.config/
 defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
 
 ###########################################################
-# Elvish configuration
-###########################################################
-
-mkdir -p ~/.elvish
-
-# Config files
-ln -sf $PWD/.elvish/rc.elv ~/.elvish/
-
-# Plugins
-ln -sf $PWD/.elvish/lib/cliniko.elv ~/.elvish/lib/
-ln -sf $PWD/.elvish/lib/docker.elv ~/.elvish/lib/
-ln -sf $PWD/.elvish/lib/node.elv ~/.elvish/lib/
-ln -sf $PWD/.elvish/lib/prompt.elv ~/.elvish/lib/
-
-###########################################################
 # Exuberant Ctags configuration
 ###########################################################
 
