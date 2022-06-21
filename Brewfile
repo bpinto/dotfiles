@@ -5,6 +5,8 @@ tap "homebrew/core"
 
 brew 'awscli'
 brew 'cfn-lint'
+brew 'codespell'
+brew 'docker-compose'
 brew 'fish'
 brew 'fzf'
 brew 'gh'
