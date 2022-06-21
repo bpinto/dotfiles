@@ -14,6 +14,7 @@ brew 'neovim'
 brew 'node@16', link: true
 brew 'pinentry-mac'
 brew 'ripgrep'
+brew 'yt-dlp'
 
 cask '1password'
 cask 'authy'
