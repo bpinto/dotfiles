@@ -31,5 +31,5 @@ SETUVAR fish_pager_color_description:e3e5e9
 SETUVAR fish_pager_color_prefix:a7cc8c
 SETUVAR fish_pager_color_progress:e3e5e9
 SETUVAR fish_pager_color_selected_background:\x2dr
-SETUVAR fish_user_paths:/usr/local/bin\x1e/usr/local/sbin\x1e/usr/X11/bin\x1e\x2egit/node_bin
+SETUVAR fish_user_paths:/usr/local/bin\x1e/usr/local/sbin\x1e/opt/homebrew/bin\x1e/opt/homebrew/sbin\x1e/usr/X11/bin\x1e\x2egit/node_bin
 SETUVAR terminal_colors_set:\x1d

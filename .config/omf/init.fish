@@ -5,9 +5,9 @@ set -gx EDITOR nvim
 set -g theme_short_path yes
 
 # Ruby configuration
-set -g theme_display_rbenv 'yes'
-set -g theme_display_rbenv_gemset 'yes'
-set -g theme_display_rbenv_with_gemfile_only 'yes'
+set -g theme_display_rbenv yes
+set -g theme_display_rbenv_gemset yes
+set -g theme_display_rbenv_with_gemfile_only yes
 
 # Less colors
 set -gx LESS_TERMCAP_so \e'[01;44m' # begin standout-mode – info
@@ -31,4 +31,4 @@ set -gx FZF_ALT_C_COMMAND "
 set -gx FZF_DEFAULT_COMMAND "rg --files --hidden -g'!.git'"
 
 # Configure PATH
-set PATH ~/.gem/ruby/2.4.0/bin /usr/local/bin $PATH
+set PATH ~/.gem/ruby/2.4.0/bin /opt/homebrew/bin /usr/local/bin $PATH
