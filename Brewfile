@@ -4,6 +4,7 @@ tap "homebrew/cask-versions"
 tap "homebrew/core"
 
 brew 'awscli'
+brew 'bat'
 brew 'cfn-lint'
 brew 'codespell'
 brew 'docker-compose'
