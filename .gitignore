@@ -18,4 +18,5 @@ com.googlecode.iterm2.plist
 .vim/autoload
 .vim/bundle
 .z
+Brewfile.lock.json
 Library/
