@@ -1,9 +1,0 @@
-background-color=#323232
-border-color=#323232
-border-size=2
-default-timeout=5000
-font=SF Pro Text 10
-text-color=#f3f4f5
-
-#[app-name="Slack"]
-#exec=swaymsg [class="Slack"] urgent enable

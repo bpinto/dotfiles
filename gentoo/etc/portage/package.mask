@@ -1,2 +1,0 @@
-*/*::jorgicio
-*/*::go-overlay

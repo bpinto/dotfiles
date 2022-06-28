@@ -1,4 +1,0 @@
-post_src_install() {
-  chmod -R u-x,g-w,o-o ${D}
-  chown -R root:browser ${D}
-}

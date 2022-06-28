@@ -1,5 +1,0 @@
-# The default is 'bestvideo+bestaudio/best' which include 4k resolutions when available.
---format bestvideo[height<=?1080]+bestaudio/best
-
-# Save all videos under Movies directory in your home directory
--o ~/Videos/%(title)s.%(ext)s

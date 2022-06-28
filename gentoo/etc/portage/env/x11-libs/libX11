@@ -1,7 +1,0 @@
-post_pkg_postinst() {
-  einfo 'Executing custom patch'
-
-  local file=/usr/share/X11/locale/en_US.UTF-8/Compose
-  sed -i "s/ć/ç/g" $file
-  sed -i "s/Ć/Ç/g" $file
-}
