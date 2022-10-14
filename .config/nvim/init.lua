@@ -11,6 +11,7 @@ require 'paq' {
   'savq/paq-nvim'; -- paq-nvim manages itself
   'MunifTanjim/nui.nvim'; -- required by package-info
   'RRethy/nvim-treesitter-textsubjects';
+  'delphinus/cmp-ctags';
   'eddyekofo94/gruvbox-flat.nvim';
   'ervandew/supertab';
   'folke/trouble.nvim';
@@ -28,7 +29,6 @@ require 'paq' {
   'nvim-lua/plenary.nvim'; -- required by: null-ls
   { 'nvim-treesitter/nvim-treesitter', run = function() vim.cmd('TSUpdate') end };
   'nvim-treesitter/nvim-treesitter-textobjects';
-  'quangnguyen30192/cmp-nvim-tags';
   'scrooloose/nerdcommenter';
   'slm-lang/vim-slm';
   'tpope/vim-fugitive';
@@ -472,9 +472,9 @@ cmp.setup {
   },
   sources = {
     { name = 'buffer' },
+    { name = 'ctags' },
     { name = 'emoji' },
     { name = 'nvim_lsp' },
-    { name = 'tags' },
   }
 }
 
