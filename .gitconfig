@@ -6,7 +6,6 @@
   email      = bruno@bpinto.com
   signingkey = bruno@bpinto.com
 [alias]
-  co    = checkout
   ctags = !.git/hooks/ctags
   ds    = diff --staged
   lg    = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
@@ -20,6 +19,9 @@
 
   # Amend the currently staged files to the latest commit
   amend = commit --amend -C HEAD
+
+  # Interactive checkout
+  co = "!f() { [ $# != 0 ] && git checkout $@ || git checkout $(git branch | grep -v '^*' | fzf --preview 'git show --color $(git merge-base master {+1})..{+1}'); }; f"
 
   # List contributors with number of commits
   contributors = shortlog --summary --numbered
