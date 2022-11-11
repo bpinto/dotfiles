@@ -481,7 +481,9 @@ cmp.setup {
 ----------------------------
 -- Package Info
 ----------------------------
-require('package-info').setup()
+require('package-info').setup({
+  hide_up_to_date = true
+})
 
 ----------------------------
 -- Projectionist
