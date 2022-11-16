@@ -1,5 +1,10 @@
 local null_ls = require 'null-ls'
+local lspconfig = require 'lspconfig'
 local lsp = vim.lsp
+
+--------------------------------------------------------------------------------
+-- null-ls
+--------------------------------------------------------------------------------
 
 vim.diagnostic.config({
   float = { border = 'single', focusable = false },
@@ -51,17 +56,24 @@ null_ls.setup({
   on_attach = on_attach,
   sources = {
     -- code actions
-    null_ls.builtins.code_actions.eslint_d,
     null_ls.builtins.code_actions.gitsigns,
 
     -- diagnostics
     null_ls.builtins.diagnostics.codespell,
-    null_ls.builtins.diagnostics.eslint_d,
 
     -- formatting
     null_ls.builtins.formatting.fish_indent,
     null_ls.builtins.formatting.prettierd,
-    null_ls.builtins.formatting.eslint_d,
     null_ls.builtins.formatting.trim_whitespace
   }
 })
+
+--------------------------------------------------------------------------------
+-- LSP Config
+--------------------------------------------------------------------------------
+
+-- Enable language server
+require'lspconfig'.eslint.setup{}
+
+-- Format document on save
+vim.cmd('autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll')
