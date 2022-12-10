@@ -27,7 +27,7 @@ if status --is-interactive
     set -gx EDITOR vim
 
     # Set bat theme
-    set -gx BAT_THEME gruvbox-dark
+    set -gx BAT_THEME everforest
 
     # Build images using dockerbuild
     set -gx COMPOSE_DOCKER_CLI_BUILD 1

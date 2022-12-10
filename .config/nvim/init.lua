@@ -12,7 +12,6 @@ require 'paq' {
   'MunifTanjim/nui.nvim'; -- required by package-info
   'RRethy/nvim-treesitter-textsubjects';
   'delphinus/cmp-ctags';
-  'eddyekofo94/gruvbox-flat.nvim';
   'ervandew/supertab';
   'folke/trouble.nvim';
   'ful1e5/onedark.nvim';
@@ -29,6 +28,7 @@ require 'paq' {
   'nvim-lua/plenary.nvim'; -- required by: null-ls
   { 'nvim-treesitter/nvim-treesitter', run = function() vim.cmd('TSUpdate') end };
   'nvim-treesitter/nvim-treesitter-textobjects';
+  'sainnhe/everforest';
   'scrooloose/nerdcommenter';
   'slm-lang/vim-slm';
   'tpope/vim-fugitive';
@@ -70,7 +70,7 @@ opt.winwidth = 79 -- Minimal window width
 --------------------------------------------------------------------------------
 require('lualine').setup {
     options = {
-        theme = 'gruvbox-flat',
+        theme = 'everforest',
         component_separators = {'', ''},
         icons_enabled = true
     },
@@ -94,10 +94,12 @@ require('lualine').setup {
     extensions = {}
 }
 
-vim.g.gruvbox_flat_style = "dark"
-cmd 'colorscheme gruvbox-flat' -- Theme
-opt.background = 'dark' -- Background color
-opt.termguicolors = true -- Enable true colors in the terminal
+vim.g.everforest_background = 'hard' -- high contrast
+vim.g.everforest_enable_italic = 1 -- enable italic
+
+cmd.colorscheme 'everforest' -- theme
+opt.background = 'dark' -- background color
+opt.termguicolors = true -- enable true colors in the terminal
 
 vim.api.nvim_set_hl(0, 'VertSplit', {
   fg = '#343F4C',
@@ -504,17 +506,11 @@ vim.g.SuperTabDefaultCompletionType = '<c-n>'
 ----------------------------
 require('nvim-treesitter.configs').setup {
   ensure_installed = "all",
-  ignore_install = { "phpdoc" },
   highlight = {
     enable = true -- enable extension
-  }
-}
+  },
 
-----------------------------
--- Treesitter textobjects
-----------------------------
-
-require('nvim-treesitter.configs').setup {
+  -- Treesitter textobjects
   textobjects = {
     select = {
       enable = true,
@@ -547,14 +543,9 @@ require('nvim-treesitter.configs').setup {
         ["[M"] = "@function.outer"
       }
     }
-  }
-}
+  },
 
-----------------------------
--- Treesitter textsubjects
-----------------------------
-
-require('nvim-treesitter.configs').setup {
+  -- Treesitter textsubjects
     textsubjects = {
         enable = true,
         keymaps = {
