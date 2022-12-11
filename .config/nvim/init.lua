@@ -225,15 +225,15 @@ _G.map_enter()
 keymap.set('i', '<Esc>', 'pumvisible() ? "<C-e>" : "<Esc>"', { expr = true })
 
 -- Typos
-cmd 'command! -bang E e<bang>'
-cmd 'command! -bang Q q<bang>'
-cmd 'command! -bang W w<bang>'
-cmd 'command! -bang QA qa<bang>'
-cmd 'command! -bang Qa qa<bang>'
-cmd 'command! -bang Wa wa<bang>'
-cmd 'command! -bang WA wa<bang>'
-cmd 'command! -bang Wq wq<bang>'
-cmd 'command! -bang WQ wq<bang>'
+vim.api.nvim_create_user_command('E', 'e<bang>', { bang = true })
+vim.api.nvim_create_user_command('Q', 'q<bang>', { bang = true })
+vim.api.nvim_create_user_command('W', 'w<bang>', { bang = true })
+vim.api.nvim_create_user_command('Qa', 'qa<bang>', { bang = true })
+vim.api.nvim_create_user_command('QA', 'wa<bang>', { bang = true })
+vim.api.nvim_create_user_command('Wa', 'wa<bang>', { bang = true })
+vim.api.nvim_create_user_command('WA', 'wa<bang>', { bang = true })
+vim.api.nvim_create_user_command('Wq', 'wq<bang>', { bang = true })
+vim.api.nvim_create_user_command('WQ', 'wq<bang>', { bang = true })
 
 --------------------------------------------------------------------------------
 -- EXTRA
@@ -249,7 +249,7 @@ keymap.set('', '<leader>e', ':edit %%', { remap = true})
 -- Find merge conflict markers
 keymap.set('n', '<leader>cf', '<ESC>/\\v^[<=>]{7}( .*|$)<CR>', { silent = true })
 
--- Shorcut for setting a pry breakpoint
+-- Shortcut for setting a pry breakpoint
 cmd "iabbrev xpry require 'pry'; binding.pry<Esc>F%s<c-o>:call getchar()<CR>"
 
 -- Convert ruby 1.8 hash into ruby 1.9
