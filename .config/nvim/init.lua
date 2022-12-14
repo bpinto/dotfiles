@@ -484,8 +484,14 @@ cmp.setup {
 -- Package Info
 ----------------------------
 require('package-info').setup({
+  colors = {
+    outdated = "#7FBBB3"
+  },
   hide_up_to_date = true
 })
+
+-- Fix for custom colors not working
+require('package-info.config').__register_highlight_groups()
 
 ----------------------------
 -- Projectionist
