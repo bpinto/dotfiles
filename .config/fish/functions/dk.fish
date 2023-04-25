@@ -1,3 +1,3 @@
 function dk
-  command docker-compose $argv
+    command docker compose $argv
 end
