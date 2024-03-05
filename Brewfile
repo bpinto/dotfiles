@@ -1,7 +1,6 @@
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
-tap "homebrew/core"
 
 brew 'awscli'
 brew 'bat'
@@ -13,7 +12,7 @@ brew 'gh'
 brew 'git-delta'
 brew 'gpg'
 brew 'neovim'
-brew 'node@18', link: true
+brew 'node@20', link: true
 brew 'pinentry-mac'
 brew 'ripgrep'
 brew 'yt-dlp'
