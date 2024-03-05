@@ -10,6 +10,6 @@ function dockerize_commands
         set app_name (cat "$path/docker-compose" | grep -E "^($argv[1]|\*)" | head -1 | cut -d':' -f2)
         command docker compose run --rm $app_name $argv
     else
-        command rake $argv
+        command $argv
     end
 end
