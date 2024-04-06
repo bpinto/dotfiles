@@ -6,38 +6,46 @@ local opt = vim.opt
 --------------------------------------------------------------------------------
 -- PLUGINS
 --------------------------------------------------------------------------------
+-- Enable the experimental Lua module loader
+if vim.loader then
+  vim.loader.enable()
+end
 
-require 'paq' {
-  'savq/paq-nvim'; -- paq-nvim manages itself
-  'MunifTanjim/nui.nvim'; -- required by package-info
-  'RRethy/nvim-treesitter-textsubjects';
-  'delphinus/cmp-ctags';
-  'ervandew/supertab';
-  'folke/trouble.nvim';
-  'ful1e5/onedark.nvim';
-  'hoob3rt/lualine.nvim';
-  'hrsh7th/cmp-buffer';
-  'hrsh7th/cmp-emoji';
-  'hrsh7th/cmp-nvim-lsp';
-  'hrsh7th/nvim-cmp';
-  'jbmorgado/vim-pine-script';
-  'jose-elias-alvarez/null-ls.nvim';
-  'junegunn/fzf';
-  'junegunn/vim-easy-align';
-  'lewis6991/gitsigns.nvim';
-  'neovim/nvim-lspconfig';
-  'nvim-lua/plenary.nvim'; -- required by: null-ls
-  { 'nvim-treesitter/nvim-treesitter', build = function() vim.cmd('TSUpdate') end };
-  'nvim-treesitter/nvim-treesitter-textobjects';
-  { "rose-pine/neovim", as = "rose-pine" };
-  'scrooloose/nerdcommenter';
-  'slm-lang/vim-slm';
-  'tpope/vim-fugitive';
-  'tpope/vim-projectionist';
-  'tpope/vim-rhubarb';
-  'tpope/vim-surround';
-  'vuki656/package-info.nvim';
-}
+-- lazy.nvim requires this to be defined before its setup
+-- Remapping leader to ,
+vim.g.mapleader = ','
+
+-- Bootstrap lazy.nvim
+local lazypath = fn.stdpath('data') .. '/lazy/lazy.nvim'
+opt.rtp:prepend(lazypath)
+
+-- Configure lazy.nvim
+require('lazy').setup({
+  { import = 'plugins' }, -- Merge with configurations from ~/.config/nvim/lua/plugins/*.lua
+  { 'ervandew/supertab' },
+  { 'folke/trouble.nvim' },
+  { 'hrsh7th/nvim-cmp' },
+  { 'jbmorgado/vim-pine-script', ft = 'pine' },
+  { 'nvimtools/none-ls.nvim' },
+  { 'junegunn/vim-easy-align' },
+  { 'junegunn/fzf' },
+  { 'lewis6991/gitsigns.nvim' },
+  { 'neovim/nvim-lspconfig' },
+  { 'nvim-lualine/lualine.nvim' },
+  { 'nvim-treesitter/nvim-treesitter' },
+  { 'rose-pine/neovim' },
+  { 'scrooloose/nerdcommenter' },
+  { 'slm-lang/vim-slm', event = 'VeryLazy' },
+  { 'tpope/vim-fugitive' },
+  { 'tpope/vim-projectionist' },
+  { 'tpope/vim-rhubarb' },
+  { 'tpope/vim-surround' },
+  { 'vuki656/package-info.nvim' },
+},
+{
+  defaults = { lazy = true },
+  install = { colorscheme = { "rose-pine", "habamax" } },
+})
 
 --------------------------------------------------------------------------------
 -- EDITOR CONFIGURATION
@@ -71,42 +79,7 @@ opt.winwidth = 79 -- Minimal window width
 --------------------------------------------------------------------------------
 opt.background = 'dark' -- background color
 
-require("rose-pine").setup {
-  styles = {
-    italic = false,
-  },
-  highlight_groups = {
-    Comment = { italic = true },
-  },
-}
-
-require('lualine').setup {
-    options = {
-        theme = 'rose-pine',
-        component_separators = {'', ''},
-        icons_enabled = true
-    },
-    sections = {
-        lualine_a = {{'mode', upper = true}},
-        lualine_b = {{'branch', icon = ''}},
-        lualine_c = {{'filename', file_status = true, path = 1}},
-        lualine_x = {'encoding', 'fileformat', 'filetype'},
-        lualine_y = {'progress'},
-        lualine_z = {'location'}
-    },
-    inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {{'filename', file_status = true, path = 1}},
-        lualine_x = {'location'},
-        lualine_y = {},
-        lualine_z = {}
-    },
-    tabline = {},
-    extensions = {}
-}
-
-vim.cmd("colorscheme rose-pine-moon")
+cmd("colorscheme rose-pine-moon")
 opt.termguicolors = true -- enable true colors in the terminal
 
 vim.api.nvim_set_hl(0, 'VertSplit', {
@@ -318,6 +291,7 @@ vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
 vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
   pattern = '*.pine',
   callback = function()
+    cmd('set filetype=pine')
     cmd('set syntax=psl')
   end,
   desc = '.pine is a psl filetype'
@@ -401,204 +375,3 @@ cmd([[
     autocmd FocusLost * :silent! wall
   augroup END
 ]])
-
-cmd([[
-  augroup config-github-complete
-    " Remove ALL autocommands for the current group.
-    autocmd!
-
-    " Github completion on git commit messages
-    autocmd FileType gitcommit setl omnifunc=rhubarb#omnifunc | call SuperTabChain(&omnifunc, "<c-p>")
-  augroup END
-]])
-
---------------------------------------------------------------------------------
--- PLUGINS
---------------------------------------------------------------------------------
-
-----------------------------
--- Easy Align
-----------------------------
--- Start interactive EasyAlign in visual mode (e.g. vipga)
-keymap.set('x', 'ga', '<Plug>(EasyAlign)', { remap = true})
--- Start interactive EasyAlign for a motion/text object (e.g. gaip)
-keymap.set('n', 'ga', '<Plug>(EasyAlign)', { remap = true})
-
-----------------------------
--- FZF
-----------------------------
--- Act like CtrlP
-vim.g.fzf_action = { ['ctrl-s'] = 'split', ['ctrl-v'] = 'vsplit' }
--- Enable per-command history
-vim.g.fzf_history_dir = '~/.local/share/fzf-history'
--- Show preview window with colors using bat
-vim.env.FZF_DEFAULT_OPTS = "--ansi --preview-window 'right:60%' --margin=1 --preview 'bat --color=always --line-range :150 {}'"
-
--- <C-p> or <C-t> to search files
-keymap.set('n', '<C-t>', ':FZF -m<cr>', { silent = true })
-keymap.set('n', '<C-p>', ':FZF -m<cr>', { silent = true })
-
-----------------------------
--- Gitsigns
-----------------------------
-require('gitsigns').setup {
-  on_attach = function(bufnr)
-    -- Navigation
-    keymap.set('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true })
-    keymap.set('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true })
-
-    -- Actions
-    keymap.set('n', '<leader>hs', ':Gitsigns stage_hunk<CR>')
-    keymap.set('v', '<leader>hs', ':Gitsigns stage_hunk<CR>')
-    keymap.set('n', '<leader>hr', ':Gitsigns reset_hunk<CR>')
-    keymap.set('v', '<leader>hr', ':Gitsigns reset_hunk<CR>')
-    keymap.set('n', '<leader>hS', '<cmd>Gitsigns stage_buffer<CR>')
-    keymap.set('n', '<leader>hu', '<cmd>Gitsigns undo_stage_hunk<CR>')
-    keymap.set('n', '<leader>hR', '<cmd>Gitsigns reset_buffer<CR>')
-    keymap.set('n', '<leader>hp', '<cmd>Gitsigns preview_hunk<CR>')
-    keymap.set('n', '<leader>hb', '<cmd>lua require"gitsigns".blame_line{full=true}<CR>')
-    keymap.set('n', '<leader>tb', '<cmd>Gitsigns toggle_current_line_blame<CR>')
-    keymap.set('n', '<leader>hd', '<cmd>Gitsigns diffthis<CR>')
-    keymap.set('n', '<leader>hD', '<cmd>lua require"gitsigns".diffthis("~")<CR>')
-    keymap.set('n', '<leader>td', '<cmd>Gitsigns toggle_deleted<CR>')
-
-    -- Text object
-    keymap.set('o', 'ih', ':<C-U>Gitsigns select_hunk<CR>')
-    keymap.set('x', 'ih', ':<C-U>Gitsigns select_hunk<CR>')
-  end
-}
-
-----------------------------
--- NerdCommenter
-----------------------------
-keymap.set('', '<leader>/', '<plug>NERDCommenterToggle<CR>', { remap = true})
-keymap.set('i', '<leader>/', '<Esc><plug>NERDCommenterToggle<CR>i', { remap = true})
-
-----------------------------
--- nvim-cmp
-----------------------------
-local cmp = require('cmp')
-
-cmp.setup {
-  mapping = {
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    })
-  },
-  sources = {
-    { name = 'buffer' },
-    { name = 'ctags' },
-    { name = 'emoji' },
-    { name = 'nvim_lsp' },
-  }
-}
-
-----------------------------
--- Package Info
-----------------------------
-require('package-info').setup({
-  colors = {
-    outdated = "#7FBBB3"
-  },
-  hide_up_to_date = true
-})
-
--- Fix for custom colors not working
-require('package-info.config').__register_highlight_groups()
-
-----------------------------
--- Projectionist
-----------------------------
--- Global configuration file
-vim.g.projectionist_heuristics = vim.fn.json_decode(vim.fn.join(vim.fn.readfile(vim.fn.expand('~/.config/projections.json'))))
--- Jump to alternate file
-keymap.set('n', '<leader>.', ':A<cr>')
-
-----------------------------
--- Supertab
-----------------------------
--- Navigate the completion menu from top to bottom
-vim.g.SuperTabDefaultCompletionType = '<c-n>'
-
-----------------------------
--- Treesitter
-----------------------------
-require('nvim-treesitter.configs').setup {
-  ensure_installed = "all",
-  highlight = {
-    enable = true -- enable extension
-  },
-
-  -- Treesitter textobjects
-  textobjects = {
-    select = {
-      enable = true,
-      lookahead = true, -- automatically jump forward to textobj
-
-      keymaps = {
-        ["ab"] = "@block.outer",
-        ["ib"] = "@block.inner",
-        ["ac"] = "@call.outer",
-        ["ic"] = "@call.inner",
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-      }
-    },
-
-    move = {
-      enable = true,
-      set_jumps = true, -- whether to set jumps in the jumplist
-
-      goto_next_start = {
-        ["]m"] = "@function.outer"
-      },
-      goto_next_end = {
-        ["]M"] = "@function.outer"
-      },
-      goto_previous_start = {
-        ["[m"] = "@function.outer"
-      },
-      goto_previous_end = {
-        ["[M"] = "@function.outer"
-      }
-    }
-  },
-
-  -- Treesitter textsubjects
-    textsubjects = {
-        enable = true,
-        keymaps = {
-            ['.'] = 'textsubjects-smart',
-            [';'] = 'textsubjects-container-outer'
-        }
-    }
-}
-
-----------------------------
--- Trouble
-----------------------------
-require('trouble').setup {
-  icons = false -- do not use devicons for filenames
-}
-
--- Diagnostic icons
-local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-end
-
-keymap.set('n', '<leader>xw', '<cmd>Trouble lsp_workspace_diagnostics<cr>', { silent = true })
-keymap.set('n', '<leader>xd', '<cmd>Trouble lsp_document_diagnostics<cr>', { silent = true })
-keymap.set('n', '<leader>xx', '<cmd>Trouble<cr>', { silent = true })
-keymap.set('n', 'gR', '<cmd>Trouble lsp_references<cr>', { silent = true })
-
---------------------------------------------------------------------------------
--- Load other config files
---------------------------------------------------------------------------------
-
-require 'my_modules/lsp'

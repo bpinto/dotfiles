@@ -80,10 +80,10 @@ ln -sf $PWD/.config/nvim ~/.config/
 # Create backup folder
 mkdir -p ~/.local/share/nvim/backup
 
-# Install vim-plug
-if [[ ! -e ~/.local/share/nvim/site/autoload/plug.vim ]]; then
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# Install lazy.nvim
+if [[ ! -e ~/.local/share/nvim/lazy/lazy.nvim ]]; then
+  mkdir -p ~/.local/share/nvim/lazy
+  git clone --filter=blob:none https://github.com/folke/lazy.nvim.git --branch=stable ~/.local/share/nvim/lazy/lazy.nvim
 fi
 
 # Install global projectionist file
