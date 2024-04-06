@@ -29,7 +29,7 @@ require 'paq' {
   'nvim-lua/plenary.nvim'; -- required by: null-ls
   { 'nvim-treesitter/nvim-treesitter', build = function() vim.cmd('TSUpdate') end };
   'nvim-treesitter/nvim-treesitter-textobjects';
-  'sainnhe/everforest';
+  { "rose-pine/neovim", as = "rose-pine" };
   'scrooloose/nerdcommenter';
   'slm-lang/vim-slm';
   'tpope/vim-fugitive';
@@ -69,9 +69,20 @@ opt.winwidth = 79 -- Minimal window width
 --------------------------------------------------------------------------------
 -- COLOR
 --------------------------------------------------------------------------------
+opt.background = 'dark' -- background color
+
+require("rose-pine").setup {
+  styles = {
+    italic = false,
+  },
+  highlight_groups = {
+    Comment = { italic = true },
+  },
+}
+
 require('lualine').setup {
     options = {
-        theme = 'everforest',
+        theme = 'rose-pine',
         component_separators = {'', ''},
         icons_enabled = true
     },
@@ -95,11 +106,7 @@ require('lualine').setup {
     extensions = {}
 }
 
-vim.g.everforest_background = 'hard' -- high contrast
-vim.g.everforest_enable_italic = 1 -- enable italic
-
-cmd.colorscheme 'everforest' -- theme
-opt.background = 'dark' -- background color
+vim.cmd("colorscheme rose-pine-moon")
 opt.termguicolors = true -- enable true colors in the terminal
 
 vim.api.nvim_set_hl(0, 'VertSplit', {
