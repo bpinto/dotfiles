@@ -27,7 +27,7 @@ require 'paq' {
   'lewis6991/gitsigns.nvim';
   'neovim/nvim-lspconfig';
   'nvim-lua/plenary.nvim'; -- required by: null-ls
-  { 'nvim-treesitter/nvim-treesitter', run = function() vim.cmd('TSUpdate') end };
+  { 'nvim-treesitter/nvim-treesitter', build = function() vim.cmd('TSUpdate') end };
   'nvim-treesitter/nvim-treesitter-textobjects';
   'sainnhe/everforest';
   'scrooloose/nerdcommenter';
