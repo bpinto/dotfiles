@@ -20,6 +20,7 @@ require 'paq' {
   'hrsh7th/cmp-emoji';
   'hrsh7th/cmp-nvim-lsp';
   'hrsh7th/nvim-cmp';
+  'jbmorgado/vim-pine-script';
   'jose-elias-alvarez/null-ls.nvim';
   'junegunn/fzf';
   'junegunn/vim-easy-align';
@@ -304,6 +305,15 @@ vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
     cmd('set syntax=slm')
   end,
   desc = '.slim is a slm filetype'
+})
+
+-- .pine is a psl filetype
+vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
+  pattern = '*.pine',
+  callback = function()
+    cmd('set syntax=psl')
+  end,
+  desc = '.pine is a psl filetype'
 })
 
 --------------------------------------------------------------------------------
