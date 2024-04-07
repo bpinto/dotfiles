@@ -16,6 +16,11 @@ end
 if status --is-interactive
     # Do not ignore hidden files when filtering files (e.g. vim integration)
     set -gx FZF_DEFAULT_COMMAND "rg --files --hidden -g'!.git'"
+    set -gx FZF_DEFAULT_OPTS "$FZF_DEFAULT_OPTS \
+--color=fg:#c0caf5,bg:#24283b,hl:#ff9e64 \
+--color=fg+:#c0caf5,bg+:#292e42,hl+:#ff9e64 \
+--color=info:#7aa2f7,prompt:#7dcfff,pointer:#7dcfff \
+--color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a"
 
     # Set language environment
     set -gx LC_ALL "en_US.UTF-8"
@@ -27,7 +32,7 @@ if status --is-interactive
     set -gx EDITOR vim
 
     # Set bat theme
-    set -gx BAT_THEME everforest
+    set -gx BAT_THEME tokyonight_storm
 
     # Build images using dockerbuild
     set -gx COMPOSE_DOCKER_CLI_BUILD 1

@@ -62,22 +62,21 @@
   # [default] space-before-tab: looks for spaces before tabs at the beginning of a line
   whitespace = space-before-tab,-indent-with-non-tab,trailing-space
 [delta]
-  plus-style = "syntax #32361a"
-  minus-style = "syntax #3c1f1e"
+  plus-style = syntax "#283b4d"
+  plus-non-emph-style = syntax "#283b4d"
+  plus-emph-style = syntax "#316172"
+  plus-empty-line-marker-style = syntax "#283b4d"
+  minus-style = syntax "#3f2d3d"
+  minus-non-emph-style = syntax "#3f2d3d"
+  minus-emph-style = syntax "#763842"
+  minus-empty-line-marker-style = syntax "#3f2d3d"
   features = side-by-side line-numbers decorations
-  syntax-theme = gruvbox-dark
+  syntax-theme = tokyonight_storm
   navigate = true
-[delta "decorations"]
-  commit-decoration-style = bold yellow box ul
-  file-style = bold ul
-  file-decoration-style = none
-  hunk-header-decoration-style = "#5a524c" box ul
 [delta "line-numbers"]
-  line-numbers-plus-style = "#6c782e"
-  line-numbers-minus-style = "#c14a4a"
-  line-numbers-left-style = "#5a524c"
-  line-numbers-right-style = "#5a524c"
-  line-numbers-zero-style = "#5a524c"
+  line-numbers-minus-style = "#b2555b"
+  line-numbers-plus-style = "#266d6a"
+  line-numbers-zero-style = "#3b4261"
 [difftool]
   prompt = false
 [format]

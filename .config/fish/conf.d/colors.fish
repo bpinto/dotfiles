@@ -2,45 +2,28 @@ if not set -q terminal_colors_set
     echo Setting colors
     set -U terminal_colors_set
 
-    # syntax highlighting variables
+    # Syntax Highlighting Colors
     # https://fishshell.com/docs/current/interactive.html#syntax-highlighting-variables
-    set -U fish_color_normal e0def4
-    set -U fish_color_command ea9a97
-    set -U fish_color_keyword 9ccfd8
-    set -U fish_color_quote f6c177
-    set -U fish_color_redirection 3e8fb0
-    set -U fish_color_end 908caa
-    set -U fish_color_error eb6f92
-    set -U fish_color_param e0def4
-    set -U fish_color_comment 908caa
-    # set -U fish_color_match --background=brblue
-    set -U fish_color_selection --reverse
-    # set -U fish_color_history_current --bold
-    set -U fish_color_operator e0def4
-    set -U fish_color_escape 3e8fb0
-    set -U fish_color_autosuggestion 908caa
-    set -U fish_color_cwd ea9a97
-    # set -U fish_color_cwd_root red
-    set -U fish_color_user f6c177
-    set -U fish_color_host 9ccfd8
-    set -U fish_color_host_remote c4a7e7
-    set -U fish_color_cancel e0def4
-    set -U fish_color_search_match --background=232136
-    set -U fish_color_valid_path
+    set -U fish_color_normal c0caf5
+    set -U fish_color_command 7dcfff
+    set -U fish_color_keyword bb9af7
+    set -U fish_color_quote e0af68
+    set -U fish_color_redirection c0caf5
+    set -U fish_color_end ff9e64
+    set -U fish_color_error f7768e
+    set -U fish_color_param 9d7cd8
+    set -U fish_color_comment 565f89
+    set -U fish_color_selection --background=2e3c64
+    set -U fish_color_search_match --background=2e3c64
+    set -U fish_color_operator 9ece6a
+    set -U fish_color_escape bb9af7
+    set -U fish_color_autosuggestion 565f89
 
-    # pager color variables
+    # Completion Pager Colors
     # https://fishshell.com/docs/current/interactive.html#pager-color-variables
-    set -U fish_pager_color_progress ea9a97
-    set -U fish_pager_color_background --background=2a273f
-    set -U fish_pager_color_prefix 9ccfd8
-    set -U fish_pager_color_completion 908caa
-    set -U fish_pager_color_description 908caa
-    set -U fish_pager_color_secondary_background
-    set -U fish_pager_color_secondary_prefix
-    set -U fish_pager_color_secondary_completion
-    set -U fish_pager_color_secondary_description
-    set -U fish_pager_color_selected_background --background=393552
-    set -U fish_pager_color_selected_prefix 9ccfd8
-    set -U fish_pager_color_selected_completion e0def4
-    set -U fish_pager_color_selected_description e0def4
+    set -U fish_pager_color_progress 565f89
+    set -U fish_pager_color_prefix 7dcfff
+    set -U fish_pager_color_completion c0caf5
+    set -U fish_pager_color_description 565f89
+    set -U fish_pager_color_selected_background --background=2e3c64
 end

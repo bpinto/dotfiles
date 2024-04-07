@@ -23,16 +23,17 @@ opt.rtp:prepend(lazypath)
 require('lazy').setup({
   { import = 'plugins' }, -- Merge with configurations from ~/.config/nvim/lua/plugins/*.lua
   { 'ervandew/supertab' },
+  { 'folke/tokyonight.nvim' },
   { 'folke/trouble.nvim' },
   { 'hrsh7th/nvim-cmp' },
   { 'jbmorgado/vim-pine-script', ft = 'pine' },
-  { 'nvimtools/none-ls.nvim' },
-  { 'junegunn/vim-easy-align' },
   { 'junegunn/fzf' },
+  { 'junegunn/vim-easy-align' },
   { 'lewis6991/gitsigns.nvim' },
   { 'neovim/nvim-lspconfig' },
   { 'nvim-lualine/lualine.nvim' },
   { 'nvim-treesitter/nvim-treesitter' },
+  { 'nvimtools/none-ls.nvim' },
   { 'rose-pine/neovim' },
   { 'scrooloose/nerdcommenter' },
   { 'slm-lang/vim-slm', event = 'VeryLazy' },
@@ -44,7 +45,7 @@ require('lazy').setup({
 },
 {
   defaults = { lazy = true },
-  install = { colorscheme = { "rose-pine", "habamax" } },
+  install = { colorscheme = { 'tokyonight', 'habamax' } },
 })
 
 --------------------------------------------------------------------------------
@@ -78,16 +79,16 @@ opt.winwidth = 79 -- Minimal window width
 -- COLOR
 --------------------------------------------------------------------------------
 opt.background = 'dark' -- background color
-
-cmd("colorscheme rose-pine-moon")
 opt.termguicolors = true -- enable true colors in the terminal
 
-vim.api.nvim_set_hl(0, 'VertSplit', {
-  fg = '#343F4C',
-  bg = 'NONE',
-  ctermfg = 81,
-  ctermbg = 'NONE',
-})
+cmd("colorscheme tokyonight")
+
+--vim.api.nvim_set_hl(0, 'VertSplit', {
+  --fg = '#343F4C',
+  --bg = 'NONE',
+  --ctermfg = 81,
+  --ctermbg = 'NONE',
+--})
 
 --------------------------------------------------------------------------------
 -- SEARCH CONFIGURATION
@@ -361,7 +362,7 @@ cmd([[
     autocmd CmdwinLeave * :call v:lua.map_enter()
 
     " Highlight characters longer than 100 characters
-    autocmd BufEnter * highlight OverLength ctermbg=darkgrey guibg=#111111
+    autocmd BufEnter * highlight OverLength ctermbg=grey guibg=#2E3C64
     autocmd BufEnter * :if &buftype isnot# "nofile" | match OverLength /\%>100v.\+/ | endif
   augroup END
 ]])
