@@ -11,7 +11,12 @@ return {
       local configs = require("nvim-treesitter.configs")
 
       configs.setup({
-        ensure_installed = "all",
+        ensure_installed = {
+          'bash', 'comment', 'css', 'csv', 'diff', 'dockerfile', 'fish', 'git_config',
+          'git_rebase', 'gitcommit', 'gitignore', 'html', 'http', 'javascript', 'jsdoc',
+          'json', 'json5', 'lua', 'regex', 'ruby', 'scss', 'sql', 'ssh_config', 'typescript',
+          'yaml'
+        },
 
         highlight = {
           enable = true -- enable extension

@@ -13,7 +13,7 @@ return {
         lualine_a = {{'mode', upper = true}},
         lualine_b = {{'branch', icon = ''}},
         lualine_c = {{'filename', file_status = true, path = 1}},
-        lualine_x = {'encoding', 'fileformat', 'filetype'},
+        lualine_x = {'encoding', 'fileformat', { 'filetype', icon_only = true }},
         lualine_y = {'progress'},
         lualine_z = {'location'}
       },

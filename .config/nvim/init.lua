@@ -22,7 +22,7 @@ opt.rtp:prepend(lazypath)
 -- Configure lazy.nvim
 require('lazy').setup({
   { import = 'plugins' }, -- Merge with configurations from ~/.config/nvim/lua/plugins/*.lua
-  { 'ervandew/supertab' },
+  { 'VonHeikemen/lsp-zero.nvim' },
   { 'folke/tokyonight.nvim' },
   { 'folke/trouble.nvim' },
   { 'hrsh7th/nvim-cmp' },
@@ -30,7 +30,6 @@ require('lazy').setup({
   { 'junegunn/fzf' },
   { 'junegunn/vim-easy-align' },
   { 'lewis6991/gitsigns.nvim' },
-  { 'neovim/nvim-lspconfig' },
   { 'nvim-lualine/lualine.nvim' },
   { 'nvim-treesitter/nvim-treesitter' },
   { 'nvimtools/none-ls.nvim' },
