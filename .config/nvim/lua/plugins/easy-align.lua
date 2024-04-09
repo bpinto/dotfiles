@@ -1,6 +1,6 @@
 return {
 	{
-		"tpope/vim-projectionist",
+		"junegunn/vim-easy-align",
 		event = "VeryLazy",
 		keys = {
 			-- Start interactive EasyAlign for a motion/text object (e.g. gaip)

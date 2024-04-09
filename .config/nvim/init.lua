@@ -22,25 +22,9 @@ opt.rtp:prepend(lazypath)
 -- Configure lazy.nvim
 require("lazy").setup({
 	{ import = "plugins" }, -- Merge with configurations from ~/.config/nvim/lua/plugins/*.lua
-	{ "VonHeikemen/lsp-zero.nvim" },
-	{ "folke/tokyonight.nvim" },
-	{ "folke/trouble.nvim" },
-	{ "hrsh7th/nvim-cmp" },
 	{ "jbmorgado/vim-pine-script", ft = "pine" },
-	{ "junegunn/fzf" },
-	{ "junegunn/vim-easy-align" },
-	{ "lewis6991/gitsigns.nvim" },
-	{ "nvim-lualine/lualine.nvim" },
-	{ "nvim-treesitter/nvim-treesitter" },
-	{ "nvimtools/none-ls.nvim" },
-	{ "rose-pine/neovim" },
-	{ "scrooloose/nerdcommenter" },
 	{ "slm-lang/vim-slm", event = "VeryLazy" },
-	{ "tpope/vim-fugitive" },
-	{ "tpope/vim-projectionist" },
-	{ "tpope/vim-rhubarb" },
-	{ "tpope/vim-surround" },
-	{ "vuki656/package-info.nvim" },
+	{ "tpope/vim-surround", event = "VeryLazy" },
 }, {
 	defaults = { lazy = true },
 	install = { colorscheme = { "tokyonight", "habamax" } },
