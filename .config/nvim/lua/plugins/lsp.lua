@@ -86,7 +86,11 @@ return {
 
 			--- if you want to know more about lsp-zero and mason.nvim
 			--- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
-			lsp_zero.on_attach(function(_, bufnr)
+			lsp_zero.on_attach(function(client, bufnr)
+				if client.name == "eslint" then
+					client.server_capabilities.documentFormattingProvider = true
+				end
+
 				vim.diagnostic.config({
 					float = { border = "single", focusable = false },
 					signs = true,
