@@ -84,6 +84,10 @@ return {
 				info = "",
 			})
 
+			-- Disable autofocus on signature help
+			vim.lsp.handlers["textDocument/signatureHelp"] =
+				vim.lsp.with(vim.lsp.handlers.signature_help, { focus = false })
+
 			--- if you want to know more about lsp-zero and mason.nvim
 			--- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
 			lsp_zero.on_attach(function(client, bufnr)
@@ -92,7 +96,7 @@ return {
 				end
 
 				vim.diagnostic.config({
-					float = { border = "single", focusable = false },
+					float = { border = "single", focus = false },
 					signs = true,
 					underline = true,
 					update_in_insert = false, -- delay update diagnostics
