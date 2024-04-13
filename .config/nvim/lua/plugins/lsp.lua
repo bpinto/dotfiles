@@ -129,6 +129,7 @@ return {
 					"jsonls",
 					"lua_ls",
 					"somesass_ls",
+					"tsserver",
 					--'ruby_ls', 'rubocop',
 				},
 				handlers = {
