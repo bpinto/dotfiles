@@ -7,15 +7,16 @@
   signingkey = bruno@bpinto.com
 [alias]
   ctags = !.git/hooks/ctags
-  ds    = diff --staged
-  lg    = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  ll    = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --decorate --numstat
-  lga   = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  lla   = log --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --decorate --numstat
+  ds = diff --staged
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  lga = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  ll = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --decorate --numstat
+  lla = log --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --decorate --numstat
   patch = diff --no-color
-  pf    = push --force-with-lease
-  pr    = pull --rebase
-  st    = status -sb
+  pf = push --force-with-lease
+  pr = pull --rebase
+  smart-blame = blame -W -C -C -C
+  st = status -sb
 
   # Amend the currently staged files to the latest commit
   amend = commit --amend -C HEAD
@@ -48,7 +49,9 @@
 [apply]
   whitespace = nowarn
 [branch]
-  sort = -authordate
+  sort = -committerdate
+[column]
+  ui = auto
 [commit]
   gpgsign  = true
   template = ~/.gitmessage
