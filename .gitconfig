@@ -44,6 +44,9 @@
   # Interactive rebase
   reb = "!git --no-pager lga --color | fzf --ansi --delimiter='[*-]' --exact --multi --no-sort --preview 'echo {+2} | grep -E -o \"[a-f0-9]+\" | xargs git show -m --color' --reverse --bind 'enter:execute(echo {+2} | xargs git rebase -i --autosquash)+accept' --query='origin/master'"
 
+  # Interactive fixup=reword
+  reword = "!git --no-pager lg --color | fzf --ansi --delimiter='[*-]' --exact --multi --no-sort --preview 'echo {+2} | grep -E -o \"[a-f0-9]+\" | xargs git show -m --color' --reverse --bind 'enter:execute(git commit --fixup=reword:{+2})+accept'"
+
   # Interactive revert
   rev = "!git --no-pager lg --color | fzf --ansi --delimiter='[*-]' --exact --multi --no-sort --preview 'echo {+2} | grep -E -o \"[a-f0-9]+\" | xargs git show -m --color' --reverse --bind 'enter:execute(echo {+2} | xargs git revert)+accept'"
 [apply]
