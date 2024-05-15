@@ -128,9 +128,9 @@ return {
 					"html",
 					"jsonls",
 					"lua_ls",
+					--"ruby_ls",
 					"somesass_ls",
 					"tsserver",
-					--'ruby_ls', 'rubocop',
 				},
 				handlers = {
 					lsp_zero.default_setup,

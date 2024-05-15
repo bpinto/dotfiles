@@ -1,6 +1,10 @@
 local function get_lsp_fallback(bufnr)
-	local always_use_lsp = vim.bo[bufnr].filetype:match("^javascript")
-	return always_use_lsp and "always" or true
+	return true
+	-- Disabled until we migrate to eslint 9 due to its formatting rules being removed.
+	-- e.g. fetch-mock.test.js gets unwanted space between { }.
+	--
+	--local always_use_lsp = vim.bo[bufnr].filetype:match("^javascript")
+	--return always_use_lsp and "always" or true
 end
 
 return {
