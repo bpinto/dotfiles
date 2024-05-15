@@ -116,6 +116,9 @@ defaults write NSGlobalDomain AppleLocale -string "en_PT@currency=EUR"
 defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
 defaults write NSGlobalDomain AppleMetricUnits -bool true
 
+# Turn off font smoothing: https://tonsky.me/blog/monitors/
+defaults -currentHost write -g AppleFontSmoothing -int 0
+
 # --
 # -- Dock
 # --
