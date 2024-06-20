@@ -2,12 +2,36 @@ return {
 	"folke/trouble.nvim",
 	event = "BufWinEnter",
 	keys = {
-		{ "<leader>xw", "<cmd>Trouble lsp_workspace_diagnostics<cr>", silent = true },
-		{ "<leader>xd", "<cmd>Trouble lsp_document_diagnostics<cr>", silent = true },
-		{ "<leader>xx", "<cmd>Trouble<cr>", silent = true },
-		{ "gR", "<cmd>Trouble lsp_references<cr>", silent = true },
+		{
+			"<leader>xx",
+			"<cmd>Trouble diagnostics toggle<cr>",
+			desc = "Diagnostics (Trouble)",
+		},
+		{
+			"<leader>xX",
+			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+			desc = "Buffer Diagnostics (Trouble)",
+		},
+		{
+			"<leader>cs",
+			"<cmd>Trouble symbols toggle focus=false<cr>",
+			desc = "Symbols (Trouble)",
+		},
+		{
+			"<leader>cl",
+			"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+			desc = "LSP Definitions / references / ... (Trouble)",
+		},
+		{
+			"<leader>xL",
+			"<cmd>Trouble loclist toggle<cr>",
+			desc = "Location List (Trouble)",
+		},
+		{
+			"<leader>xQ",
+			"<cmd>Trouble qflist toggle<cr>",
+			desc = "Quickfix List (Trouble)",
+		},
 	},
-	opts = {
-		icons = false, -- do not use devicons for filenames
-	},
+	opts = {},
 }
