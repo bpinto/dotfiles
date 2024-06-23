@@ -6,6 +6,7 @@
   email      = bruno@bpinto.com
   signingkey = bruno@bpinto.com
 [alias]
+  alias-master-as-main = !git symbolic-ref refs/heads/main refs/heads/master && git symbolic-ref refs/remotes/origin/main refs/remotes/origin/master
   ctags = !.git/hooks/ctags
   ds = diff --staged
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
@@ -22,7 +23,7 @@
   amend = commit --amend -C HEAD
 
   # Interactive checkout
-  co = "!f() { [ $# != 0 ] && git checkout $@ || git checkout $(git branch | grep -v '^*' | fzf --preview 'git show --color $(git merge-base master {+1})..{+1}'); }; f"
+  co = "!f() { [ $# != 0 ] && git checkout $@ || git checkout $(git branch | grep -v '^*' | fzf --preview 'git show --color $(git merge-base main {+1})..{+1}'); }; f"
 
   # List contributors with number of commits
   contributors = shortlog --summary --numbered
@@ -30,19 +31,19 @@
   # Credit an author on the latest commit
   credit = "!git shortlog --email --numbered --summary | fzf --reverse --delimiter='\t' --bind 'enter:execute(git commit --amend --author \"{+2}\" -C HEAD)+accept'"
 
-  # Remove branches that have already been merged with master
+  # Remove branches that have already been merged with main
   # a.k.a. ‘delete merged’
   ;dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d; git remote -v update -p"
 
-  # Remove branches that have already been "squash-merged" into master
+  # Remove branches that have already been "squash-merged" into main
   # a.k.a 'delete squashed'
-  dm = "!git for-each-ref refs/heads/ '--format=%(refname:short)' | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == '-'* ]] && git branch -D $branch; done"
+  dm = "!git for-each-ref refs/heads/ '--format=%(refname:short)' | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == '-'* ]] && git branch -D $branch; done"
 
   # Interactive fixup
   fixup = "!git --no-pager lg --color | fzf --ansi --delimiter='[*-]' --exact --multi --no-sort --preview 'echo {+2} | grep -E -o \"[a-f0-9]+\" | xargs git show -m --color' --reverse --bind 'enter:execute(echo {+2} | xargs git commit --fixup)+accept'"
 
   # Interactive rebase
-  reb = "!git --no-pager lga --color | fzf --ansi --delimiter='[*-]' --exact --multi --no-sort --preview 'echo {+2} | grep -E -o \"[a-f0-9]+\" | xargs git show -m --color' --reverse --bind 'enter:execute(echo {+2} | xargs git rebase -i --autosquash)+accept' --query='origin/master'"
+  reb = "!git --no-pager lga --color | fzf --ansi --delimiter='[*-]' --exact --multi --no-sort --preview 'echo {+2} | grep -E -o \"[a-f0-9]+\" | xargs git show -m --color' --reverse --bind 'enter:execute(echo {+2} | xargs git rebase -i --autosquash)+accept' --query='origin/main'"
 
   # Interactive fixup=reword
   reword = "!git --no-pager lg --color | fzf --ansi --delimiter='[*-]' --exact --multi --no-sort --preview 'echo {+2} | grep -E -o \"[a-f0-9]+\" | xargs git show -m --color' --reverse --bind 'enter:execute(git commit --fixup=reword:{+2})+accept'"
