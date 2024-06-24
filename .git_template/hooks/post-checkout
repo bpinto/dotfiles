@@ -1,2 +1,4 @@
 #!/bin/sh
 .git/hooks/ctags >/dev/null 2>&1 &
+
+! git symbolic-ref refs/remotes/origin/main >/dev/null 2>&1 && git show-ref --quiet refs/heads/master && git symbolic-ref refs/heads/main refs/heads/master && git symbolic-ref refs/remotes/origin/main refs/remotes/origin/master
