@@ -62,6 +62,12 @@ ln -sf $PWD/.gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
 ln -sf $PWD/.gnupg/gpg.conf ~/.gnupg/gpg.conf
 
 ###########################################################
+# Ghostty configuration
+###########################################################
+
+ln -sf $PWD/.config/ghostty ~/.config/
+
+###########################################################
 # Kitty configuration
 ###########################################################
 
