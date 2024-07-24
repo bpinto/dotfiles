@@ -234,13 +234,6 @@ keymap.set("n", "<leader>EE", ":vsplit ~/.elvish/rc.elv<cr>")
 -- Edit fish config file
 keymap.set("n", "<leader>EF", ":vsplit ~/.config/fish/config.fish<cr>")
 
--- Edit github pull request
-keymap.set(
-	"n",
-	"<leader>EG",
-	":execute 'split' fnameescape(FugitiveFind('.git/descriptions/'.fugitive#Head().'.mk'))<CR>"
-)
-
 -- Edit tmux config file
 keymap.set("n", "<leader>ET", ":vsplit ~/.tmux.conf<cr>")
 
