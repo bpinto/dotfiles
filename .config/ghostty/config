@@ -565,7 +565,7 @@ working-directory =
 #     removes ALL keybindings up to this point, including the default
 #     keybindings.
 
-# keybind = super+shift+h="show_scrollback"
+keybind = super+shift+h=write_scrollback_file:open
 
 keybind = super+enter=new_split:down
 
