@@ -4,12 +4,12 @@ return {
 	event = "VeryLazy",
 	keys = {
 		-- <C-p> or <C-t> to search files
-		{ "<C-t>", ":lua require('fzf-lua').files({ resume = true })<cr>", silent = true },
-		{ "<C-p>", ":lua require('fzf-lua').files({ resume = true })<cr>", silent = true },
+		{ "<C-t>", ":lua require('fzf-lua').files()<cr>", silent = true },
+		{ "<C-p>", ":lua require('fzf-lua').files()<cr>", silent = true },
 		-- <C-k> to search for a pattern
 		{
 			"<C-k>",
-			":lua require('fzf-lua').live_grep({ exec_empty_query = true, resume = true  })<cr>",
+			":lua require('fzf-lua').live_grep({ exec_empty_query = true })<cr>",
 			silent = true,
 		},
 	},
