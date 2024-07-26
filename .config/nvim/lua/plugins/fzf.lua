@@ -1,20 +1,38 @@
 return {
-	{
-		"junegunn/fzf",
-		event = "VeryLazy",
-		keys = {
-			-- <C-p> or <C-t> to search files
-			{ "<C-t>", ":FZF -m<cr>", silent = true },
-			{ "<C-p>", ":FZF -m<cr>", silent = true },
+	"ibhagwan/fzf-lua",
+	dependencies = { "nvim-tree/nvim-web-devicons" },
+	event = "VeryLazy",
+	keys = {
+		-- <C-p> or <C-t> to search files
+		{ "<C-t>", ":lua require('fzf-lua').files({ resume = true })<cr>", silent = true },
+		{ "<C-p>", ":lua require('fzf-lua').files({ resume = true })<cr>", silent = true },
+		-- <C-k> to search for a pattern
+		{
+			"<C-k>",
+			":lua require('fzf-lua').live_grep({ exec_empty_query = true, resume = true  })<cr>",
+			silent = true,
 		},
-		init = function()
-			-- Act like CtrlP
-			vim.g.fzf_action = { ["ctrl-s"] = "split", ["ctrl-v"] = "vsplit" }
-			-- Enable per-command history
-			vim.g.fzf_history_dir = "~/.local/share/fzf-history"
-			-- Show preview window with colors using bat
-			vim.env.FZF_DEFAULT_OPTS =
-				"--ansi --preview-window 'right:60%' --margin=1 --color=fg:#c0caf5,bg:#24283b,hl:#ff9e64 --color=fg+:#c0caf5,bg+:#292e42,hl+:#ff9e64 --color=info:#7aa2f7,prompt:#7dcfff,pointer:#7dcfff --color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a --preview 'bat --color=always --line-range :150 {}'"
-		end,
 	},
+	config = function()
+		local trouble_actions = require("trouble.sources.fzf").actions
+
+		require("fzf-lua").setup({
+			defaults = {
+				actions = {
+					["ctrl-q"] = trouble_actions.open,
+				},
+			},
+			files = {
+				fzf_opts = {
+					["--history"] = vim.fn.stdpath("data") .. "/fzf-lua-files-history",
+				},
+			},
+			grep = {
+				fzf_opts = {
+					["--history"] = vim.fn.stdpath("data") .. "/fzf-lua-grep-history",
+				},
+				rg_glob = true, -- enable glob parsing by default to all
+			},
+		})
+	end,
 }
