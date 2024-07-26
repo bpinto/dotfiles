@@ -10,6 +10,7 @@ if not set -q terminal_colors_set
     set -U fish_color_quote e0af68
     set -U fish_color_redirection c0caf5
     set -U fish_color_end ff9e64
+    set -U fish_color_option bb9af7
     set -U fish_color_error f7768e
     set -U fish_color_param 9d7cd8
     set -U fish_color_comment 565f89

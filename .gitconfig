@@ -80,8 +80,8 @@
   syntax-theme = tokyonight_storm
   navigate = true
 [delta "line-numbers"]
-  line-numbers-minus-style = "#b2555b"
-  line-numbers-plus-style = "#266d6a"
+  line-numbers-minus-style = "#914c54"
+  line-numbers-plus-style = "#449dab"
   line-numbers-zero-style = "#3b4261"
 [difftool]
   prompt = false

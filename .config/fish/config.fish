@@ -17,10 +17,28 @@ if status --is-interactive
     # Do not ignore hidden files when filtering files (e.g. vim integration)
     set -gx FZF_DEFAULT_COMMAND "rg --files --hidden -g'!.git'"
     set -gx FZF_DEFAULT_OPTS "$FZF_DEFAULT_OPTS \
---color=fg:#c0caf5,bg:#24283b,hl:#ff9e64 \
---color=fg+:#c0caf5,bg+:#292e42,hl+:#ff9e64 \
---color=info:#7aa2f7,prompt:#7dcfff,pointer:#7dcfff \
---color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a"
+  --highlight-line \
+  --info=inline-right \
+  --ansi \
+  --layout=reverse \
+  --border=none
+  --color=bg+:#2e3c64 \
+  --color=bg:#24283b \
+  --color=border:#29a4bd \
+  --color=fg:#c0caf5 \
+  --color=gutter:#24283b \
+  --color=header:#ff9e64 \
+  --color=hl+:#2ac3de \
+  --color=hl:#2ac3de \
+  --color=info:#545c7e \
+  --color=marker:#ff007c \
+  --color=pointer:#ff007c \
+  --color=prompt:#2ac3de \
+  --color=query:#c0caf5:regular \
+  --color=scrollbar:#29a4bd \
+  --color=separator:#ff9e64 \
+  --color=spinner:#ff007c \
+"
 
     # Set language environment
     set -gx LC_ALL "en_US.UTF-8"
