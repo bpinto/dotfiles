@@ -238,11 +238,6 @@ keymap.set("n", "<leader>EF", ":vsplit ~/.config/fish/config.fish<cr>")
 -- Edit tmux config file
 keymap.set("n", "<leader>ET", ":vsplit ~/.tmux.conf<cr>")
 
--- Replace grep with ripgrep
-if vim.fn.executable("rg") == 1 then
-	opt.grepprg = "rg --vimgrep"
-end
-
 -- Auto open the search result
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 	pattern = "*grep*",
