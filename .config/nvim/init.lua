@@ -25,6 +25,7 @@ require("lazy").setup({
 	{ "jbmorgado/vim-pine-script", ft = "pine" },
 	{ "slm-lang/vim-slm", event = "VeryLazy" },
 	{ "tpope/vim-surround", event = "VeryLazy" },
+	{ "folke/drop.nvim", event = "VeryLazy" },
 }, {
 	defaults = { lazy = true },
 	install = { colorscheme = { "tokyonight", "habamax" } },
