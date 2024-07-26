@@ -1,12 +1,3 @@
-local function get_lsp_fallback(bufnr)
-	return true
-	-- Disabled until we migrate to eslint 9 due to its formatting rules being removed.
-	-- e.g. fetch-mock.test.js gets unwanted space between { }.
-	--
-	--local always_use_lsp = vim.bo[bufnr].filetype:match("^javascript")
-	--return always_use_lsp and "always" or true
-end
-
 return {
 	{
 		"stevearc/conform.nvim",
@@ -16,7 +7,7 @@ return {
 			{
 				"<leader>f",
 				function()
-					require("conform").format({ async = true, lsp_fallback = get_lsp_fallback(0) })
+					require("conform").format({ async = true })
 				end,
 				mode = "",
 				desc = "Format buffer",
@@ -26,17 +17,13 @@ return {
 			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 		end,
 		opts = {
-			format_on_save = function(bufnr)
-				return {
-					lsp_fallback = get_lsp_fallback(bufnr),
-					timeout_ms = 500,
-				}
-			end,
+			default_format_opts = { lsp_format = "fallback" },
+			format_on_save = { timeout_ms = 500 },
 			formatters_by_ft = {
 				css = { "prettierd" },
 				html = { "prettierd" },
-				javascript = { "prettierd" },
-				javascriptreact = { "prettierd" },
+				javascript = { "prettierd", lsp_format = "first" },
+				javascriptreact = { "prettierd", lsp_format = "first" },
 				json = { "prettierd" },
 				lua = { "stylua" },
 				markdown = { "prettierd" },
