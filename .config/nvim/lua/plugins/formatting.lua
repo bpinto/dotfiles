@@ -22,8 +22,8 @@ return {
 			formatters_by_ft = {
 				css = { "prettierd" },
 				html = { "prettierd" },
-				javascript = { "prettierd", lsp_format = "first" },
-				javascriptreact = { "prettierd", lsp_format = "first" },
+				javascript = { "prettierd", lsp_format = "never" },
+				javascriptreact = { "prettierd", lsp_format = "never" },
 				json = { "prettierd" },
 				lua = { "stylua" },
 				markdown = { "prettierd" },
