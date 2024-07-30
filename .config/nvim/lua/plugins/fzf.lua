@@ -6,9 +6,9 @@ return {
 		-- <C-p> or <C-t> to search files
 		{ "<C-t>", ":lua require('fzf-lua').files()<cr>", silent = true },
 		{ "<C-p>", ":lua require('fzf-lua').files()<cr>", silent = true },
-		-- <C-k> to search for a pattern
+		-- <C-x> to search for a pattern
 		{
-			"<C-k>",
+			"<C-x>",
 			":lua require('fzf-lua').live_grep({ exec_empty_query = true })<cr>",
 			silent = true,
 		},
