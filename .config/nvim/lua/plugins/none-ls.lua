@@ -11,9 +11,6 @@ return {
 			sources = {
 				-- code actions
 				null_ls.builtins.code_actions.gitsigns,
-
-				-- diagnostics
-				null_ls.builtins.diagnostics.codespell,
 			},
 		})
 	end,

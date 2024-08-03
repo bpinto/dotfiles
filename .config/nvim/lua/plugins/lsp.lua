@@ -141,6 +141,7 @@ return {
 					--"ruby_ls",
 					"somesass_ls",
 					"tsserver",
+					"typos_lsp",
 				},
 				handlers = {
 					lsp_zero.default_setup,

@@ -4,7 +4,6 @@ tap "homebrew/cask-versions"
 
 brew 'awscli'
 brew 'bat'
-brew 'codespell'
 brew 'fish'
 brew 'fzf'
 brew 'gh'
