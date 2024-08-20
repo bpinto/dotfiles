@@ -138,7 +138,7 @@ return {
 					"html",
 					"jsonls",
 					"lua_ls",
-					--"ruby_ls",
+					-- "ruby_lsp",
 					"somesass_ls",
 					"tsserver",
 					"typos_lsp",
