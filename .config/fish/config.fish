@@ -55,4 +55,7 @@ if status --is-interactive
     # Build images using dockerbuild
     set -gx COMPOSE_DOCKER_CLI_BUILD 1
     set -gx DOCKER_BUILDKIT 1
+
+    # Use docker on Cliniko setup script
+    set -gx DOCKER true
 end
