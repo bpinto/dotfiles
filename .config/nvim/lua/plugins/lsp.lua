@@ -140,7 +140,7 @@ return {
 					"lua_ls",
 					-- "ruby_lsp",
 					"somesass_ls",
-					"tsserver",
+					"ts_ls",
 					"typos_lsp",
 				},
 				handlers = {
