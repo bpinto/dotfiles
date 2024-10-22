@@ -805,7 +805,7 @@ link-url = true
 # On macOS, this setting does not work if window-decoration is set to
 # "false", because native fullscreen on macOS requires window decorations
 # to be set.
-fullscreen = false
+fullscreen = true
 
 # The title Ghostty will use for the window. This will force the title of the
 # window to be this title at all times and Ghostty will ignore any set title
@@ -1059,7 +1059,9 @@ keybind = super+v=paste_from_clipboard
 
 keybind = super+enter=toggle_quick_terminal
 
+keybind = alt+f=toggle_split_zoom
 keybind = alt+w>-=toggle_split_zoom
+keybind = alt+w>shift+-=toggle_split_zoom
 keybind = alt+w>s=new_split:down
 keybind = alt+w>v=new_split:right
 
@@ -1684,7 +1686,7 @@ custom-shader-animation = true
 # Changing this option at runtime works, but will only apply to the next
 # time the window is made fullscreen. If a window is already fullscreen,
 # it will retain the previous setting until fullscreen is exited.
-macos-non-native-fullscreen = false
+macos-non-native-fullscreen = visible-menu
 
 # The style of the macOS titlebar. Available values are: "native",
 # "transparent", "tabs", and "hidden".
