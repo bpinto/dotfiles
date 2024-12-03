@@ -241,9 +241,37 @@ adjust-cursor-thickness =
 # terminals. Only new terminals will use the new configuration.
 grapheme-width-method = unicode
 
-# A theme to use. If the theme is an absolute pathname, Ghostty will attempt
-# to load that file as a theme. If that file does not exist or is inaccessible,
-# an error will be logged and no other directories will be searched.
+# FreeType load flags to enable. The format of this is a list of flags to
+# enable separated by commas. If you prefix a flag with `no-` then it is
+# disabled. If you omit a flag, it's default value is used, so you must
+# explicitly disable flags you don't want. You can also use `true` or `false`
+# to turn all flags on or off.
+#
+# This configuration only applies to Ghostty builds that use FreeType.
+# This is usually the case only for Linux builds. macOS uses CoreText
+# and does not have an equivalent configuration.
+#
+# Available flags:
+#
+#   * `hinting` - Enable or disable hinting, enabled by default.
+#   * `force-autohint` - Use the freetype auto-hinter rather than the
+#     font's native hinter. Enabled by default.
+#   * `monochrome` - Instructs renderer to use 1-bit monochrome
+#     rendering. This option doesn't impact the hinter.
+#     Enabled by default.
+#   * `autohint` - Use the freetype auto-hinter. Enabled by default.
+#
+# Example: `hinting`, `no-hinting`, `force-autohint`, `no-force-autohint`
+freetype-load-flags = hinting,force-autohint,monochrome,autohint
+
+# A theme to use. This can be a built-in theme name, a custom theme
+# name, or an absolute path to a custom theme file. Ghostty also supports
+# specifying a different them to use for light and dark mode. Each
+# option is documented below.
+#
+# If the theme is an absolute pathname, Ghostty will attempt to load that
+# file as a theme. If that file does not exist or is inaccessible, an error
+# will be logged and no other directories will be searched.
 #
 # If the theme is not an absolute pathname, two different directories will be
 # searched for a file name that matches the theme. This is case sensitive on
@@ -263,8 +291,33 @@ grapheme-width-method = unicode
 #
 # To see a list of available themes, run `ghostty +list-themes`.
 #
+# A theme file is simply another Ghostty configuration file. They share
+# the same syntax and same configuration options. A theme can set any valid
+# configuration option so please do not use a theme file from an untrusted
+# source. The built-in themes are audited to only set safe configuration
+# options.
+#
+# Some options cannot be set within theme files. The reason these are not
+# supported should be self-evident. A theme file cannot set `theme` or
+# `config-file`. At the time of writing this, Ghostty will not show any
+# warnings or errors if you set these options in a theme file but they will
+# be silently ignored.
+#
 # Any additional colors specified via background, foreground, palette, etc.
 # will override the colors specified in the theme.
+#
+# To specify a different theme for light and dark mode, use the following
+# syntax: `light:theme-name,dark:theme-name`. For example:
+# `light:rose-pine-dawn,dark:rose-pine`. Whitespace around all values are
+# trimmed and order of light and dark does not matter. Both light and dark
+# must be specified in this form. In this form, the theme used will be
+# based on the current desktop environment theme.
+#
+# There are some known bugs with light/dark mode theming. These will
+# be fixed in a future update:
+#
+#   - macOS: titlebar tabs style is not updated when switching themes.
+#
 theme = "tokyonight-storm"
 
 # Background color for the window.
@@ -635,11 +688,10 @@ cursor-text =
 # way to implement it.
 cursor-click-to-move = true
 
-# Hide the mouse immediately when typing. The mouse becomes visible again when
-# the mouse is used. The mouse is only hidden if the mouse cursor is over the
-# active terminal surface.
-#
-# macOS: This feature requires macOS 15.0 (Sequoia) or later.
+# Hide the mouse immediately when typing. The mouse becomes visible again
+# when the mouse is used (button, movement, etc.). Platform-specific behavior
+# may dictate other scenarios where the mouse is shown. For example on macOS,
+# the mouse is shown again when a new window, tab, or split is created.
 mouse-hide-while-typing = false
 
 # Determines whether running programs can detect the shift key pressed with a
@@ -682,6 +734,10 @@ mouse-scroll-multiplier = 3
 # The opacity level (opposite of transparency) of the background. A value of
 # 1 is fully opaque and a value of 0 is fully transparent. A value less than 0
 # or greater than 1 will be clamped to the nearest valid value.
+#
+# On macOS, background opacity is disabled when the terminal enters native
+# fullscreen. This is because the background becomes gray and it can cause
+# widgets to show through which isn't generally desirable.
 background-opacity = 1
 
 # A positive value enables blurring of the background when background-opacity
@@ -722,7 +778,26 @@ unfocused-split-fill =
 # arguments are provided, the command will be executed using `/bin/sh -c`.
 # Ghostty does not do any shell command parsing.
 #
-# If you're using the `ghostty` CLI there is also a shortcut to run a command
+# This command will be used for all new terminal surfaces, i.e. new windows,
+# tabs, etc. If you want to run a command only for the first terminal surface
+# created when Ghostty starts, use the `initial-command` configuration.
+#
+# Ghostty supports the common `-e` flag for executing a command with
+# arguments. For example, `ghostty -e fish --with --custom --args`.
+# This flag sets the `initial-command` configuration, see that for more
+# information.
+command = /opt/homebrew/bin/fish
+
+# This is the same as "command", but only applies to the first terminal
+# surface created when Ghostty starts. Subsequent terminal surfaces will use
+# the `command` configuration.
+#
+# After the first terminal surface is created (or closed), there is no
+# way to run this initial command again automatically. As such, setting
+# this at runtime works but will only affect the next terminal surface
+# if it is the first one ever created.
+#
+# If you're using the `ghostty` CLI there is also a shortcut to set this
 # with arguments directly: you can use the `-e` flag. For example: `ghostty -e
 # fish --with --custom --args`. The `-e` flag automatically forces some
 # other behaviors as well:
@@ -734,7 +809,7 @@ unfocused-split-fill =
 #     process will exit when the command exits. Additionally, the
 #     `quit-after-last-window-closed-delay` is unset.
 #
-command = /opt/homebrew/bin/fish
+initial-command =
 
 # If true, keep the terminal open after the command exits. Normally, the
 # terminal window closes when the running command (such as a shell) exits.
@@ -882,6 +957,10 @@ working-directory =
 # or the alias. When debugging keybinds, the non-aliased modifier will always
 # be used in output.
 #
+# Note that the fn or "globe" key on keyboards are not supported as a
+# modifier. This is a limitation of the operating systems and GUI toolkits
+# that Ghostty uses.
+#
 # You may also specify multiple triggers separated by `>` to require a
 # sequence of triggers to activate the action. For example,
 # `ctrl+a>n=new_window` will only trigger the `new_window` action if the
@@ -1027,6 +1106,7 @@ keybind = super+comma=open_config
 keybind = super+shift+comma=reload_config
 keybind = super+minus=decrease_font_size:1
 keybind = shift+page_down=adjust_selection:page_down
+keybind = ctrl+tab=next_tab
 keybind = super+a=select_all
 keybind = alt+shift+equal=equalize_splits
 keybind = super+shift+enter=toggle_split_zoom
@@ -1035,6 +1115,7 @@ keybind = super+ctrl+f=toggle_fullscreen
 keybind = super+ctrl+right=resize_split:right,10
 keybind = super+alt+shift+j=write_scrollback_file:open
 keybind = shift+down=adjust_selection:down
+keybind = ctrl+shift+tab=previous_tab
 keybind = super+n=new_window
 keybind = super+alt+left=goto_split:left
 keybind = super+page_down=scroll_page_down
@@ -1210,13 +1291,15 @@ window-title-font-family =
 # The theme to use for the windows. Valid values:
 #
 #   * `auto` - Determine the theme based on the configured terminal
-#      background color.
+#      background color. This has no effect if the "theme" configuration
+#      has separate light and dark themes. In that case, the behavior
+#      of "auto" is equivalent to "system".
 #   * `system` - Use the system theme.
 #   * `light` - Use the light theme regardless of system theme.
 #   * `dark` - Use the dark theme regardless of system theme.
 #   * `ghostty` - Use the background and foreground colors specified in the
 #     Ghostty configuration. This is only supported on Linux builds with
-#     libadwaita and `gtk-adwaita` enabled.
+#     Adwaita and `gtk-adwaita` enabled.
 #
 # On macOS, if `macos-titlebar-style` is "tabs", the window theme will be
 # automatically set based on the luminosity of the terminal background color.
@@ -1406,15 +1489,23 @@ clipboard-paste-bracketed-safe = true
 # limit per surface is double.
 image-storage-limit = 320000000
 
-# Whether to automatically copy selected text to the clipboard. `true` will
-# only copy on systems that support a selection clipboard.
+# Whether to automatically copy selected text to the clipboard. `true`
+# will prefer to copy to the selection clipboard if supported by the
+# OS, otherwise it will copy to the system clipboard.
 #
-# The value `clipboard` will copy to the system clipboard, making this work on
-# macOS. Note that middle-click will also paste from the system clipboard in
-# this case.
+# The value `clipboard` will always copy text to the selection clipboard
+# (for supported systems) as well as the system clipboard. This is sometimes
+# a preferred behavior on Linux.
 #
-# Note that if this is disabled, middle-click paste will also be disabled.
-copy-on-select = true
+# Middle-click paste will always use the selection clipboard on Linux
+# and the system clipboard on macOS. Middle-click paste is always enabled
+# even if this is `false`.
+#
+# The default value is true on Linux and false on macOS. macOS copy on
+# select behavior is not typical for applications so it is disabled by
+# default. On Linux, this is a standard behavior so it is enabled by
+# default.
+copy-on-select = false
 
 # The time in milliseconds between clicks to consider a click a repeat
 # (double, triple, etc.) or an entirely new single click. A value of zero will
@@ -1434,6 +1525,21 @@ click-repeat-interval = 0
 #
 # Cycles are not allowed. If a cycle is detected, an error will be logged and
 # the configuration file will be ignored.
+#
+# Configuration files are loaded after the configuration they're defined
+# within in the order they're defined. **THIS IS A VERY SUBTLE BUT IMPORTANT
+# POINT.** To put it another way: configuration files do not take effect
+# until after the entire configuration is loaded. For example, in the
+# configuration below:
+#
+# ```
+# config-file = "foo"
+# a = 1
+# ```
+#
+# If "foo" contains `a = 2`, the final value of `a` will be 2, because
+# `foo` is loaded after the configuration file that configures the
+# nested `config-file` value.
 config-file =
 
 # When this is true, the default configuration file paths will be loaded.
@@ -1442,7 +1548,7 @@ config-file =
 #
 # If this is false, the default configuration paths will not be loaded.
 # This is targeted directly at using Ghostty from the CLI in a way
-# that minimizes external affects.
+# that minimizes external effects.
 #
 # This is a CLI-only configuration. Setting this in a configuration file
 # will have no effect. It is not an error, but it will not do anything.
@@ -1509,7 +1615,7 @@ quit-after-last-window-closed-delay =
 # is run. Note that if `quit-after-last-window-closed` is `true` and
 # `quit-after-last-window-closed-delay` is set, setting `initial-window` to
 # `false` will mean that Ghostty will quit after the configured delay if no
-# window is ever created. Only implemented on Linux.
+# window is ever created. Only implemented on Linux and macOS.
 initial-window = true
 
 # The position of the "quick" terminal window. To learn more about the
@@ -1545,6 +1651,11 @@ quick-terminal-position = top
 # The default value is `main` because this is the recommended screen
 # by the operating system.
 quick-terminal-screen = main
+
+# Duration (in seconds) of the quick terminal enter and exit animation.
+# Set it to 0 to disable animation completely. This can be changed at
+# runtime.
+quick-terminal-animation-duration = 0.2
 
 # Whether to enable shell integration auto-injection or not. Shell integration
 # greatly enhances the terminal experience by enabling a number of features:
@@ -1699,6 +1810,13 @@ macos-non-native-fullscreen = visible-menu
 # This makes a more seamless window appearance but looks a little less
 # typical for a macOS application and may not work well with all themes.
 #
+# The "transparent" style will also update in real-time to dynamic
+# changes to the window background color, i.e. via OSC 11. To make this
+# more aesthetically pleasing, this only happens if the terminal is
+# a window, tab, or split that borders the top of the window. This
+# avoids a disjointed appearance where the titlebar color changes
+# but all the topmost terminals don't match.
+#
 # The "tabs" style is a completely custom titlebar that integrates the
 # tab bar into the titlebar. This titlebar always matches the background
 # color of the terminal. There are some limitations to this style:
@@ -1719,6 +1837,27 @@ macos-non-native-fullscreen = visible-menu
 #
 # Changing this option at runtime only applies to new windows.
 macos-titlebar-style = transparent
+
+# Whether the proxy icon in the macOS titlebar is visible. The proxy icon
+# is the icon that represents the folder of the current working directory.
+# You can see this very clearly in the macOS built-in Terminal.app
+# titlebar.
+#
+# The proxy icon is only visible with the native macOS titlebar style.
+#
+# Valid values are:
+#
+#   * `visible` - Show the proxy icon.
+#   * `hidden` - Hide the proxy icon.
+#
+# The default value is `visible`.
+#
+# This setting can be changed at runtime and will affect all currently
+# open windows but only after their working directory changes again.
+# Therefore, to make this work after changing the setting, you must
+# usually `cd` to a different directory, open a different file in an
+# editor, etc.
+macos-titlebar-proxy-icon = visible
 
 # If `true`, the *Option* key will be treated as *Alt*. This makes terminal
 # sequences expecting *Alt* to work properly, but will break Unicode input
@@ -1854,12 +1993,12 @@ gtk-titlebar = true
 # Determines the side of the screen that the GTK tab bar will stick to.
 # Top, bottom, left, and right are supported. The default is top.
 #
-# If this option has value `left` or `right` when using `libadwaita`, it falls
+# If this option has value `left` or `right` when using Adwaita, it falls
 # back to `top`.
 gtk-tabs-location = top
 
 # Determines the appearance of the top and bottom bars when using the
-# adwaita tab bar. This requires `gtk-adwaita` to be enabled (it is
+# Adwaita tab bar. This requires `gtk-adwaita` to be enabled (it is
 # by default).
 #
 # Valid values are:
@@ -1878,7 +2017,7 @@ adw-toolbar-style = raised
 # which is the old style.
 gtk-wide-tabs = true
 
-# If `true` (default), Ghostty will enable libadwaita theme support. This
+# If `true` (default), Ghostty will enable Adwaita theme support. This
 # will make `window-theme` work properly and will also allow Ghostty to
 # properly respond to system theme changes, light/dark mode changing, etc.
 # This requires a GTK4 desktop with a GTK4 theme.
@@ -1889,7 +2028,7 @@ gtk-wide-tabs = true
 # expected.
 #
 # This configuration only has an effect if Ghostty was built with
-# libadwaita support.
+# Adwaita support.
 gtk-adwaita = true
 
 # If `true` (default), applications running in the terminal can show desktop
