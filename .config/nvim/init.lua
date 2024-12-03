@@ -215,7 +215,7 @@ keymap.set("", "<leader>e", ":edit %%", { remap = true })
 keymap.set("n", "<leader>cf", "<ESC>/\\v^[<=>]{7}( .*|$)<CR>", { silent = true })
 
 -- Shortcut for setting a pry breakpoint
-cmd("iabbrev xpry require 'pry'; binding.pry<Esc>F%s<c-o>:call getchar()<CR>")
+cmd("iabbrev xpry binding.break<Esc>F%s<c-o>:call getchar()<CR>")
 
 -- Convert ruby 1.8 hash into ruby 1.9
 keymap.set("n", "<leader>h", ":%s/:\\([^ ]*\\)\\(\\s*\\)=>/\\1:/g<CR>")
