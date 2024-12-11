@@ -1,3 +1,3 @@
 function console
-    env TERM=xterm-256color ./infra/cli/index.mjs ssh $argv
+    env TERM=xterm-256color rgi ssh $argv
 end
