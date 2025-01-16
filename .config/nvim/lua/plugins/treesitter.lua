@@ -23,6 +23,8 @@ return {
 					"git_rebase",
 					"gitcommit",
 					"gitignore",
+					"gotmpl",
+					"helm",
 					"html",
 					"http",
 					"javascript",

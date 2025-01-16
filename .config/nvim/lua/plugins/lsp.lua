@@ -135,6 +135,7 @@ return {
 					"dockerls",
 					"docker_compose_language_service",
 					"eslint",
+					"helm_ls",
 					"html",
 					"jsonls",
 					"lua_ls",
@@ -144,10 +145,28 @@ return {
 					"typos_lsp",
 				},
 				handlers = {
+					-- The first entry (without a key) will be the default handler
+					-- and will be called for each installed server that doesn't have
+					-- a dedicated handler.
 					lsp_zero.default_setup,
-					lua_ls = function() -- Configure lua language server for neovim
+
+					-- Next, you can provide targeted overrides for specific servers.
+					lua_ls = function()
 						local lua_opts = lsp_zero.nvim_lua_ls()
 						require("lspconfig").lua_ls.setup(lua_opts)
+					end,
+
+					helm_ls = function()
+						require("lspconfig").helm_ls.setup({
+							settings = {
+								["helm-ls"] = {
+									valuesFiles = {
+										mainValuesFile = "values.yaml",
+										additionalValuesFilesGlobPattern = "../../environment_values/development.yaml",
+									},
+								},
+							},
+						})
 					end,
 				},
 			})
