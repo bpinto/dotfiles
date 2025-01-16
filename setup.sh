@@ -78,6 +78,12 @@ launchctl setenv KITTY_CONFIG_DIRECTORY $HOME/.config/kitty/
 ln -sf $PWD/.config/kitty ~/.config/
 
 ###########################################################
+# k9s configuration
+###########################################################
+
+ln -sf $PWD/.config/k9s ~/.config/
+
+###########################################################
 # Neovim configuration
 ###########################################################
 
