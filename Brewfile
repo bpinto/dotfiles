@@ -10,6 +10,7 @@ brew 'gh'
 brew 'git-delta'
 brew 'gpg'
 brew 'helmfile'
+brew 'kubectx'
 brew 'neovim'
 brew 'node@20', link: true
 brew 'pinentry-mac'
