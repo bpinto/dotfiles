@@ -34,10 +34,25 @@ function _prompt_color_for_status
   end
 end
 
+function _kubernetes_context
+  if test (which kubectl)
+    set context (kubectl config current-context | awk -F/ '{print $NF}')
+
+    if test "$context" != "orbstack"
+      echo -n " ($context)"
+    else
+      echo ""
+    end
+  else
+    echo ""
+  end
+end
+
 function fish_prompt
   set -l last_status $status
 
   _print_in_color "\n"(prompt_pwd) 61AFEF
   __fish_git_prompt " %s"
+  _print_in_color (_kubernetes_context) E0AF68
   _print_in_color "\n❯ " (_prompt_color_for_status $last_status)
 end
