@@ -222,13 +222,22 @@ defaults write -g ApplePressAndHoldEnabled -bool false
 defaults write NSGlobalDomain KeyRepeat -int 3
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
+# Install PT to US keyboard remap (EN language)
+mkdir -p ~/Library/Keyboard\ Layouts/
+cp -R pt-us.en.keymap.bundle ~/Library/Keyboard\ Layouts/
+
+# Install PT to US keyboard remap (PT language)
+mkdir -p ~/Library/Keyboard\ Layouts/
+cp -R pt-us.pt.keymap.bundle ~/Library/Keyboard\ Layouts/
+
+#
 # Enable US layout
-defaults read com.apple.HIToolbox | grep -q 252 || \
-  defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add '<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>252</integer><key>KeyboardLayout Name</key><string>ABC</string></dict>'
+#defaults read com.apple.HIToolbox | grep -q 252 || \
+#  defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add '<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>252</integer><key>KeyboardLayout Name</key><string>ABC</string></dict>'
 
 # Enable PT-BR layout
-defaults read com.apple.HIToolbox | grep -q 72 || \
-  defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add '<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>72</integer><key>KeyboardLayout Name</key><string>Brazilian - Pro</string></dict>'
+#defaults read com.apple.HIToolbox | grep -q 72 || \
+#  defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add '<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>72</integer><key>KeyboardLayout Name</key><string>Brazilian - Pro</string></dict>'
 
 # --
 # -- Printer
