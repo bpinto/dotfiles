@@ -49,6 +49,9 @@ if status --is-interactive
     # Set main editor
     set -gx EDITOR vim
 
+    # GPG configuration
+    set -gx GPG_TTY (tty)
+
     # Set bat theme
     set -gx BAT_THEME tokyonight_storm
 
