@@ -23,6 +23,9 @@ mkdir -p ~/.local/share
 
 ln -sf $PWD/.config/bat ~/.config/
 
+# Update the binary cache
+bat cache --build
+
 ###########################################################
 # Chrome configuration
 ###########################################################
