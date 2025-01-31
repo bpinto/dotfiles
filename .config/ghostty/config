@@ -201,7 +201,8 @@ font-thicken-strength = 255
 
 # What color space to use when performing alpha blending.
 #
-# This affects how text looks for different background/foreground color pairs.
+# This affects the appearance of text and of any images with transparency.
+# Additionally, custom shaders will receive colors in the configured space.
 #
 # Valid values:
 #
@@ -215,15 +216,10 @@ font-thicken-strength = 255
 #   This is also sometimes known as "gamma correction".
 #   (Currently only supported on macOS. Has no effect on Linux.)
 #
-# * `linear-corrected` - Corrects the thinning/thickening effect of linear
-#   by applying a correction curve to the text alpha depending on its
-#   brightness. This compensates for the thinning and makes the weight of
-#   most text appear very similar to when it's blended non-linearly.
-#
-# Note: This setting affects more than just text, images will also be blended
-# in the selected color space, and custom shaders will receive colors in that
-# color space as well.
-text-blending = native
+# * `linear-corrected` - Same as `linear`, but with a correction step applied
+#   for text that makes it look nearly or completely identical to `native`,
+#   but without any of the darkening artifacts.
+alpha-blending = native
 
 # All of the configurations behavior adjust various metrics determined by the
 # font. The values can be integers (1, -1, etc.) or a percentage (20%, -15%,
@@ -1225,6 +1221,12 @@ working-directory =
 #     performable (acting identically to not having a keybind set at
 #     all).
 #
+#     Performable keybinds will not appear as menu shortcuts in the
+#     application menu. This is because the menu shortcuts force the
+#     action to be performed regardless of the state of the terminal.
+#     Performable keybinds will still work, they just won't appear as
+#     a shortcut label in the menu.
+#
 # Keybind triggers are not unique per prefix combination. For example,
 # `ctrl+a` and `global:ctrl+a` are not two separate keybinds. The keybind
 # set later will overwrite the keybind set earlier. In this case, the
@@ -1528,12 +1530,16 @@ window-subtitle = false
 # This is currently only supported on macOS and Linux.
 window-theme = auto
 
-# The colorspace to use for the terminal window. The default is `srgb` but
-# this can also be set to `display-p3` to use the Display P3 colorspace.
+# The color space to use when interpreting terminal colors. "Terminal colors"
+# refers to colors specified in your configuration and colors produced by
+# direct-color SGR sequences.
 #
-# Changing this value at runtime will only affect new windows.
+# Valid values:
 #
-# This setting is only supported on macOS.
+#   * `srgb` - Interpret colors in the sRGB color space. This is the default.
+#   * `display-p3` - Interpret colors in the Display P3 color space.
+#
+# This setting is currently only supported on macOS.
 window-colorspace = srgb
 
 # The initial window size. This size is in terminal grid cells by default.
