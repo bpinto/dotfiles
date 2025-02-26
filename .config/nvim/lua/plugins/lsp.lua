@@ -25,6 +25,7 @@ return {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-emoji",
 			"hrsh7th/cmp-nvim-lsp",
+			"petertriho/cmp-git",
 		},
 		config = function()
 			-- Here is where you configure the autocompletion settings.
@@ -56,9 +57,13 @@ return {
 					{ name = "nvim_lsp" },
 					{ name = "buffer" },
 					{ name = "ctags" },
+					{ name = "git" },
 					{ name = "emoji" },
 				},
 			})
+		end,
+		init = function()
+			require("cmp_git").setup()
 		end,
 	},
 
