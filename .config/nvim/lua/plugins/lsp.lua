@@ -148,6 +148,7 @@ return {
 					"somesass_ls",
 					"ts_ls",
 					"typos_lsp",
+					"yamlls",
 				},
 				handlers = {
 					-- The first entry (without a key) will be the default handler
