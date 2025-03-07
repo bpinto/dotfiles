@@ -6,7 +6,7 @@ return {
 		ft = { "gitcommit", "markdown" },
 		main = "render-markdown",
 		opts = {
-			file_types = { "gitcommit", "markdown" },
+			file_types = { "codecompanion", "gitcommit", "markdown" },
 		},
 	},
 }
