@@ -73,6 +73,9 @@ cmd("colorscheme tokyonight")
 --ctermbg = 'NONE',
 --})
 
+-- Highlight over length characters
+vim.api.nvim_set_hl(0, "OverLength", { bg = "#2E3C64" })
+
 --------------------------------------------------------------------------------
 -- SEARCH CONFIGURATION
 --------------------------------------------------------------------------------
@@ -179,12 +182,6 @@ keymap.set("n", "<C-h>", "<C-w>h")
 keymap.set("n", "<C-j>", "<C-w>j")
 keymap.set("n", "<C-k>", "<C-w>k")
 keymap.set("n", "<C-l>", "<C-w>l")
-
--- Clear the search buffer when hitting return
-function _G.map_enter()
-	keymap.set("n", "<cr>", ":nohlsearch<cr>:call clearmatches()<cr>")
-end
-_G.map_enter()
 
 -- Make escape get out of pumenu mode and go back to the uncompleted word
 keymap.set("i", "<Esc>", 'pumvisible() ? "<C-e>" : "<Esc>"', { expr = true })
@@ -314,42 +311,76 @@ end)
 -- CUSTOM AUTOCMDS
 --------------------------------------------------------------------------------
 
-cmd([[
-  augroup cursor-position
-    " Remove ALL autocommands for the current group.
-    autocmd!
+-- Jump to last cursor position unless it's invalid or in an event handler
+local cursor_position_group = vim.api.nvim_create_augroup("cursor_position", { clear = true })
 
-    " Jump to last cursor position unless it's invalid or in an event handler
-    autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
-  augroup END
-]])
+vim.api.nvim_create_autocmd("BufReadPost", {
+	group = cursor_position_group,
+	callback = function()
+		local line = vim.fn.line("'\"")
+		if line > 0 and line <= vim.fn.line("$") then
+			vim.cmd('normal! g`"')
+		end
+	end,
+})
 
-cmd([[
-  augroup highlight
-    " Remove ALL autocommands for the current group.
-    autocmd!
+-- Clear the search buffer when hitting return
+function _G.map_enter()
+	keymap.set("n", "<cr>", ":nohlsearch<cr>:call clearmatches()<cr>", { buffer = 0 })
+end
 
-    " Leave the return key alone when in quickfix windows, since it's used
-    " to run commands there.
-    autocmd BufEnter * :if &buftype is# "quickfix" | :unmap <cr> | else | :call v:lua.map_enter() | endif
+function _G.map_leave()
+	keymap.set("n", "<cr>", "<cr>", { buffer = 0 })
+end
 
-    " Leave the return key alone when in command line windows, since it's used
-    " to run commands there.
-    autocmd CmdwinEnter * :unmap <cr>
-    autocmd CmdwinLeave * :call v:lua.map_enter()
+local highlight_group = vim.api.nvim_create_augroup("highlight", { clear = true })
 
-    " Highlight characters longer than 100 characters
-    autocmd BufEnter * highlight OverLength ctermbg=grey guibg=#2E3C64
-    autocmd BufEnter * :if &buftype isnot# "nofile" | match OverLength /\%>100v.\+/ | endif
-  augroup END
-]])
+vim.api.nvim_create_autocmd("BufEnter", {
+	group = highlight_group,
+	callback = function()
+		local buftype = vim.bo.buftype
+		if buftype == "quickfix" then
+			_G.map_leave()
+		else
+			_G.map_enter()
+		end
+	end,
+	desc = "Leave the return key alone when in quickfix windows",
+})
 
-cmd([[
-  augroup autosave
-    " Remove ALL autocommands for the current group.
-    autocmd!
+vim.api.nvim_create_autocmd("CmdwinEnter", {
+	group = highlight_group,
+	callback = function()
+		_G.map_leave()
+	end,
+	desc = "Leave the return key alone when in command line windows",
+})
 
-    " Autosave files/buffers when losing focus
-    autocmd FocusLost * :silent! wall
-  augroup END
-]])
+vim.api.nvim_create_autocmd("CmdwinLeave", {
+	group = highlight_group,
+	callback = function()
+		_G.map_enter()
+	end,
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	group = highlight_group,
+	callback = function()
+		if vim.bo.buftype ~= "nofile" then
+			vim.fn.matchadd("OverLength", "\\%>100v.\\+")
+		end
+	end,
+	desc = "Highlight characters longer than 100 characters",
+})
+
+-- Autosave files/buffers when losing focus
+local autosave_group = vim.api.nvim_create_augroup("autosave", { clear = true })
+
+vim.api.nvim_create_autocmd("FocusLost", {
+	group = autosave_group,
+	pattern = "*",
+	callback = function()
+		vim.cmd("silent! wall")
+	end,
+	desc = "Autosave files/buffers when losing focus",
+})
