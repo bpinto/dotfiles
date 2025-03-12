@@ -339,13 +339,13 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	group = highlight_group,
 	callback = function()
 		local buftype = vim.bo.buftype
-		if buftype == "quickfix" then
+		if buftype == "quickfix" or buftype == "nofile" then
 			_G.map_leave()
 		else
 			_G.map_enter()
 		end
 	end,
-	desc = "Leave the return key alone when in quickfix windows",
+	desc = "Leave the return key alone when in codecompanion or quickfix windows",
 })
 
 vim.api.nvim_create_autocmd("CmdwinEnter", {
