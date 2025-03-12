@@ -61,4 +61,7 @@ if status --is-interactive
 
     # Use docker on Cliniko setup script
     set -gx DOCKER true
+
+    # Set XDG directories for k9s: https://github.com/derailed/k9s/issues/2983
+    set -gx XDG_CONFIG_HOME ~/.config
 end
