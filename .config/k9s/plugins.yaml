@@ -1,0 +1,21 @@
+plugins:
+  #--- Create debug container for selected pod in current namespace
+  debug:
+    shortCut: Shift-D
+    description: Debug
+    dangerous: true
+    scopes:
+      - containers
+    command: bash
+    background: false
+    args:
+      - -c
+      - |
+        DEBUG_POD_NAME="$USER-k9s-debug"
+        BLUE='\033[0;34m'
+        NO_COLOR='\033[0m'
+
+        echo -e "${BLUE}Starting debug container $DEBUG_POD_NAME...${NO_COLOR}"
+        kubectl debug -it "$POD" --context="$CONTEXT" --cluster="$CLUSTER" --namespace="$NAMESPACE" --container="$NAME" --copy-to="$DEBUG_POD_NAME" --profile=general -- bash
+
+        kubectl delete pod "$DEBUG_POD_NAME" --context="$CONTEXT" --cluster="$CLUSTER" --namespace="$NAMESPACE"
