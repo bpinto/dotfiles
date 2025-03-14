@@ -4,6 +4,7 @@ com.googlecode.iterm2.plist
 .config/nvim/.netrwhist
 .config/nvim/autoload
 .config/nvim/bundle
+.config/nvim/lazy-lock.json
 .config/nvim/plugged
 .elvish/db
 .elvish/db-journal
