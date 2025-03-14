@@ -11,7 +11,7 @@ brew 'helmfile'
 brew 'kubectx'
 brew 'k9s'
 brew 'neovim'
-brew 'node@20', link: true
+brew 'node@22', link: true
 brew 'pinentry-mac'
 brew 'ripgrep'
 brew 'yt-dlp'
