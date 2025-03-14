@@ -150,6 +150,12 @@ vim.g.mapleader = ","
 -- Aliasing the new leader ',' to the default one '\'
 keymap.set("n", "<Bslash>", ",", { remap = true })
 
+-- Clear the search buffer when hitting return
+keymap.set("n", "<CR>", function()
+	vim.cmd("nohlsearch")
+	return "<CR>"
+end, { noremap = true, silent = true, expr = true })
+
 -- Better ESC
 keymap.set("i", "jk", "<Esc>")
 
@@ -324,44 +330,8 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 	end,
 })
 
--- Clear the search buffer when hitting return
-function _G.map_enter()
-	keymap.set("n", "<cr>", ":nohlsearch<cr>:call clearmatches()<cr>", { buffer = 0 })
-end
-
-function _G.map_leave()
-	keymap.set("n", "<cr>", "<cr>", { buffer = 0 })
-end
-
+-- Highlight characters longer than 100 characters
 local highlight_group = vim.api.nvim_create_augroup("highlight", { clear = true })
-
-vim.api.nvim_create_autocmd("BufEnter", {
-	group = highlight_group,
-	callback = function()
-		local buftype = vim.bo.buftype
-		if buftype == "" then
-			_G.map_enter()
-		else
-			_G.map_leave()
-		end
-	end,
-	desc = "Leave the return key alone unless inside a normal buffer window",
-})
-
-vim.api.nvim_create_autocmd("CmdwinEnter", {
-	group = highlight_group,
-	callback = function()
-		_G.map_leave()
-	end,
-	desc = "Leave the return key alone when in command line windows",
-})
-
-vim.api.nvim_create_autocmd("CmdwinLeave", {
-	group = highlight_group,
-	callback = function()
-		_G.map_enter()
-	end,
-})
 
 vim.api.nvim_create_autocmd("BufEnter", {
 	group = highlight_group,
