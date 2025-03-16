@@ -108,7 +108,7 @@
   lga = fzf --ansi --delimiter='[*-]' --exact --multi --no-sort --preview 'echo {+2} | grep -E -o \"[a-f0-9]+\" | xargs git show -m --color' --reverse --bind 'enter:execute(echo -n {+2} | pbcopy)+accept'
 
   # Bare commit
-  patch = cat
+  patch = false
 [push]
   autoSetupRemote = true
   # Setting to git 2.0 default to suppress warning message
