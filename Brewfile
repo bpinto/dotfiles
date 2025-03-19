@@ -2,6 +2,7 @@ tap "homebrew/bundle"
 
 brew 'awscli'
 brew 'bat'
+brew 'ctags'
 brew 'fish'
 brew 'fzf'
 brew 'gh'
