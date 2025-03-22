@@ -1,34 +1,25 @@
-local cmd = vim.cmd
-local fn = vim.fn
 local keymap = vim.keymap
 local opt = vim.opt
 
 --------------------------------------------------------------------------------
 -- PLUGINS
 --------------------------------------------------------------------------------
--- Enable the experimental Lua module loader
-if vim.loader then
-	vim.loader.enable()
-end
-
 -- lazy.nvim requires this to be defined before its setup
 -- Remapping leader to ,
 vim.g.mapleader = ","
 
 -- Bootstrap lazy.nvim
-local lazypath = fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 opt.rtp:prepend(lazypath)
 
 -- Configure lazy.nvim
 require("lazy").setup({
 	{ import = "plugins" }, -- Merge with configurations from ~/.config/nvim/lua/plugins/*.lua
-	{ "jbmorgado/vim-pine-script", ft = "pine" },
 	{ "slm-lang/vim-slm", event = "VeryLazy" },
 	{ "tpope/vim-surround", event = "VeryLazy" },
-	{ "folke/drop.nvim", event = "VeryLazy" },
 }, {
 	defaults = { lazy = true },
-	install = { colorscheme = { "tokyonight", "habamax" } },
+	install = { colorscheme = { "tokyonight" } },
 })
 
 --------------------------------------------------------------------------------
@@ -42,7 +33,7 @@ opt.switchbuf = "useopen" -- Use already open buffer
 -- INTERFACE
 --------------------------------------------------------------------------------
 
-cmd("syntax enable") -- Enable highlighting for syntax
+vim.cmd("syntax enable") -- Enable highlighting for syntax
 opt.synmaxcol = 128 -- Syntax coloring lines that are too long just slows down the world
 
 opt.cmdheight = 2 -- Height of the command bar
@@ -64,7 +55,7 @@ opt.winwidth = 79 -- Minimal window width
 opt.background = "dark" -- background color
 opt.termguicolors = true -- enable true colors in the terminal
 
-cmd("colorscheme tokyonight")
+vim.cmd("colorscheme tokyonight")
 
 --vim.api.nvim_set_hl(0, 'VertSplit', {
 --fg = '#343F4C',
@@ -103,7 +94,7 @@ opt.undodir = vim.fn.expand("~/.local/share/nvim/undo/")
 
 -- Enable file type detection.
 -- Also load indent files, to automatically do language-dependent indenting.
-cmd("filetype plugin indent on")
+vim.cmd("filetype plugin indent on")
 opt.expandtab = true -- Use spaces, not tabs
 opt.tabstop = 2 -- A tab is two spaces
 opt.shiftwidth = 2 -- An autoindent (with <<) is two spaces
@@ -218,7 +209,7 @@ keymap.set("", "<leader>e", ":edit %%", { remap = true })
 keymap.set("n", "<leader>cf", "<ESC>/\\v^[<=>]{7}( .*|$)<CR>", { silent = true })
 
 -- Shortcut for setting a pry breakpoint
-cmd("iabbrev xpry binding.break<Esc>F%s<c-o>:call getchar()<CR>")
+vim.cmd("iabbrev xpry binding.break<Esc>F%s<c-o>:call getchar()<CR>")
 
 -- Convert ruby 1.8 hash into ruby 1.9
 keymap.set("n", "<leader>h", ":%s/:\\([^ ]*\\)\\(\\s*\\)=>/\\1:/g<CR>")
@@ -245,7 +236,7 @@ keymap.set("n", "<leader>ET", ":vsplit ~/.tmux.conf<cr>")
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 	pattern = "*grep*",
 	callback = function()
-		cmd("cwindow")
+		vim.cmd("cwindow")
 	end,
 	desc = "Auto open the search result",
 })
@@ -254,7 +245,7 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 vim.api.nvim_create_autocmd("Filetype", {
 	pattern = "gitcommit",
 	callback = function()
-		cmd("setlocal spell textwidth=72")
+		vim.cmd("setlocal spell textwidth=72")
 	end,
 	desc = "Spell checking and automatic wrapping at the 72 chars to git commit message",
 })
@@ -263,7 +254,7 @@ vim.api.nvim_create_autocmd("Filetype", {
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 	pattern = "*.slim",
 	callback = function()
-		cmd("set syntax=slm")
+		vim.cmd("set syntax=slm")
 	end,
 	desc = ".slim is a slm filetype",
 })
@@ -272,8 +263,8 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 	pattern = "*.pine",
 	callback = function()
-		cmd("set filetype=pine")
-		cmd("set syntax=psl")
+		vim.cmd("set filetype=pine")
+		vim.cmd("set syntax=psl")
 	end,
 	desc = ".pine is a psl filetype",
 })
@@ -292,13 +283,13 @@ keymap.set("", "<Down>", ':echo "Arrow keys are unnaceptable"<CR>', { remap = tr
 --------------------------------------------------------------------------------
 
 keymap.set("", "<leader>n", function()
-	local old_name = fn.expand("%")
-	local new_name = fn.input("New file name: ", vim.fn.expand("%"), "file")
+	local old_name = vim.fn.expand("%")
+	local new_name = vim.fn.input("New file name: ", vim.fn.expand("%"), "file")
 
 	if new_name ~= "" and new_name ~= old_name then
-		cmd(":saveas " .. new_name)
-		cmd(":silent !rm " .. old_name)
-		cmd("redraw!")
+		vim.cmd(":saveas " .. new_name)
+		vim.cmd(":silent !rm " .. old_name)
+		vim.cmd("redraw!")
 	end
 end)
 
@@ -307,10 +298,10 @@ end)
 --------------------------------------------------------------------------------
 
 keymap.set("", "<leader>p", function()
-	cmd(":normal! dd")
-	cmd(":normal! P")
-	cmd(":.s/\\(\\w\\+\\) = \\(.*\\)$/let(:\\1) { \\2 }/")
-	cmd(":normal ==")
+	vim.cmd(":normal! dd")
+	vim.cmd(":normal! P")
+	vim.cmd(":.s/\\(\\w\\+\\) = \\(.*\\)$/let(:\\1) { \\2 }/")
+	vim.cmd(":normal ==")
 end)
 
 --------------------------------------------------------------------------------
