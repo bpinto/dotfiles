@@ -1,8 +1,8 @@
 tap "homebrew/bundle"
+tap "netmute/tap"
 
 brew 'awscli'
 brew 'bat'
-brew 'ctags'
 brew 'fish'
 brew 'fzf'
 brew 'gh'
@@ -11,6 +11,7 @@ brew 'gpg'
 brew 'helmfile'
 brew 'kubectx'
 brew 'k9s'
+brew 'netmute/tap/ctags-lsp'
 brew 'neovim'
 brew 'node@22', link: true
 brew 'pinentry-mac'

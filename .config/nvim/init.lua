@@ -47,6 +47,7 @@ opt.showcmd = true -- Display incomplete commands
 opt.splitbelow = true -- When on, splitting a window will put the new window below the current one
 opt.splitright = true -- When on, splitting a window will put the new window right of the current one
 opt.title = true -- Set window title
+opt.winborder = "single" -- Enable borders in floating windows
 opt.winwidth = 79 -- Minimal window width
 
 --------------------------------------------------------------------------------

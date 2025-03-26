@@ -1,170 +1,33 @@
+local has_words_before = function()
+	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+	if col == 0 then
+		return false
+	end
+	local text = vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
+	return text:sub(col, col):match("%s") == nil
+end
+
 return {
-	{
-		"VonHeikemen/lsp-zero.nvim",
-		branch = "v3.x",
-		config = false,
-		init = function()
-			-- Disable automatic setup, we are doing it manually
-			vim.g.lsp_zero_extend_cmp = 0
-			vim.g.lsp_zero_extend_lspconfig = 0
-		end,
-	},
+	-- LSP
 	{
 		"williamboman/mason.nvim",
 		lazy = false,
-		config = true,
+		config = false,
 	},
-
-	-- Autocompletion
 	{
-		"hrsh7th/nvim-cmp",
-		event = "InsertEnter",
-		dependencies = {
-			"L3MON4D3/LuaSnip",
-			"delphinus/cmp-ctags",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-emoji",
-			"hrsh7th/cmp-nvim-lsp",
-			"petertriho/cmp-git",
-		},
-		config = function()
-			-- Here is where you configure the autocompletion settings.
-			local lsp_zero = require("lsp-zero")
-			lsp_zero.extend_cmp()
-
-			-- And you can configure cmp even more, if you want to.
-			local luasnip = require("luasnip")
-			local cmp = require("cmp")
-
-			cmp.setup({
-				formatting = lsp_zero.cmp_format({ details = true }),
-
-				mapping = cmp.mapping.preset.insert({
-					["<C-b>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-					["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<CR>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							if luasnip.expandable() then
-								luasnip.expand()
-							else
-								cmp.confirm({
-									select = true,
-								})
-							end
-						else
-							fallback()
-						end
-					end),
-
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_next_item()
-						elseif luasnip.locally_jumpable(1) then
-							luasnip.jump(1)
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-
-					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item()
-						elseif luasnip.locally_jumpable(-1) then
-							luasnip.jump(-1)
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-				}),
-				snippet = {
-					expand = function(args)
-						require("luasnip").lsp_expand(args.body)
-					end,
-				},
-				sources = {
-					{ name = "nvim_lsp" },
-					{ name = "buffer" },
-					{ name = "ctags" },
-					{ name = "git" },
-					{ name = "emoji" },
-				},
-			})
-		end,
-		init = function()
-			require("cmp_git").setup()
-		end,
+		"williamboman/mason-lspconfig.nvim",
+		lazy = false,
+		config = false,
 	},
-
-	-- LSP
 	{
 		"neovim/nvim-lspconfig",
 		cmd = { "LspInfo", "LspInstall", "LspStart" },
-		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "williamboman/mason-lspconfig.nvim" },
+			"netmute/ctags-lsp.nvim",
 		},
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
-			-- This is where all the LSP shenanigans will live
-			local lsp_zero = require("lsp-zero")
-			lsp_zero.extend_lspconfig()
-
-			-- Defines the sign icons that appear in the gutter.
-			lsp_zero.set_sign_icons({
-				error = "",
-				warn = "",
-				hint = "",
-				info = "",
-			})
-			local signs = {
-				Error = "",
-				Warn = "",
-				Hint = "",
-				Info = "",
-			}
-			for type, icon in pairs(signs) do
-				local hl = "DiagnosticSign" .. type
-				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-			end
-
-			-- Disable autofocus on signature help
-			vim.lsp.handlers["textDocument/signatureHelp"] =
-				vim.lsp.with(vim.lsp.handlers.signature_help, { focus = false })
-
-			--- if you want to know more about lsp-zero and mason.nvim
-			--- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
-			lsp_zero.on_attach(function(client, bufnr)
-				if client.name == "eslint" then
-					client.server_capabilities.documentFormattingProvider = true
-				end
-
-				vim.diagnostic.config({
-					float = { border = "single", focus = false },
-					signs = true,
-					underline = true,
-					update_in_insert = false, -- delay update diagnostics
-					virtual_text = false, -- do not show diagnostics message inline
-				})
-
-				vim.opt.updatetime = 300 -- set inactivity time to 300ms
-
-				-- see :help lsp-zero-keybindings
-				-- to learn the available actions
-				lsp_zero.default_keymaps({ buffer = bufnr })
-
-				vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", { buffer = bufnr })
-				vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", { buffer = bufnr })
-
-				-- Show line diagnostics after inactivity
-				vim.cmd("autocmd CursorHold <buffer> lua vim.diagnostic.open_float()")
-
-				-- Show signature help after inactivity on insertion mode
-				vim.cmd("autocmd CursorHoldI <buffer> silent! lua vim.lsp.buf.signature_help()")
-			end)
-
+			require("mason").setup({})
 			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"cssls",
@@ -182,17 +45,6 @@ return {
 					"yamlls",
 				},
 				handlers = {
-					-- The first entry (without a key) will be the default handler
-					-- and will be called for each installed server that doesn't have
-					-- a dedicated handler.
-					lsp_zero.default_setup,
-
-					-- Next, you can provide targeted overrides for specific servers.
-					lua_ls = function()
-						local lua_opts = lsp_zero.nvim_lua_ls()
-						require("lspconfig").lua_ls.setup(lua_opts)
-					end,
-
 					helm_ls = function()
 						require("lspconfig").helm_ls.setup({
 							settings = {
@@ -207,6 +59,127 @@ return {
 					end,
 				},
 			})
+
+			require("lspconfig").ctags_lsp.setup({})
+			require("lspconfig").cssls.setup({})
+			require("lspconfig").dockerls.setup({})
+			require("lspconfig").docker_compose_language_service.setup({})
+			require("lspconfig").eslint.setup({})
+			require("lspconfig").html.setup({})
+			require("lspconfig").jsonls.setup({})
+			require("lspconfig").lua_ls.setup({})
+			require("lspconfig").somesass_ls.setup({})
+			require("lspconfig").ts_ls.setup({})
+			require("lspconfig").typos_lsp.setup({})
+			require("lspconfig").yamlls.setup({})
+
+			-- Defines the sign icons that appear in the gutter.
+			local signs = {
+				Error = "",
+				Warn = "",
+				Hint = "",
+				Info = "",
+			}
+			for type, icon in pairs(signs) do
+				local hl = "DiagnosticSign" .. type
+				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+			end
+
+			vim.diagnostic.config({
+				float = { border = "single", focus = false },
+				signs = true,
+				underline = true,
+				update_in_insert = false, -- delay update diagnostics
+			})
+
+			vim.opt.updatetime = 300 -- set inactivity time to 300ms
+
+			-- Show line diagnostics after inactivity
+			vim.cmd("autocmd CursorHold <buffer> lua vim.diagnostic.open_float()")
 		end,
+	},
+
+	-- Completion
+	{
+		"saghen/blink.cmp",
+		dependencies = {
+			"moyiz/blink-emoji.nvim",
+			{
+				"Kaiser-Yang/blink-cmp-git",
+				dependencies = { "nvim-lua/plenary.nvim" },
+			},
+		},
+		event = "InsertEnter",
+		version = "1.*",
+		opts = {
+			-- adjusts spacing to ensure icons are aligned
+			appearance = { nerd_font_variant = "mono" },
+
+			cmdline = {
+				completion = {
+					list = { selection = { preselect = false, auto_insert = true } },
+					menu = { auto_show = true },
+				},
+
+				keymap = { preset = "default" },
+			},
+
+			completion = {
+				-- Show documentation when selecting a completion item
+				documentation = { auto_show = true, auto_show_delay_ms = 200 },
+
+				list = { selection = { preselect = false, auto_insert = true } },
+
+				trigger = {
+					-- Shows after typing a trigger character, defined by the sources.
+					show_on_trigger_character = true,
+					-- Shows after entering insert mode on top of a trigger character.
+					show_on_insert_on_trigger_character = true,
+				},
+			},
+
+			fuzzy = { implementation = "prefer_rust_with_warning" },
+
+			keymap = {
+				preset = "default",
+
+				["<CR>"] = { "accept", "select_and_accept", "fallback" },
+
+				["<Tab>"] = {
+					function(cmp)
+						if has_words_before() then
+							return cmp.insert_next()
+						end
+					end,
+					"fallback",
+				},
+				["<S-Tab>"] = { "insert_prev" },
+			},
+
+			-- Experimental signature help support
+			signature = { enabled = true },
+
+			sources = {
+				default = { "git", "lsp", "path", "snippets", "buffer", "emoji" },
+
+				providers = {
+					emoji = {
+						module = "blink-emoji",
+						name = "Emoji",
+						score_offset = 15,
+						should_show_items = function()
+							return vim.tbl_contains(
+								-- Enable emoji completion only for git commits and markdown.
+								{ "gitcommit", "markdown" },
+								vim.o.filetype
+							)
+						end,
+					},
+
+					git = { module = "blink-cmp-git", name = "Git" },
+				},
+			},
+		},
+		opts_extend = { "sources.default" },
 	},
 }
