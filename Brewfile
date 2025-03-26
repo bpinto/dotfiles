@@ -14,7 +14,9 @@ brew 'k9s'
 brew 'neovim'
 brew 'node@22', link: true
 brew 'pinentry-mac'
+brew 'prettierd'
 brew 'ripgrep'
+brew 'stylua'
 brew 'yt-dlp'
 
 cask 'aws-vault'
