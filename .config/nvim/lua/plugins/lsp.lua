@@ -3,6 +3,7 @@ local has_words_before = function()
 	if col == 0 then
 		return false
 	end
+
 	local text = vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
 	return text:sub(col, col):match("%s") == nil
 end
@@ -44,50 +45,73 @@ return {
 					"typos_lsp",
 					"yamlls",
 				},
-				handlers = {
-					helm_ls = function()
-						require("lspconfig").helm_ls.setup({
-							settings = {
-								["helm-ls"] = {
-									valuesFiles = {
-										mainValuesFile = "values.yaml",
-										additionalValuesFilesGlobPattern = "../../environment_values/development.yaml",
-									},
-								},
-							},
-						})
-					end,
-				},
 			})
 
 			require("lspconfig").ctags_lsp.setup({})
 			require("lspconfig").cssls.setup({})
 			require("lspconfig").dockerls.setup({})
 			require("lspconfig").docker_compose_language_service.setup({})
-			require("lspconfig").eslint.setup({})
+			require("lspconfig").eslint.setup({
+				on_attach = function(client)
+					if client.name == "eslint" then
+						client.server_capabilities.documentFormattingProvider = true
+					elseif client.name == "tsserver" then
+						client.server_capabilities.documentFormattingProvider = false
+					end
+				end,
+			})
+			require("lspconfig").helm_ls.setup({
+				settings = {
+					["helm-ls"] = {
+						valuesFiles = {
+							mainValuesFile = "values.yaml",
+							additionalValuesFilesGlobPattern = "../../environment_values/development.yaml",
+						},
+					},
+				},
+			})
 			require("lspconfig").html.setup({})
 			require("lspconfig").jsonls.setup({})
-			require("lspconfig").lua_ls.setup({})
+			require("lspconfig").lua_ls.setup({
+				on_init = function(client)
+					if client.workspace_folders then
+						local path = client.workspace_folders[1].name
+						if
+							path ~= vim.fn.stdpath("config")
+							and (vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc"))
+						then
+							return
+						end
+					end
+
+					client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+						runtime = { version = "LuaJIT" },
+						-- Make the server aware of Neovim runtime files
+						workspace = {
+							checkThirdParty = false,
+							library = { vim.env.VIMRUNTIME },
+						},
+					})
+				end,
+				settings = {
+					Lua = {},
+				},
+			})
 			require("lspconfig").somesass_ls.setup({})
 			require("lspconfig").ts_ls.setup({})
 			require("lspconfig").typos_lsp.setup({})
 			require("lspconfig").yamlls.setup({})
 
-			-- Defines the sign icons that appear in the gutter.
-			local signs = {
-				Error = "",
-				Warn = "",
-				Hint = "",
-				Info = "",
-			}
-			for type, icon in pairs(signs) do
-				local hl = "DiagnosticSign" .. type
-				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-			end
-
 			vim.diagnostic.config({
 				float = { border = "single", focus = false },
-				signs = true,
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = "",
+						[vim.diagnostic.severity.WARN] = "",
+						[vim.diagnostic.severity.HINT] = "",
+						[vim.diagnostic.severity.INFO] = "",
+					},
+				},
 				underline = true,
 				update_in_insert = false, -- delay update diagnostics
 			})
@@ -95,8 +119,39 @@ return {
 			vim.opt.updatetime = 300 -- set inactivity time to 300ms
 
 			-- Show line diagnostics after inactivity
-			vim.cmd("autocmd CursorHold <buffer> lua vim.diagnostic.open_float()")
+			vim.api.nvim_create_autocmd({ "CursorHold" }, {
+				pattern = "*",
+				callback = function()
+					-- Don't open diagnostic if floating dialog exists
+					for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+						if vim.api.nvim_win_get_config(winid).zindex then
+							return
+						end
+					end
+
+					vim.diagnostic.open_float({
+						close_events = {
+							"CursorMoved",
+							"CursorMovedI",
+							"BufHidden",
+							"InsertCharPre",
+							"WinLeave",
+						},
+					})
+				end,
+			})
 		end,
+
+		keys = {
+			{
+				"gK",
+				function()
+					vim.diagnostic.config({ virtual_lines = not vim.diagnostic.config().virtual_lines })
+				end,
+				mode = "n",
+				desc = "Toggle diagnostic virtual_lines",
+			},
+		},
 	},
 
 	-- Completion
