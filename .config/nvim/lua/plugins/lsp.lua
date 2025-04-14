@@ -47,20 +47,7 @@ return {
 				},
 			})
 
-			require("lspconfig").ctags_lsp.setup({})
-			require("lspconfig").cssls.setup({})
-			require("lspconfig").dockerls.setup({})
-			require("lspconfig").docker_compose_language_service.setup({})
-			require("lspconfig").eslint.setup({
-				on_attach = function(client)
-					if client.name == "eslint" then
-						client.server_capabilities.documentFormattingProvider = true
-					elseif client.name == "tsserver" then
-						client.server_capabilities.documentFormattingProvider = false
-					end
-				end,
-			})
-			require("lspconfig").helm_ls.setup({
+			vim.lsp.config("helm_ls", {
 				settings = {
 					["helm-ls"] = {
 						valuesFiles = {
@@ -70,9 +57,8 @@ return {
 					},
 				},
 			})
-			require("lspconfig").html.setup({})
-			require("lspconfig").jsonls.setup({})
-			require("lspconfig").lua_ls.setup({
+
+			vim.lsp.config("lua_ls", {
 				on_init = function(client)
 					if client.workspace_folders then
 						local path = client.workspace_folders[1].name
@@ -97,10 +83,32 @@ return {
 					Lua = {},
 				},
 			})
-			require("lspconfig").somesass_ls.setup({})
-			require("lspconfig").ts_ls.setup({})
-			require("lspconfig").typos_lsp.setup({})
-			require("lspconfig").yamlls.setup({})
+
+			vim.lsp.enable({
+				"cssls",
+				"dockerls",
+				"docker_compose_language_service",
+				"helm_ls",
+				"html",
+				"jsonls",
+				"lua_ls",
+				"somesass_ls",
+				"ts_ls",
+				"typos_lsp",
+				"yamlls",
+			})
+
+			-- Legacy configuration, maybe natively supported on Neovim v0.11.1.
+			require("lspconfig").ctags_lsp.setup({})
+			require("lspconfig").eslint.setup({
+				on_attach = function(client)
+					if client.name == "eslint" then
+						client.server_capabilities.documentFormattingProvider = true
+					elseif client.name == "tsserver" then
+						client.server_capabilities.documentFormattingProvider = false
+					end
+				end,
+			})
 
 			vim.diagnostic.config({
 				float = { border = "single", focus = false },
