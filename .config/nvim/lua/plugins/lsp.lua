@@ -88,6 +88,7 @@ return {
 				"cssls",
 				"dockerls",
 				"docker_compose_language_service",
+				"eslint",
 				"helm_ls",
 				"html",
 				"jsonls",
@@ -98,17 +99,7 @@ return {
 				"yamlls",
 			})
 
-			-- Legacy configuration, maybe natively supported on Neovim v0.11.1.
 			require("lspconfig").ctags_lsp.setup({})
-			require("lspconfig").eslint.setup({
-				on_attach = function(client)
-					if client.name == "eslint" then
-						client.server_capabilities.documentFormattingProvider = true
-					elseif client.name == "tsserver" then
-						client.server_capabilities.documentFormattingProvider = false
-					end
-				end,
-			})
 
 			vim.diagnostic.config({
 				float = { border = "single", focus = false },
