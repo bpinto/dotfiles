@@ -20,7 +20,7 @@ brew 'ripgrep'
 brew 'stylua'
 brew 'yt-dlp'
 
-cask 'aws-vault'
+cask 'aws-vault-binary'
 cask 'browserstacklocal'
 cask 'discord'
 cask 'font-powerline-symbols'
