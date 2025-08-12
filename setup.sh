@@ -116,6 +116,12 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 defaults write -g WebKitDeveloperExtras -bool true
 
 ###########################################################
+# Ticker configuration
+###########################################################
+
+ln -sf $HOME/Documents/.ticker.yaml ~/.ticker.yaml
+
+###########################################################
 # macOS configuration
 ###########################################################
 

@@ -1,6 +1,8 @@
+tap "achannarasappa/tap"
 tap "homebrew/bundle"
 tap "netmute/tap"
 
+brew 'achannarasappa/tap/ticker'
 brew 'awscli'
 brew 'bat'
 brew 'fish'
