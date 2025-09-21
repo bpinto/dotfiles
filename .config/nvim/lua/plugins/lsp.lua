@@ -23,9 +23,6 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		cmd = { "LspInfo", "LspInstall", "LspStart" },
-		dependencies = {
-			"netmute/ctags-lsp.nvim",
-		},
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("mason").setup({})
@@ -45,6 +42,11 @@ return {
 					"typos_lsp",
 					"yamlls",
 				},
+			})
+
+			vim.lsp.config("ctags_lsp", {
+				cmd = { "ctags-lsp" },
+				root_dir = vim.uv.cwd(),
 			})
 
 			vim.lsp.config("helm_ls", {
@@ -86,6 +88,7 @@ return {
 
 			vim.lsp.enable({
 				"cssls",
+				"ctags_lsp",
 				"dockerls",
 				"docker_compose_language_service",
 				"eslint",
@@ -98,8 +101,6 @@ return {
 				"typos_lsp",
 				"yamlls",
 			})
-
-			require("lspconfig").ctags_lsp.setup({})
 
 			vim.diagnostic.config({
 				float = { border = "single", focus = false },
