@@ -41,5 +41,5 @@ SETUVAR fish_pager_color_selected_background:\x2d\x2dbackground\x3d2e3c64
 SETUVAR fish_pager_color_selected_completion:e0def4
 SETUVAR fish_pager_color_selected_description:e0def4
 SETUVAR fish_pager_color_selected_prefix:9ccfd8
-SETUVAR fish_user_paths:/usr/local/bin\x1e/usr/local/sbin\x1e/opt/homebrew/bin\x1e/opt/homebrew/sbin\x1e/usr/X11/bin\x1e\x2egit/node_bin
+SETUVAR fish_user_paths:/usr/local/bin\x1e/usr/local/sbin\x1e/opt/homebrew/bin\x1e/opt/homebrew/sbin\x1e/usr/X11/bin\x1e\x2egit/node_bin\x1e/Applications/Ghostty\x2eapp/Contents/MacOS
 SETUVAR terminal_colors_set:\x1d
