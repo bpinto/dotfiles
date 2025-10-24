@@ -54,20 +54,6 @@ return {
 			},
 		},
 		opts = {
-			adapters = {
-				http = {
-					copilot = function()
-						return require("codecompanion.adapters").extend("copilot", {
-							schema = {
-								model = {
-									default = "claude-3.7-sonnet",
-								},
-							},
-						})
-					end,
-				},
-			},
-
 			strategies = {
 				chat = {
 					slash_commands = {
@@ -91,6 +77,11 @@ return {
 								provider = "fzf_lua",
 							},
 						},
+					},
+				},
+				http = {
+					copilot = {
+						model = "claude-3.7-sonnet",
 					},
 				},
 				inline = {
