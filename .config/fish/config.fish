@@ -64,4 +64,7 @@ if status --is-interactive
 
     # Set XDG directories for k9s: https://github.com/derailed/k9s/issues/2983
     set -gx XDG_CONFIG_HOME ~/.config
+
+    # Set default fish key bindings
+    set -g fish_key_bindings fish_default_key_bindings
 end

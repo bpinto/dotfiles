@@ -1351,7 +1351,7 @@ fullscreen = true
 # sequence will be honored but previous changes will not retroactively
 # be set. This latter case may require you to restart programs such as Neovim
 # to get the new title.
-title =
+title = " "
 
 # The setting that will change the application class value.
 #
