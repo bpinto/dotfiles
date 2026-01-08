@@ -54,8 +54,17 @@ return {
 			},
 		},
 		opts = {
-			strategies = {
+			display = {
 				chat = {
+					-- show_settings = true,
+				},
+			},
+			interactions = {
+				chat = {
+					adapter = {
+						name = "copilot",
+						model = "gpt-5-mini",
+					},
 					slash_commands = {
 						["buffer"] = {
 							opts = {
@@ -80,11 +89,16 @@ return {
 					},
 				},
 				http = {
-					copilot = {
-						model = "claude-3.7-sonnet",
+					adapter = {
+						name = "copilot",
+						model = "gpt-5-mini",
 					},
 				},
 				inline = {
+					adapter = {
+						name = "copilot",
+						model = "gpt-5-mini",
+					},
 					keymaps = {
 						accept_change = {
 							modes = { n = "ga" },
@@ -97,8 +111,6 @@ return {
 					},
 				},
 			},
-
-			--log_level = "DEBUG",
 		},
 	},
 }
