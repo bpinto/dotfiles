@@ -5,6 +5,7 @@ tap "netmute/tap"
 brew 'achannarasappa/tap/ticker'
 brew 'awscli'
 brew 'bat'
+brew 'esphome'
 brew 'fish'
 brew 'fzf'
 brew 'gh'
