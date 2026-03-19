@@ -11,7 +11,7 @@ NIXNAME ?= vm-aarch64
 
 # SSH options that are used. These aren't meant to be overridden but are
 # reused a lot so we just store them up here.
-SSH_OPTIONS=-o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
+SSH_OPTIONS=-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
 
 # Primary disk device. VMware Fusion on Apple Silicon typically uses NVMe,
 # while older versions or Intel VMs may use SATA.
@@ -69,10 +69,14 @@ vm/bootstrap0:
 # copy our config and apply the full configuration.
 vm/bootstrap:
 	NIXUSER=root $(MAKE) vm/copy
+	NIXUSER=root $(MAKE) vm/secrets
 	NIXUSER=root $(MAKE) vm/switch
-	ssh $(SSH_OPTIONS) -p$(NIXPORT) $(NIXUSER)@$(NIXADDR) " \
-		sudo reboot; \
-	"
+	@echo ""
+	@echo "Switch complete. The VM IP may have changed."
+	@echo "Find the new IP from the VM console, then run:"
+	@echo "  export NIXADDR=<new-ip>"
+	@echo "  make vm/secrets-user"
+	@echo "  ssh bpinto@\$$NIXADDR sudo reboot"
 
 # Copy the Nix configurations into the VM.
 vm/copy:
@@ -81,9 +85,33 @@ vm/copy:
 		--rsync-path="sudo rsync" \
 		$(MAKEFILE_DIR)/ $(NIXUSER)@$(NIXADDR):/nix-config
 
+# Copy system-level secrets into the VM (before vm/switch, user may not exist yet).
+vm/secrets:
+	rsync -av -e 'ssh $(SSH_OPTIONS) -p$(NIXPORT)' \
+		$(HOME)/.ssh/nixos_vm.pub $(HOME)/.ssh/nixos_vm.age $(NIXUSER)@$(NIXADDR):/etc/ssh/
+	ssh $(SSH_OPTIONS) -p$(NIXPORT) $(NIXUSER)@$(NIXADDR) "bash -c 'sudo chmod 600 /etc/ssh/nixos_vm.age'"
+
+# Copy user-level secrets into the VM (after vm/switch, user exists).
+vm/secrets-user:
+	ssh $(SSH_OPTIONS) -p$(NIXPORT) $(NIXUSER)@$(NIXADDR) "bash -c '\
+		sudo mkdir -p /home/bpinto/.ssh && \
+		sudo chown bpinto:users /home/bpinto/.ssh && \
+		sudo chmod 700 /home/bpinto/.ssh \
+	'"
+	rsync -av -e 'ssh $(SSH_OPTIONS) -p$(NIXPORT)' \
+		--rsync-path='sudo rsync' \
+		$(HOME)/.ssh/nixos_vm.pub $(HOME)/.ssh/nixos_vm.age $(NIXUSER)@$(NIXADDR):/home/bpinto/.ssh/
+	ssh $(SSH_OPTIONS) -p$(NIXPORT) $(NIXUSER)@$(NIXADDR) "bash -c '\
+		sudo chown bpinto:users /home/bpinto/.ssh/nixos_vm.pub /home/bpinto/.ssh/nixos_vm.age && \
+		sudo chmod 600 /home/bpinto/.ssh/nixos_vm.age \
+	'"
+
 # Run nixos-rebuild switch. This does NOT copy files so you have to run vm/copy before.
+# Note: SSH may disconnect when sshd restarts during switch. This is expected.
+# ServerAliveInterval ensures the connection drops quickly instead of hanging.
 vm/switch:
-	ssh $(SSH_OPTIONS) -p$(NIXPORT) $(NIXUSER)@$(NIXADDR) " \
-		echo 'nameserver 8.8.8.8' | sudo tee /etc/resolv.conf > /dev/null; \
-		sudo NIXPKGS_ALLOW_UNFREE=1 nixos-rebuild switch --flake \"/nix-config#${NIXNAME}\" \
-	"
+	ssh $(SSH_OPTIONS) -p$(NIXPORT) -o ServerAliveInterval=5 -o ServerAliveCountMax=2 \
+		$(NIXUSER)@$(NIXADDR) "bash -c '\
+		echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf > /dev/null && \
+		sudo NIXPKGS_ALLOW_UNFREE=1 nixos-rebuild switch --flake /nix-config#${NIXNAME} \
+	'" || true
