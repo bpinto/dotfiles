@@ -1,0 +1,207 @@
+set $mod Mod4
+
+#----------------------------------------------------------------------
+# Look & Feel
+#----------------------------------------------------------------------
+# Font for window titles and the i3bar (unless overridden in the bar block).
+font pango:VictorMono Nerd Font 8
+
+# Window border: thin 2px pixel border (no title bar).
+new_window pixel 2
+new_float pixel 2
+
+# Floating window size constraints.
+floating_minimum_size 400 x 300
+floating_maximum_size -1 x -1
+
+# Focus only changes on click, not when the mouse hovers over a window.
+focus_follows_mouse no
+
+# Color palette read from X resources with fallback hex values.
+set_from_resource $back         i3wm.background #1D1F21
+set_from_resource $black        i3wm.color0     #282A2E
+set_from_resource $grey         i3wm.color8     #373B41
+set_from_resource $lightgrey    i3wm.color7     #707880
+set_from_resource $white        i3wm.color15    #C5C8C6
+set_from_resource $yellow       i3wm.color11    #F0C674
+set_from_resource $red          i3wm.color9     #CC6666
+set_from_resource $darkred      i3wm.color1     #A54242
+set_from_resource $green        i3wm.color10    #B5BD56
+
+# Window decoration colors:
+#                       border      background  text        indicator
+client.focused          $green      $green      $black      $red
+client.focused_inactive $grey       $grey       $lightgrey  $grey
+client.unfocused        $grey       $grey       $lightgrey  $grey
+client.urgent           $red        $red        $black      $red
+client.background       $back
+
+#----------------------------------------------------------------------
+# Startup
+#----------------------------------------------------------------------
+# Lock the screen automatically before suspend/sleep via xss-lock + i3lock.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+# Set a solid background color (no wallpaper).
+exec --no-startup-id xsetroot -solid $back
+
+# Set keyboard layout to US International (supports accents/diacritics).
+exec --no-startup-id setxkbmap -layout us -variant intl
+
+#----------------------------------------------------------------------
+# Keybindings
+#----------------------------------------------------------------------
+# Hold $mod + mouse to drag/resize floating windows.
+floating_modifier $mod
+
+# Application launcher (rofi).
+bindsym $mod+o exec rofi -show run
+
+# Open a new terminal.
+bindsym $mod+n exec ghostty --gtk-single-instance=true
+
+# Split orientation: horizontal / vertical.
+bindsym $mod+d split h
+bindsym $mod+Shift+d split v
+
+# Close the focused window.
+bindsym $mod+w kill
+
+# Move focus between windows (vim-style).
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Move the focused window (vim-style).
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# Toggle fullscreen for the focused window.
+bindsym $mod+Shift+f fullscreen toggle
+
+# Switch container layout: stacking / tabbed / toggle split.
+bindsym $mod+Shift+s layout stacking
+bindsym $mod+Shift+w layout tabbed
+bindsym $mod+Shift+e layout toggle split
+
+# Toggle tiling ↔ floating for the focused window.
+bindsym $mod+Shift+space floating toggle
+
+# Switch focus between tiling and floating layers.
+bindsym $mod+space focus mode_toggle
+
+# Focus the parent container.
+bindsym $mod+Shift+a focus parent
+
+#----------------------------------------------------------------------
+# Workspaces
+#----------------------------------------------------------------------
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Switch to workspace.
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# Move the focused container to a workspace.
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# Reload the i3 configuration file.
+bindsym $mod+Shift+c reload
+# Restart i3 in place (preserves layout/session — useful after upgrading i3).
+bindsym $mod+Shift+r restart
+
+#----------------------------------------------------------------------
+# Resize Mode
+#----------------------------------------------------------------------
+set $mode_resize Resize / Move
+
+mode "$mode_resize" {
+        # Navigate the container tree.
+        bindsym a focus parent
+        bindsym $mod+a focus parent
+        bindsym c focus child
+        bindsym $mod+c focus child
+
+        # Move the focused container to a workspace and follow it.
+        bindsym 1 move container to workspace number $ws1; workspace number $ws1
+        bindsym 2 move container to workspace number $ws2; workspace number $ws2
+        bindsym 3 move container to workspace number $ws3; workspace number $ws3
+        bindsym 4 move container to workspace number $ws4; workspace number $ws4
+        bindsym 5 move container to workspace number $ws5; workspace number $ws5
+        bindsym 6 move container to workspace number $ws6; workspace number $ws6
+        bindsym 7 move container to workspace number $ws7; workspace number $ws7
+        bindsym 8 move container to workspace number $ws8; workspace number $ws8
+        bindsym 9 move container to workspace number $ws9; workspace number $ws9
+        bindsym 0 move container to workspace number $ws10; workspace number $ws10
+
+        # Resize windows (vim-style: h/l = width, j/k = height).
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # Exit resize mode.
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "$mode_resize"
+
+#----------------------------------------------------------------------
+# System Mode
+#----------------------------------------------------------------------
+set $mode_system System (e) logout, (r) reboot, (Ctrl+s) shutdown
+
+mode "$mode_system" {
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Ctrl+s exec --no-startup-id systemctl poweroff -i, mode "default"
+
+    # Exit system mode.
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+BackSpace mode "$mode_system"
+
+#----------------------------------------------------------------------
+# Status Bar
+#----------------------------------------------------------------------
+bar {
+    status_command i3status
+
+    font pango:VictorMono Nerd Font 8
+    colors {
+        background $back
+    }
+}
