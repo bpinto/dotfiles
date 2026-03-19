@@ -21,7 +21,12 @@
     networkConfig = {
       DHCP = "yes";
       IPv6AcceptRA = true;
-      DNS = [ "1.1.1.1" "1.0.0.1" "2606:4700:4700::1111" "2606:4700:4700::1001" ];
+      DNS = [
+        "1.1.1.1"
+        "1.0.0.1"
+        "2606:4700:4700::1111"
+        "2606:4700:4700::1001"
+      ];
     };
     dhcpV4Config.UseDNS = true;
     dhcpV6Config.UseDNS = true;

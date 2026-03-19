@@ -8,7 +8,10 @@
   users.users.bpinto = {
     isNormalUser = true;
     home = "/home/bpinto";
-    extraGroups = [ "docker" "wheel" ];
+    extraGroups = [
+      "docker"
+      "wheel"
+    ];
     shell = pkgs.nushell;
 
     hashedPasswordFile = config.sops.secrets.user_bpinto_password.path;

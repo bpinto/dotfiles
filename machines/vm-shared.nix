@@ -1,4 +1,11 @@
-{ config, pkgs, lib, home-manager, sops-nix, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  home-manager,
+  sops-nix,
+  ...
+}:
 
 {
   imports = [
