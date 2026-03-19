@@ -16,16 +16,38 @@
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, sops-nix, ... }: {
-    # Formatter configuration for `nix fmt`
-    formatter.aarch64-linux = nixpkgs.legacyPackages.aarch64-linux.nixfmt-rfc-style;
-
-    nixosConfigurations.vm-aarch64 = nixpkgs.lib.nixosSystem {
+  outputs = { self, nixpkgs, home-manager, sops-nix, ... }:
+    let
       system = "aarch64-linux";
-      specialArgs = { inherit home-manager sops-nix; };
-      modules = [
-        ./machines/vm-aarch64.nix
-      ];
+      nixname = "vm-aarch64";
+      pkgs = nixpkgs.legacyPackages.${system};
+      nixos-rebuild-wrapper = name: action: pkgs.writeShellApplication {
+        inherit name;
+        text = ''
+          echo "> Running nixos-rebuild ${action}..."
+          NIXPKGS_ALLOW_UNFREE=1 nixos-rebuild ${action} --sudo --flake ".#${nixname}"
+          echo "> nixos-rebuild ${action} was successful ✅"
+        '';
+      };
+    in
+    {
+      # Formatter configuration for `nix fmt`
+      formatter.${system} = pkgs.nixfmt-rfc-style;
+
+      devShells.${system}.default = pkgs.mkShellNoCC {
+        name = "dotfiles";
+        packages = [
+          (nixos-rebuild-wrapper "switch" "switch")
+          (nixos-rebuild-wrapper "try" "test")
+        ];
+      };
+
+      nixosConfigurations.${nixname} = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = { inherit home-manager sops-nix; };
+        modules = [
+          ./machines/vm-aarch64.nix
+        ];
+      };
     };
-  };
 }

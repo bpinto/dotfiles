@@ -34,6 +34,8 @@ in
     PAGER = "less -FirSwX";
   };
 
+  services.ssh-agent.enable = true;
+
   xdg.enable = true;
 
   #---------------------------------------------------------------------
@@ -58,6 +60,7 @@ in
   home.file.".gitignore".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/.gitignore";
   home.file.".gitmessage".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/.gitmessage";
   home.file.".git_template".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/.git_template";
+  home.file.".ssh/allowed_signers".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/.ssh/allowed_signers";
 
   programs.git = {
     enable = true;

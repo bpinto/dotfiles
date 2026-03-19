@@ -9,12 +9,14 @@ com.googlecode.iterm2.plist
 .elvish/db
 .elvish/db-journal
 .elvish/lib/cliniko.elv
+.direnv/
 .DS_Store
 .gem/credentials
 .netrc
 .ngrok
 .gnupg/
-.ssh
+.ssh/*
+!.ssh/allowed_signers
 .subversion/
 .vim/autoload
 .vim/bundle
