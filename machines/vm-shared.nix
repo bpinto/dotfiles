@@ -10,6 +10,9 @@
 
     # Import services
     ../services/dotfiles-clone.nix
+
+    # Import network configuration
+    ../modules/network.nix
   ];
 
   # Use latest kernel
@@ -66,13 +69,8 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  networking = {
-    # Hostname
-    hostName = "nixos-dev";
-
-    # Disable DHCP for all interfaces (systemd-networkd will handle it)
-    useDHCP = false;
-  };
+  # Hostname
+  networking.hostName = "nixos-dev";
 
   nix = {
     # Enable flakes
@@ -123,12 +121,6 @@
   services.openssh.enable = true;
   services.openssh.settings.PasswordAuthentication = true;
   services.openssh.settings.PermitRootLogin = "no";
-
-  # Enable systemd-resolved for DNS resolution
-  services.resolved = {
-    enable = true;
-    dnssec = "allow-downgrade";
-  };
 
   # SOPS configuration
   sops = {
