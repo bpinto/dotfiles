@@ -8,10 +8,8 @@
     # Import OS configurations
     ../users/bpinto/nixos.nix
 
-    # Import services
-    ../services/dotfiles-clone.nix
-
-    # Import network configuration
+    # Import modules
+    ../modules/dotfiles-clone.nix
     ../modules/network.nix
   ];
 
