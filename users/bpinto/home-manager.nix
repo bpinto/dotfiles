@@ -8,8 +8,13 @@
 let
   home = config.home.homeDirectory;
   dotfiles = "${home}/src/dotfiles";
+  isLinux = pkgs.stdenv.isLinux;
 in
 {
+  imports = [
+    ../../modules/theme.nix
+  ];
+
   home.stateVersion = "25.11";
 
   # SOPS
@@ -25,9 +30,16 @@ in
 
   home.packages = with pkgs; [
     delta
+    fzf
+    ghostty
     ripgrep
     tree
-  ];
+  ] ++ (lib.optionals isLinux [
+    # i3-related tools
+    rofi        # Application launcher
+    i3lock      # Screen locker
+    xss-lock    # Automatic screen locker on suspend
+  ]);
 
   #---------------------------------------------------------------------
   # Environment
@@ -41,7 +53,14 @@ in
 
   services.ssh-agent.enable = true;
 
+  # XDG config files
+  xdg.configFile = {
+    # i3 window manager configuration (Linux only)
+    "i3/config" = lib.mkIf isLinux { text = builtins.readFile ./i3; };
+  };
+
   xdg.enable = true;
+
 
   #---------------------------------------------------------------------
   # Programs
@@ -76,6 +95,22 @@ in
   };
 
   #
+  # i3status
+  programs.i3status = {
+    enable = isLinux;
+
+    general = {
+      colors = true;
+    };
+
+    modules = {
+      ipv6.enable = false;
+      "battery all".enable = false;
+      "wireless _first_".enable = false;
+    };
+  };
+
+  #
   # Neovim
   programs.neovim = {
     enable = true;
@@ -88,6 +123,7 @@ in
     enable = true;
   };
 
+  #
   # Starship
   programs.starship = {
     enable = true;
