@@ -1,11 +1,15 @@
-{ config, pkgs, lib, home-manager, ... }:
+{ config, pkgs, lib, home-manager, sops-nix, ... }:
 
 {
   imports = [
     home-manager.nixosModules.home-manager
+    sops-nix.nixosModules.sops
 
     # Import OS configurations
     ../users/bpinto/nixos.nix
+
+    # Import services
+    ../services/dotfiles-clone.nix
   ];
 
   # Use latest kernel
@@ -47,6 +51,11 @@
 
   # Home Manager configuration
   home-manager = {
+    # NixOS system-wide home-manager configuration
+    sharedModules = [
+      sops-nix.homeManagerModules.sops
+    ];
+
     useGlobalPkgs = true;
     useUserPackages = true;
 
@@ -119,6 +128,13 @@
   services.resolved = {
     enable = true;
     dnssec = "allow-downgrade";
+  };
+
+  # SOPS configuration
+  sops = {
+    age.keyFile = "/etc/ssh/nixos_vm.age";
+    age.sshKeyPaths = [ ];
+    defaultSopsFile = ./../secrets/nixos.yaml;
   };
 
   system.stateVersion = "25.11";

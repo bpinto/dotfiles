@@ -1,0 +1,8 @@
+keys:
+  # Generate with: nix-shell -p ssh-to-age --run 'ssh-to-age < ~/.ssh/nixos_vm.pub'
+  - &nixos_vm age1sfp6tz4f22tdze8q3auudfsd2vja7uhk3l734jm699vh0229kf7shfhug5
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      - age:
+          - *nixos_vm
