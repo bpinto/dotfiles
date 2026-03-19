@@ -1,11 +1,16 @@
-{ config, pkgs, lib, home-manager, ... }:
+{ config, pkgs, lib, home-manager, sops-nix, ... }:
 
 {
   imports = [
     home-manager.nixosModules.home-manager
+    sops-nix.nixosModules.sops
 
     # Import OS configurations
     ../users/bpinto/nixos.nix
+
+    # Import modules
+    ../modules/dotfiles-clone.nix
+    ../modules/network.nix
   ];
 
   # Use latest kernel
@@ -47,6 +52,11 @@
 
   # Home Manager configuration
   home-manager = {
+    # NixOS system-wide home-manager configuration
+    sharedModules = [
+      sops-nix.homeManagerModules.sops
+    ];
+
     useGlobalPkgs = true;
     useUserPackages = true;
 
@@ -57,13 +67,8 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  networking = {
-    # Hostname
-    hostName = "nixos-dev";
-
-    # Disable DHCP for all interfaces (systemd-networkd will handle it)
-    useDHCP = false;
-  };
+  # Hostname
+  networking.hostName = "nixos-dev";
 
   nix = {
     # Enable flakes
@@ -115,10 +120,11 @@
   services.openssh.settings.PasswordAuthentication = true;
   services.openssh.settings.PermitRootLogin = "no";
 
-  # Enable systemd-resolved for DNS resolution
-  services.resolved = {
-    enable = true;
-    dnssec = "allow-downgrade";
+  # SOPS configuration
+  sops = {
+    age.keyFile = "/etc/ssh/nixos_vm.age";
+    age.sshKeyPaths = [ ];
+    defaultSopsFile = ./../secrets/nixos.yaml;
   };
 
   system.stateVersion = "25.11";
