@@ -17,22 +17,24 @@ floating_maximum_size -1 x -1
 # Focus only changes on click, not when the mouse hovers over a window.
 focus_follows_mouse no
 
-# Color palette read from X resources with fallback hex values.
-set_from_resource $back         i3wm.background #1D1F21
-set_from_resource $black        i3wm.color0     #282A2E
-set_from_resource $grey         i3wm.color8     #373B41
-set_from_resource $lightgrey    i3wm.color7     #707880
-set_from_resource $white        i3wm.color15    #C5C8C6
-set_from_resource $yellow       i3wm.color11    #F0C674
-set_from_resource $red          i3wm.color9     #CC6666
-set_from_resource $darkred      i3wm.color1     #A54242
-set_from_resource $green        i3wm.color10    #B5BD56
+# TokyoNight Storm color palette (read from X resources with fallbacks).
+set_from_resource $back         i3wm.background #24283b
+set_from_resource $black        i3wm.color0     #1d202f
+set_from_resource $grey         i3wm.color8     #414868
+set_from_resource $lightgrey    i3wm.color7     #a9b1d6
+set_from_resource $white        i3wm.color15    #c0caf5
+set_from_resource $yellow       i3wm.color11    #e0af68
+set_from_resource $red          i3wm.color9     #f7768e
+set_from_resource $darkred      i3wm.color1     #f7768e
+set_from_resource $green        i3wm.color10    #9ece6a
+set_from_resource $blue         i3wm.color4     #7aa2f7
+set_from_resource $purple       i3wm.color5     #bb9af7
 
 # Window decoration colors:
 #                       border      background  text        indicator
-client.focused          $green      $green      $black      $red
+client.focused          $blue       $blue       $black      $purple
 client.focused_inactive $grey       $grey       $lightgrey  $grey
-client.unfocused        $grey       $grey       $lightgrey  $grey
+client.unfocused        $grey       $back       $lightgrey  $grey
 client.urgent           $red        $red        $black      $red
 client.background       $back
 
@@ -203,5 +205,13 @@ bar {
     font pango:VictorMono Nerd Font 8
     colors {
         background $back
+        statusline $white
+        separator  $grey
+
+        #                  border  backgr. text
+        focused_workspace  $blue   $blue   $black
+        active_workspace   $grey   $grey   $white
+        inactive_workspace $back   $back   $lightgrey
+        urgent_workspace   $red    $red    $black
     }
 }

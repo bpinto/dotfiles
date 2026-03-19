@@ -11,6 +11,10 @@ let
   isLinux = pkgs.stdenv.isLinux;
 in
 {
+  imports = [
+    ../../modules/theme.nix
+  ];
+
   home.stateVersion = "25.11";
 
   # SOPS
@@ -57,6 +61,7 @@ in
 
   xdg.enable = true;
 
+
   #---------------------------------------------------------------------
   # Programs
   #---------------------------------------------------------------------
@@ -96,9 +101,6 @@ in
 
     general = {
       colors = true;
-      color_good = "#8C9440";
-      color_bad = "#A54242";
-      color_degraded = "#DE935F";
     };
 
     modules = {
