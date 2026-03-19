@@ -100,10 +100,13 @@ vm/secrets-user:
 	'"
 	rsync -av -e 'ssh $(SSH_OPTIONS) -p$(NIXPORT)' \
 		--rsync-path='sudo rsync' \
-		$(HOME)/.ssh/nixos_vm.pub $(HOME)/.ssh/nixos_vm.age $(NIXUSER)@$(NIXADDR):/home/bpinto/.ssh/
+		$(HOME)/.ssh/nixos_vm.pub $(HOME)/.ssh/nixos_vm.age \
+		$(HOME)/.ssh/github $(HOME)/.ssh/github.pub \
+		$(NIXUSER)@$(NIXADDR):/home/bpinto/.ssh/
 	ssh $(SSH_OPTIONS) -p$(NIXPORT) $(NIXUSER)@$(NIXADDR) "bash -c '\
-		sudo chown bpinto:users /home/bpinto/.ssh/nixos_vm.pub /home/bpinto/.ssh/nixos_vm.age && \
-		sudo chmod 600 /home/bpinto/.ssh/nixos_vm.age \
+		sudo chown bpinto:users /home/bpinto/.ssh/nixos_vm.pub /home/bpinto/.ssh/nixos_vm.age \
+			/home/bpinto/.ssh/github /home/bpinto/.ssh/github.pub && \
+		sudo chmod 600 /home/bpinto/.ssh/nixos_vm.age /home/bpinto/.ssh/github \
 	'"
 
 # Run nixos-rebuild switch. This does NOT copy files so you have to run vm/copy before.
