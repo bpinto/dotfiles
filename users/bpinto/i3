@@ -4,7 +4,7 @@ set $mod Mod4
 # Look & Feel
 #----------------------------------------------------------------------
 # Font for window titles and the i3bar (unless overridden in the bar block).
-font pango:VictorMono Nerd Font 8
+font pango:VictorMono Nerd Font 10
 
 # Window border: thin 2px pixel border (no title bar).
 new_window pixel 2
@@ -202,7 +202,7 @@ bindsym $mod+BackSpace mode "$mode_system"
 bar {
     status_command i3status
 
-    font pango:VictorMono Nerd Font 8
+    font pango:VictorMono Nerd Font 10
     colors {
         background $back
         statusline $white

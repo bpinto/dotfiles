@@ -32,7 +32,16 @@ in
 {
   # X resources — loads the palette into X so i3's set_from_resource
   # directives (and any other X application) pick up the colors.
+  # Xft settings control font rendering for GTK and X11 applications.
   xresources.properties = lib.mkIf isLinux {
+    "Xft.dpi" = 180;
+    "Xft.autohint" = true;
+    "Xft.antialias" = true;
+    "Xft.hinting" = true;
+    "Xft.hintstyle" = "hintslight";
+    "Xft.rgba" = "none";
+    "Xft.lcdfilter" = "lcddefault";
+
     "*.background" = colors.background;
     "*.foreground" = colors.foreground;
     "*.color0"  = colors.color0;
