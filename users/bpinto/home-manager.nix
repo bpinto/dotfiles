@@ -9,6 +9,14 @@ let
   home = config.home.homeDirectory;
   dotfiles = "${home}/src/dotfiles";
   isLinux = pkgs.stdenv.isLinux;
+
+  # Colorized manpages using bat
+  # https://github.com/sharkdp/bat/issues/1145
+  manpager = pkgs.writeShellScriptBin "manpager" (if isLinux then ''
+    cat "$1" | col -bx | bat --language man --style plain
+  '' else ''
+    sh -c 'col -bx | bat -l man -p'
+  '');
 in
 {
   imports = [
@@ -29,11 +37,12 @@ in
   #---------------------------------------------------------------------
 
   home.packages = with pkgs; [
+    bat
     delta
-    fzf
     ghostty
     ripgrep
     tree
+    xclip
   ] ++ (lib.optionals isLinux [
     # i3-related tools
     rofi        # Application launcher
@@ -45,9 +54,24 @@ in
   # Environment
   #---------------------------------------------------------------------
 
+  # HiDPI cursor — without this the cursor is tiny at high resolutions
+  home.pointerCursor = lib.mkIf isLinux {
+    name = "Vanilla-DMZ";
+    package = pkgs.vanilla-dmz;
+    size = 128;
+    x11.enable = true;
+  };
+
+  # Clipboard aliases so macOS muscle memory works on Linux
+  home.shellAliases = lib.mkIf isLinux {
+    pbcopy = "xclip";
+    pbpaste = "xclip -o";
+  };
+
   home.sessionVariables = {
     LANG = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
+    MANPAGER = "${manpager}/bin/manpager";
     PAGER = "less -FirSwX";
   };
 
