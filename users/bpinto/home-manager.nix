@@ -37,7 +37,6 @@ in
   #---------------------------------------------------------------------
 
   home.packages = with pkgs; [
-    bat
     delta
     ghostty
     ripgrep
@@ -97,6 +96,16 @@ in
   # Bash
   programs.bash = {
     enable = true;
+  };
+
+  #
+  # Bat
+  programs.bat = {
+    enable = true;
+    config.theme = "tokyonight_storm";
+    themes = {
+      tokyonight_storm = { src = ../../.config/bat/themes/tokyonight_storm.tmTheme; };
+    };
   };
 
   #
