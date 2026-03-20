@@ -32,7 +32,16 @@ in
 {
   # X resources — loads the palette into X so i3's set_from_resource
   # directives (and any other X application) pick up the colors.
+  # Xft settings control font rendering for GTK and X11 applications.
   xresources.properties = lib.mkIf isLinux {
+    "Xft.dpi" = 180;
+    "Xft.autohint" = true;
+    "Xft.antialias" = true;
+    "Xft.hinting" = true;
+    "Xft.hintstyle" = "hintslight";
+    "Xft.rgba" = "none";
+    "Xft.lcdfilter" = "lcddefault";
+
     "*.background" = colors.background;
     "*.foreground" = colors.foreground;
     "*.color0"  = colors.color0;
@@ -51,6 +60,34 @@ in
     "*.color13" = colors.color13;
     "*.color14" = colors.color14;
     "*.color15" = colors.color15;
+  };
+
+  # fzf
+  programs.fzf = {
+    enable = true;
+    defaultOptions = [
+      "--highlight-line"
+      "--info=inline-right"
+      "--ansi"
+      "--layout=reverse"
+      "--border=none"
+      "--color=bg+:#2e3c64"
+      "--color=bg:#1f2335"
+      "--color=border:#29a4bd"
+      "--color=fg:#c0caf5"
+      "--color=gutter:#1f2335"
+      "--color=header:#ff9e64"
+      "--color=hl+:#2ac3de"
+      "--color=hl:#2ac3de"
+      "--color=info:#545c7e"
+      "--color=marker:#ff007c"
+      "--color=pointer:#ff007c"
+      "--color=prompt:#2ac3de"
+      "--color=query:#c0caf5:regular"
+      "--color=scrollbar:#29a4bd"
+      "--color=separator:#ff9e64"
+      "--color=spinner:#ff007c"
+    ];
   };
 
   # i3status bar colors

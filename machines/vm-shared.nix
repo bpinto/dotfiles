@@ -100,7 +100,7 @@
   services.xserver = {
     enable = true;
     xkb.layout = "us";
-    dpi = 220;
+    dpi = 180;
 
     desktopManager = {
       xterm.enable = false;
@@ -110,9 +110,10 @@
     displayManager = {
       lightdm.enable = true;
 
-      # AARCH64: For now, on Apple Silicon, we must manually set the
-      # display resolution. This is a known issue with VMware Fusion.
+      # AARCH64: On Apple Silicon with VMware Fusion, the display
+      # resolution must be set manually — it defaults to 1280x800.
       sessionCommands = ''
+        ${pkgs.xorg.xrandr}/bin/xrandr --output Virtual-1 --auto || true
         ${pkgs.xorg.xset}/bin/xset r rate 200 40
       '';
     };
