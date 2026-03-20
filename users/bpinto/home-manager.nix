@@ -55,6 +55,9 @@ in
 
   # XDG config files
   xdg.configFile = {
+    # Ghostty terminal configuration (Linux only)
+    "ghostty/config" = lib.mkIf isLinux { text = builtins.readFile ./ghostty.linux; };
+
     # i3 window manager configuration (Linux only)
     "i3/config" = lib.mkIf isLinux { text = builtins.readFile ./i3; };
   };
