@@ -52,7 +52,6 @@ in
       delta
       fish
       gh
-      gnupg
       helmfile
       k9s
       kubectx
@@ -198,14 +197,6 @@ in
       { path = "${dotfiles}/.gitconfig"; }
     ];
   };
-
-  # GPG
-  home.activation.gnupgSetup = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    mkdir -p "${home}/.gnupg"
-    chmod 700 "${home}/.gnupg"
-  '';
-  home.file.".gnupg/gpg-agent.conf".source = mkSymlink "${dotfiles}/.gnupg/gpg-agent.conf";
-  home.file.".gnupg/gpg.conf".source = mkSymlink "${dotfiles}/.gnupg/gpg.conf";
 
   # i3status
   programs.i3status = {
