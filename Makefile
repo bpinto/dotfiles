@@ -18,12 +18,6 @@ SSH_OPTIONS=-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
 # Override with: make vm/bootstrap0 NIXDISK=/dev/sda
 NIXDISK ?= /dev/nvme0n1
 
-switch:
-	sudo NIXPKGS_ALLOW_UNFREE=1 nixos-rebuild switch --flake ".#${NIXNAME}"
-
-test:
-	sudo NIXPKGS_ALLOW_UNFREE=1 nixos-rebuild test --flake ".#$(NIXNAME)"
-
 # bootstrap a brand new VM. The VM should have NixOS ISO on the CD drive.
 # Set the password of the root user to "root" before running this.
 #

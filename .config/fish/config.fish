@@ -2,11 +2,11 @@
 set fish_greeting
 
 if not set -q fish_user_paths
-    # Add brew binaries to PATH
-    set -U fish_user_paths /usr/local/bin /usr/local/sbin /opt/homebrew/bin /opt/homebrew/sbin
-
     # Add XQuartz binaries to PATH
     set -U fish_user_paths $fish_user_paths /usr/X11/bin
+
+    # Add global npm binaries to PATH
+    set -U fish_user_paths $fish_user_paths ~/.npm-global/bin
 
     # Add ./node_modules/.bin to PATH
     # Usage: ln -sf ../node_modules/.bin/ .git/node_bin
@@ -14,6 +14,9 @@ if not set -q fish_user_paths
 end
 
 if status --is-interactive
+    # Initialize fzf key bindings and shell integration
+    fzf --fish | source
+
     # Do not ignore hidden files when filtering files (e.g. vim integration)
     set -gx FZF_DEFAULT_COMMAND "rg --files --hidden -g'!.git'"
     set -gx FZF_DEFAULT_OPTS "$FZF_DEFAULT_OPTS \
@@ -61,6 +64,8 @@ if status --is-interactive
 
     # Use docker on Cliniko setup script
     set -gx DOCKER true
+
+    set -gx NPM_CONFIG_PREFIX ~/.npm-global
 
     # Set XDG directories for k9s: https://github.com/derailed/k9s/issues/2983
     set -gx XDG_CONFIG_HOME ~/.config
