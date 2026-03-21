@@ -142,11 +142,6 @@ in
       source = mkSymlink "${dotfiles}/.config/k9s";
     };
 
-    # Kitty terminal configuration
-    "kitty" = {
-      source = mkSymlink "${dotfiles}/.config/kitty";
-    };
-
     # Neovim configuration
     "nvim" = {
       source = mkSymlink "${dotfiles}/.config/nvim";
@@ -226,13 +221,6 @@ in
       "wireless _first_".enable = false;
     };
   };
-
-  # Kitty
-  home.activation.kittySetup = lib.mkIf isDarwin (
-    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      /bin/launchctl setenv KITTY_CONFIG_DIRECTORY "${home}/.config/kitty/" || true
-    ''
-  );
 
   # Neovim
   home.activation.neovimSetup = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
