@@ -7,7 +7,7 @@
 
 let
   home = config.home.homeDirectory;
-  dotfiles = "${home}/src/dotfiles";
+  dotfiles = "${home}/src/dotfiles/users/bpinto/dotfiles";
   isDarwin = pkgs.stdenv.isDarwin;
   isLinux = pkgs.stdenv.isLinux;
   mkSymlink = config.lib.file.mkOutOfStoreSymlink;
@@ -52,7 +52,6 @@ in
       delta
       fish
       gh
-      gnupg
       helmfile
       k9s
       kubectx
@@ -142,11 +141,6 @@ in
       source = mkSymlink "${dotfiles}/.config/k9s";
     };
 
-    # Kitty terminal configuration
-    "kitty" = {
-      source = mkSymlink "${dotfiles}/.config/kitty";
-    };
-
     # Neovim configuration
     "nvim" = {
       source = mkSymlink "${dotfiles}/.config/nvim";
@@ -178,7 +172,7 @@ in
     config.theme = "tokyonight_storm";
     themes = {
       tokyonight_storm = {
-        src = ../../.config/bat/themes/tokyonight_storm.tmTheme;
+        src = ./dotfiles/.config/bat/themes/tokyonight_storm.tmTheme;
       };
     };
   };
@@ -204,14 +198,6 @@ in
     ];
   };
 
-  # GPG
-  home.activation.gnupgSetup = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    mkdir -p "${home}/.gnupg"
-    chmod 700 "${home}/.gnupg"
-  '';
-  home.file.".gnupg/gpg-agent.conf".source = mkSymlink "${dotfiles}/.gnupg/gpg-agent.conf";
-  home.file.".gnupg/gpg.conf".source = mkSymlink "${dotfiles}/.gnupg/gpg.conf";
-
   # i3status
   programs.i3status = {
     enable = isLinux;
@@ -226,13 +212,6 @@ in
       "wireless _first_".enable = false;
     };
   };
-
-  # Kitty
-  home.activation.kittySetup = lib.mkIf isDarwin (
-    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      /bin/launchctl setenv KITTY_CONFIG_DIRECTORY "${home}/.config/kitty/" || true
-    ''
-  );
 
   # Neovim
   home.activation.neovimSetup = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
