@@ -31,7 +31,6 @@
     users.bpinto = import ../users/bpinto/home-manager.nix;
   };
 
-
   # Configures system-level fish integration (/etc/fish/) so fish can find
   # Nix-installed programs. Fish is launched by the terminal emulator, not
   # set as the macOS login shell.
