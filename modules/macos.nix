@@ -180,9 +180,9 @@
 
     # Install PT to US keyboard remap (EN language)
     sudo -u bpinto mkdir -p "/Users/bpinto/Library/Keyboard Layouts/"
-    sudo -u bpinto cp -R /Users/bpinto/src/dotfiles/pt-us.en.keymap.bundle "/Users/bpinto/Library/Keyboard Layouts/"
+    sudo -u bpinto cp -R /Users/bpinto/src/dotfiles/users/bpinto/dotfiles/pt-us.en.keymap.bundle "/Users/bpinto/Library/Keyboard Layouts/"
 
     # Install PT to US keyboard remap (PT language)
-    sudo -u bpinto cp -R /Users/bpinto/src/dotfiles/pt-us.pt.keymap.bundle "/Users/bpinto/Library/Keyboard Layouts/"
+    sudo -u bpinto cp -R /Users/bpinto/src/dotfiles/users/bpinto/dotfiles/pt-us.pt.keymap.bundle "/Users/bpinto/Library/Keyboard Layouts/"
   '';
 }

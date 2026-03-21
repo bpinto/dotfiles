@@ -7,7 +7,7 @@
 
 let
   home = config.home.homeDirectory;
-  dotfiles = "${home}/src/dotfiles";
+  dotfiles = "${home}/src/dotfiles/users/bpinto/dotfiles";
   isDarwin = pkgs.stdenv.isDarwin;
   isLinux = pkgs.stdenv.isLinux;
   mkSymlink = config.lib.file.mkOutOfStoreSymlink;
@@ -172,7 +172,7 @@ in
     config.theme = "tokyonight_storm";
     themes = {
       tokyonight_storm = {
-        src = ../../.config/bat/themes/tokyonight_storm.tmTheme;
+        src = ./dotfiles/.config/bat/themes/tokyonight_storm.tmTheme;
       };
     };
   };
