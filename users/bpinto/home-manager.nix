@@ -27,11 +27,11 @@ let
 in
 {
   imports = [
+    ../../modules/git.nix
     ../../modules/neovim.nix
+    ../../modules/ssh.nix
     ../../modules/theme.nix
   ];
-
-  modules.neovim.dotfilesPath = "${home}/src/dotfiles/users/shared/dotfiles";
 
   home.stateVersion = "25.11";
 
@@ -40,7 +40,6 @@ in
     age.keyFile = "${home}/.ssh/nixos_vm.age";
     age.sshKeyPaths = [ ];
     defaultSopsFile = ./../../secrets/nixos.yaml;
-
   };
 
   #---------------------------------------------------------------------
@@ -69,7 +68,7 @@ in
       universal-ctags
       yt-dlp
     ]
-    ++ (lib.optionals isDarwin [
+    ++ lib.optionals isDarwin [
       aws-vault
       discord
       ghostty-bin
@@ -80,18 +79,16 @@ in
       slack
       ssm-session-manager-plugin
       tailscale
-    ])
-    ++ (lib.optionals isLinux [
+    ]
+    ++ lib.optionals isLinux [
       esphome
       ghostty
       xclip
-    ])
-    ++ (lib.optionals isLinux [
       # i3-related tools
       i3lock # Screen locker
       rofi # Application launcher
       xss-lock # Automatic screen locker on suspend
-    ]);
+    ];
 
   #---------------------------------------------------------------------
   # Environment
@@ -121,8 +118,6 @@ in
     PAGER = "less -FirSwX";
   };
 
-  services.ssh-agent.enable = isLinux;
-
   # XDG config files
   xdg.configFile = {
     # Fish shell configuration
@@ -133,16 +128,21 @@ in
     # Ghostty terminal configuration (Linux uses a separate config file)
     "ghostty/config" =
       if isLinux then
-        { text = builtins.readFile ./dotfiles/ghostty.linux; }
+        { source = mkSymlink "${dotfiles}/.config/ghostty/config-linux"; }
       else
         { source = mkSymlink "${dotfiles}/.config/ghostty/config"; };
 
     # i3 window manager configuration (Linux only)
-    "i3/config" = lib.mkIf isLinux { text = builtins.readFile ./dotfiles/i3; };
+    "i3/config" = lib.mkIf isLinux { source = mkSymlink "${dotfiles}/.config/i3/config"; };
 
     # k9s configuration
     "k9s" = {
       source = mkSymlink "${dotfiles}/.config/k9s";
+    };
+
+    # Neovim configuration
+    "nvim" = {
+      source = mkSymlink "${dotfiles}/.config/nvim";
     };
 
     # Projectionist configuration
@@ -179,22 +179,16 @@ in
   # Ctags
   home.file.".ctags".source = mkSymlink "${dotfiles}/.ctags";
 
+  # Git supporting files
+  home.file.".git_template".source = mkSymlink "${dotfiles}/.git_template";
+  home.file.".gitconfig".source = mkSymlink "${dotfiles}/.gitconfig";
+  home.file.".gitmessage".source = mkSymlink "${dotfiles}/.gitmessage";
+  home.file.".ssh/allowed_signers".source = mkSymlink "${dotfiles}/.ssh/allowed_signers";
+
   # Direnv
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
-  };
-
-  # Git
-  home.file.".git_template".source = mkSymlink "${dotfiles}/.git_template";
-  home.file.".gitignore".source = mkSymlink "${dotfiles}/.gitignore";
-  home.file.".gitmessage".source = mkSymlink "${dotfiles}/.gitmessage";
-  home.file.".ssh/allowed_signers".source = mkSymlink "${dotfiles}/.ssh/allowed_signers";
-  programs.git = {
-    enable = true;
-    includes = [
-      { path = "${dotfiles}/.gitconfig"; }
-    ];
   };
 
   # i3status
@@ -211,8 +205,6 @@ in
       "wireless _first_".enable = false;
     };
   };
-
-  # Neovim — configured via modules/neovim.nix
 
   # Nushell
   programs.nushell = {

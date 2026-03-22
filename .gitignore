@@ -1,15 +1,21 @@
-users/shared/.pi/
-users/shared/dotfiles/.config/fish/fishd.localhost
-users/shared/dotfiles/.config/nvim/.netrwhist
-users/shared/dotfiles/.config/nvim/autoload
-users/shared/dotfiles/.config/nvim/bundle
-users/shared/dotfiles/.config/nvim/lazy-lock.json
-users/shared/dotfiles/.config/nvim/plugged
-users/shared/dotfiles/.direnv/
+# macOS
 .DS_Store
+
+# Shared dotfiles - user data
+users/shared/dotfiles/.direnv/
 users/shared/dotfiles/.netrc
 users/shared/dotfiles/.ssh/*
 !users/shared/dotfiles/.ssh/allowed_signers
-users/shared/dotfiles/Library/
+
+# Shared dotfiles - device-specific (created by home-manager / systemd)
+users/shared/dotfiles/.config/environment.d/
+users/shared/dotfiles/.config/fontconfig/
+users/shared/dotfiles/.config/systemd/
+
+# Pi agent
+users/shared/dotfiles/.pi/agent/auth.json
+users/shared/dotfiles/.pi/agent/settings.json
+users/shared/dotfiles/.pi/agent/sessions/
+users/shared/dotfiles/.pi/agent/bin/
+
 result
-var.img
