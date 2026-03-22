@@ -7,7 +7,7 @@
 
 let
   home = config.home.homeDirectory;
-  dotfiles = "${home}/src/dotfiles/users/bpinto/dotfiles";
+  dotfiles = "${home}/src/dotfiles/users/shared/dotfiles";
   isDarwin = pkgs.stdenv.isDarwin;
   isLinux = pkgs.stdenv.isLinux;
   mkSymlink = config.lib.file.mkOutOfStoreSymlink;
@@ -27,8 +27,11 @@ let
 in
 {
   imports = [
+    ../../modules/neovim.nix
     ../../modules/theme.nix
   ];
+
+  modules.neovim.dotfilesPath = "${home}/src/dotfiles/users/shared/dotfiles";
 
   home.stateVersion = "25.11";
 
@@ -37,6 +40,7 @@ in
     age.keyFile = "${home}/.ssh/nixos_vm.age";
     age.sshKeyPaths = [ ];
     defaultSopsFile = ./../../secrets/nixos.yaml;
+
   };
 
   #---------------------------------------------------------------------
@@ -129,21 +133,16 @@ in
     # Ghostty terminal configuration (Linux uses a separate config file)
     "ghostty/config" =
       if isLinux then
-        { text = builtins.readFile ./ghostty.linux; }
+        { text = builtins.readFile ./dotfiles/ghostty.linux; }
       else
         { source = mkSymlink "${dotfiles}/.config/ghostty/config"; };
 
     # i3 window manager configuration (Linux only)
-    "i3/config" = lib.mkIf isLinux { text = builtins.readFile ./i3; };
+    "i3/config" = lib.mkIf isLinux { text = builtins.readFile ./dotfiles/i3; };
 
     # k9s configuration
     "k9s" = {
       source = mkSymlink "${dotfiles}/.config/k9s";
-    };
-
-    # Neovim configuration
-    "nvim" = {
-      source = mkSymlink "${dotfiles}/.config/nvim";
     };
 
     # Projectionist configuration
@@ -172,7 +171,7 @@ in
     config.theme = "tokyonight_storm";
     themes = {
       tokyonight_storm = {
-        src = ./dotfiles/.config/bat/themes/tokyonight_storm.tmTheme;
+        src = ../shared/dotfiles/.config/bat/themes/tokyonight_storm.tmTheme;
       };
     };
   };
@@ -213,21 +212,7 @@ in
     };
   };
 
-  # Neovim
-  home.activation.neovimSetup = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    mkdir -p "${home}/.local/share/nvim/backup"
-    if [ ! -e "${home}/.local/share/nvim/lazy/lazy.nvim" ]; then
-      mkdir -p "${home}/.local/share/nvim/lazy"
-      ${pkgs.git}/bin/git clone --filter=blob:none \
-        https://github.com/folke/lazy.nvim.git \
-        --branch=stable \
-        "${home}/.local/share/nvim/lazy/lazy.nvim"
-    fi
-  '';
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
+  # Neovim — configured via modules/neovim.nix
 
   # Nushell
   programs.nushell = {
