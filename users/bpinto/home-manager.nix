@@ -27,6 +27,7 @@ let
 in
 {
   imports = [
+    ../../lib/vm-scripts.nix
     ../../modules/git.nix
     ../../modules/neovim.nix
     ../../modules/ssh.nix

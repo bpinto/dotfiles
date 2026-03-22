@@ -1,6 +1,11 @@
 # macOS
 .DS_Store
 
+# MicroVM runtime artifacts
+result
+*.img
+control.socket
+
 # Shared dotfiles - user data
 users/shared/dotfiles/.direnv/
 users/shared/dotfiles/.netrc
@@ -17,5 +22,3 @@ users/shared/dotfiles/.pi/agent/auth.json
 users/shared/dotfiles/.pi/agent/settings.json
 users/shared/dotfiles/.pi/agent/sessions/
 users/shared/dotfiles/.pi/agent/bin/
-
-result

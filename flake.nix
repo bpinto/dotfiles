@@ -6,6 +6,10 @@
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # microvm.nix for lightweight NixOS VMs on macOS
+    microvm.url = "github:astro/microvm.nix";
+    microvm.inputs.nixpkgs.follows = "nixpkgs";
+
     # nix-darwin module for macOS system configuration
     nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-25.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -24,6 +28,7 @@
     {
       self,
       home-manager,
+      microvm,
       nix-darwin,
       nixpkgs,
       sops-nix,
@@ -37,6 +42,8 @@
         "aarch64-darwin"
         "aarch64-linux"
       ];
+
+      mkMicroVM = import ./lib/mk-microvm.nix { inherit home-manager microvm nixpkgs; };
     in
     {
       devShells = forAllSystems (
@@ -86,5 +93,14 @@
           ./machines/vm-aarch64.nix
         ];
       };
+
+      #--------------------------------------------------------------------
+      # MicroVMs (aarch64-linux guests, launched via vfkit)
+      #--------------------------------------------------------------------
+
+      nixosConfigurations.dotfiles-vm = mkMicroVM "dotfiles";
+
+      packages.aarch64-darwin.dotfiles-vm =
+        self.nixosConfigurations.dotfiles-vm.config.microvm.declaredRunner;
     };
 }

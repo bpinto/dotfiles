@@ -45,6 +45,17 @@
       experimental-features = nix-command flakes
     '';
 
+    # Linux builder VM for cross-compiling aarch64-linux (e.g., microVMs)
+    linux-builder = {
+      enable = true;
+      config = {
+        virtualisation = {
+          cores = 4;
+          darwin-builder.memorySize = 8 * 1024;
+        };
+      };
+    };
+
     # Use latest nix version
     package = pkgs.nixVersions.latest;
 
