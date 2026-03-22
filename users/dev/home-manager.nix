@@ -21,6 +21,9 @@ in
     ../../modules/neovim.nix
   ];
 
+  # Start ssh-agent so git commit signing and SSH operations work.
+  services.ssh-agent.enable = true;
+
   home.stateVersion = "25.11";
 
   xdg.enable = true;
