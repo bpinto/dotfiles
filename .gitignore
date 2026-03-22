@@ -1,23 +1,24 @@
-com.googlecode.iterm2.plist
-.config/fish/fishd.localhost
-.config/nvim/.netrwhist
-.config/nvim/autoload
-.config/nvim/bundle
-.config/nvim/lazy-lock.json
-.config/nvim/plugged
-.elvish/db
-.elvish/db-journal
-.elvish/lib/cliniko.elv
-.direnv/
+# macOS
 .DS_Store
-.gem/credentials
-.netrc
-.ngrok
-.ssh/*
-!.ssh/allowed_signers
-.subversion/
-.vim/autoload
-.vim/bundle
-.z
-Brewfile.lock.json
-Library/
+
+# MicroVM runtime artifacts
+result
+*.img
+control.socket
+
+# Shared dotfiles - user data
+users/shared/dotfiles/.direnv/
+users/shared/dotfiles/.netrc
+users/shared/dotfiles/.ssh/*
+!users/shared/dotfiles/.ssh/allowed_signers
+
+# Shared dotfiles - device-specific (created by home-manager / systemd)
+users/shared/dotfiles/.config/environment.d/
+users/shared/dotfiles/.config/fontconfig/
+users/shared/dotfiles/.config/systemd/
+
+# Pi agent
+users/shared/dotfiles/.pi/agent/auth.json
+users/shared/dotfiles/.pi/agent/settings.json
+users/shared/dotfiles/.pi/agent/sessions/
+users/shared/dotfiles/.pi/agent/bin/

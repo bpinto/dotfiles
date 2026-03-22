@@ -7,7 +7,7 @@
 
 let
   home = config.home.homeDirectory;
-  dotfiles = "${home}/src/dotfiles/users/bpinto/dotfiles";
+  dotfiles = "${home}/src/dotfiles/users/shared/dotfiles";
   isDarwin = pkgs.stdenv.isDarwin;
   isLinux = pkgs.stdenv.isLinux;
   mkSymlink = config.lib.file.mkOutOfStoreSymlink;
@@ -27,6 +27,10 @@ let
 in
 {
   imports = [
+    ../../lib/vm-scripts.nix
+    ../../modules/git.nix
+    ../../modules/neovim.nix
+    ../../modules/ssh.nix
     ../../modules/theme.nix
   ];
 
@@ -65,7 +69,7 @@ in
       universal-ctags
       yt-dlp
     ]
-    ++ (lib.optionals isDarwin [
+    ++ lib.optionals isDarwin [
       aws-vault
       discord
       ghostty-bin
@@ -76,18 +80,16 @@ in
       slack
       ssm-session-manager-plugin
       tailscale
-    ])
-    ++ (lib.optionals isLinux [
+    ]
+    ++ lib.optionals isLinux [
       esphome
       ghostty
       xclip
-    ])
-    ++ (lib.optionals isLinux [
       # i3-related tools
       i3lock # Screen locker
       rofi # Application launcher
       xss-lock # Automatic screen locker on suspend
-    ]);
+    ];
 
   #---------------------------------------------------------------------
   # Environment
@@ -117,8 +119,6 @@ in
     PAGER = "less -FirSwX";
   };
 
-  services.ssh-agent.enable = isLinux;
-
   # XDG config files
   xdg.configFile = {
     # Fish shell configuration
@@ -129,12 +129,12 @@ in
     # Ghostty terminal configuration (Linux uses a separate config file)
     "ghostty/config" =
       if isLinux then
-        { text = builtins.readFile ./ghostty.linux; }
+        { source = mkSymlink "${dotfiles}/.config/ghostty/config-linux"; }
       else
         { source = mkSymlink "${dotfiles}/.config/ghostty/config"; };
 
     # i3 window manager configuration (Linux only)
-    "i3/config" = lib.mkIf isLinux { text = builtins.readFile ./i3; };
+    "i3/config" = lib.mkIf isLinux { source = mkSymlink "${dotfiles}/.config/i3/config"; };
 
     # k9s configuration
     "k9s" = {
@@ -172,7 +172,7 @@ in
     config.theme = "tokyonight_storm";
     themes = {
       tokyonight_storm = {
-        src = ./dotfiles/.config/bat/themes/tokyonight_storm.tmTheme;
+        src = ../shared/dotfiles/.config/bat/themes/tokyonight_storm.tmTheme;
       };
     };
   };
@@ -180,22 +180,16 @@ in
   # Ctags
   home.file.".ctags".source = mkSymlink "${dotfiles}/.ctags";
 
+  # Git supporting files
+  home.file.".git_template".source = mkSymlink "${dotfiles}/.git_template";
+  home.file.".gitconfig".source = mkSymlink "${dotfiles}/.gitconfig";
+  home.file.".gitmessage".source = mkSymlink "${dotfiles}/.gitmessage";
+  home.file.".ssh/allowed_signers".source = mkSymlink "${dotfiles}/.ssh/allowed_signers";
+
   # Direnv
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
-  };
-
-  # Git
-  home.file.".git_template".source = mkSymlink "${dotfiles}/.git_template";
-  home.file.".gitignore".source = mkSymlink "${dotfiles}/.gitignore";
-  home.file.".gitmessage".source = mkSymlink "${dotfiles}/.gitmessage";
-  home.file.".ssh/allowed_signers".source = mkSymlink "${dotfiles}/.ssh/allowed_signers";
-  programs.git = {
-    enable = true;
-    includes = [
-      { path = "${dotfiles}/.gitconfig"; }
-    ];
   };
 
   # i3status
@@ -211,22 +205,6 @@ in
       "battery all".enable = false;
       "wireless _first_".enable = false;
     };
-  };
-
-  # Neovim
-  home.activation.neovimSetup = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    mkdir -p "${home}/.local/share/nvim/backup"
-    if [ ! -e "${home}/.local/share/nvim/lazy/lazy.nvim" ]; then
-      mkdir -p "${home}/.local/share/nvim/lazy"
-      ${pkgs.git}/bin/git clone --filter=blob:none \
-        https://github.com/folke/lazy.nvim.git \
-        --branch=stable \
-        "${home}/.local/share/nvim/lazy/lazy.nvim"
-    fi
-  '';
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
   };
 
   # Nushell

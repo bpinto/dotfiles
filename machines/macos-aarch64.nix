@@ -31,7 +31,6 @@
     users.bpinto = import ../users/bpinto/home-manager.nix;
   };
 
-
   # Configures system-level fish integration (/etc/fish/) so fish can find
   # Nix-installed programs. Fish is launched by the terminal emulator, not
   # set as the macOS login shell.
@@ -45,6 +44,17 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+
+    # Linux builder VM for cross-compiling aarch64-linux (e.g., microVMs)
+    linux-builder = {
+      enable = true;
+      config = {
+        virtualisation = {
+          cores = 4;
+          darwin-builder.memorySize = 8 * 1024;
+        };
+      };
+    };
 
     # Use latest nix version
     package = pkgs.nixVersions.latest;
