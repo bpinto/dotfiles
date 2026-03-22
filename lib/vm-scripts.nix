@@ -92,7 +92,7 @@ in
 
     (pkgs.writeShellApplication {
       name = "vm-stop";
-      runtimeInputs = runtimeInputs ++ [ pkgs.curl ];
+      runtimeInputs = runtimeInputs ++ [ pkgs.curl pkgs.procps ];
       text = ''
         ${selectFromRunning}
         VM_DIR="$HOME/microvm/$VM"
@@ -109,6 +109,16 @@ in
           -H "Content-Type: application/json" \
           -d '{"state": "Stop"}' \
           http://localhost/vm/state
+
+        # Wait for the VM process to fully exit before returning.
+        echo "> Waiting for $VM-vm to shut down..."
+        for _ in $(seq 1 30); do
+          if ! pgrep -f "$VM-vm" > /dev/null 2>&1; then
+            break
+          fi
+          sleep 1
+        done
+
         rm -f "$SOCKET"
         echo "> $VM-vm stopped ✅"
       '';
