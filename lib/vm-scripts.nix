@@ -11,6 +11,7 @@ let
       shift
     else
       VM=$(find "$HOME/src/dotfiles/machines/microvms" -name '*.nix' -exec basename {} .nix \; \
+        | sort \
         | fzf --prompt="Select VM: " --height=~10 --layout=reverse) || exit 0
     fi
   '';
@@ -23,6 +24,7 @@ let
     else
       VM=$(find "$HOME/microvm" -name 'control.socket' -type s -exec dirname {} \; \
         | while read -r d; do basename "$d"; done \
+        | sort \
         | fzf --prompt="Select VM: " --height=~10 --layout=reverse) || exit 0
     fi
   '';
