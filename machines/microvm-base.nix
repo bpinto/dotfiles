@@ -18,7 +18,7 @@
   ];
 
   config = {
-    networking.hostName = "${vmName}-vm";
+    nix.settings.experimental-features = "nix-command flakes";
 
     system.stateVersion = "25.11";
 
@@ -80,6 +80,8 @@
     # currently reach the host (gateway, typically 192.168.64.1) and any
     # service listening on it.
     networking.firewall.enable = false;
+
+    networking.hostName = "${vmName}-vm";
 
     services.resolved.enable = true;
     networking.useDHCP = false;
