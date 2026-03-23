@@ -23,6 +23,10 @@ in
       fi
     '';
 
+    home.packages = with pkgs; [
+      gcc # Required by nvim-treesitter to compile parsers
+    ];
+
     programs.neovim = {
       enable = true;
       defaultEditor = true;
