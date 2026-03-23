@@ -24,6 +24,27 @@
     description = "Default directory to cd into on login.";
   };
 
+  options.staticIpAddress = lib.mkOption {
+    # Make this option mandatory by declaring it as a plain string without
+    # a default. lib.mkUndefined is used so evaluation fails if the option
+    # is not set by the VM module.
+    type = lib.types.str;
+    default = lib.mkUndefined;
+    description = ''
+      Static IPv4 address for the VM on the Apple Virtualization.framework
+      NAT network (192.168.64.0/24). The gateway is assumed to be
+      192.168.64.1. This option is mandatory and must be set in
+      machines/microvms/<name>.nix as: staticIpAddress = "192.168.64.X";
+    '';
+    example = "192.168.64.10";
+  };
+
+  options.varVolumeSize = lib.mkOption {
+    type = lib.types.int;
+    default = 8192;
+    description = "Size of the persistent /var volume in MB.";
+  };
+
   config = {
     environment.loginShellInit = lib.mkIf (config.defaultSshDirectory != null) ''
       cd ${config.defaultSshDirectory}
@@ -67,7 +88,7 @@
         {
           mountPoint = "/var";
           image = "var.img";
-          size = lib.mkDefault 8192; # MB
+          size = config.varVolumeSize;
         }
       ];
 
@@ -111,10 +132,10 @@
     systemd.network.enable = true;
     systemd.network.networks."10-e" = {
       matchConfig.Name = "e*";
-      networkConfig = {
-        DHCP = "yes";
-        IPv6AcceptRA = true;
-      };
+
+      address = [ "${config.staticIpAddress}/24" ];
+      gateway = [ "192.168.64.1" ];
+      dns = [ "192.168.64.1" ];
     };
 
     # ── Systemd tuning ─────────────────────────────────────────────────

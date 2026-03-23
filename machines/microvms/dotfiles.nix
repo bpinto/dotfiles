@@ -1,9 +1,6 @@
 # MicroVM for working on the dotfiles repository.
 #
 
-# Shares ~/src/dotfiles from the macOS host via virtiofs.
-# Access via SSH: the VM gets a private IP from vfkit NAT
-# (typically 192.168.64.x), visible from the host.
 { lib, ... }:
 
 {
@@ -15,6 +12,9 @@
   ];
 
   defaultSshDirectory = "/home/dev/src/dotfiles";
+
+  # Static IP so the macOS host can reach the VM at a known address
+  staticIpAddress = "192.168.64.10";
 
   microvm.shares = [
     {

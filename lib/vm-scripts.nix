@@ -29,19 +29,12 @@ let
     fi
   '';
 
-  # Resolve a VM name to its IP address from the macOS DHCP leases file.
+  # Resolve a VM name to its static IP address declared in the VM nix
+  # file. Static IP must be set in machines/microvms/<vm>.nix as
+  # `staticIpAddress = "192.168.64.X";`.
   resolveIP = ''
-    VM_IP=$(awk -v name="$VM-vm" '
-      /^{/     { rec=""; n="" }
-      /name=/  { n=$0; sub(/.*name=/, "", n) }
-      /ip_address=/ { ip=$0; sub(/.*ip_address=/, "", ip) }
-      /^}/     { if (n == name) print ip }
-    ' /var/db/dhcpd_leases | tail -1)
-
-    if [ -z "$VM_IP" ]; then
-      echo "Error: could not find IP for $VM-vm in DHCP leases"
-      exit 1
-    fi
+    VM_NIX="$HOME/src/dotfiles/machines/microvms/$VM.nix"
+    VM_IP=$(sed -n 's/^[[:space:]]*staticIpAddress[[:space:]]*=[[:space:]]*"\(.*\)".*/\1/p' "$VM_NIX" | head -n1)
   '';
 
   # Common SSH options for connecting to microVMs.
@@ -94,7 +87,10 @@ in
 
     (pkgs.writeShellApplication {
       name = "vm-stop";
-      runtimeInputs = runtimeInputs ++ [ pkgs.curl pkgs.procps ];
+      runtimeInputs = runtimeInputs ++ [
+        pkgs.curl
+        pkgs.procps
+      ];
       text = ''
         ${selectFromRunning}
         VM_DIR="$HOME/microvm/$VM"
