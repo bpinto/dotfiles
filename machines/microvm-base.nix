@@ -72,11 +72,22 @@
       ];
 
       # User-mode NAT networking (only option on macOS/vfkit)
+      # Each VM needs a unique MAC to avoid ARP conflicts on the host's
+      # network — identical MACs cause lag and dropped SSH connections.
       interfaces = [
         {
           type = "user";
           id = "net0";
-          mac = "02:00:00:01:01:01";
+          mac =
+            let
+              hash = builtins.hashString "sha256" vmName;
+              # Take 4 bytes from the hash for the last 4 octets
+              b3 = builtins.substring 0 2 hash;
+              b4 = builtins.substring 2 2 hash;
+              b5 = builtins.substring 4 2 hash;
+              b6 = builtins.substring 6 2 hash;
+            in
+            "02:00:${b3}:${b4}:${b5}:${b6}";
         }
       ];
 
