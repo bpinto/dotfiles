@@ -17,11 +17,19 @@ let
 in
 {
   imports = [
+    ../../modules/bat.nix
     ../../modules/git.nix
     ../../modules/neovim.nix
   ];
 
   home.stateVersion = "25.11";
+
+  # Bash must be managed by home-manager so session variables
+  # (including SSH_AUTH_SOCK) are sourced on login.
+  programs.bash.enable = true;
+
+  # Start ssh-agent so git commit signing and SSH operations work.
+  services.ssh-agent.enable = true;
 
   xdg.enable = true;
 

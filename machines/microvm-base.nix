@@ -18,7 +18,7 @@
   ];
 
   config = {
-    networking.hostName = "${vmName}-vm";
+    nix.settings.experimental-features = "nix-command flakes";
 
     system.stateVersion = "25.11";
 
@@ -81,6 +81,8 @@
     # service listening on it.
     networking.firewall.enable = false;
 
+    networking.hostName = "${vmName}-vm";
+
     services.resolved.enable = true;
     networking.useDHCP = false;
     networking.useNetworkd = true;
@@ -125,9 +127,20 @@
     security.sudo.wheelNeedsPassword = false;
 
     # ── Packages ─────────────────────────────────────────────────────────
+    environment.enableAllTerminfo = true;
+
     environment.systemPackages = with pkgs; [
       ghostty.terminfo
     ];
+
+    # The host /nix/store is shared from macOS (case-insensitive FS) via
+    # virtiofs, so terminfo dirs get ~nix~case~hack~ suffixes that ncurses
+    # can't find.  Prepend the ghostty terminfo package path directly to
+    # TERMINFO_DIRS so ncurses finds xterm-ghostty without going through
+    # the merged profile (where x/ becomes x~nix~case~hack~1/).
+    environment.extraInit = ''
+      export TERMINFO_DIRS="${pkgs.ghostty.terminfo}/share/terminfo''${TERMINFO_DIRS:+:$TERMINFO_DIRS}"
+    '';
 
     # ── SSH key sync ─────────────────────────────────────────────────────
     # Copy SSH keys from host mount to /home/dev/.ssh/ with correct

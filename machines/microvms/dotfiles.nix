@@ -35,5 +35,6 @@
   programs.ssh.extraConfig = ''
     Host github.com
       IdentityFile /home/dev/.ssh/github
+      AddKeysToAgent yes
   '';
 }
