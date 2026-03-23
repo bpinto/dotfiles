@@ -9,21 +9,14 @@
 {
   imports = [
     ../microvm-base.nix
-    ../../modules/pi.nix
+    ../../modules/microvm/dotfiles.nix
+    ../../modules/microvm/github.nix
+    ../../modules/microvm/pi.nix
   ];
 
   defaultSshDirectory = "/home/dev/src/dotfiles";
 
   microvm.shares = [
-    {
-      # Shared dotfiles for symlinking into home via home-manager.
-      # Mounted at /mnt/dotfiles so home-manager owns ~/.config and
-      # selectively symlinks only the configs the VM needs.
-      proto = "virtiofs";
-      tag = "dotfiles";
-      source = "/Users/bpinto/src/dotfiles/users/shared/dotfiles";
-      mountPoint = "/mnt/dotfiles";
-    }
     {
       # Full dotfiles repo for development in this VM.
       proto = "virtiofs";
@@ -32,11 +25,4 @@
       mountPoint = "/home/dev/src/dotfiles";
     }
   ];
-
-  # Use the github key for GitHub SSH access
-  programs.ssh.extraConfig = ''
-    Host github.com
-      IdentityFile /home/dev/.ssh/github
-      AddKeysToAgent yes
-  '';
 }
