@@ -14,6 +14,7 @@ let
 in
 {
   home.packages = with pkgs; [
+    delta # Git pager with syntax highlighting
     fzf
   ];
 

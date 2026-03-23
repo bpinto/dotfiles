@@ -53,7 +53,6 @@ in
       age
       awscli2
       ctags-lsp
-      delta
       fish
       gh
       helmfile
