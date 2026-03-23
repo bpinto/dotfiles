@@ -17,6 +17,7 @@ let
 in
 {
   imports = [
+    ../../modules/bat.nix
     ../../modules/git.nix
     ../../modules/neovim.nix
   ];

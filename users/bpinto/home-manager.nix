@@ -28,6 +28,7 @@ in
 {
   imports = [
     ../../lib/vm-scripts.nix
+    ../../modules/bat.nix
     ../../modules/git.nix
     ../../modules/neovim.nix
     ../../modules/ssh.nix
@@ -160,20 +161,6 @@ in
   # Bash
   programs.bash = {
     enable = true;
-  };
-
-  # Bat
-  home.activation.batCacheBuild = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    ${pkgs.bat}/bin/bat cache --build 2>/dev/null || true
-  '';
-  programs.bat = {
-    enable = true;
-    config.theme = "tokyonight_storm";
-    themes = {
-      tokyonight_storm = {
-        src = ../shared/dotfiles/.config/bat/themes/tokyonight_storm.tmTheme;
-      };
-    };
   };
 
   # Ctags
