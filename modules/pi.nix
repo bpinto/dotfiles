@@ -8,6 +8,7 @@
 
 {
   # ── virtiofs share ──────────────────────────────────────────────────
+
   microvm.shares = [
     {
       proto = "virtiofs";
@@ -18,6 +19,7 @@
   ];
 
   # ── Packages ────────────────────────────────────────────────────────
+
   environment.systemPackages = with pkgs; [
     fd
     nodejs
@@ -26,27 +28,16 @@
 
   # ── Installation ────────────────────────────────────────────────────
   # Install pi globally via npm; persists on /var across reboots.
+
   systemd.services.pi-install = {
     description = "Install pi coding agent via npm";
-    wantedBy = [ "multi-user.target" ];
-    after = [
-      "network-online.target"
-      "home.mount"
-    ];
-    wants = [ "network-online.target" ];
-    unitConfig.RequiresMountsFor = [ "/home" ];
+
     path = with pkgs; [
       bash
       coreutils
       nodejs
     ];
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-      User = "dev";
-      Group = "users";
-      Environment = "HOME=/home/dev";
-    };
+
     script = ''
       export npm_config_prefix=/home/dev/.npm-global
       mkdir -p /home/dev/.npm-global
@@ -59,9 +50,27 @@
 
       npm install -g @mariozechner/pi-coding-agent
     '';
+
+    serviceConfig = {
+      Environment = "HOME=/home/dev";
+      Group = "users";
+      RemainAfterExit = true;
+      Type = "oneshot";
+      User = "dev";
+    };
+
+    unitConfig.RequiresMountsFor = [ "/home" ];
+
+    after = [
+      "home.mount"
+      "network-online.target"
+    ];
+    wantedBy = [ "multi-user.target" ];
+    wants = [ "network-online.target" ];
   };
 
   # ── Environment ─────────────────────────────────────────────────────
+
   environment.variables.PI_CODING_AGENT_DIR = "/mnt/pi-agent";
 
   environment.shellInit = ''
