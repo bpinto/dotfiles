@@ -25,6 +25,7 @@ in
 
     home.packages = with pkgs; [
       gcc # Required by nvim-treesitter to compile parsers
+      tree-sitter # Required by nvim-treesitter to build parsers
     ];
 
     programs.neovim = {

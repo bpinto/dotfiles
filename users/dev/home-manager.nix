@@ -26,7 +26,15 @@ in
 
   # Bash must be managed by home-manager so session variables
   # (including SSH_AUTH_SOCK) are sourced on login.
-  programs.bash.enable = true;
+  programs.bash = {
+    enable = true;
+    initExtra = ''
+      # Auto-add SSH key to agent when not already loaded.
+      if ! ssh-add -l &>/dev/null; then
+        ssh-add ~/.ssh/github &>/dev/null
+      fi
+    '';
+  };
 
   # Start ssh-agent so git commit signing and SSH operations work.
   services.ssh-agent.enable = true;

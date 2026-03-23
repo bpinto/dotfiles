@@ -35,47 +35,27 @@
       ...
     }:
     let
-      lib = nixpkgs.lib;
-
-      # Helper to generate attributes for each system
-      forAllSystems = lib.genAttrs [
-        "aarch64-darwin"
-        "aarch64-linux"
-      ];
+      system = "aarch64-darwin";
+      pkgs = nixpkgs.legacyPackages.${system};
 
       mkMicroVM = import ./lib/mk-microvm.nix { inherit home-manager microvm nixpkgs; };
     in
     {
-      devShells = forAllSystems (
-        system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-        {
-          default = pkgs.mkShellNoCC {
-            name = "dotfiles";
-            packages =
-              lib.optionals pkgs.stdenv.isDarwin [
-                nix-darwin.packages.${system}.darwin-rebuild
-                (pkgs.writeShellApplication {
-                  name = "switch";
-                  text = "sudo darwin-rebuild switch --flake '.#macos-aarch64'";
-                })
-              ]
-              ++ lib.optionals pkgs.stdenv.isLinux [
-                (pkgs.writeShellApplication {
-                  name = "switch";
-                  text = "NIXPKGS_ALLOW_UNFREE=1 nixos-rebuild switch --sudo --flake '.#vm-aarch64'";
-                })
-              ];
-          };
-        }
-      );
+      devShells.${system}.default = pkgs.mkShellNoCC {
+        name = "dotfiles";
+        packages = [
+          nix-darwin.packages.${system}.darwin-rebuild
+          (pkgs.writeShellApplication {
+            name = "switch";
+            text = "sudo darwin-rebuild switch --flake '.#macos-aarch64'";
+          })
+        ];
+      };
 
-      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
+      formatter.${system} = pkgs.nixfmt-tree;
 
       #--------------------------------------------------------------------
-      # System configurations (macOS + VMware VM)
+      # System configurations (macOS)
       #--------------------------------------------------------------------
 
       darwinConfigurations.macos-aarch64 = nix-darwin.lib.darwinSystem {
@@ -83,14 +63,6 @@
         specialArgs = { inherit home-manager sops-nix; };
         modules = [
           ./machines/macos-aarch64.nix
-        ];
-      };
-
-      nixosConfigurations.vm-aarch64 = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        specialArgs = { inherit home-manager sops-nix; };
-        modules = [
-          ./machines/vm-aarch64.nix
         ];
       };
 
