@@ -12,6 +12,8 @@
     ../../modules/pi.nix
   ];
 
+  defaultSshDirectory = "/home/dev/src/dotfiles";
+
   microvm.shares = [
     {
       # Shared dotfiles for symlinking into home via home-manager.

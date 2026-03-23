@@ -5,6 +5,7 @@
 #
 # Each project module supplies its own shares, port forwards, packages, etc.
 {
+  config,
   hostPkgs,
   lib,
   pkgs,
@@ -17,7 +18,16 @@
     ../users/dev/nixos.nix
   ];
 
+  options.defaultSshDirectory = lib.mkOption {
+    type = lib.types.nullOr lib.types.str;
+    default = null;
+    description = "Default directory to cd into on login.";
+  };
+
   config = {
+    environment.loginShellInit = lib.mkIf (config.defaultSshDirectory != null) ''
+      cd ${config.defaultSshDirectory}
+    '';
     nix.settings.experimental-features = "nix-command flakes";
 
     system.stateVersion = "25.11";
