@@ -1,4 +1,3 @@
-# SSH configuration for home-manager.
 {
   config,
   lib,
@@ -7,6 +6,25 @@
 }:
 
 {
+  programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+
+    includes = [
+      config.sops.templates."ssh-hosts.conf".path
+    ];
+
+    matchBlocks = {
+      "github.com" = {
+        identityFile = "~/.ssh/github";
+        extraOptions = {
+          AddKeysToAgent = "yes";
+          UseKeychain = "yes";
+        };
+      };
+    };
+  };
+
   # Encrypted hostnames decrypted at activation time.
   sops.secrets.ssh_home_assistant_hostname = { };
 
@@ -18,22 +36,5 @@
         User hass
         IdentityFile ~/.ssh/homelab
     '';
-  };
-
-  programs.ssh = {
-    enable = true;
-    enableDefaultConfig = false;
-    includes = [
-      config.sops.templates."ssh-hosts.conf".path
-    ];
-    matchBlocks = {
-      "github.com" = {
-        identityFile = "~/.ssh/github";
-        extraOptions = {
-          AddKeysToAgent = "yes";
-          UseKeychain = "yes";
-        };
-      };
-    };
   };
 }
