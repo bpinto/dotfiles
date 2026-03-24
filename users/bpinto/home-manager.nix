@@ -117,11 +117,6 @@ in
   # Ctags
   home.file.".ctags".source = mkSymlink "${dotfiles}/.ctags";
 
-  # Starship
-  programs.starship = {
-    enable = true;
-  };
-
   # Ticker
   home.file.".ticker.yaml".source = mkSymlink "${home}/Documents/.ticker.yaml";
 }

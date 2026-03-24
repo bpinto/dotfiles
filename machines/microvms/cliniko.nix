@@ -25,6 +25,9 @@
       '';
     in
     {
+      # Starship directory color — orange
+      directoryColor = "#ff9e64";
+
       # Global gitignore — excludes direnv files so .envrc (used for
       # DOCKER_SERVICES mapping) doesn't show up as untracked in repos.
       home.file.".gitignore".text = ''

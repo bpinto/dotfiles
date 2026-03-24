@@ -13,6 +13,8 @@ let
   dotfiles = config.dotfilesPath;
 in
 {
+  home.shell.enableNushellIntegration = false;
+
   programs.nushell = {
     enable = true;
 
@@ -29,5 +31,89 @@ in
     '';
   };
 
-  home.shell.enableNushellIntegration = false;
+  programs.starship = {
+    enable = true;
+    enableNushellIntegration = true;
+
+    # Custom theme using Tokyo Night Storm palette colors.
+    settings =
+      let
+        dirBlue = "#61AFEF";
+        branchGray = "#ABB2BF";
+        dirtyAmber = "#FCBC47";
+        stagedGreen = "#9ece6a";
+        upstreamCyan = "#7dcfff";
+        kubeYellow = "#E0AF68";
+        promptMagenta = "#bb9af7";
+        promptRed = "#f7768e";
+        dimGray = "#a9b1d6";
+      in
+      {
+        format = builtins.concatStringsSep "" [
+          "\n"
+          "$directory"
+          "$git_branch"
+          "$git_state"
+          "$git_status"
+          "$kubernetes"
+          "$fill"
+          "$hostname"
+          "$line_break"
+          "$character"
+        ];
+
+        directory = {
+          style = config.directoryColor;
+          truncation_length = 0;
+          truncate_to_repo = false;
+        };
+
+        character = {
+          success_symbol = "[❯](${promptMagenta})";
+          error_symbol = "[❯](${promptRed})";
+          vimcmd_symbol = "[❮](${stagedGreen})";
+        };
+
+        git_branch = {
+          format = "[$branch]($style)";
+          style = branchGray;
+        };
+
+        git_state = {
+          format = " [$state( $progress_current/$progress_total)]($style)";
+          style = dimGray;
+        };
+
+        git_status = {
+          format = "([ *$modified$deleted](${dirtyAmber}))([ $staged](${stagedGreen}))([ $ahead_behind](${stagedGreen}))";
+          modified = "​"; # zero-width space to trigger the group
+          deleted = "​";
+          staged = "⇢";
+          ahead = "⇡";
+          behind = "⇣";
+          diverged = "⇡⇣";
+        };
+
+        fill.symbol = " ";
+
+        hostname = {
+          ssh_only = true; # only show when SSH'd into a microVM
+          format = "[$hostname]($style)";
+          style = dimGray;
+        };
+
+        kubernetes = {
+          disabled = false;
+          format = " [$context]($style)";
+          style = kubeYellow;
+          contexts = [
+            {
+              context_pattern = "orbstack";
+              style = kubeYellow;
+              context_alias = "";
+            }
+          ];
+        };
+      };
+    };
 }

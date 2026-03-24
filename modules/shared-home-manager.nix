@@ -17,4 +17,10 @@
       if config.isMicrovm then "/mnt/dotfiles" else "/Users/bpinto/src/dotfiles/users/shared/dotfiles";
     description = "Path to shared dotfiles directory (used by home-manager modules).";
   };
+
+  options.directoryColor = lib.mkOption {
+    type = lib.types.str;
+    default = "#61AFEF"; # blue
+    description = "Color for the starship directory module (per-machine).";
+  };
 }
