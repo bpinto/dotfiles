@@ -20,6 +20,7 @@ in
   imports = [
     ../../lib/vm-scripts.nix
     ../../modules/bat.nix
+    ../../modules/direnv.nix
     ../../modules/git.nix
     ../../modules/neovim.nix
     ../../modules/ssh.nix
@@ -99,16 +100,6 @@ in
     "k9s" = {
       source = mkSymlink "${dotfiles}/.config/k9s";
     };
-
-    # Neovim configuration
-    "nvim" = {
-      source = mkSymlink "${dotfiles}/.config/nvim";
-    };
-
-    # Projectionist configuration
-    "projections.json" = {
-      source = mkSymlink "${dotfiles}/.config/projections.json";
-    };
   };
 
   xdg.enable = true;
@@ -124,18 +115,6 @@ in
 
   # Ctags
   home.file.".ctags".source = mkSymlink "${dotfiles}/.ctags";
-
-  # Git supporting files
-  home.file.".git_template".source = mkSymlink "${dotfiles}/.git_template";
-  home.file.".gitconfig".source = mkSymlink "${dotfiles}/.gitconfig";
-  home.file.".gitmessage".source = mkSymlink "${dotfiles}/.gitmessage";
-  home.file.".ssh/allowed_signers".source = mkSymlink "${dotfiles}/.ssh/allowed_signers";
-
-  # Direnv
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
 
   # Nushell
   programs.nushell = {
