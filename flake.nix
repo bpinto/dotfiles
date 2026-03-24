@@ -19,6 +19,9 @@
     # it'll impact your entire system.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
 
+    # An unstable nixpkgs input for a few bleeding-edge packages.
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
     # sops-nix module to handle encrypted secrets
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
@@ -31,6 +34,7 @@
       microvm,
       nix-darwin,
       nixpkgs,
+      nixpkgs-unstable,
       sops-nix,
       ...
     }:
@@ -43,6 +47,7 @@
           home-manager
           microvm
           nixpkgs
+          nixpkgs-unstable
           ;
       };
     in
