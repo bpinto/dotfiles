@@ -200,35 +200,6 @@
       export TERMINFO_DIRS="${pkgs.ghostty.terminfo}/share/terminfo''${TERMINFO_DIRS:+:$TERMINFO_DIRS}"
     '';
 
-    # ── SSH key sync ─────────────────────────────────────────────────────
-    # Copy SSH keys from host mount to /home/dev/.ssh/ with correct
-    # permissions (SSH requires 600 + correct ownership).
-    # The host directory /Users/bpinto/microvm/<vm>/ssh-keys is shared
-    # via virtiofs; if it's empty, nothing is copied.
-    systemd.services.ssh-key-sync = {
-      description = "Sync SSH keys from host";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "local-fs.target" ];
-
-      unitConfig.RequiresMountsFor = [ "/mnt/ssh-keys" ];
-
-      serviceConfig = {
-        Type = "oneshot";
-        RemainAfterExit = true;
-      };
-
-      script = ''
-        if [ -d /mnt/ssh-keys ] && ls /mnt/ssh-keys/* >/dev/null 2>&1; then
-          mkdir -p /home/dev/.ssh
-          cp /mnt/ssh-keys/* /home/dev/.ssh/
-          chown -R dev:users /home/dev/.ssh
-          chmod 700 /home/dev/.ssh
-          chmod 600 /home/dev/.ssh/* 2>/dev/null || true
-          chmod 644 /home/dev/.ssh/*.pub 2>/dev/null || true
-        fi
-      '';
-    };
-
     # ── Services ────────────────────────────────────────────────────────
     services.openssh = {
       enable = true;
@@ -243,5 +214,21 @@
         }
       ];
     };
+
+    # ── SSH key sync ─────────────────────────────────────────────────────
+    # Copy SSH keys from host mount to /home/dev/.ssh/ with correct
+    # permissions (SSH requires 600 + correct ownership).
+    # The host directory /Users/bpinto/microvm/<vm>/ssh-keys is shared
+    # via virtiofs; if it's empty, nothing is copied.
+    system.activationScripts.ssh-key-sync.text = ''
+      if [ -d /mnt/ssh-keys ] && ls /mnt/ssh-keys/* >/dev/null 2>&1; then
+        mkdir -p /home/dev/.ssh
+        cp /mnt/ssh-keys/* /home/dev/.ssh/
+        chown -R dev:users /home/dev/.ssh
+        chmod 700 /home/dev/.ssh
+        chmod 600 /home/dev/.ssh/* 2>/dev/null || true
+        chmod 644 /home/dev/.ssh/*.pub 2>/dev/null || true
+      fi
+    '';
   };
 }
