@@ -5,6 +5,7 @@
 #
 # Each project module supplies its own shares, port forwards, packages, etc.
 {
+  config,
   hostPkgs,
   lib,
   pkgs,
@@ -17,7 +18,37 @@
     ../users/dev/nixos.nix
   ];
 
+  options.defaultSshDirectory = lib.mkOption {
+    type = lib.types.nullOr lib.types.str;
+    default = null;
+    description = "Default directory to cd into on login.";
+  };
+
+  options.staticIpAddress = lib.mkOption {
+    # Make this option mandatory by declaring it as a plain string without
+    # a default. lib.mkUndefined is used so evaluation fails if the option
+    # is not set by the VM module.
+    type = lib.types.str;
+    default = lib.mkUndefined;
+    description = ''
+      Static IPv4 address for the VM on the Apple Virtualization.framework
+      NAT network (192.168.64.0/24). The gateway is assumed to be
+      192.168.64.1. This option is mandatory and must be set in
+      machines/microvms/<name>.nix as: staticIpAddress = "192.168.64.X";
+    '';
+    example = "192.168.64.10";
+  };
+
+  options.varVolumeSize = lib.mkOption {
+    type = lib.types.int;
+    default = 8192;
+    description = "Size of the persistent /var volume in MB.";
+  };
+
   config = {
+    environment.loginShellInit = lib.mkIf (config.defaultSshDirectory != null) ''
+      cd ${config.defaultSshDirectory}
+    '';
     nix.settings.experimental-features = "nix-command flakes";
 
     system.stateVersion = "25.11";
@@ -57,16 +88,27 @@
         {
           mountPoint = "/var";
           image = "var.img";
-          size = lib.mkDefault 8192; # MB
+          size = config.varVolumeSize;
         }
       ];
 
       # User-mode NAT networking (only option on macOS/vfkit)
+      # Each VM needs a unique MAC to avoid ARP conflicts on the host's
+      # network — identical MACs cause lag and dropped SSH connections.
       interfaces = [
         {
           type = "user";
           id = "net0";
-          mac = "02:00:00:01:01:01";
+          mac =
+            let
+              hash = builtins.hashString "sha256" vmName;
+              # Take 4 bytes from the hash for the last 4 octets
+              b3 = builtins.substring 0 2 hash;
+              b4 = builtins.substring 2 2 hash;
+              b5 = builtins.substring 4 2 hash;
+              b6 = builtins.substring 6 2 hash;
+            in
+            "02:00:${b3}:${b4}:${b5}:${b6}";
         }
       ];
 
@@ -90,10 +132,10 @@
     systemd.network.enable = true;
     systemd.network.networks."10-e" = {
       matchConfig.Name = "e*";
-      networkConfig = {
-        DHCP = "yes";
-        IPv6AcceptRA = true;
-      };
+
+      address = [ "${config.staticIpAddress}/24" ];
+      gateway = [ "192.168.64.1" ];
+      dns = [ "192.168.64.1" ];
     };
 
     # ── Systemd tuning ─────────────────────────────────────────────────

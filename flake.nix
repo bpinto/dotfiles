@@ -38,7 +38,13 @@
       system = "aarch64-darwin";
       pkgs = nixpkgs.legacyPackages.${system};
 
-      mkMicroVM = import ./lib/mk-microvm.nix { inherit home-manager microvm nixpkgs; };
+      mkMicroVM = import ./lib/mk-microvm.nix {
+        inherit
+          home-manager
+          microvm
+          nixpkgs
+          ;
+      };
     in
     {
       devShells.${system}.default = pkgs.mkShellNoCC {
@@ -70,8 +76,11 @@
       # MicroVMs (aarch64-linux guests, launched via vfkit)
       #--------------------------------------------------------------------
 
+      nixosConfigurations.cliniko-vm = mkMicroVM "cliniko";
       nixosConfigurations.dotfiles-vm = mkMicroVM "dotfiles";
 
+      packages.aarch64-darwin.cliniko-vm =
+        self.nixosConfigurations.cliniko-vm.config.microvm.declaredRunner;
       packages.aarch64-darwin.dotfiles-vm =
         self.nixosConfigurations.dotfiles-vm.config.microvm.declaredRunner;
     };
