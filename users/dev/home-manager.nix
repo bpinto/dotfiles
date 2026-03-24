@@ -13,6 +13,7 @@
     ../../modules/direnv.nix
     ../../modules/git.nix
     ../../modules/neovim.nix
+    ../../modules/nushell.nix
     ../../modules/pi.nix
   ];
 

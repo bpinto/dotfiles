@@ -23,6 +23,7 @@ in
     ../../modules/direnv.nix
     ../../modules/git.nix
     ../../modules/neovim.nix
+    ../../modules/nushell.nix
     ../../modules/ssh.nix
     ../../modules/theme.nix
   ];
@@ -115,11 +116,6 @@ in
 
   # Ctags
   home.file.".ctags".source = mkSymlink "${dotfiles}/.ctags";
-
-  # Nushell
-  programs.nushell = {
-    enable = true;
-  };
 
   # Starship
   programs.starship = {
