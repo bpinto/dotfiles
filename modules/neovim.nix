@@ -12,9 +12,22 @@
 
 let
   home = config.home.homeDirectory;
+  mkSymlink = config.lib.file.mkOutOfStoreSymlink;
+  dotfiles = config.dotfilesPath;
 in
 {
   config = {
+    xdg.configFile = {
+      "nvim" = {
+        source = mkSymlink "${dotfiles}/.config/nvim";
+      };
+
+      # Projectionist configuration
+      "projections.json" = {
+        source = mkSymlink "${dotfiles}/.config/projections.json";
+      };
+    };
+
     home.activation.neovimSetup = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       mkdir -p "${home}/.local/share/nvim/backup"
       if [ ! -d "${home}/.local/share/nvim/lazy/lazy.nvim" ]; then

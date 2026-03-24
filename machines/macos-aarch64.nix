@@ -1,79 +1,84 @@
 {
-  config,
   home-manager,
-  lib,
   pkgs,
   sops-nix,
   ...
 }:
 
 {
+  # ── Imports ─────────────────────────────────────────────────────────
+
   imports = [
     home-manager.darwinModules.home-manager
     ../modules/macos.nix
     ../users/bpinto/darwin.nix
   ];
 
-  fonts.packages = with pkgs; [
-    nerd-fonts.victor-mono
-    powerline-fonts
-  ];
+  # ── Configuration ───────────────────────────────────────────────────
 
-  home-manager = {
-    sharedModules = [
-      sops-nix.homeManagerModules.sops
+  config = {
+    fonts.packages = with pkgs; [
+      nerd-fonts.victor-mono
+      powerline-fonts
     ];
 
-    useGlobalPkgs = true;
-    useUserPackages = true;
+    home-manager = {
+      sharedModules = [
+        sops-nix.homeManagerModules.sops
+        ../modules/shared-home-manager.nix
+      ];
 
-    # Configure users
-    users.bpinto = import ../users/bpinto/home-manager.nix;
-  };
+      useGlobalPkgs = true;
+      useUserPackages = true;
 
-  # Configures system-level fish integration (/etc/fish/) so fish can find
-  # Nix-installed programs. Fish is launched by the terminal emulator, not
-  # set as the macOS login shell.
-  programs.fish.enable = true;
+      # Configure users
+      users.bpinto = import ../users/bpinto/home-manager.nix;
+    };
 
-  # Required by nix-darwin for user-specific options.
-  system.primaryUser = "bpinto";
+    nix = {
+      # Enable flakes
+      extraOptions = ''
+        experimental-features = nix-command flakes
+      '';
 
-  nix = {
-    # Enable flakes
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-
-    # Linux builder VM for cross-compiling aarch64-linux (e.g., microVMs)
-    linux-builder = {
-      enable = true;
-      config = {
-        virtualisation = {
-          cores = 4;
-          darwin-builder.memorySize = 8 * 1024;
+      # Linux builder VM for cross-compiling aarch64-linux (e.g., microVMs)
+      linux-builder = {
+        enable = true;
+        config = {
+          virtualisation = {
+            cores = 4;
+            darwin-builder.memorySize = 8 * 1024;
+          };
         };
+      };
+
+      # Use latest nix version
+      package = pkgs.nixVersions.latest;
+
+      settings = {
+        trusted-users = [ "bpinto" ];
       };
     };
 
-    # Use latest nix version
-    package = pkgs.nixVersions.latest;
+    # Allow unfree packages
+    nixpkgs.config.allowUnfree = true;
 
-    settings = {
-      trusted-users = [ "bpinto" ];
+    # Configures system-level fish integration (/etc/fish/) so fish can find
+    # Nix-installed programs. Fish is launched by the terminal emulator, not
+    # set as the macOS login shell.
+    programs.fish.enable = true;
+
+    # Use Touch ID for sudo authentication
+    security.pam.services.sudo_local.touchIdAuth = true;
+
+    system = {
+      # Used for backwards compatibility
+      stateVersion = 6;
+
+      # Required by nix-darwin for user-specific options.
+      primaryUser = "bpinto";
     };
+
+    time.timeZone = "Europe/Lisbon";
   };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # Use Touch ID for sudo authentication
-  security.pam.services.sudo_local.touchIdAuth = true;
-
-  system = {
-    # Used for backwards compatibility
-    stateVersion = 6;
-  };
-
-  time.timeZone = "Europe/Lisbon";
 }

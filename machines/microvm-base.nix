@@ -14,9 +14,7 @@
 }:
 
 {
-  imports = [
-    ../users/dev/nixos.nix
-  ];
+  # ── Options ─────────────────────────────────────────────────────────
 
   options.defaultSshDirectory = lib.mkOption {
     type = lib.types.nullOr lib.types.str;
@@ -45,10 +43,27 @@
     description = "Size of the persistent /var volume in MB.";
   };
 
+  # ── Imports ─────────────────────────────────────────────────────────
+
+  imports = [
+    ../users/dev/nixos.nix
+  ];
+
+  # ── Configuration ───────────────────────────────────────────────────
+
   config = {
-    environment.loginShellInit = lib.mkIf (config.defaultSshDirectory != null) ''
+    environment.loginShellInit = lib.optionalString (config.defaultSshDirectory != null) ''
       cd ${config.defaultSshDirectory}
     '';
+
+    environment.interactiveShellInit = ''
+      # Launch nushell for interactive sessions.
+      # Bash remains the login shell for POSIX compatibility.
+      if [[ $- == *i* && -z "$IN_NUSHELL" ]]; then
+        exec env IN_NUSHELL=1 nu --login
+      fi
+    '';
+
     nix.settings.experimental-features = "nix-command flakes";
 
     system.stateVersion = "25.11";
@@ -173,6 +188,7 @@
 
     environment.systemPackages = with pkgs; [
       ghostty.terminfo
+      ripgrep
     ];
 
     # The host /nix/store is shared from macOS (case-insensitive FS) via

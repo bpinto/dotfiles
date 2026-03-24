@@ -35,6 +35,10 @@ nixpkgs.lib.nixosSystem {
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
+        sharedModules = [
+          ../modules/shared-home-manager.nix
+          { isMicrovm = true; }
+        ];
         users.dev = import ../users/dev/home-manager.nix;
       };
     }

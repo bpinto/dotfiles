@@ -1,7 +1,7 @@
 # TokyoNight Storm theme
 #
-# Centralises color definitions so that all programs (i3, i3status,
-# xresources, etc.) share a single palette.
+# Centralises color definitions so that all programs (xresources, fzf,
+# etc.) share a single palette.
 
 { lib, pkgs, ... }:
 
@@ -30,8 +30,8 @@ let
   };
 in
 {
-  # X resources — loads the palette into X so i3's set_from_resource
-  # directives (and any other X application) pick up the colors.
+  # X resources — loads the palette into X so applications using
+  # set_from_resource directives pick up the colors.
   # Xft settings control font rendering for GTK and X11 applications.
   xresources.properties = lib.mkIf isLinux {
     "Xft.dpi" = 180;
@@ -90,10 +90,4 @@ in
     ];
   };
 
-  # i3status bar colors
-  programs.i3status.general = lib.mkIf isLinux {
-    color_good = colors.color2; # green
-    color_bad = colors.color1; # red
-    color_degraded = colors.color3; # yellow
-  };
 }
