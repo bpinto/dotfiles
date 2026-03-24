@@ -1,3 +1,4 @@
+# SSH configuration for home-manager.
 {
   config,
   lib,
@@ -5,13 +6,7 @@
   ...
 }:
 
-let
-  isDarwin = pkgs.stdenv.isDarwin;
-  isLinux = pkgs.stdenv.isLinux;
-in
 {
-  services.ssh-agent.enable = isLinux;
-
   # Encrypted hostnames decrypted at activation time.
   sops.secrets.ssh_home_assistant_hostname = { };
 
@@ -36,8 +31,6 @@ in
         identityFile = "~/.ssh/github";
         extraOptions = {
           AddKeysToAgent = "yes";
-        }
-        // lib.optionalAttrs isDarwin {
           UseKeychain = "yes";
         };
       };
