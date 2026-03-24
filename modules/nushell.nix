@@ -18,6 +18,10 @@ in
   programs.nushell = {
     enable = true;
 
+    # Delta (git pager) needs COLORTERM to detect true-color support;
+    # nushell doesn't inherit/set it automatically like fish/zsh.
+    environmentVariables.COLORTERM = "truecolor";
+
     # Source our hand-written config from the shared dotfiles mount.
     extraConfig = ''
       source ${dotfiles}/.config/nushell/config.nu
