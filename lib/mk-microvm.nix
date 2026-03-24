@@ -12,6 +12,7 @@
   nixpkgs,
   microvm,
   home-manager,
+  nixpkgs-unstable,
 }:
 
 name:
@@ -22,6 +23,10 @@ nixpkgs.lib.nixosSystem {
     # on the macOS host, so it needs aarch64-darwin packages.
     hostPkgs = nixpkgs.legacyPackages.aarch64-darwin;
     vmName = name;
+
+    # Provide a package set from nixpkgs-unstable to modules that need
+    # individual unstable packages (e.g., pi-coding-agent).
+    unstablePkgs = nixpkgs-unstable.legacyPackages.${"aarch64-linux"};
   };
   modules = [
     microvm.nixosModules.microvm
