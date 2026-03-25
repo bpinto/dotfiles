@@ -41,6 +41,7 @@ def --wrapped docker-run [cmd: string, ...rest] {
 # Otherwise, runs the command directly.
 
 def --wrapped bundle [...rest] { docker-run bundle ...$rest }
+def --wrapped node [...rest] { docker-run node ...$rest }
 def --wrapped npm [...rest] { docker-run npm ...$rest }
 def --wrapped npx [...rest] { docker-run npx ...$rest }
 def --wrapped pnpm [...rest] { docker-run pnpm ...$rest }
