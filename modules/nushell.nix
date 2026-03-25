@@ -26,13 +26,7 @@ in
     extraConfig = ''
       source ${dotfiles}/.config/nushell/config.nu
     ''
-    + lib.optionalString config.isMicrovm ''
-
-      # Auto-add SSH key to agent on first interactive shell.
-      if (ssh-add -l | complete).exit_code != 0 {
-        ssh-add ~/.ssh/github
-      }
-    '';
+;
   };
 
   programs.starship = {
