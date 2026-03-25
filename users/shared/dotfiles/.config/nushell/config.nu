@@ -49,3 +49,4 @@ def --wrapped rails [...rest] { docker-run rails ...$rest }
 def --wrapped rake [...rest] { docker-run rake ...$rest }
 def --wrapped rspec [...rest] { docker-run rspec ...$rest }
 def --wrapped rubocop [...rest] { docker-run rubocop ...$rest }
+def --wrapped ruby [...rest] { docker-run ruby ...$rest }

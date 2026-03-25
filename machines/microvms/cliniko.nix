@@ -28,6 +28,15 @@
       # Starship directory color — orange
       directoryColor = "#ff9e64";
 
+      # Console — SSH into cliniko-dev infrastructure via the CLI tool.
+      programs.nushell.extraConfig = lib.mkAfter ''
+        def --wrapped console [...rest] {
+          with-env { TERM: xterm-256color } {
+            ~/src/cliniko-dev/cli/index.mjs ssh --preserve-current-context --quiet ...$rest
+          }
+        }
+      '';
+
       # Global gitignore — excludes direnv files so .envrc (used for
       # DOCKER_SERVICES mapping) doesn't show up as untracked in repos.
       home.file.".gitignore".text = ''
