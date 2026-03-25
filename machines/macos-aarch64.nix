@@ -32,7 +32,12 @@
       useUserPackages = true;
 
       # Configure users
-      users.bpinto = import ../users/bpinto/home-manager.nix;
+      users.bpinto = {
+        imports = [ ../users/bpinto/home-manager.nix ];
+
+        # Starship directory color — blue
+        directoryColor = "#61AFEF";
+      };
     };
 
     nix = {

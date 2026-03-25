@@ -13,9 +13,9 @@
 
   defaultSshDirectory = "/home/dev/src/dotfiles";
 
-  # Starship directory color — cyan
+  # Starship directory color — yellow
   home-manager.users.dev = {
-    directoryColor = "#7dcfff";
+    directoryColor = "#e0af68";
   };
 
   # Static IP so the macOS host can reach the VM at a known address

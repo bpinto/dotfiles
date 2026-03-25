@@ -20,7 +20,7 @@
 
   options.directoryColor = lib.mkOption {
     type = lib.types.str;
-    default = "#61AFEF"; # blue
+    default = "#2ac3de"; # teal
     description = "Color for the starship directory module (per-machine).";
   };
 }
