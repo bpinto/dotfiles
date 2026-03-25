@@ -3,5 +3,10 @@
 { pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [ awscli2 kubectl k9s nodejs_24 ];
+  environment.systemPackages = with pkgs; [
+    awscli2
+    kubectl
+    k9s
+    nodejs_24
+  ];
 }

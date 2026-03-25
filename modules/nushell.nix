@@ -25,8 +25,7 @@ in
     # Source our hand-written config from the shared dotfiles mount.
     extraConfig = ''
       source ${dotfiles}/.config/nushell/config.nu
-    ''
-;
+    '';
   };
 
   programs.starship = {

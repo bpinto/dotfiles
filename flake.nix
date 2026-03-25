@@ -63,7 +63,8 @@
         ];
       };
 
-      formatter.${system} = pkgs.nixfmt-tree;
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-tree;
+      formatter.aarch64-linux = nixpkgs.legacyPackages.aarch64-linux.nixfmt-tree;
 
       #--------------------------------------------------------------------
       # System configurations (macOS)
