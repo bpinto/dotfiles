@@ -54,7 +54,6 @@ in
       in
       {
         format = builtins.concatStringsSep "" [
-          "\n"
           "$directory"
           "$git_branch"
           "$git_state"
