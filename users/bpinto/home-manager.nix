@@ -109,11 +109,6 @@ in
   # Programs
   #---------------------------------------------------------------------
 
-  # Bash
-  programs.bash = {
-    enable = true;
-  };
-
   # Ctags
   home.file.".ctags".source = mkSymlink "${dotfiles}/.ctags";
 

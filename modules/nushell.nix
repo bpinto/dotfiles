@@ -13,7 +13,7 @@ let
   dotfiles = config.dotfilesPath;
 in
 {
-  home.shell.enableNushellIntegration = false;
+  home.shell.enableNushellIntegration = true;
 
   programs.nushell = {
     enable = true;

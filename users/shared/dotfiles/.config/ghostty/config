@@ -1317,7 +1317,7 @@ search-selected-background = #f2a57e
 # arguments. For example, `ghostty -e fish --with --custom --args`.
 # This flag sets the `initial-command` configuration, see that for more
 # information.
-command = /run/current-system/sw/bin/fish
+command = bash -lc 'export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"; exec nu'
 
 # This is the same as "command", but only applies to the first terminal
 # surface created when Ghostty starts. Subsequent terminal surfaces will use
