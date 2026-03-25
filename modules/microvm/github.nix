@@ -1,12 +1,15 @@
 # GitHub SSH settings for microVMs.
 # Provides an IdentityFile for github.com and adds GitHub's host key
 # to programs.ssh.knownHosts so non-interactive clones work.
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
+let
+  guestHome = config.users.users.dev.home;
+in
 {
   programs.ssh.extraConfig = ''
     Host github.com
-      IdentityFile /home/dev/.ssh/github
+      IdentityFile ${guestHome}/.ssh/github
       AddKeysToAgent yes
   '';
 

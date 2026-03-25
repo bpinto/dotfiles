@@ -14,7 +14,10 @@
   options.dotfilesPath = lib.mkOption {
     type = lib.types.str;
     default =
-      if config.isMicrovm then "/mnt/dotfiles" else "/Users/bpinto/src/dotfiles/users/shared/dotfiles";
+      if config.isMicrovm then
+        "/mnt/dotfiles"
+      else
+        "${config.home.homeDirectory}/src/dotfiles/users/shared/dotfiles";
     description = "Path to shared dotfiles directory (used by home-manager modules).";
   };
 

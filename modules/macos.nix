@@ -1,3 +1,9 @@
+{ config, ... }:
+
+let
+  user = config.system.primaryUser;
+  userHome = "/Users/${user}";
+in
 {
   system.defaults = {
     # --
@@ -122,65 +128,65 @@
     # --
 
     # Show item info near icons on the desktop and in other icon views
-    PLIST="/Users/bpinto/Library/Preferences/com.apple.finder.plist"
-    sudo -u bpinto /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" "$PLIST" 2>/dev/null || true
-    sudo -u bpinto /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:showItemInfo true" "$PLIST" 2>/dev/null || true
-    sudo -u bpinto /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:showItemInfo true" "$PLIST" 2>/dev/null || true
+    PLIST="${userHome}/Library/Preferences/com.apple.finder.plist"
+    sudo -u ${user} /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" "$PLIST" 2>/dev/null || true
+    sudo -u ${user} /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:showItemInfo true" "$PLIST" 2>/dev/null || true
+    sudo -u ${user} /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:showItemInfo true" "$PLIST" 2>/dev/null || true
 
     # Show item info to the right of the icons on the desktop
-    sudo -u bpinto /usr/libexec/PlistBuddy -c "Set DesktopViewSettings:IconViewSettings:labelOnBottom false" "$PLIST" 2>/dev/null || true
+    sudo -u ${user} /usr/libexec/PlistBuddy -c "Set DesktopViewSettings:IconViewSettings:labelOnBottom false" "$PLIST" 2>/dev/null || true
 
     # Enable snap-to-grid for icons on the desktop and in other icon views
-    sudo -u bpinto /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" "$PLIST" 2>/dev/null || true
-    sudo -u bpinto /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" "$PLIST" 2>/dev/null || true
-    sudo -u bpinto /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" "$PLIST" 2>/dev/null || true
+    sudo -u ${user} /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" "$PLIST" 2>/dev/null || true
+    sudo -u ${user} /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" "$PLIST" 2>/dev/null || true
+    sudo -u ${user} /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" "$PLIST" 2>/dev/null || true
 
     # Increase grid spacing for icons on the desktop and in other icon views
-    sudo -u bpinto /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing 100" "$PLIST" 2>/dev/null || true
-    sudo -u bpinto /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:gridSpacing 100" "$PLIST" 2>/dev/null || true
-    sudo -u bpinto /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:gridSpacing 100" "$PLIST" 2>/dev/null || true
+    sudo -u ${user} /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing 100" "$PLIST" 2>/dev/null || true
+    sudo -u ${user} /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:gridSpacing 100" "$PLIST" 2>/dev/null || true
+    sudo -u ${user} /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:gridSpacing 100" "$PLIST" 2>/dev/null || true
 
     # Increase the size of icons on the desktop and in other icon views
-    sudo -u bpinto /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize 80" "$PLIST" 2>/dev/null || true
-    sudo -u bpinto /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:iconSize 80" "$PLIST" 2>/dev/null || true
-    sudo -u bpinto /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:iconSize 80" "$PLIST" 2>/dev/null || true
+    sudo -u ${user} /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize 80" "$PLIST" 2>/dev/null || true
+    sudo -u ${user} /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:iconSize 80" "$PLIST" 2>/dev/null || true
+    sudo -u ${user} /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:iconSize 80" "$PLIST" 2>/dev/null || true
 
     # --
     # -- Locale
     # --
 
     # Set language and text formats
-    sudo -u bpinto defaults write NSGlobalDomain AppleLanguages -array "en" "pt-br"
-    sudo -u bpinto defaults write NSGlobalDomain AppleLocale -string "en_001@currency=eur;rg=ptzzzz"
-    sudo -u bpinto defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
-    sudo -u bpinto defaults write NSGlobalDomain AppleMetricUnits -bool true
+    sudo -u ${user} defaults write NSGlobalDomain AppleLanguages -array "en" "pt-br"
+    sudo -u ${user} defaults write NSGlobalDomain AppleLocale -string "en_001@currency=eur;rg=ptzzzz"
+    sudo -u ${user} defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
+    sudo -u ${user} defaults write NSGlobalDomain AppleMetricUnits -bool true
 
     # Turn off font smoothing: https://tonsky.me/blog/monitors/
-    sudo -u bpinto defaults -currentHost write -g AppleFontSmoothing -int 0
+    sudo -u ${user} defaults -currentHost write -g AppleFontSmoothing -int 0
 
     # --
     # -- Trackpad
     # --
 
     # Enable tap to click for this user and for the login screen
-    sudo -u bpinto defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+    sudo -u ${user} defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
     # --
     # -- Safari
     # --
 
     # Enable Develop Menu and Web Inspector
-    sudo -u bpinto defaults write com.apple.Safari.SandboxBroker ShowDevelopMenu -bool true
+    sudo -u ${user} defaults write com.apple.Safari.SandboxBroker ShowDevelopMenu -bool true
 
     # --
     # -- Keyboard
     # --
 
     # Install PT to US keyboard remap (EN language)
-    sudo -u bpinto mkdir -p "/Users/bpinto/Library/Keyboard Layouts/"
-    sudo -u bpinto cp -R /Users/bpinto/src/dotfiles/users/shared/dotfiles/pt-us.en.keymap.bundle "/Users/bpinto/Library/Keyboard Layouts/"
+    sudo -u ${user} mkdir -p "${userHome}/Library/Keyboard Layouts/"
+    sudo -u ${user} cp -R ${userHome}/src/dotfiles/users/shared/dotfiles/pt-us.en.keymap.bundle "${userHome}/Library/Keyboard Layouts/"
 
     # Install PT to US keyboard remap (PT language)
-    sudo -u bpinto cp -R /Users/bpinto/src/dotfiles/users/shared/dotfiles/pt-us.pt.keymap.bundle "/Users/bpinto/Library/Keyboard Layouts/"
+    sudo -u ${user} cp -R ${userHome}/src/dotfiles/users/shared/dotfiles/pt-us.pt.keymap.bundle "${userHome}/Library/Keyboard Layouts/"
   '';
 }

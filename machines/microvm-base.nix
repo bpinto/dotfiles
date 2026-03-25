@@ -16,6 +16,12 @@
 {
   # ── Options ─────────────────────────────────────────────────────────
 
+  options.hostHomeDirectory = lib.mkOption {
+    type = lib.types.str;
+    default = "/Users/bpinto";
+    description = "Home directory of the user on the macOS host (used for virtiofs share sources).";
+  };
+
   options.defaultSshDirectory = lib.mkOption {
     type = lib.types.nullOr lib.types.str;
     default = null;
@@ -51,184 +57,189 @@
 
   # ── Configuration ───────────────────────────────────────────────────
 
-  config = {
-    environment.loginShellInit = lib.optionalString (config.defaultSshDirectory != null) ''
-      cd ${config.defaultSshDirectory}
-    '';
+  config =
+    let
+      hostHome = config.hostHomeDirectory;
+      guestUser = config.users.users.dev;
+    in
+    {
+      environment.loginShellInit = lib.optionalString (config.defaultSshDirectory != null) ''
+        cd ${config.defaultSshDirectory}
+      '';
 
-    environment.interactiveShellInit = ''
-      # Launch nushell for interactive sessions.
-      # Bash remains the login shell for POSIX compatibility.
-      if [[ $- == *i* && -z "$IN_NUSHELL" ]]; then
-        exec env IN_NUSHELL=1 nu --login
-      fi
-    '';
+      environment.interactiveShellInit = ''
+        # Launch nushell for interactive sessions.
+        # Bash remains the login shell for POSIX compatibility.
+        if [[ $- == *i* && -z "$IN_NUSHELL" ]]; then
+          exec env IN_NUSHELL=1 nu --login
+        fi
+      '';
 
-    nix.settings.experimental-features = "nix-command flakes";
+      nix.settings.experimental-features = "nix-command flakes";
 
-    system.stateVersion = "25.11";
+      system.stateVersion = "25.11";
 
-    # ── Hypervisor ──────────────────────────────────────────────────────
-    microvm = {
-      hypervisor = "vfkit";
+      # ── Hypervisor ──────────────────────────────────────────────────────
+      microvm = {
+        hypervisor = "vfkit";
 
-      vcpu = lib.mkDefault 2;
-      mem = lib.mkDefault 2048;
+        vcpu = lib.mkDefault 2;
+        mem = lib.mkDefault 2048;
 
-      # Control socket for graceful shutdown.
-      socket = "control.socket";
+        # Control socket for graceful shutdown.
+        socket = "control.socket";
 
-      # Writable nix store overlay (tmpfs, ephemeral).
-      # Required for home-manager activation and nix-daemon.
-      writableStoreOverlay = "/nix/.rw-store";
+        # Writable nix store overlay (tmpfs, ephemeral).
+        # Required for home-manager activation and nix-daemon.
+        writableStoreOverlay = "/nix/.rw-store";
 
-      # Share host's /nix/store into the VM (read-only)
-      shares = [
+        # Share host's /nix/store into the VM (read-only)
+        shares = [
+          {
+            proto = "virtiofs";
+            tag = "ro-store";
+            source = "/nix/store";
+            mountPoint = "/nix/.ro-store";
+          }
+          {
+            proto = "virtiofs";
+            tag = "ssh-keys";
+            source = "${hostHome}/microvm/${vmName}/ssh-keys";
+            mountPoint = "/mnt/ssh-keys";
+          }
+        ];
+
+        # Persistent volume — survives reboots (root fs is ephemeral).
+        volumes = [
+          {
+            mountPoint = "/var";
+            image = "var.img";
+            size = config.varVolumeSize;
+          }
+        ];
+
+        # User-mode NAT networking (only option on macOS/vfkit)
+        # Each VM needs a unique MAC to avoid ARP conflicts on the host's
+        # network — identical MACs cause lag and dropped SSH connections.
+        interfaces = [
+          {
+            type = "user";
+            id = "net0";
+            mac =
+              let
+                hash = builtins.hashString "sha256" vmName;
+                # Take 4 bytes from the hash for the last 4 octets
+                b3 = builtins.substring 0 2 hash;
+                b4 = builtins.substring 2 2 hash;
+                b5 = builtins.substring 4 2 hash;
+                b6 = builtins.substring 6 2 hash;
+              in
+              "02:00:${b3}:${b4}:${b5}:${b6}";
+          }
+        ];
+
+        # The runner (vfkit) executes on the macOS host, not the Linux guest,
+        # so it needs the host's (darwin) packages.
+        vmHostPackages = hostPkgs;
+      };
+
+      # ── Networking ──────────────────────────────────────────────────────
+      # TODO: Re-enable firewall with explicit outbound rules. The guest can
+      # currently reach the host (gateway, typically 192.168.64.1) and any
+      # service listening on it.
+      networking.firewall.enable = false;
+
+      networking.hostName = "${vmName}-vm";
+
+      services.resolved.enable = true;
+      networking.useDHCP = false;
+      networking.useNetworkd = true;
+
+      systemd.network.enable = true;
+      systemd.network.networks."10-e" = {
+        matchConfig.Name = "e*";
+
+        address = [ "${config.staticIpAddress}/24" ];
+        gateway = [ "192.168.64.1" ];
+        dns = [ "192.168.64.1" ];
+      };
+
+      # ── Systemd tuning ─────────────────────────────────────────────────
+      systemd.settings.Manager = {
+        # Fast shutdowns
+        DefaultTimeoutStopSec = "5s";
+      };
+
+      # Fix for microvm shutdown hang (issue #170):
+      # Without this, systemd tries to unmount /nix/store during shutdown,
+      # but umount lives in /nix/store, causing a deadlock.
+      systemd.mounts = [
         {
-          proto = "virtiofs";
-          tag = "ro-store";
-          source = "/nix/store";
-          mountPoint = "/nix/.ro-store";
-        }
-        {
-          proto = "virtiofs";
-          tag = "ssh-keys";
-          source = "/Users/bpinto/microvm/${vmName}/ssh-keys";
-          mountPoint = "/mnt/ssh-keys";
-        }
-      ];
-
-      # Persistent volume — survives reboots (root fs is ephemeral).
-      volumes = [
-        {
-          mountPoint = "/var";
-          image = "var.img";
-          size = config.varVolumeSize;
-        }
-      ];
-
-      # User-mode NAT networking (only option on macOS/vfkit)
-      # Each VM needs a unique MAC to avoid ARP conflicts on the host's
-      # network — identical MACs cause lag and dropped SSH connections.
-      interfaces = [
-        {
-          type = "user";
-          id = "net0";
-          mac =
-            let
-              hash = builtins.hashString "sha256" vmName;
-              # Take 4 bytes from the hash for the last 4 octets
-              b3 = builtins.substring 0 2 hash;
-              b4 = builtins.substring 2 2 hash;
-              b5 = builtins.substring 4 2 hash;
-              b6 = builtins.substring 6 2 hash;
-            in
-            "02:00:${b3}:${b4}:${b5}:${b6}";
-        }
-      ];
-
-      # The runner (vfkit) executes on the macOS host, not the Linux guest,
-      # so it needs the host's (darwin) packages.
-      vmHostPackages = hostPkgs;
-    };
-
-    # ── Networking ──────────────────────────────────────────────────────
-    # TODO: Re-enable firewall with explicit outbound rules. The guest can
-    # currently reach the host (gateway, typically 192.168.64.1) and any
-    # service listening on it.
-    networking.firewall.enable = false;
-
-    networking.hostName = "${vmName}-vm";
-
-    services.resolved.enable = true;
-    networking.useDHCP = false;
-    networking.useNetworkd = true;
-
-    systemd.network.enable = true;
-    systemd.network.networks."10-e" = {
-      matchConfig.Name = "e*";
-
-      address = [ "${config.staticIpAddress}/24" ];
-      gateway = [ "192.168.64.1" ];
-      dns = [ "192.168.64.1" ];
-    };
-
-    # ── Systemd tuning ─────────────────────────────────────────────────
-    systemd.settings.Manager = {
-      # Fast shutdowns
-      DefaultTimeoutStopSec = "5s";
-    };
-
-    # Fix for microvm shutdown hang (issue #170):
-    # Without this, systemd tries to unmount /nix/store during shutdown,
-    # but umount lives in /nix/store, causing a deadlock.
-    systemd.mounts = [
-      {
-        what = "store";
-        where = "/nix/store";
-        overrideStrategy = "asDropin";
-        unitConfig.DefaultDependencies = false;
-      }
-    ];
-
-    # ── Home directories ────────────────────────────────────────────────
-    # Bind-mount /var/home → /home so user data lives on the persistent
-    # /var volume without a separate volume or mount-ordering issues.
-    fileSystems."/home" = {
-      device = "/var/home";
-      options = [ "bind" ];
-    };
-
-    # ── Users ────────────────────────────────────────────────────────────
-    users.users.root.password = "";
-    security.sudo.wheelNeedsPassword = false;
-
-    # ── Packages ─────────────────────────────────────────────────────────
-    environment.enableAllTerminfo = true;
-
-    environment.systemPackages = with pkgs; [
-      ghostty.terminfo
-      ripgrep
-    ];
-
-    # The host /nix/store is shared from macOS (case-insensitive FS) via
-    # virtiofs, so terminfo dirs get ~nix~case~hack~ suffixes that ncurses
-    # can't find.  Prepend the ghostty terminfo package path directly to
-    # TERMINFO_DIRS so ncurses finds xterm-ghostty without going through
-    # the merged profile (where x/ becomes x~nix~case~hack~1/).
-    environment.extraInit = ''
-      export TERMINFO_DIRS="${pkgs.ghostty.terminfo}/share/terminfo''${TERMINFO_DIRS:+:$TERMINFO_DIRS}"
-    '';
-
-    # ── Services ────────────────────────────────────────────────────────
-    services.openssh = {
-      enable = true;
-      settings.PermitRootLogin = "yes";
-
-      # Store host keys under /var so they persist across reboots
-      # (the root filesystem is ephemeral, but /var is a persistent volume)
-      hostKeys = [
-        {
-          path = "/var/lib/ssh/ssh_host_ed25519_key";
-          type = "ed25519";
+          what = "store";
+          where = "/nix/store";
+          overrideStrategy = "asDropin";
+          unitConfig.DefaultDependencies = false;
         }
       ];
-    };
 
-    # ── SSH key sync ─────────────────────────────────────────────────────
-    # Copy SSH keys from host mount to /home/dev/.ssh/ with correct
-    # permissions (SSH requires 600 + correct ownership).
-    # The host directory /Users/bpinto/microvm/<vm>/ssh-keys is shared
-    # via virtiofs; if it's empty, nothing is copied.
-    system.activationScripts.ssh-key-sync.text = ''
-      if [ -d /mnt/ssh-keys ] && ls /mnt/ssh-keys/* >/dev/null 2>&1; then
-        mkdir -p /home/dev/.ssh
-        cp /mnt/ssh-keys/* /home/dev/.ssh/
-        chown -R dev:users /home/dev/.ssh
-        chmod 700 /home/dev/.ssh
-        chmod 600 /home/dev/.ssh/* 2>/dev/null || true
-        chmod 644 /home/dev/.ssh/*.pub 2>/dev/null || true
-      fi
-    '';
-  };
+      # ── Home directories ────────────────────────────────────────────────
+      # Bind-mount /var/home → /home so user data lives on the persistent
+      # /var volume without a separate volume or mount-ordering issues.
+      fileSystems."/home" = {
+        device = "/var/home";
+        options = [ "bind" ];
+      };
+
+      # ── Users ────────────────────────────────────────────────────────────
+      users.users.root.password = "";
+      security.sudo.wheelNeedsPassword = false;
+
+      # ── Packages ─────────────────────────────────────────────────────────
+      environment.enableAllTerminfo = true;
+
+      environment.systemPackages = with pkgs; [
+        ghostty.terminfo
+        ripgrep
+      ];
+
+      # The host /nix/store is shared from macOS (case-insensitive FS) via
+      # virtiofs, so terminfo dirs get ~nix~case~hack~ suffixes that ncurses
+      # can't find.  Prepend the ghostty terminfo package path directly to
+      # TERMINFO_DIRS so ncurses finds xterm-ghostty without going through
+      # the merged profile (where x/ becomes x~nix~case~hack~1/).
+      environment.extraInit = ''
+        export TERMINFO_DIRS="${pkgs.ghostty.terminfo}/share/terminfo''${TERMINFO_DIRS:+:$TERMINFO_DIRS}"
+      '';
+
+      # ── Services ────────────────────────────────────────────────────────
+      services.openssh = {
+        enable = true;
+        settings.PermitRootLogin = "yes";
+
+        # Store host keys under /var so they persist across reboots
+        # (the root filesystem is ephemeral, but /var is a persistent volume)
+        hostKeys = [
+          {
+            path = "/var/lib/ssh/ssh_host_ed25519_key";
+            type = "ed25519";
+          }
+        ];
+      };
+
+      # ── SSH key sync ─────────────────────────────────────────────────────
+      # Copy SSH keys from host mount to ~/.ssh/ with correct permissions
+      # (SSH requires 600 + correct ownership).
+      # The host directory is shared via virtiofs; if it's empty, nothing
+      # is copied.
+      system.activationScripts.ssh-key-sync.text = ''
+        if [ -d /mnt/ssh-keys ] && ls /mnt/ssh-keys/* >/dev/null 2>&1; then
+          mkdir -p ${guestUser.home}/.ssh
+          cp /mnt/ssh-keys/* ${guestUser.home}/.ssh/
+          chown -R ${guestUser.name}:users ${guestUser.home}/.ssh
+          chmod 700 ${guestUser.home}/.ssh
+          chmod 600 ${guestUser.home}/.ssh/* 2>/dev/null || true
+          chmod 644 ${guestUser.home}/.ssh/*.pub 2>/dev/null || true
+        fi
+      '';
+    };
 }

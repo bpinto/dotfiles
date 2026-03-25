@@ -2,10 +2,14 @@
 #
 
 {
+  config,
   lib,
   ...
 }:
 
+let
+  guestHome = config.users.users.dev.home;
+in
 {
   imports = [
     ../microvm-base.nix
@@ -15,7 +19,7 @@
     ../../modules/microvm/pi.nix
   ];
 
-  defaultSshDirectory = "/home/dev/src/cliniko";
+  defaultSshDirectory = "${guestHome}/src/cliniko";
 
   home-manager.users.dev =
     { config, ... }:
@@ -46,12 +50,12 @@
 
       # Create .envrc with docker service mappings and allow it via direnv.
       home.activation.clinikoEnvrc = config.lib.dag.entryAfter [ "writeBoundary" ] ''
-        mkdir -p /home/dev/src/cliniko
-        cat > /home/dev/src/cliniko/.envrc << 'ENVRC'
+        mkdir -p ${config.home.homeDirectory}/src/cliniko
+        cat > ${config.home.homeDirectory}/src/cliniko/.envrc << 'ENVRC'
         ${envrcContent}
         ENVRC
-        export HOME=/home/dev
-        PATH="${config.home.profileDirectory}/bin:$PATH" direnv allow /home/dev/src/cliniko/.envrc 2>/dev/null || true
+        export HOME=${config.home.homeDirectory}
+        PATH="${config.home.profileDirectory}/bin:$PATH" direnv allow ${config.home.homeDirectory}/src/cliniko/.envrc 2>/dev/null || true
       '';
     };
 

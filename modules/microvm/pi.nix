@@ -3,7 +3,12 @@
 # Mounts the host's .pi/agent/ directory via virtiofs (read-only) at
 # /mnt/pi-agent. The home-manager pi module (modules/pi.nix) handles
 # selectively symlinking config files into ~/.pi/agent/.
-{ pkgs, unstablePkgs, ... }:
+{
+  config,
+  pkgs,
+  unstablePkgs,
+  ...
+}:
 
 {
   # ── virtiofs share ──────────────────────────────────────────────────
@@ -12,7 +17,7 @@
     {
       proto = "virtiofs";
       tag = "pi-agent";
-      source = "/Users/bpinto/src/dotfiles/users/shared/dotfiles/.pi/agent";
+      source = "${config.hostHomeDirectory}/src/dotfiles/users/shared/dotfiles/.pi/agent";
       mountPoint = "/mnt/pi-agent";
       readOnly = true;
     }

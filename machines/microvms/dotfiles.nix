@@ -1,8 +1,14 @@
 # MicroVM for working on the dotfiles repository.
 #
 
-{ lib, ... }:
+{ config, lib, ... }:
 
+let
+  hostHome = config.hostHomeDirectory;
+  # Use a static guestHome literal to avoid evaluating config.users during module
+  # evaluation which can create recursive option evaluation paths.
+  guestHome = "/home/dev";
+in
 {
   imports = [
     ../microvm-base.nix
@@ -11,7 +17,7 @@
     ../../modules/microvm/pi.nix
   ];
 
-  defaultSshDirectory = "/home/dev/src/dotfiles";
+  defaultSshDirectory = "${guestHome}/src/dotfiles";
 
   # Starship directory color — yellow
   home-manager.users.dev = {
@@ -26,8 +32,8 @@
       # Full dotfiles repo for development in this VM.
       proto = "virtiofs";
       tag = "dotfiles-repo";
-      source = "/Users/bpinto/src/dotfiles";
-      mountPoint = "/home/dev/src/dotfiles";
+      source = "${hostHome}/src/dotfiles";
+      mountPoint = "${guestHome}/src/dotfiles";
     }
   ];
 }
