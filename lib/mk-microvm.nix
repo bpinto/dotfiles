@@ -14,6 +14,7 @@
   microvm,
   home-manager,
   nixpkgs-unstable,
+  vercel-labs-agent-skills,
 }:
 
 name:
@@ -33,7 +34,7 @@ nixpkgs.lib.nixosSystem {
         useGlobalPkgs = true;
         useUserPackages = true;
         extraSpecialArgs = {
-          inherit dgalarza-claude-code-workflows;
+          inherit dgalarza-claude-code-workflows vercel-labs-agent-skills;
           unstablePkgs = nixpkgs-unstable.legacyPackages.aarch64-linux;
         };
         sharedModules = [

@@ -31,6 +31,12 @@
     # sops-nix module to handle encrypted secrets
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    # React/Next.js agent skills for Pi (vercel-labs/agent-skills)
+    vercel-labs-agent-skills = {
+      url = "github:vercel-labs/agent-skills/64484e9a6022c81e3af59f5dcee6fb6d631bf53e";
+      flake = false;
+    };
   };
 
   outputs =
@@ -43,6 +49,7 @@
       nixpkgs,
       nixpkgs-unstable,
       sops-nix,
+      vercel-labs-agent-skills,
       ...
     }:
     let
@@ -56,6 +63,7 @@
           microvm
           nixpkgs
           nixpkgs-unstable
+          vercel-labs-agent-skills
           ;
       };
     in

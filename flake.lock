@@ -98,11 +98,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1774106199,
-        "narHash": "sha256-US5Tda2sKmjrg2lNHQL3jRQ6p96cgfWh3J1QBliQ8Ws=",
+        "lastModified": 1774386573,
+        "narHash": "sha256-4hAV26quOxdC6iyG7kYaZcM3VOskcPUrdCQd/nx8obc=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "6c9a78c09ff4d6c21d0319114873508a6ec01655",
+        "rev": "46db2e09e1d3f113a13c0d7b81e2f221c63b8ce9",
         "type": "github"
       },
       "original": {
@@ -120,7 +120,8 @@
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "sops-nix": "sops-nix"
+        "sops-nix": "sops-nix",
+        "vercel-labs-agent-skills": "vercel-labs-agent-skills"
       }
     },
     "sops-nix": {
@@ -157,6 +158,23 @@
       "original": {
         "type": "git",
         "url": "https://spectrum-os.org/git/spectrum"
+      }
+    },
+    "vercel-labs-agent-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1774393204,
+        "narHash": "sha256-rMkx74IAnW55otJefKke8GRYL4Py0KxoeASJwMqOmFY=",
+        "owner": "vercel-labs",
+        "repo": "agent-skills",
+        "rev": "64484e9a6022c81e3af59f5dcee6fb6d631bf53e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vercel-labs",
+        "repo": "agent-skills",
+        "rev": "64484e9a6022c81e3af59f5dcee6fb6d631bf53e",
+        "type": "github"
       }
     }
   },
