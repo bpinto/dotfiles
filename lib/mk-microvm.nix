@@ -22,32 +22,21 @@ name:
 nixpkgs.lib.nixosSystem {
   system = "aarch64-linux";
   specialArgs = {
+    inherit
+      dgalarza-claude-code-workflows
+      nixvim
+      vercel-labs-agent-skills
+      ;
     # The NixOS guest is aarch64-linux but the runner (vfkit) executes
     # on the macOS host, so it needs aarch64-darwin packages.
     hostPkgs = nixpkgs.legacyPackages.aarch64-darwin;
+    unstablePkgs = nixpkgs-unstable.legacyPackages.aarch64-linux;
     vmName = name;
   };
 
   modules = [
     microvm.nixosModules.microvm
     home-manager.nixosModules.home-manager
-    { nixpkgs.config.allowUnfree = true; }
-    {
-      home-manager = {
-        useGlobalPkgs = true;
-        useUserPackages = true;
-        extraSpecialArgs = {
-          inherit dgalarza-claude-code-workflows vercel-labs-agent-skills;
-          unstablePkgs = nixpkgs-unstable.legacyPackages.aarch64-linux;
-        };
-        sharedModules = [
-          nixvim.homeModules.nixvim
-          ../modules/shared-home-manager.nix
-          { isMicrovm = true; }
-        ];
-        users.dev = import ../users/dev/home-manager.nix;
-      };
-    }
     ../machines/microvms/${name}.nix
   ];
 }

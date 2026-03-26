@@ -6,9 +6,13 @@
 # Each project module supplies its own shares, port forwards, packages, etc.
 {
   config,
+  dgalarza-claude-code-workflows,
   hostPkgs,
   lib,
+  nixvim,
   pkgs,
+  unstablePkgs,
+  vercel-labs-agent-skills,
   vmName,
   ...
 }:
@@ -75,7 +79,22 @@
         fi
       '';
 
+      home-manager = {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+        extraSpecialArgs = {
+          inherit dgalarza-claude-code-workflows vercel-labs-agent-skills unstablePkgs;
+        };
+        sharedModules = [
+          nixvim.homeModules.nixvim
+          ../modules/shared-home-manager.nix
+          { isMicrovm = true; }
+        ];
+        users.dev = import ../users/dev/home-manager.nix;
+      };
+
       nix.settings.experimental-features = "nix-command flakes";
+      nixpkgs.config.allowUnfree = true;
 
       system.stateVersion = "25.11";
 
