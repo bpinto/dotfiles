@@ -22,15 +22,18 @@
     # An unstable nixpkgs input for a few bleeding-edge packages.
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # NixVim — configure Neovim entirely in Nix
+    nixvim.url = "github:nix-community/nixvim/nixos-25.11";
+
+    # sops-nix module to handle encrypted secrets
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
     # Conventional commits skill for Pi (dgalarza/claude-code-workflows)
     dgalarza-claude-code-workflows = {
       url = "github:dgalarza/claude-code-workflows/0bc28b28f949dc448753913e6f69479444f2241f";
       flake = false;
     };
-
-    # sops-nix module to handle encrypted secrets
-    sops-nix.url = "github:Mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     # React/Next.js agent skills for Pi (vercel-labs/agent-skills)
     vercel-labs-agent-skills = {
@@ -48,6 +51,7 @@
       nix-darwin,
       nixpkgs,
       nixpkgs-unstable,
+      nixvim,
       sops-nix,
       vercel-labs-agent-skills,
       ...
@@ -63,6 +67,7 @@
           microvm
           nixpkgs
           nixpkgs-unstable
+          nixvim
           vercel-labs-agent-skills
           ;
       };
@@ -88,7 +93,7 @@
 
       darwinConfigurations.macos-aarch64 = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
-        specialArgs = { inherit home-manager sops-nix; };
+        specialArgs = { inherit home-manager nixvim sops-nix; };
         modules = [
           ./machines/macos-aarch64.nix
         ];

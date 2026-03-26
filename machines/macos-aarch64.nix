@@ -1,5 +1,6 @@
 {
   home-manager,
+  nixvim,
   pkgs,
   sops-nix,
   ...
@@ -24,6 +25,7 @@
 
     home-manager = {
       sharedModules = [
+        nixvim.homeModules.nixvim
         sops-nix.homeManagerModules.sops
         ../modules/shared-home-manager.nix
       ];

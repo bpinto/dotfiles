@@ -22,7 +22,7 @@ in
     ../../modules/bat.nix
     ../../modules/direnv.nix
     ../../modules/git.nix
-    ../../modules/neovim.nix
+    ../../modules/neovim
     ../../modules/nushell.nix
     ../../modules/ssh.nix
     ../../modules/theme.nix
@@ -45,7 +45,6 @@ in
     age
     awscli2
     aws-vault
-    ctags-lsp
     discord
     fish
     gh
@@ -56,13 +55,11 @@ in
     kubectx
     nodejs
     orbstack
-    prettierd
     ripgrep
     shiori
     slack
     sops
     ssm-session-manager-plugin
-    stylua
     tailscale
     ticker
     tree

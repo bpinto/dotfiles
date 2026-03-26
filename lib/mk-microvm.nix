@@ -14,6 +14,7 @@
   microvm,
   home-manager,
   nixpkgs-unstable,
+  nixvim,
   vercel-labs-agent-skills,
 }:
 
@@ -26,9 +27,11 @@ nixpkgs.lib.nixosSystem {
     hostPkgs = nixpkgs.legacyPackages.aarch64-darwin;
     vmName = name;
   };
+
   modules = [
     microvm.nixosModules.microvm
     home-manager.nixosModules.home-manager
+    { nixpkgs.config.allowUnfree = true; }
     {
       home-manager = {
         useGlobalPkgs = true;
@@ -38,6 +41,7 @@ nixpkgs.lib.nixosSystem {
           unstablePkgs = nixpkgs-unstable.legacyPackages.aarch64-linux;
         };
         sharedModules = [
+          nixvim.homeModules.nixvim
           ../modules/shared-home-manager.nix
           { isMicrovm = true; }
         ];
