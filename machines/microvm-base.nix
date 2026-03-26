@@ -227,11 +227,11 @@
       };
 
       # ── Key sync ──────────────────────────────────────────────────────────
-      # Copy SSH and GPG keys from host mount to the guest with correct
+      # Copy SSH keys from host mount to the guest with correct
       # permissions. Runs as a systemd oneshot after the virtiofs mount is
-      # available (activation scripts run too early — before mounts).
+      # available (activation scripts run too early - before mounts).
       systemd.services.key-sync = {
-        description = "Sync SSH and GPG keys from host mount";
+        description = "Sync SSH keys from host mount";
         after = [ "mnt-keys.mount" ];
         requires = [ "mnt-keys.mount" ];
         wantedBy = [ "multi-user.target" ];
@@ -248,26 +248,6 @@
             chmod 700 ${guestUser.home}/.ssh
             chmod 600 ${guestUser.home}/.ssh/* 2>/dev/null || true
             chmod 644 ${guestUser.home}/.ssh/*.pub 2>/dev/null || true
-          fi
-
-          # GPG keys (/mnt/keys/gpg → ~/.gnupg)
-          # Only the keyring, trust database and private keys are needed.
-          if [ -d /mnt/keys/gpg ]; then
-            mkdir -p ${guestUser.home}/.gnupg
-            chmod 700 ${guestUser.home}/.gnupg
-
-            [ -f /mnt/keys/gpg/pubring.kbx ] && cp /mnt/keys/gpg/pubring.kbx ${guestUser.home}/.gnupg/
-            [ -f /mnt/keys/gpg/trustdb.gpg ] && cp /mnt/keys/gpg/trustdb.gpg ${guestUser.home}/.gnupg/
-
-            if [ -d /mnt/keys/gpg/private-keys-v1.d ]; then
-              cp -r /mnt/keys/gpg/private-keys-v1.d ${guestUser.home}/.gnupg/
-              chmod 700 ${guestUser.home}/.gnupg/private-keys-v1.d
-              chmod 600 ${guestUser.home}/.gnupg/private-keys-v1.d/* 2>/dev/null || true
-            fi
-
-            chown -R ${guestUser.name}:users ${guestUser.home}/.gnupg
-            chmod 600 ${guestUser.home}/.gnupg/pubring.kbx 2>/dev/null || true
-            chmod 600 ${guestUser.home}/.gnupg/trustdb.gpg 2>/dev/null || true
           fi
         '';
       };

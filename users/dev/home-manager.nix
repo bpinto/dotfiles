@@ -3,11 +3,6 @@
 # Minimal setup: neovim and essential tools.
 # No graphical environment.
 {
-  config,
-  ...
-}:
-
-{
   imports = [
     ../../modules/bat.nix
     ../../modules/direnv.nix

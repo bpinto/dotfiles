@@ -4,7 +4,7 @@
   helper     = osxkeychain
   name       = Bruno Pinto
   email      = bruno@bpinto.com
-  signingkey = C1F1916E1D072A0D
+  signingkey = ~/.ssh/git_sign.pub
 [alias]
   ctags = !.git/hooks/ctags
   ds = diff --staged
@@ -59,7 +59,7 @@
   gpgsign  = true
   template = ~/.gitmessage
 [gpg]
-  program = gpg
+  format = ssh
 [core]
   editor       = nvim
   excludesfile = ~/.gitignore

@@ -56,7 +56,6 @@ in
     kubectx
     nodejs
     orbstack
-    pinentry_mac
     prettierd
     ripgrep
     shiori

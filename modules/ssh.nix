@@ -18,7 +18,7 @@
       "github.com" = {
         identityFile = "~/.ssh/github";
         extraOptions = {
-          AddKeysToAgent = "yes";
+          AddKeysToAgent = "no";
           UseKeychain = "yes";
         };
       };
