@@ -12,9 +12,18 @@ let
   # ~/.pi/agent/skills so we can keep a vercel- prefix locally while
   # the upstream repo uses prefix-less directories.
   enabledSkills = [
-    { src = "composition-patterns"; dst = "vercel-composition-patterns"; }
-    { src = "react-best-practices"; dst = "vercel-react-best-practices"; }
-    { src = "web-design-guidelines"; dst = "web-design-guidelines"; }
+    {
+      src = "composition-patterns";
+      dst = "vercel-composition-patterns";
+    }
+    {
+      src = "react-best-practices";
+      dst = "vercel-react-best-practices";
+    }
+    {
+      src = "web-design-guidelines";
+      dst = "web-design-guidelines";
+    }
   ];
 
   mkSkillEntry = skill: {

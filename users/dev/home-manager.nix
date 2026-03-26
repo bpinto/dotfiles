@@ -8,7 +8,7 @@
     ../../modules/bat.nix
     ../../modules/direnv.nix
     ../../modules/git.nix
-    ../../modules/neovim.nix
+    ../../modules/neovim
     ../../modules/nushell.nix
   ];
 
