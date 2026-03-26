@@ -16,7 +16,7 @@ $env.config.hooks.env_change.PWD ++= [{||
   direnv export json | from json | default {} | load-env
 }]
 
-# ── Docker compose helpers ────────────────────────────────────────────
+# ── Docker compose helpers ───────────────────────────────────────────
 # Shorthand for docker compose.
 def --wrapped dk [...rest] {
   docker compose ...$rest
@@ -34,6 +34,10 @@ def --wrapped docker-run [cmd: string, ...rest] {
   let service = ($services | get -o $cmd | default ($services | get -o "*"))
   if $service != null { docker compose run --rm $service $cmd ...$rest } else { ^$cmd ...$rest }
 }
+
+# Provide a small "command" helper (like fish's) to run the underlying
+# external binary undoing the commands wrapped with "docker-run".
+def --wrapped command [cmd: string, ...rest] { ^$cmd ...$rest }
 
 # ── Dockerized command wrappers ───────────────────────────────────────
 # Each command delegates to docker-run, which checks DOCKER_SERVICES
