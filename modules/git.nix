@@ -37,4 +37,5 @@ in
   home.file.".git_template".source = mkSymlink "${dotfiles}/.git_template";
   home.file.".gitmessage".source = mkSymlink "${dotfiles}/.gitmessage";
   home.file.".gitconfig".source = mkSymlink "${dotfiles}/.gitconfig";
+
 }

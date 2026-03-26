@@ -9,6 +9,7 @@
 #   mkMicroVM = import ./lib/mk-microvm.nix { inherit nixpkgs microvm home-manager; };
 #   nixosConfigurations.dotfiles-vm = mkMicroVM "dotfiles";
 {
+  dgalarza-claude-code-workflows,
   nixpkgs,
   microvm,
   home-manager,
@@ -23,10 +24,6 @@ nixpkgs.lib.nixosSystem {
     # on the macOS host, so it needs aarch64-darwin packages.
     hostPkgs = nixpkgs.legacyPackages.aarch64-darwin;
     vmName = name;
-
-    # Provide a package set from nixpkgs-unstable to modules that need
-    # individual unstable packages (e.g., pi-coding-agent).
-    unstablePkgs = nixpkgs-unstable.legacyPackages.${"aarch64-linux"};
   };
   modules = [
     microvm.nixosModules.microvm
@@ -35,6 +32,10 @@ nixpkgs.lib.nixosSystem {
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
+        extraSpecialArgs = {
+          inherit dgalarza-claude-code-workflows;
+          unstablePkgs = nixpkgs-unstable.legacyPackages.aarch64-linux;
+        };
         sharedModules = [
           ../modules/shared-home-manager.nix
           { isMicrovm = true; }

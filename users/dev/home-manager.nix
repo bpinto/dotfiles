@@ -2,6 +2,7 @@
 #
 # Minimal setup: neovim and essential tools.
 # No graphical environment.
+{ unstablePkgs, ... }:
 {
   imports = [
     ../../modules/bat.nix
@@ -9,8 +10,9 @@
     ../../modules/git.nix
     ../../modules/neovim.nix
     ../../modules/nushell.nix
-    ../../modules/pi.nix
   ];
+
+  home.packages = [ unstablePkgs.pi-coding-agent ];
 
   home.stateVersion = "25.11";
 

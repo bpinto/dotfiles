@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "dgalarza-claude-code-workflows": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1773975876,
+        "narHash": "sha256-gAizRXiApYihGZxku5xqC6iATK5gYTnzrOwjN5VbpCA=",
+        "owner": "dgalarza",
+        "repo": "claude-code-workflows",
+        "rev": "0bc28b28f949dc448753913e6f69479444f2241f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dgalarza",
+        "repo": "claude-code-workflows",
+        "rev": "0bc28b28f949dc448753913e6f69479444f2241f",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -97,6 +114,7 @@
     },
     "root": {
       "inputs": {
+        "dgalarza-claude-code-workflows": "dgalarza-claude-code-workflows",
         "home-manager": "home-manager",
         "microvm": "microvm",
         "nix-darwin": "nix-darwin",

@@ -22,6 +22,12 @@
     # An unstable nixpkgs input for a few bleeding-edge packages.
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # Conventional commits skill for Pi (dgalarza/claude-code-workflows)
+    dgalarza-claude-code-workflows = {
+      url = "github:dgalarza/claude-code-workflows/0bc28b28f949dc448753913e6f69479444f2241f";
+      flake = false;
+    };
+
     # sops-nix module to handle encrypted secrets
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
@@ -30,6 +36,7 @@
   outputs =
     {
       self,
+      dgalarza-claude-code-workflows,
       home-manager,
       microvm,
       nix-darwin,
@@ -44,6 +51,7 @@
 
       mkMicroVM = import ./lib/mk-microvm.nix {
         inherit
+          dgalarza-claude-code-workflows
           home-manager
           microvm
           nixpkgs

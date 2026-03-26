@@ -16,9 +16,3 @@ users/shared/dotfiles/.ssh/*
 users/shared/dotfiles/.config/environment.d/
 users/shared/dotfiles/.config/fontconfig/
 users/shared/dotfiles/.config/systemd/
-
-# Pi agent
-users/shared/dotfiles/.pi/agent/auth.json
-users/shared/dotfiles/.pi/agent/settings.json
-users/shared/dotfiles/.pi/agent/sessions/
-users/shared/dotfiles/.pi/agent/bin/

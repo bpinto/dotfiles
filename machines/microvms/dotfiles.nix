@@ -14,19 +14,24 @@ in
     ../microvm-base.nix
     ../../modules/microvm/dotfiles.nix
     ../../modules/microvm/github.nix
-    ../../modules/microvm/pi.nix
   ];
 
   defaultSshDirectory = "${guestHome}/src/dotfiles";
 
   # Starship directory color — yellow
   home-manager.users.dev = {
+    imports = [
+      ../../modules/skills/conventional-commits.nix
+    ];
+
+    # Starship directory color — light amber
     directoryColor = "#e0af68";
   };
 
   # Static IP so the macOS host can reach the VM at a known address
   staticIpAddress = "192.168.64.10";
 
+  # ── VM resources ────────────────────────────────────────────────────
   microvm.shares = [
     {
       # Full dotfiles repo for development in this VM.
