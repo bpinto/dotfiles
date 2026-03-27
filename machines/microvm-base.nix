@@ -70,7 +70,7 @@
       environment.interactiveShellInit = ''
         # Launch nushell for interactive sessions.
         # Bash remains the login shell for POSIX compatibility.
-        if [[ $- == *i* && -z "$IN_NUSHELL" ]]; then
+        if [[ $- == *i* && -z "$IN_NUSHELL" && "$(id -u)" -ne 0 ]]; then
           exec env IN_NUSHELL=1 nu --login
         fi
       '';
