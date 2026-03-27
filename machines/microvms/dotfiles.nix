@@ -18,7 +18,6 @@ in
 
   defaultSshDirectory = "${guestHome}/src/dotfiles";
 
-  # Starship directory color — yellow
   home-manager.users.dev = {
     imports = [
       ../../modules/skills/conventional-commits.nix
