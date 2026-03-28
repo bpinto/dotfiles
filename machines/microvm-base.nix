@@ -268,6 +268,15 @@
             chmod 600 ${guestUser.home}/.ssh/* 2>/dev/null || true
             chmod 644 ${guestUser.home}/.ssh/*.pub 2>/dev/null || true
           fi
+
+          # Age keys (/mnt/keys/age → ~/.config/sops/age)
+          if [ -d /mnt/keys/age ] && ls /mnt/keys/age/* >/dev/null 2>&1; then
+            mkdir -p ${guestUser.home}/.config/sops/age
+            cp /mnt/keys/age/* ${guestUser.home}/.config/sops/age/
+            chown -R ${guestUser.name}:users ${guestUser.home}/.config/sops/age
+            chmod 700 ${guestUser.home}/.config/sops/age
+            chmod 600 ${guestUser.home}/.config/sops/age/* 2>/dev/null || true
+          fi
         '';
       };
     };
