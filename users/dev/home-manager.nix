@@ -10,6 +10,7 @@
     ../../modules/git.nix
     ../../modules/neovim
     ../../modules/nushell.nix
+    ../../modules/ssh.nix
   ];
 
   home.packages = [ unstablePkgs.pi-coding-agent ];

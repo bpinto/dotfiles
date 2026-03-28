@@ -13,7 +13,6 @@ in
   imports = [
     ../microvm-base.nix
     ../../modules/microvm/dotfiles.nix
-    ../../modules/microvm/github.nix
   ];
 
   defaultSshDirectory = "${guestHome}/src/dotfiles";

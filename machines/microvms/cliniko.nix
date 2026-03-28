@@ -15,7 +15,6 @@ in
     ../../modules/microvm/cliniko-dev.nix
     ../../modules/microvm/docker.nix
     ../../modules/microvm/dotfiles.nix
-    ../../modules/microvm/github.nix
   ];
 
   defaultSshDirectory = "${guestHome}/src/cliniko";

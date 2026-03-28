@@ -25,6 +25,7 @@ in
     ../../modules/neovim
     ../../modules/nushell.nix
     ../../modules/ssh.nix
+    ../../modules/macos-ssh.nix
     ../../modules/theme.nix
   ];
 
