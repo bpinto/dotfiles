@@ -103,7 +103,7 @@
         hypervisor = "vfkit";
 
         vcpu = lib.mkDefault 2;
-        mem = lib.mkDefault 2048;
+        mem = lib.mkDefault 4096;
 
         # Control socket for graceful shutdown.
         socket = "control.socket";

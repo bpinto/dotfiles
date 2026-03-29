@@ -30,7 +30,6 @@ in
   staticIpAddress = "192.168.64.10";
 
   # ── VM resources ────────────────────────────────────────────────────
-  microvm.mem = 4096; # 4GB
 
   microvm.shares = [
     {
