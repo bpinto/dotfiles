@@ -68,7 +68,7 @@
     in
     {
       environment.loginShellInit = lib.optionalString (config.defaultSshDirectory != null) ''
-        cd ${config.defaultSshDirectory}
+        if [ -d ${config.defaultSshDirectory} ]; then cd ${config.defaultSshDirectory}; fi
       '';
 
       environment.interactiveShellInit = ''
