@@ -106,6 +106,7 @@
       nixosConfigurations.cliniko-vm = mkMicroVM "cliniko";
       nixosConfigurations.dotfiles-vm = mkMicroVM "dotfiles";
       nixosConfigurations.homelab-vm = mkMicroVM "homelab";
+      nixosConfigurations.predbat-vm = mkMicroVM "predbat";
 
       packages.aarch64-darwin.cliniko-vm =
         self.nixosConfigurations.cliniko-vm.config.microvm.declaredRunner;
@@ -113,5 +114,7 @@
         self.nixosConfigurations.dotfiles-vm.config.microvm.declaredRunner;
       packages.aarch64-darwin.homelab-vm =
         self.nixosConfigurations.homelab-vm.config.microvm.declaredRunner;
+      packages.aarch64-darwin.predbat-vm =
+        self.nixosConfigurations.predbat-vm.config.microvm.declaredRunner;
     };
 }
