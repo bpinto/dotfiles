@@ -32,9 +32,9 @@ in
 
   # SOPS
   sops = {
-    age.keyFile = "${home}/.ssh/nixos_vm.age";
+    age.keyFile = "${home}/.config/sops/age/keys.txt";
     age.sshKeyPaths = [ ];
-    defaultSopsFile = ./../../secrets/nixos.yaml;
+    defaultSopsFile = ./../../secrets/macos.yaml;
   };
 
   #---------------------------------------------------------------------

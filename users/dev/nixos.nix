@@ -9,7 +9,7 @@ in
     home = "/home/dev";
     extraGroups = [ "wheel" ];
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKd7PMzAWjdjMW68JDlADapXcf8hgPqBEgV7h3Hq7n4b Bruno Pinto"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQ6Phrt2tHAVfav8mVSgeg8R+1lqbzC7kaUGOSYo4S/ bruno@bpinto.com"
     ];
   };
 

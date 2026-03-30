@@ -24,7 +24,6 @@ in
   sops = {
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
     age.sshKeyPaths = [ ];
-    defaultSopsFile = ../secrets/nixos.yaml;
 
     secrets.ssh_git_sign_passphrase = { };
   };

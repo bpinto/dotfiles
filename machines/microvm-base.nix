@@ -99,7 +99,10 @@
           sops-nix.homeManagerModules.sops
           { isMicrovm = true; }
         ];
-        users.dev = import ../users/dev/home-manager.nix;
+        users.dev = {
+          imports = [ ../users/dev/home-manager.nix ];
+          sops.defaultSopsFile = ../secrets/${vmName}.yaml;
+        };
       };
 
       nix.settings.experimental-features = "nix-command flakes";

@@ -1,8 +1,26 @@
 keys:
-  # Generate with: nix-shell -p ssh-to-age --run 'ssh-to-age < ~/.ssh/nixos_vm.pub'
-  - &nixos_vm age1sfp6tz4f22tdze8q3auudfsd2vja7uhk3l734jm699vh0229kf7shfhug5
+  - &id_ed25519 age1gyg5fqhp9weka86j5wga0atxldwrlpumhu60hkd9hlcnw6achftslyhdyq
+  - &vm_cliniko age1stzag7q5hr6t0n7lwsyxdpap67vsjtnnmhqmtk08jes3fg2vuqrsfh0xpj
+  - &vm_dotfiles age1a5xdp2x76av5sdecvj28d0kmf3pat0v05rl506043mqrjksq945sehxqfa
+  - &vm_homelab age1yahuwf05mv5wsvkdjy2s3algjqdcmhcnufq4g7sa0e4frp0xnydqcwqj2h
+  - &vm_predbat age1jgyg6wszpckcxcvz2jz6mrf2c72y3jn7uykdzemwxkmeu9vwfpasrqs4x4
 creation_rules:
-  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+  - path_regex: secrets/macos\.yaml$
     key_groups:
-      - age:
-          - *nixos_vm
+      - age: [*id_ed25519]
+
+  - path_regex: secrets/cliniko\.yaml$
+    key_groups:
+      - age: [*id_ed25519, *vm_cliniko]
+
+  - path_regex: secrets/dotfiles\.yaml$
+    key_groups:
+      - age: [*id_ed25519, *vm_dotfiles]
+
+  - path_regex: secrets/homelab\.yaml$
+    key_groups:
+      - age: [*id_ed25519, *vm_homelab]
+
+  - path_regex: secrets/predbat\.yaml$
+    key_groups:
+      - age: [*id_ed25519, *vm_predbat]

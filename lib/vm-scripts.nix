@@ -38,7 +38,7 @@ let
   '';
 
   # Common SSH options for connecting to microVMs.
-  sshOpts = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -i ~/.ssh/nixos_vm";
+  sshOpts = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -i ~/.ssh/id_ed25519";
 
   runtimeInputs = with pkgs; [
     findutils
