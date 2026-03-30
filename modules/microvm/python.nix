@@ -49,10 +49,9 @@
 
     environment.systemPackages = [ pkgs.uv ];
 
-    programs.nix-ld.libraries =
-      [
-        pkgs.stdenv.cc.cc # libstdc++
-      ]
-      ++ config.python.nativeLibraries;
+    programs.nix-ld.libraries = [
+      pkgs.stdenv.cc.cc # libstdc++
+    ]
+    ++ config.python.nativeLibraries;
   };
 }

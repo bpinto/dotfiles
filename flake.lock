@@ -250,6 +250,7 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixvim": "nixvim",
         "sops-nix": "sops-nix",
+        "spnngl-pi-ext": "spnngl-pi-ext",
         "vercel-labs-agent-skills": "vercel-labs-agent-skills"
       }
     },
@@ -287,6 +288,23 @@
       "original": {
         "type": "git",
         "url": "https://spectrum-os.org/git/spectrum"
+      }
+    },
+    "spnngl-pi-ext": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1772403520,
+        "narHash": "sha256-3MWKLaGE5lFM4ZH1yRXyfr0KNRZHaoI1SuH6kPf7BZg=",
+        "owner": "spnngl",
+        "repo": "pi-ext",
+        "rev": "505c0f9a9c0ebc528d11466a7f779c2b99f02de7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "spnngl",
+        "repo": "pi-ext",
+        "rev": "505c0f9a9c0ebc528d11466a7f779c2b99f02de7",
+        "type": "github"
       }
     },
     "systems": {

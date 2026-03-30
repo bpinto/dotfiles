@@ -11,6 +11,7 @@
   lib,
   nixvim,
   pkgs,
+  spnngl-pi-ext,
   unstablePkgs,
   vercel-labs-agent-skills,
   vmName,
@@ -83,7 +84,12 @@
         useGlobalPkgs = true;
         useUserPackages = true;
         extraSpecialArgs = {
-          inherit dgalarza-claude-code-workflows vercel-labs-agent-skills unstablePkgs;
+          inherit
+            dgalarza-claude-code-workflows
+            spnngl-pi-ext
+            unstablePkgs
+            vercel-labs-agent-skills
+            ;
         };
         sharedModules = [
           nixvim.homeModules.nixvim

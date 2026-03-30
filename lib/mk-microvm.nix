@@ -15,6 +15,7 @@
   home-manager,
   nixpkgs-unstable,
   nixvim,
+  spnngl-pi-ext,
   vercel-labs-agent-skills,
 }:
 
@@ -25,6 +26,7 @@ nixpkgs.lib.nixosSystem {
     inherit
       dgalarza-claude-code-workflows
       nixvim
+      spnngl-pi-ext
       vercel-labs-agent-skills
       ;
     # The NixOS guest is aarch64-linux but the runner (vfkit) executes

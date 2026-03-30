@@ -35,6 +35,12 @@
       flake = false;
     };
 
+    # Nushell extension for Pi (spnngl/pi-ext)
+    spnngl-pi-ext = {
+      url = "github:spnngl/pi-ext/505c0f9a9c0ebc528d11466a7f779c2b99f02de7";
+      flake = false;
+    };
+
     # React/Next.js agent skills for Pi (vercel-labs/agent-skills)
     vercel-labs-agent-skills = {
       url = "github:vercel-labs/agent-skills/64484e9a6022c81e3af59f5dcee6fb6d631bf53e";
@@ -53,6 +59,7 @@
       nixpkgs-unstable,
       nixvim,
       sops-nix,
+      spnngl-pi-ext,
       vercel-labs-agent-skills,
       ...
     }:
@@ -68,6 +75,7 @@
           nixpkgs
           nixpkgs-unstable
           nixvim
+          spnngl-pi-ext
           vercel-labs-agent-skills
           ;
       };

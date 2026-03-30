@@ -22,8 +22,7 @@ in
   home-manager.users.dev = {
     imports = [
       ../../modules/cliniko.nix
-      ../../modules/skills/conventional-commits.nix
-      ../../modules/skills/react.nix
+      ../../modules/pi.nix
     ];
 
     # Starship directory color — orange

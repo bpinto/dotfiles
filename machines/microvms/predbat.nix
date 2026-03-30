@@ -23,7 +23,7 @@ in
 
   home-manager.users.dev = {
     imports = [
-      ../../modules/skills/conventional-commits.nix
+      ../../modules/pi.nix
     ];
 
     # Starship directory color — green
