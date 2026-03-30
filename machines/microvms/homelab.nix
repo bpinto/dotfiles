@@ -3,8 +3,6 @@
 
 {
   config,
-  lib,
-  pkgs,
   ...
 }:
 
@@ -30,10 +28,6 @@ in
     # Starship directory color — cyan
     directoryColor = "#73daca";
   };
-
-  environment.systemPackages = with pkgs; [
-    sops
-  ];
 
   # Static IP so the macOS host can reach the VM at a known address
   staticIpAddress = "192.168.64.12";

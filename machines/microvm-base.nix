@@ -11,6 +11,7 @@
   lib,
   nixvim,
   pkgs,
+  sops-nix,
   spnngl-pi-ext,
   unstablePkgs,
   vercel-labs-agent-skills,
@@ -86,14 +87,16 @@
         extraSpecialArgs = {
           inherit
             dgalarza-claude-code-workflows
+            sops-nix
             spnngl-pi-ext
             unstablePkgs
             vercel-labs-agent-skills
             ;
         };
         sharedModules = [
-          nixvim.homeModules.nixvim
           ../modules/shared-home-manager.nix
+          nixvim.homeModules.nixvim
+          sops-nix.homeManagerModules.sops
           { isMicrovm = true; }
         ];
         users.dev = import ../users/dev/home-manager.nix;

@@ -10,11 +10,12 @@
 #   nixosConfigurations.dotfiles-vm = mkMicroVM "dotfiles";
 {
   dgalarza-claude-code-workflows,
-  nixpkgs,
-  microvm,
   home-manager,
+  microvm,
+  nixpkgs,
   nixpkgs-unstable,
   nixvim,
+  sops-nix,
   spnngl-pi-ext,
   vercel-labs-agent-skills,
 }:
@@ -26,6 +27,7 @@ nixpkgs.lib.nixosSystem {
     inherit
       dgalarza-claude-code-workflows
       nixvim
+      sops-nix
       spnngl-pi-ext
       vercel-labs-agent-skills
       ;

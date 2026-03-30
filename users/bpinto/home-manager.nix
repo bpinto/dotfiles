@@ -23,9 +23,8 @@ in
     ../../modules/direnv.nix
     ../../modules/git.nix
     ../../modules/neovim
-    ../../modules/nushell.nix
-    ../../modules/ssh.nix
     ../../modules/macos-ssh.nix
+    ../../modules/nushell.nix
     ../../modules/theme.nix
   ];
 

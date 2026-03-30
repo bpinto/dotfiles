@@ -1,24 +1,26 @@
-# macOS-specific SSH extensions: Keychain integration and encrypted host
-# config via sops. Import alongside modules/ssh.nix.
+# macOS-specific SSH module: base SSH config + Keychain integration +
+# encrypted host config via sops.
 {
   config,
-  lib,
-  pkgs,
   ...
 }:
 
 {
   programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+
     includes = [
       config.sops.templates."ssh-hosts.conf".path
     ];
 
     matchBlocks = {
       "github.com" = {
-        addKeysToAgent = lib.mkForce "yes";
+        addKeysToAgent = "yes";
         extraOptions = {
           UseKeychain = "yes";
         };
+        identityFile = "~/.ssh/github";
       };
     };
   };

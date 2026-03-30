@@ -75,6 +75,7 @@
           nixpkgs
           nixpkgs-unstable
           nixvim
+          sops-nix
           spnngl-pi-ext
           vercel-labs-agent-skills
           ;
