@@ -35,6 +35,12 @@
       flake = false;
     };
 
+    # Pi extensions from mitsuhiko/agent-stuff
+    mitsuhiko-agent-stuff = {
+      url = "github:mitsuhiko/agent-stuff/80e1e96fa563ffc0c9d60422eac6dc9e67440385";
+      flake = false;
+    };
+
     # Nushell extension for Pi (spnngl/pi-ext)
     spnngl-pi-ext = {
       url = "github:spnngl/pi-ext/505c0f9a9c0ebc528d11466a7f779c2b99f02de7";
@@ -54,6 +60,7 @@
       dgalarza-claude-code-workflows,
       home-manager,
       microvm,
+      mitsuhiko-agent-stuff,
       nix-darwin,
       nixpkgs,
       nixpkgs-unstable,
@@ -72,6 +79,7 @@
           dgalarza-claude-code-workflows
           home-manager
           microvm
+          mitsuhiko-agent-stuff
           nixpkgs
           nixpkgs-unstable
           nixvim

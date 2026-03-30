@@ -9,6 +9,7 @@
   dgalarza-claude-code-workflows,
   hostPkgs,
   lib,
+  mitsuhiko-agent-stuff,
   nixvim,
   pkgs,
   sops-nix,
@@ -87,6 +88,7 @@
         extraSpecialArgs = {
           inherit
             dgalarza-claude-code-workflows
+            mitsuhiko-agent-stuff
             sops-nix
             spnngl-pi-ext
             unstablePkgs

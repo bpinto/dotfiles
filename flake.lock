@@ -126,6 +126,23 @@
         "type": "github"
       }
     },
+    "mitsuhiko-agent-stuff": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1774868285,
+        "narHash": "sha256-JKMqt5ionfF/aBFTSQe9BD49wAErNtEnf3Mnekk3nzk=",
+        "owner": "mitsuhiko",
+        "repo": "agent-stuff",
+        "rev": "80e1e96fa563ffc0c9d60422eac6dc9e67440385",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mitsuhiko",
+        "repo": "agent-stuff",
+        "rev": "80e1e96fa563ffc0c9d60422eac6dc9e67440385",
+        "type": "github"
+      }
+    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -245,6 +262,7 @@
         "dgalarza-claude-code-workflows": "dgalarza-claude-code-workflows",
         "home-manager": "home-manager",
         "microvm": "microvm",
+        "mitsuhiko-agent-stuff": "mitsuhiko-agent-stuff",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",

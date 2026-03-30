@@ -12,6 +12,7 @@
   dgalarza-claude-code-workflows,
   home-manager,
   microvm,
+  mitsuhiko-agent-stuff,
   nixpkgs,
   nixpkgs-unstable,
   nixvim,
@@ -26,6 +27,7 @@ nixpkgs.lib.nixosSystem {
   specialArgs = {
     inherit
       dgalarza-claude-code-workflows
+      mitsuhiko-agent-stuff
       nixvim
       sops-nix
       spnngl-pi-ext

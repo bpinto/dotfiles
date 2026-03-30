@@ -5,6 +5,7 @@
 
 {
   imports = [
+    ./extensions/agent-stuff.nix
     ./extensions/nushell.nix
     ./skills/conventional-commits.nix
     ./skills/react.nix
