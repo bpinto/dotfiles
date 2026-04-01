@@ -122,18 +122,17 @@
         # Control socket for graceful shutdown.
         socket = "control.socket";
 
+        # Mount /nix/store from the VM store disk (read-only).
+        storeOnDisk = true;
+        # Build was failing with default squashfs store type.
+        storeDiskType = "squashfs";
+
         # Writable nix store overlay (tmpfs, ephemeral).
         # Required for home-manager activation and nix-daemon.
         writableStoreOverlay = "/nix/.rw-store";
 
         # Share host's /nix/store into the VM (read-only)
         shares = [
-          {
-            proto = "virtiofs";
-            tag = "ro-store";
-            source = "/nix/store";
-            mountPoint = "/nix/.ro-store";
-          }
           {
             proto = "virtiofs";
             tag = "keys";
@@ -203,18 +202,6 @@
         DefaultTimeoutStopSec = "5s";
       };
 
-      # Fix for microvm shutdown hang (issue #170):
-      # Without this, systemd tries to unmount /nix/store during shutdown,
-      # but umount lives in /nix/store, causing a deadlock.
-      systemd.mounts = [
-        {
-          what = "store";
-          where = "/nix/store";
-          overrideStrategy = "asDropin";
-          unitConfig.DefaultDependencies = false;
-        }
-      ];
-
       # ── Home directories ────────────────────────────────────────────────
       # Bind-mount /var/home → /home so user data lives on the persistent
       # /var volume without a separate volume or mount-ordering issues.
@@ -234,15 +221,6 @@
         ghostty.terminfo
         ripgrep
       ];
-
-      # The host /nix/store is shared from macOS (case-insensitive FS) via
-      # virtiofs, so terminfo dirs get ~nix~case~hack~ suffixes that ncurses
-      # can't find.  Prepend the ghostty terminfo package path directly to
-      # TERMINFO_DIRS so ncurses finds xterm-ghostty without going through
-      # the merged profile (where x/ becomes x~nix~case~hack~1/).
-      environment.extraInit = ''
-        export TERMINFO_DIRS="${pkgs.ghostty.terminfo}/share/terminfo''${TERMINFO_DIRS:+:$TERMINFO_DIRS}"
-      '';
 
       # ── Services ────────────────────────────────────────────────────────
       services.openssh = {
