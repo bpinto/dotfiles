@@ -48,6 +48,7 @@ in
         tag = "keys";
         source = "${hostHome}/microvm/${vmName}/keys";
         mountPoint = "/mnt/keys";
+        readOnly = true;
       }
     ];
 
@@ -70,13 +71,9 @@ in
         mac =
           let
             hash = builtins.hashString "sha256" vmName;
-            # Take 4 bytes from the hash for the last 4 octets
-            b3 = builtins.substring 0 2 hash;
-            b4 = builtins.substring 2 2 hash;
-            b5 = builtins.substring 4 2 hash;
-            b6 = builtins.substring 6 2 hash;
+            byte = offset: builtins.substring (offset * 2) 2 hash;
           in
-          "02:00:${b3}:${b4}:${b5}:${b6}";
+          "02:00:${byte 0}:${byte 1}:${byte 2}:${byte 3}";
       }
     ];
 

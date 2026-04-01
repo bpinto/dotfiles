@@ -41,7 +41,31 @@
     };
 
     # ── Users ────────────────────────────────────────────────────────────
-    users.users.root.password = "";
-    security.sudo.wheelNeedsPassword = false;
+    users.users.root.hashedPassword = "$6$oE3LIeLA9DVnhvtg$OAX116gGGGUGk8ZpVa16QB5ArSwLktkWhk/MHP6xayx6qAwRP56lxnMkUPOa2xFu6u3N88bnrGN6Z1P0qNF/y1";
+
+    # ── Sudo ─────────────────────────────────────────────────────────────
+    # No blanket root access — dev is not in wheel. Grant only the
+    # specific commands that need elevated privileges. This prevents
+    # the guest from modifying nftables rules that restrict host access.
+    security.sudo = {
+      wheelNeedsPassword = false;
+      extraRules = [
+        {
+          users = [ "dev" ];
+          commands = [
+            # Allow systemctl for service management (e.g. restarting docker).
+            {
+              command = "/run/current-system/sw/bin/systemctl";
+              options = [ "NOPASSWD" ];
+            }
+            # Allow journalctl for log inspection.
+            {
+              command = "/run/current-system/sw/bin/journalctl";
+              options = [ "NOPASSWD" ];
+            }
+          ];
+        }
+      ];
+    };
   };
 }

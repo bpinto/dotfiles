@@ -38,7 +38,9 @@ let
   '';
 
   # Common SSH options for connecting to microVMs.
-  sshOpts = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -i ~/.ssh/id_ed25519";
+  # accept-new: auto-accept the host key on first connect, reject if it
+  # changes later (TOFU).
+  sshOpts = "-o StrictHostKeyChecking=accept-new -o LogLevel=ERROR -i ~/.ssh/id_ed25519";
 
   runtimeInputs = with pkgs; [
     findutils

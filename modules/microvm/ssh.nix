@@ -7,7 +7,6 @@ in
 {
   services.openssh = {
     enable = true;
-    settings.PermitRootLogin = "yes";
 
     # Store host keys under /var so they persist across reboots
     # (the root filesystem is ephemeral, but /var is a persistent volume)
@@ -17,6 +16,9 @@ in
         type = "ed25519";
       }
     ];
+
+    # SSH via dev user only, no root login
+    settings.PermitRootLogin = "no";
   };
 
   # Copy SSH keys from host mount to the guest with correct
