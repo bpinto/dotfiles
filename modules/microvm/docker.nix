@@ -3,6 +3,11 @@
 { pkgs, ... }:
 
 {
+  environment.systemPackages = with pkgs; [
+    docker-buildx
+    docker-compose
+  ];
+
   # Add dev user to docker group so they can run docker without sudo
   users.users.dev.extraGroups = [ "docker" ];
 
@@ -23,12 +28,6 @@
       ];
     };
   };
-
-  # ── Packages ──────────────────────────────────────────────────────────
-  environment.systemPackages = with pkgs; [
-    docker-buildx
-    docker-compose
-  ];
 
   # ── BuildKit ──────────────────────────────────────────────────────────
   # Allow BuildKit to use SSH (for private repo access in builds)

@@ -59,10 +59,10 @@ in
         askpass_script="$(${lib.getExe' pkgs.coreutils "mktemp"})"
         trap '${lib.getExe' pkgs.coreutils "rm"} -f "$askpass_script"' EXIT
 
-        ${lib.getExe' pkgs.coreutils "cat"} > "$askpass_script" <<'EOF'
-#!${pkgs.runtimeShell}
-${lib.getExe' pkgs.coreutils "cat"} "${config.sops.secrets.ssh_git_sign_passphrase.path}"
-EOF
+        ${lib.getExe' pkgs.coreutils "cat"} > "$askpass_script" <<ASKPASS
+        #!${pkgs.runtimeShell}
+        ${lib.getExe' pkgs.coreutils "cat"} "${config.sops.secrets.ssh_git_sign_passphrase.path}"
+        ASKPASS
         ${lib.getExe' pkgs.coreutils "chmod"} 700 "$askpass_script"
 
         SSH_ASKPASS="$askpass_script" \
