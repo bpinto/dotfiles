@@ -10,6 +10,7 @@
     ../modules/microvm/networking.nix
     ../modules/microvm/shell.nix
     ../modules/microvm/ssh.nix
+    ../modules/microvm/virtiofs-store.nix
     ../users/dev/nixos.nix
   ];
 

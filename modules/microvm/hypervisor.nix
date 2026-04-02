@@ -33,9 +33,9 @@ in
     socket = "control.socket";
 
     # Mount /nix/store from the VM store disk (read-only).
-    storeOnDisk = true;
+    storeOnDisk = lib.mkDefault true;
     # Build was failing with default erofs store type.
-    storeDiskType = "squashfs";
+    storeDiskType = lib.mkIf config.microvm.storeOnDisk "squashfs";
 
     # Writable nix store overlay (tmpfs, ephemeral).
     # Required for home-manager activation and nix-daemon.

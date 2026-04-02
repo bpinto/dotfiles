@@ -33,6 +33,7 @@ in
   staticIpAddress = "192.168.64.11";
 
   # ── VM resources ────────────────────────────────────────────────────
+  microvm.storeOnDisk = false;
   microvm.vcpu = 14;
   microvm.mem = 16384; # 16GB
 
