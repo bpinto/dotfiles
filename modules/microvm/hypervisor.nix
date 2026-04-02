@@ -34,7 +34,7 @@ in
 
     # Mount /nix/store from the VM store disk (read-only).
     storeOnDisk = true;
-    # Build was failing with default squashfs store type.
+    # Build was failing with default erofs store type.
     storeDiskType = "squashfs";
 
     # Writable nix store overlay (tmpfs, ephemeral).
