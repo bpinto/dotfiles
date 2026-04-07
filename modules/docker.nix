@@ -36,11 +36,10 @@ let
     "ruby"
   ];
 
-  shimScript = ''
+  mkShim = cmd: ''
     #!/usr/bin/env nu
     def --wrapped main [...rest: string] {
-      let cmd = ($env.CURRENT_FILE | path basename)
-      let shim_dir = ($env.CURRENT_FILE | path dirname)
+      let cmd = "${cmd}"
       let services = ($env.DOCKER_SERVICES? | default '{}' | from json)
       let service = ($services | get -o $cmd | default ($services | get -o '*'))
 
@@ -49,7 +48,9 @@ let
         return
       }
 
-      with-env { PATH: ($env.PATH | where {|p| $p != $shim_dir }) } {
+      # Fall through to the real binary by stripping ~/.local/bin from PATH
+      # so we don't recursively re-invoke ourselves.
+      with-env { PATH: ($env.PATH | where {|p| $p != $"($env.HOME)/.local/bin" }) } {
         ^$cmd ...$rest
       }
     }
@@ -59,11 +60,17 @@ in
   # Make sure ~/.local/bin is on PATH (ahead of system bins) so the shims win.
   home.sessionPath = [ "$HOME/.local/bin" ];
 
-  # Install the shim under each wrapped command name.
-  home.file = lib.genAttrs (map (c: ".local/bin/${c}") wrappedCmds) (_: {
-    text = shimScript;
-    executable = true;
-  });
+  # Install a dedicated shim per wrapped command name.
+  home.file = lib.genAttrs (map (c: ".local/bin/${c}") wrappedCmds) (
+    name:
+    let
+      cmd = baseNameOf name;
+    in
+    {
+      text = mkShim cmd;
+      executable = true;
+    }
+  );
 
   programs.nushell.extraConfig = lib.mkAfter ''
     # Shorthand for docker compose.

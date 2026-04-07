@@ -11,6 +11,14 @@
 
 let
   dotfiles = config.dotfilesPath;
+
+  # home-manager's nushell module doesn't propagate home.sessionPath into
+  # nushell (it only writes a POSIX hm-session-vars.sh that nushell never
+  # sources). Translate the entries ourselves: substitute $HOME at eval time
+  # and prepend them to $env.PATH on every shell start.
+  sessionPathEntries = map (
+    p: lib.replaceStrings [ "$HOME" ] [ config.home.homeDirectory ] p
+  ) config.home.sessionPath;
 in
 {
   home.shell.enableNushellIntegration = true;
@@ -23,9 +31,20 @@ in
     environmentVariables.COLORTERM = "truecolor";
 
     # Source our hand-written config from the shared dotfiles mount.
-    extraConfig = ''
-      source ${dotfiles}/.config/nushell/config.nu
-    '';
+    extraConfig = lib.mkMerge [
+      (lib.mkBefore (
+        lib.optionalString (sessionPathEntries != [ ]) ''
+          $env.PATH = (
+            $env.PATH
+            | prepend [ ${lib.concatMapStringsSep " " (p: "\"${p}\"") sessionPathEntries} ]
+            | uniq
+          )
+        ''
+      ))
+      ''
+        source ${dotfiles}/.config/nushell/config.nu
+      ''
+    ];
   };
 
   programs.starship = {
