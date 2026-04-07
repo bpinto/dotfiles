@@ -1,7 +1,6 @@
 # Cliniko-specific home-manager configuration.
 #
-# Nushell helpers, direnv docker-service mappings, and global gitignore
-# for the Cliniko development workflow.
+# Nushell helpers, and global gitignore for the Cliniko development workflow.
 {
   config,
   lib,
@@ -14,6 +13,8 @@ let
   '';
 in
 {
+  imports = [ ./docker.nix ];
+
   # Console — SSH into cliniko-dev infrastructure via the CLI tool.
   programs.nushell.extraConfig = lib.mkAfter ''
     def --wrapped console [...rest] {
