@@ -63,26 +63,33 @@ in
 
         ${selectFromDefinitions}
         VM_DIR="$HOME/microvm/$VM"
+        VM_NAME="$VM-vm"
+        PIDFILE="$VM_DIR/$VM_NAME.pid"
 
         mkdir -p "$VM_DIR"
 
         if [ -S "$VM_DIR/control.socket" ]; then
-          echo "Error: $VM-vm is already running"
+          echo "Error: $VM_NAME is already running"
           exit 1
         fi
 
-        echo "> Starting $VM-vm from $VM_DIR"
+        echo "> Starting $VM_NAME from $VM_DIR"
         cd "$VM_DIR"
 
-        cleanup() { rm -f "$VM_DIR/control.socket"; }
+        cleanup() {
+          if [ "$DAEMON" != true ]; then
+            rm -f "$VM_DIR/control.socket" "$PIDFILE"
+          fi
+        }
         trap cleanup EXIT
 
         if [ "$DAEMON" = true ]; then
-          LOG="$VM_DIR/$VM-vm.log"
-          script -q "$LOG" nix run "path:$HOME/src/dotfiles#$VM-vm" > /dev/null 2>&1 &
-          echo "> $VM-vm running in background (pid $!, log: $LOG)"
+          LOG="$VM_DIR/$VM_NAME.log"
+          script -q "$LOG" nix run "path:$HOME/src/dotfiles#$VM_NAME" > /dev/null 2>&1 &
+          echo "$!" > "$PIDFILE"
+          echo "> $VM_NAME running in background (pid $(cat "$PIDFILE"), log: $LOG)"
         else
-          nix run "path:$HOME/src/dotfiles#$VM-vm"
+          nix run "path:$HOME/src/dotfiles#$VM_NAME"
         fi
       '';
     })
@@ -94,33 +101,105 @@ in
         pkgs.procps
       ];
       text = ''
+        FORCE=false
+        while [[ "''${1:-}" == -* ]]; do
+          case "$1" in
+            --force) FORCE=true; shift ;;
+            *) echo "Unknown option: $1"; exit 1 ;;
+          esac
+        done
+
         ${selectFromRunning}
         VM_DIR="$HOME/microvm/$VM"
+        VM_NAME="$VM-vm"
         SOCKET="$VM_DIR/control.socket"
+        PIDFILE="$VM_DIR/$VM_NAME.pid"
 
         if [ ! -S "$SOCKET" ]; then
-          echo "Error: $VM-vm is not running (no socket at $SOCKET)"
+          echo "Error: $VM_NAME is not running (no socket at $SOCKET)"
           exit 1
         fi
 
-        echo "> Stopping $VM-vm..."
+        echo "> Stopping $VM_NAME..."
         curl -s --unix-socket "$SOCKET" \
           -X POST \
           -H "Content-Type: application/json" \
           -d '{"state": "Stop"}' \
-          http://localhost/vm/state
+          http://localhost/vm/state || true
 
         # Wait for the VM process to fully exit before returning.
-        echo "> Waiting for $VM-vm to shut down..."
-        for _ in $(seq 1 30); do
-          if ! pgrep -f "$VM-vm" > /dev/null 2>&1; then
-            break
+        echo "> Waiting for $VM_NAME to shut down..."
+        STOPPED=false
+        if [ -f "$PIDFILE" ]; then
+          PID=$(cat "$PIDFILE")
+          if [ -n "$PID" ]; then
+            for _ in $(seq 1 10); do
+              if ! kill -0 "$PID" > /dev/null 2>&1; then
+                STOPPED=true
+                break
+              fi
+              sleep 1
+            done
           fi
-          sleep 1
-        done
+        else
+          for _ in $(seq 1 10); do
+            if ! pgrep -f "$VM_NAME" > /dev/null 2>&1; then
+              STOPPED=true
+              break
+            fi
+            sleep 1
+          done
+        fi
 
-        rm -f "$SOCKET"
-        echo "> $VM-vm stopped ✅"
+        if [ "$STOPPED" = true ]; then
+          rm -f "$SOCKET" "$PIDFILE"
+          echo "> $VM_NAME stopped ✅"
+          exit 0
+        fi
+
+        if [ "$FORCE" != true ]; then
+          if [ -t 0 ]; then
+            read -r -p "> $VM_NAME did not stop in time. Force kill it? [y/N] " REPLY
+            case "$REPLY" in
+              [yY]|[yY][eE][sS]) FORCE=true ;;
+              *)
+                echo "> Aborted. You can run: vm-stop --force $VM"
+                exit 1
+                ;;
+            esac
+          else
+            echo "Error: $VM_NAME did not stop in time. Retry with --force"
+            exit 1
+          fi
+        fi
+
+        if [ -f "$PIDFILE" ]; then
+          PID=$(cat "$PIDFILE")
+          if [ -n "$PID" ] && kill -0 "$PID" > /dev/null 2>&1; then
+            echo "> Force-stopping $VM_NAME (pid $PID)..."
+            kill "$PID" > /dev/null 2>&1 || true
+
+            for _ in $(seq 1 5); do
+              if ! kill -0 "$PID" > /dev/null 2>&1; then
+                break
+              fi
+              sleep 1
+            done
+
+            if kill -0 "$PID" > /dev/null 2>&1; then
+              echo "> Process still alive, sending SIGKILL..."
+              kill -9 "$PID" > /dev/null 2>&1 || true
+            fi
+          else
+            echo "> PID from pidfile is not running (stale pid file), cleaning up..."
+          fi
+        else
+          echo "Error: cannot force stop without pid file at $PIDFILE"
+          exit 1
+        fi
+
+        rm -f "$PIDFILE" "$SOCKET"
+        echo "> $VM_NAME force-stopped ✅"
       '';
     })
 
