@@ -19,6 +19,7 @@
   config = {
     # Global packages available in the VM
     environment.systemPackages = with pkgs; [
+      osc
       ripgrep
     ];
 

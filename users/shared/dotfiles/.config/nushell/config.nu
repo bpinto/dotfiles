@@ -16,3 +16,6 @@ $env.config.hooks.env_change.PWD ++= [{||
   direnv export json | from json | default {} | load-env
 }]
 
+# ── Clipboard (OSC 52 over SSH via nixpkgs `osc`) ─────────────────────
+alias pbcopy = osc copy
+alias pbpaste = osc paste
