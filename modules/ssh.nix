@@ -1,3 +1,4 @@
+# Shared SSH module for non-macOS environments (e.g. microVMs).
 {
   config,
   lib,
@@ -13,20 +14,18 @@ in
     enable = true;
     enableDefaultConfig = false;
 
-    matchBlocks = {
-      "github.com" = {
-        addKeysToAgent = "no";
-        identityFile = "~/.ssh/github";
-      };
-    };
+    matchBlocks."github.com".extraOptions.IdentityAgent = "\${SECRETIVE_AUTH_SOCK}";
   };
 
-  sops = {
-    age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
-    age.sshKeyPaths = [ ];
-
-    secrets.ssh_git_sign_passphrase = { };
+  services.ssh-agent = {
+    enable = true;
+    # Our nushell extraEnv (see modules/nushell.nix) owns SSH_AUTH_SOCK and
+    # points it at /run/user/%i/ssh-agent, so the stock integration would
+    # be redundant and would race with our ordering.
+    enableNushellIntegration = false;
   };
+
+  sops.secrets.ssh_git_sign_passphrase = { };
 
   systemd.user.services.ssh-add-git-sign = {
     Install.WantedBy = [ "default.target" ];

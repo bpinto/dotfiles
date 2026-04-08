@@ -27,12 +27,6 @@ in
     ];
   };
 
-  # Start ssh-agent so SSH operations work.
-  services.ssh-agent = {
-    enable = true;
-    enableNushellIntegration = true;
-  };
-
   # Whitelist/support symlinks for git supporting files
   home.file.".git_template".source = mkSymlink "${dotfiles}/.git_template";
   home.file.".gitmessage".source = mkSymlink "${dotfiles}/.gitmessage";

@@ -1,11 +1,15 @@
 {
   home-manager,
+  nixpkgs-unstable,
   nixvim,
   pkgs,
   sops-nix,
   ...
 }:
 
+let
+  unstablePkgs = nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+in
 {
   # ── Imports ─────────────────────────────────────────────────────────
 
@@ -24,6 +28,8 @@
     ];
 
     home-manager = {
+      extraSpecialArgs = { inherit unstablePkgs; };
+
       sharedModules = [
         nixvim.homeModules.nixvim
         sops-nix.homeManagerModules.sops

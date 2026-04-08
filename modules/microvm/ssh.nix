@@ -17,15 +17,19 @@ in
       }
     ];
 
-    # SSH via dev user only, no root login
-    settings.PermitRootLogin = "no";
+    settings = {
+      # SSH via dev user only, no root login.
+      PermitRootLogin = "no";
+      # Keep agent forwarding enabled
+      AllowAgentForwarding = "yes";
+    };
   };
 
-  # Copy SSH keys from host mount to the guest with correct
+  # Copy SSH and age keys from host mount to the guest with correct
   # permissions. Runs as a systemd oneshot after the virtiofs mount is
   # available (activation scripts run too early - before mounts).
   systemd.services.key-sync = {
-    description = "Sync SSH keys from host mount";
+    description = "Sync SSH and age keys from host mount";
     after = [ "mnt-keys.mount" ];
     requires = [ "mnt-keys.mount" ];
     wantedBy = [ "multi-user.target" ];
@@ -40,8 +44,11 @@ in
         cp /mnt/keys/ssh/* ${guestUser.home}/.ssh/
         chown -R ${guestUser.name}:users ${guestUser.home}/.ssh
         chmod 700 ${guestUser.home}/.ssh
-        chmod 600 ${guestUser.home}/.ssh/* 2>/dev/null || true
-        chmod 644 ${guestUser.home}/.ssh/*.pub 2>/dev/null || true
+        # Keep directories traversable (e.g. ~/.ssh/agent used by sshd for
+        # forwarded-agent listener sockets), and set sane file modes.
+        find ${guestUser.home}/.ssh -maxdepth 1 -type d -exec chmod 700 {} +
+        find ${guestUser.home}/.ssh -maxdepth 1 -type f ! -name '*.pub' -exec chmod 600 {} +
+        find ${guestUser.home}/.ssh -maxdepth 1 -type f -name '*.pub' -exec chmod 644 {} +
       fi
 
       # Age keys (/mnt/keys/age → ~/.config/sops/age)

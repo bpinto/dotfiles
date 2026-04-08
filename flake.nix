@@ -110,7 +110,14 @@
 
       darwinConfigurations.macos-aarch64 = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
-        specialArgs = { inherit home-manager nixvim sops-nix; };
+        specialArgs = {
+          inherit
+            home-manager
+            nixpkgs-unstable
+            nixvim
+            sops-nix
+            ;
+        };
         modules = [
           ./machines/macos-aarch64.nix
         ];

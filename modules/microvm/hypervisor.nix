@@ -42,7 +42,7 @@ in
     writableStoreOverlay = "/nix/.rw-store";
 
     shares = [
-      # Share the SSH keys from the host for easy access in the VM (e.g. for git).
+      # Share host-provided keys into the VM.
       {
         proto = "virtiofs";
         tag = "keys";

@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  unstablePkgs,
   ...
 }:
 
@@ -64,6 +65,7 @@ in
     ticker
     tree
     universal-ctags
+    unstablePkgs.secretive
     yt-dlp
   ];
 

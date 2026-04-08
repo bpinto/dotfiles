@@ -1,10 +1,13 @@
-# macOS-specific SSH module: base SSH config + Keychain integration +
+# macOS-specific SSH module: base SSH config + Secretive integration +
 # encrypted host config via sops.
 {
   config,
   ...
 }:
 
+let
+  secretiveAgentSocket = "~/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh";
+in
 {
   programs.ssh = {
     enable = true;
@@ -18,17 +21,15 @@
       "192.168.64.*" = {
         addKeysToAgent = "8h";
         extraOptions = {
+          IdentityAgent = secretiveAgentSocket;
           UseKeychain = "yes";
         };
+        forwardAgent = true;
         identityFile = "~/.ssh/id_ed25519";
       };
 
       "github.com" = {
-        addKeysToAgent = "yes";
-        extraOptions = {
-          UseKeychain = "yes";
-        };
-        identityFile = "~/.ssh/github";
+        extraOptions.IdentityAgent = secretiveAgentSocket;
       };
     };
   };

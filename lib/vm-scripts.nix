@@ -40,7 +40,7 @@ let
   # Common SSH options for connecting to microVMs.
   # accept-new: auto-accept the host key on first connect, reject if it
   # changes later (TOFU).
-  sshOpts = "-o StrictHostKeyChecking=accept-new -o LogLevel=ERROR -i ~/.ssh/id_ed25519";
+  sshOpts = "-A -o StrictHostKeyChecking=accept-new -o LogLevel=ERROR -i ~/.ssh/id_ed25519";
 
   runtimeInputs = with pkgs; [
     findutils

@@ -30,6 +30,20 @@ in
     # nushell doesn't inherit/set it automatically like fish/zsh.
     environmentVariables.COLORTERM = "truecolor";
 
+    # SSH agent socket juggling.
+    #
+    # We run a local in-VM ssh-agent (services.ssh-agent) holding the
+    # git_sign key, and optionally inherit a forwarded agent from the macOS
+    # host (Secretive-backed, used only for github.com). sshd hands us the
+    # forwarded socket via $SSH_AUTH_SOCK. We want:
+    #
+    #   $SSH_AUTH_SOCK       -> local agent (the common case)
+    #   $SECRETIVE_AUTH_SOCK -> forwarded agent from Secretive (github.com)
+    extraEnv = ''
+      $env.SECRETIVE_AUTH_SOCK = ($env.SSH_AUTH_SOCK? | default "")
+      $env.SSH_AUTH_SOCK = $"/run/user/(^id -u | str trim)/ssh-agent"
+    '';
+
     # Source our hand-written config from the shared dotfiles mount.
     extraConfig = lib.mkMerge [
       (lib.mkBefore (
