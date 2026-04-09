@@ -18,8 +18,11 @@ in
   # Console — SSH into cliniko-dev infrastructure via the CLI tool.
   programs.nushell.extraConfig = lib.mkAfter ''
     def --wrapped console [...rest] {
-      with-env { TERM: xterm-256color } {
-        ~/src/cliniko-dev/cli/index.mjs ssh --preserve-current-context --quiet ...$rest
+      with-env {
+        PATH: ($env.PATH | where {|p| $p != $"($env.HOME)/.local/bin" })
+        TERM: xterm-256color
+      } {
+        ^node ~/src/cliniko-dev/cli/index.mjs ssh --preserve-current-context --quiet ...$rest
       }
     }
   '';
