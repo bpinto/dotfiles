@@ -30,7 +30,6 @@ in
   staticIpAddress = "192.168.64.10";
 
   # ── VM resources ────────────────────────────────────────────────────
-
   microvm.shares = [
     {
       # Full dotfiles repo for development in this VM.
@@ -40,4 +39,7 @@ in
       mountPoint = "${guestHome}/src/dotfiles";
     }
   ];
+
+  microvm.storeOnDisk = false;
+  varVolumeSize = 32768; # 32 GB
 }
