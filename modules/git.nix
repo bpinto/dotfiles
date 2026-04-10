@@ -18,6 +18,7 @@ in
   home.packages = with pkgs; [
     delta
     fzf
+    universal-ctags
   ];
 
   programs.git = {
