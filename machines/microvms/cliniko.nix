@@ -21,6 +21,7 @@ in
 
   home-manager.users.dev = {
     imports = [
+      ../../modules/claude-code.nix
       ../../modules/cliniko.nix
       ../../modules/pi.nix
     ];

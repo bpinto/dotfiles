@@ -23,6 +23,7 @@ in
 
   home-manager.users.dev = {
     imports = [
+      ../../modules/claude-code.nix
       ../../modules/pi.nix
     ];
 
