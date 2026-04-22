@@ -76,15 +76,25 @@ in
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 
+    nixpkgs.overlays = [
+      (_final: prev: {
+        fish = prev.fish.overrideAttrs (_old: {
+          # Bust the cache key to force a local rebuild, ensuring valid codesigning
+          # on Apple Silicon. See: https://github.com/NixOS/nixpkgs/issues/507531
+          NIX_FORCE_LOCAL_REBUILD = "darwin-codesign-fix";
+        });
+      })
+    ];
+
     # Use Touch ID for sudo authentication
     security.pam.services.sudo_local.touchIdAuth = true;
 
     system = {
-      # Used for backwards compatibility
-      stateVersion = 6;
-
       # Required by nix-darwin for user-specific options.
       primaryUser = "bpinto";
+
+      # Used for backwards compatibility
+      stateVersion = 6;
     };
 
     time.timeZone = "Europe/Lisbon";
