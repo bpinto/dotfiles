@@ -76,11 +76,6 @@ in
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 
-    # Configures system-level fish integration (/etc/fish/) so fish can find
-    # Nix-installed programs. Fish is launched by the terminal emulator, not
-    # set as the macOS login shell.
-    programs.fish.enable = true;
-
     # Use Touch ID for sudo authentication
     security.pam.services.sudo_local.touchIdAuth = true;
 

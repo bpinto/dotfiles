@@ -47,7 +47,6 @@ in
     awscli2
     aws-vault
     discord
-    fish
     gh
     ghostty-bin
     google-chrome
@@ -85,11 +84,6 @@ in
 
   # XDG config files
   xdg.configFile = {
-    # Fish shell configuration
-    "fish" = {
-      source = mkSymlink "${dotfiles}/.config/fish";
-    };
-
     # Ghostty terminal configuration
     "ghostty/config" = {
       source = mkSymlink "${dotfiles}/.config/ghostty/config";
