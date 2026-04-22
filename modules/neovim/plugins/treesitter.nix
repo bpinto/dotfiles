@@ -84,12 +84,18 @@
         json
         json5
         lua
+        markdown
         nix
+        nu
+        python
         regex
         ruby
         scss
+        slim
         sql
         ssh_config
+        terraform
+        tsx
         typescript
         yaml
       ];
